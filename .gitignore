@@ -1,0 +1,21 @@
+# Local working repos — the published, reproducible copies live in apps/
+/ns-benchmark/
+/lynx-benchmark/
+
+# The results website is its own repository: github.com/nstudio/agent-tokenomics
+/agent-tokenomics/
+
+# Dependencies & site build output
+node_modules/
+agent-tokenomics/dist/
+agent-tokenomics/.netlify/
+
+# Per-trial app binaries (~3 GB) — regenerable: Debug apps via the harness,
+# Release apps via harness/perf/build-release.sh from apps/trials sources
+results/*/app/
+results/*/app-release/
+
+.DS_Store
+
+# sparkling-app-cli template cache (local tooling artifact)
+/.temp-templates/

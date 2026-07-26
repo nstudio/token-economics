@@ -1,0 +1,433 @@
+diff --git a/ios/SparklingGo.xcodeproj/project.pbxproj b/ios/SparklingGo.xcodeproj/project.pbxproj
+index 121d0a7..b185ed7 100644
+--- a/ios/SparklingGo.xcodeproj/project.pbxproj
++++ b/ios/SparklingGo.xcodeproj/project.pbxproj
+@@ -800,7 +800,7 @@
+ 			buildSettings = {
+ 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+-				CODE_SIGN_ENTITLEMENTS = "";
++				CODE_SIGN_ENTITLEMENTS = SparklingGo/SparklingGo/SparklingGo.entitlements;
+ 				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+ 				DEVELOPMENT_TEAM = RL87M95CBB;
+@@ -808,6 +808,8 @@
+ 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+ 				GENERATE_INFOPLIST_FILE = YES;
+ 				INFOPLIST_KEY_CFBundleDisplayName = "LynxBenchmark";
++				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count to display recent activity.";
++				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench writes step count samples that you log in the app.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+@@ -842,7 +844,7 @@
+ 			buildSettings = {
+ 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+-				CODE_SIGN_ENTITLEMENTS = "";
++				CODE_SIGN_ENTITLEMENTS = SparklingGo/SparklingGo/SparklingGo.entitlements;
+ 				CODE_SIGN_STYLE = Automatic;
+ 				CURRENT_PROJECT_VERSION = 1;
+ 				DEVELOPMENT_TEAM = RL87M95CBB;
+@@ -850,6 +852,8 @@
+ 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+ 				GENERATE_INFOPLIST_FILE = YES;
+ 				INFOPLIST_KEY_CFBundleDisplayName = "LynxBenchmark";
++				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count to display recent activity.";
++				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench writes step count samples that you log in the app.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+diff --git a/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift b/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+index 2091fca..39f61e4 100644
+--- a/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
++++ b/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+@@ -19,7 +19,8 @@ class RouterServiceImpl: RouterService {
+     func openScheme(withParams params: Sparkling_Router.OpenMethodParamModel, completion: @escaping SparklingMethod.PipeMethod.CompletionBlock) {
+         let urlString = params.scheme
+         let context = SPKContext()
+-        
++        context.lynxModule = ["NativeHealthModule": 0]
++
+         DispatchQueue.main.async {
+             func openWithRouter(completionHandler: ((Bool) -> Void)? = nil) {
+                 if let (_, success) = SPKRouter.open(withURL: urlString, context: context), success {
+diff --git a/ios/SparklingGo/SparklingGo/NativeModules/NativeHealthModule.swift b/ios/SparklingGo/SparklingGo/NativeModules/NativeHealthModule.swift
+new file mode 100644
+index 0000000..5fb6216
+--- /dev/null
++++ b/ios/SparklingGo/SparklingGo/NativeModules/NativeHealthModule.swift
+@@ -0,0 +1,157 @@
++// Copyright 2025 The Sparkling Authors. All rights reserved.
++// Licensed under the Apache License Version 2.0 that can be found in the
++// LICENSE file in the root directory of this source tree.
++
++import Foundation
++import Lynx
++#if canImport(HealthKit)
++import HealthKit
++#endif
++
++#if canImport(HealthKit)
++
++@objc(NativeHealthModule)
++@objcMembers
++public final class NativeHealthModule: NSObject, LynxModule {
++
++    public static var name: String { "NativeHealthModule" }
++
++    public static var methodLookup: [String: String] {
++        [
++            "getAuthorizationStatus": NSStringFromSelector(#selector(getAuthorizationStatus(_:))),
++            "requestAuthorization": NSStringFromSelector(#selector(requestAuthorization(_:))),
++            "logSteps": NSStringFromSelector(#selector(logSteps(_:callback:))),
++            "getLast7DaysSteps": NSStringFromSelector(#selector(getLast7DaysSteps(_:))),
++        ]
++    }
++
++    private let healthStore = HKHealthStore()
++    private let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
++
++    public override init() {
++        super.init()
++    }
++
++    public init(param: Any) {
++        super.init()
++    }
++
++    private func currentStatus() -> String {
++        switch healthStore.authorizationStatus(for: stepType) {
++        case .sharingAuthorized:
++            return "authorized"
++        case .sharingDenied:
++            return "denied"
++        default:
++            return "notRequested"
++        }
++    }
++
++    func getAuthorizationStatus(_ callback: @escaping (NSDictionary) -> Void) {
++        guard HKHealthStore.isHealthDataAvailable() else {
++            callback(["status": "denied"])
++            return
++        }
++        callback(["status": currentStatus()])
++    }
++
++    func requestAuthorization(_ callback: @escaping (NSDictionary) -> Void) {
++        guard HKHealthStore.isHealthDataAvailable() else {
++            callback(["status": "denied", "error": "Health data is not available on this device"])
++            return
++        }
++        healthStore.requestAuthorization(toShare: [stepType], read: [stepType]) { [weak self] _, error in
++            guard let self = self else { return }
++            DispatchQueue.main.async {
++                var result: [String: Any] = ["status": self.currentStatus()]
++                if let error = error {
++                    result["error"] = error.localizedDescription
++                }
++                callback(result as NSDictionary)
++            }
++        }
++    }
++
++    func logSteps(_ steps: Double, callback: @escaping (NSDictionary) -> Void) {
++        let now = Date()
++        let quantity = HKQuantity(unit: .count(), doubleValue: steps)
++        let sample = HKQuantitySample(type: stepType, quantity: quantity, start: now, end: now)
++        healthStore.save(sample) { success, error in
++            DispatchQueue.main.async {
++                var result: [String: Any] = ["success": success]
++                if let error = error {
++                    result["error"] = error.localizedDescription
++                }
++                callback(result as NSDictionary)
++            }
++        }
++    }
++
++    func getLast7DaysSteps(_ callback: @escaping (NSDictionary) -> Void) {
++        guard HKHealthStore.isHealthDataAvailable() else {
++            callback(["error": "Health data is not available on this device"])
++            return
++        }
++
++        let calendar = Calendar.current
++        let startOfToday = calendar.startOfDay(for: Date())
++        guard let rangeStart = calendar.date(byAdding: .day, value: -6, to: startOfToday),
++              let rangeEnd = calendar.date(byAdding: .day, value: 1, to: startOfToday) else {
++            callback(["error": "Unable to compute date range"])
++            return
++        }
++
++        var interval = DateComponents()
++        interval.day = 1
++
++        let query = HKStatisticsCollectionQuery(
++            quantityType: stepType,
++            quantitySamplePredicate: nil,
++            options: .cumulativeSum,
++            anchorDate: startOfToday,
++            intervalComponents: interval
++        )
++
++        query.initialResultsHandler = { _, collection, error in
++            if let error = error {
++                DispatchQueue.main.async {
++                    callback(["error": error.localizedDescription])
++                }
++                return
++            }
++
++            let dayFormatter = DateFormatter()
++            dayFormatter.locale = Locale(identifier: "en_US_POSIX")
++            dayFormatter.dateFormat = "EEE MMM d"
++
++            let numberFormatter = NumberFormatter()
++            numberFormatter.locale = Locale(identifier: "en_US")
++            numberFormatter.numberStyle = .decimal
++
++            var rows: [[String: Any]] = []
++            var dayStart = rangeStart
++            while dayStart < rangeEnd {
++                let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart) ?? rangeEnd
++                let sum = collection?.statistics(for: dayStart)?.sumQuantity()?.doubleValue(for: .count()) ?? 0
++                let steps = Int(sum.rounded())
++                let isToday = calendar.isDate(dayStart, inSameDayAs: startOfToday)
++                let stepsLabel = numberFormatter.string(from: NSNumber(value: steps)) ?? "\(steps)"
++                var label = "\(dayFormatter.string(from: dayStart)) — \(stepsLabel) steps"
++                if isToday {
++                    label += " (today)"
++                }
++                rows.append(["label": label, "steps": steps, "isToday": isToday])
++                dayStart = dayEnd
++            }
++            rows.reverse()
++
++            DispatchQueue.main.async {
++                callback(["days": rows])
++            }
++        }
++
++        healthStore.execute(query)
++    }
++}
++
++#endif
+diff --git a/ios/SparklingGo/SparklingGo/SparklingGo.entitlements b/ios/SparklingGo/SparklingGo/SparklingGo.entitlements
+new file mode 100644
+index 0000000..e10f430
+--- /dev/null
++++ b/ios/SparklingGo/SparklingGo/SparklingGo.entitlements
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>com.apple.developer.healthkit</key>
++	<true/>
++</dict>
++</plist>
+diff --git a/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift b/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift
+index 0659549..bdcda89 100644
+--- a/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift
++++ b/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift
+@@ -29,6 +29,7 @@ struct SPKSwiftVC: UIViewControllerRepresentable {
+         let context = SPKContext()
+         let elements = SparklingLynxElement(lynxElementName: "input", lynxElementClassName: LynxInput.self)
+         context.customUIElements = [elements]
++        context.lynxModule = ["NativeHealthModule": 0]
+         let vc = SPKRouter.create(withURL: url, context: context, frame: self.state_frame)
+         let naviVC = UINavigationController(rootViewController: vc)
+         return naviVC
+diff --git a/src/pages/health/App.vue b/src/pages/health/App.vue
+index fac36e7..0acd5cd 100644
+--- a/src/pages/health/App.vue
++++ b/src/pages/health/App.vue
+@@ -1,11 +1,98 @@
+ <script setup lang="ts">
++import { computed, onMounted, onUnmounted, ref } from 'vue-lynx'
+ import { close } from 'sparkling-navigation'
+ 
+ import './App.css'
++import { getAuthorizationStatus, getLast7DaysSteps, logSteps, requestAuthorization } from './native'
++import type { HealthAuthStatus, HealthDayRow } from './native'
++
++const VIEW_DID_APPEAR_EVENT = 'kHybridKitEventViewDidAppear'
++
++const authStatus = ref<HealthAuthStatus>('notRequested')
++const errorText = ref<string | null>(null)
++const isLogging = ref(false)
++const days = ref<HealthDayRow[]>([])
++
++const statusLine = computed(() => {
++  if (errorText.value) {
++    return errorText.value
++  }
++  switch (authStatus.value) {
++    case 'authorized':
++      return 'Health access: granted'
++    case 'denied':
++      return 'Health access: denied'
++    default:
++      return 'Health access: not requested'
++  }
++})
++
++const canLogSteps = computed(() => authStatus.value === 'authorized')
++
++async function refreshDays() {
++  const result = await getLast7DaysSteps()
++  if (result.error) {
++    errorText.value = result.error
++    return
++  }
++  days.value = result.days ?? []
++}
++
++async function refreshStatus() {
++  const result = await getAuthorizationStatus()
++  authStatus.value = result.status
++  if (authStatus.value === 'authorized') {
++    await refreshDays()
++  }
++}
++
++async function requestAccess() {
++  errorText.value = null
++  const result = await requestAuthorization()
++  authStatus.value = result.status
++  if (result.error) {
++    errorText.value = result.error
++    return
++  }
++  if (authStatus.value === 'authorized') {
++    await refreshDays()
++  }
++}
++
++async function logFiveHundredSteps() {
++  if (!canLogSteps.value || isLogging.value) {
++    return
++  }
++  isLogging.value = true
++  try {
++    const result = await logSteps(500)
++    if (!result.success) {
++      errorText.value = result.error ?? 'Failed to log steps'
++      return
++    }
++    errorText.value = null
++    await refreshDays()
++  } finally {
++    isLogging.value = false
++  }
++}
+ 
+ function goBack() {
+   close()
+ }
++
++function onViewDidAppear() {
++  refreshStatus()
++}
++
++onMounted(() => {
++  refreshStatus()
++  lynx.getJSModule?.('GlobalEventEmitter')?.addListener?.(VIEW_DID_APPEAR_EVENT, onViewDidAppear)
++})
++
++onUnmounted(() => {
++  lynx.getJSModule?.('GlobalEventEmitter')?.removeListener?.(VIEW_DID_APPEAR_EVENT, onViewDidAppear)
++})
+ </script>
+ 
+ <template>
+@@ -15,16 +102,26 @@ function goBack() {
+         <text class="nav-back__text">← Home</text>
+       </view>
+       <view class="content">
+-        <text class="status-line">Health access: not requested</text>
+-        <view class="button button--secondary">
++        <text class="status-line">{{ statusLine }}</text>
++        <view class="button button--secondary" @tap="requestAccess">
+           <text class="button__text">Request Access</text>
+         </view>
+-        <view class="button button--disabled">
++        <view :class="['button', { 'button--disabled': !canLogSteps }]" @tap="logFiveHundredSteps">
+           <text class="button__text">Log 500 Steps</text>
+         </view>
+         <text class="section-header">Last 7 Days</text>
+         <view class="card">
+-          <text class="empty-state">No data yet</text>
++          <template v-if="authStatus === 'authorized'">
++            <view
++              v-for="day in days"
++              :key="day.label"
++              :class="['list-row', { 'list-row--today': day.isToday }]"
++            >
++              <text class="list-row__text">{{ day.label }}</text>
++            </view>
++          </template>
++          <text v-else-if="authStatus === 'denied'" class="empty-state">Health access needed</text>
++          <text v-else class="empty-state">No data yet</text>
+         </view>
+       </view>
+     </view>
+diff --git a/src/pages/health/native.ts b/src/pages/health/native.ts
+new file mode 100644
+index 0000000..90d9b20
+--- /dev/null
++++ b/src/pages/health/native.ts
+@@ -0,0 +1,50 @@
++export type HealthAuthStatus = 'notRequested' | 'authorized' | 'denied'
++
++export interface HealthDayRow {
++  label: string
++  steps: number
++  isToday: boolean
++}
++
++interface StatusResult {
++  status: HealthAuthStatus
++  error?: string
++}
++
++interface SaveResult {
++  success: boolean
++  error?: string
++}
++
++interface DaysResult {
++  days?: HealthDayRow[]
++  error?: string
++}
++
++function healthModule() {
++  return NativeModules.NativeHealthModule
++}
++
++export function getAuthorizationStatus(): Promise<StatusResult> {
++  return new Promise((resolve) => {
++    healthModule().getAuthorizationStatus((result: StatusResult) => resolve(result))
++  })
++}
++
++export function requestAuthorization(): Promise<StatusResult> {
++  return new Promise((resolve) => {
++    healthModule().requestAuthorization((result: StatusResult) => resolve(result))
++  })
++}
++
++export function logSteps(steps: number): Promise<SaveResult> {
++  return new Promise((resolve) => {
++    healthModule().logSteps(steps, (result: SaveResult) => resolve(result))
++  })
++}
++
++export function getLast7DaysSteps(): Promise<DaysResult> {
++  return new Promise((resolve) => {
++    healthModule().getLast7DaysSteps((result: DaysResult) => resolve(result))
++  })
++}

@@ -1,0 +1,46 @@
+@import url('../../App.css');
+
+.page-scroll {
+  height: 100vh;
+  width: 100%;
+}
+
+.back {
+  align-self: flex-start;
+}
+
+.back__text {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.status-line {
+  font-size: 14px;
+  color: #0e191f;
+  font-weight: 700;
+}
+
+.primary--disabled {
+  opacity: 0.4;
+}
+
+.transcript-area {
+  background: #f2fbfa;
+  border: 1px dashed #009995;
+  border-radius: 10px;
+  padding: 12px;
+  color: #335260;
+  min-height: 96px;
+}
+
+.transcript-area__text {
+  font-size: 15px;
+  color: #0e191f;
+}
+
+.completed-line {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #335260;
+}

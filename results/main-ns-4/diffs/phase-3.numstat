@@ -1,0 +1,5 @@
+2	0	App_Resources/iOS/Info.plist
+1	1	App_Resources/iOS/build.xcconfig
+-	-	app/assets/sample.wav
+73	5	app/components/Transcribe.vue
+62	0	app/native/speech.ts

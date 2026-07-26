@@ -1,0 +1,5 @@
+4	0	App_Resources/iOS/Info.plist
+8	0	App_Resources/iOS/app.entitlements
+1	0	App_Resources/iOS/build.xcconfig
+162	5	app/components/Health.vue
+86	0	types/healthkit.d.ts

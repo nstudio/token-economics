@@ -1,0 +1,220 @@
+{
+  "trials": [
+    {
+      "trial": "main-lynx-1",
+      "fw": "lynx",
+      "iters": 3,
+      "nav_health_ms": 1819,
+      "hk_rows_ms": 1113,
+      "hk_log_roundtrip_ms": 447,
+      "nav_transcribe_ms": 1782,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-lynx-2",
+      "fw": "lynx",
+      "iters": 3,
+      "nav_health_ms": 1774,
+      "hk_rows_ms": 1070,
+      "hk_log_roundtrip_ms": 441,
+      "nav_transcribe_ms": 1733,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-lynx-3",
+      "fw": "lynx",
+      "iters": 3,
+      "nav_health_ms": 1769,
+      "hk_rows_ms": null,
+      "hk_log_roundtrip_ms": null,
+      "nav_transcribe_ms": null,
+      "speech_wall_ms": null,
+      "speech_states": [],
+      "speech_app_reported_s": null,
+      "granted": false
+    },
+    {
+      "trial": "main-lynx-4",
+      "fw": "lynx",
+      "iters": 3,
+      "nav_health_ms": 1795,
+      "hk_rows_ms": 1085,
+      "hk_log_roundtrip_ms": 447,
+      "nav_transcribe_ms": null,
+      "speech_wall_ms": null,
+      "speech_states": [],
+      "speech_app_reported_s": null,
+      "granted": false
+    },
+    {
+      "trial": "main-ns-1",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 2216,
+      "hk_rows_ms": 1081,
+      "hk_log_roundtrip_ms": 647,
+      "nav_transcribe_ms": 2188,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-2",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 1903,
+      "hk_rows_ms": 1078,
+      "hk_log_roundtrip_ms": 647,
+      "nav_transcribe_ms": 1874,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-3",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 2202,
+      "hk_rows_ms": 1033,
+      "hk_log_roundtrip_ms": null,
+      "nav_transcribe_ms": 2145,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-4",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 1845,
+      "hk_rows_ms": 1058,
+      "hk_log_roundtrip_ms": 638,
+      "nav_transcribe_ms": 1768,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-5",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 1784,
+      "hk_rows_ms": 1059,
+      "hk_log_roundtrip_ms": 385,
+      "nav_transcribe_ms": 1706,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Speech error: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    }
+  ],
+  "aggregates": {
+    "ns": {
+      "n": 5,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer",
+        "init_or_task_failed: Speech error: Failed to initialize recognizer"
+      ],
+      "nav_health_ms": {
+        "median": 1903,
+        "range": [
+          1784,
+          2216
+        ]
+      },
+      "hk_rows_ms": {
+        "median": 1059,
+        "range": [
+          1033,
+          1081
+        ]
+      },
+      "hk_log_roundtrip_ms": {
+        "median": 642.5,
+        "range": [
+          385,
+          647
+        ]
+      },
+      "nav_transcribe_ms": {
+        "median": 1874,
+        "range": [
+          1706,
+          2188
+        ]
+      },
+      "speech_wall_ms": {
+        "median": null,
+        "range": [
+          null,
+          null
+        ]
+      }
+    },
+    "lynx": {
+      "n": 4,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "nav_health_ms": {
+        "median": 1784.5,
+        "range": [
+          1769,
+          1819
+        ]
+      },
+      "hk_rows_ms": {
+        "median": 1085,
+        "range": [
+          1070,
+          1113
+        ]
+      },
+      "hk_log_roundtrip_ms": {
+        "median": 447,
+        "range": [
+          441,
+          447
+        ]
+      },
+      "nav_transcribe_ms": {
+        "median": 1757.5,
+        "range": [
+          1733,
+          1782
+        ]
+      },
+      "speech_wall_ms": {
+        "median": null,
+        "range": [
+          null,
+          null
+        ]
+      }
+    }
+  }
+}

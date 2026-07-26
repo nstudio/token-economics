@@ -1,0 +1,1920 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project UIDriver.xcodeproj -scheme UIDriver -destination id=7DFF2660-A10C-449E-867A-92863D91663B
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'UIDriverUITests' in project 'UIDriver' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+    cd /Users/runner/token-economics/harness/perf/uidriver/UIDriver.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+
+ProcessInfoPlistFile /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Info.plist /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/empty-UIDriverUITests.plist (in target 'UIDriverUITests' from project 'UIDriver')
+    cd /Users/runner/token-economics/harness/perf/uidriver
+    builtin-infoPlistUtility /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/empty-UIDriverUITests.plist -producttype com.apple.product-type.bundle.ui-testing -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/ProductTypeInfoPlistAdditions.plist -o /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Info.plist
+
+CopySwiftLibs /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest (in target 'UIDriverUITests' from project 'UIDriver')
+    cd /Users/runner/token-economics/harness/perf/uidriver
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/UIDriverUITests --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Frameworks --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/PlugIns --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/SystemExtensions --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Extensions --platform iphonesimulator --toolchain /var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.42.0.xRBJyY/Metal.xctoolchain --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+2026-07-25 20:01:05.194716-0700 UIDriverUITests-Runner[58141:17024445] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'All tests' started at 2026-07-25 20:01:05.750.
+Test Suite 'UIDriverUITests.xctest' started at 2026-07-25 20:01:05.750.
+Test Suite 'FeatureLatencyTests' started at 2026-07-25 20:01:05.750.
+Test Case '-[UIDriverUITests.FeatureLatencyTests testFeatureLatencies]' started.
+    t =     0.00s Start Test at 2026-07-25 20:01:05.751
+    t =     0.02s Set Up
+STEP[0s]: iter 0: launch org.nativescript.nsbenchmark
+    t =     0.02s Open org.nativescript.nsbenchmark
+    t =     0.02s     Launch org.nativescript.nsbenchmark
+    t =     0.11s         Setting up automation session
+objc[58141]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x107da8310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x107c0c398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =     1.23s         Wait for org.nativescript.nsbenchmark to idle
+    t =     2.40s Checking existence of `"Health" Button`
+    t =     2.43s Waiting 20.0s for "Health" Button to exist
+    t =     3.46s     Checking `Expect predicate `existsNoRetry == 1` for object "Health" Button`
+    t =     3.46s         Checking existence of `"Health" Button`
+STEP[3s]: iter 0: nav Health
+    t =     3.48s Checking existence of `"Health" Button`
+    t =     3.49s Tap "Health" Button
+    t =     3.49s     Wait for org.nativescript.nsbenchmark to idle
+    t =     3.49s     Find the "Health" Button
+    t =     3.50s     Check for interrupting elements affecting "Health" Button
+    t =     3.51s     Synthesize event
+    t =     3.80s     Wait for org.nativescript.nsbenchmark to idle
+    t =     4.64s Waiting 10.0s for Any (First Match) to exist
+    t =     5.68s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     5.68s         Checking existence of `Any (First Match)`
+    t =     5.70s Checking existence of `Any (First Match)`
+    t =     5.71s Find the Any (First Match)
+STEP[5s]: iter 0: HK authorize
+    t =     5.72s Checking existence of `"Request Access" Button`
+    t =     5.73s Checking existence of `"Request Access" Button`
+    t =     5.74s Find the "Request Access" Button
+    t =     5.75s Tap "Request Access" Button
+    t =     5.75s     Wait for org.nativescript.nsbenchmark to idle
+    t =     5.75s     Find the "Request Access" Button
+    t =     5.76s     Check for interrupting elements affecting "Request Access" Button
+    t =     5.77s     Synthesize event
+    t =     6.06s     Wait for org.nativescript.nsbenchmark to idle
+    t =     6.94s Waiting 3.0s for Any (First Match) to exist
+    t =     7.98s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     7.98s         Checking existence of `Any (First Match)`
+    t =     8.03s Find the Any (First Match)
+STEP[8s]: health sheet(app): tap 'Turn On All'
+    t =     8.07s Tap "Turn On All" StaticText
+    t =     8.07s     Wait for org.nativescript.nsbenchmark to idle
+    t =     8.07s     Find the "Turn On All" StaticText
+    t =     8.10s     Check for interrupting elements affecting "Turn On All" StaticText
+    t =     8.13s     Synthesize event
+    t =     8.41s     Wait for org.nativescript.nsbenchmark to idle
+    t =     8.42s Waiting 2.0s for "Allow" Button to exist
+    t =     9.44s     Checking `Expect predicate `existsNoRetry == 1` for object "Allow" Button`
+    t =     9.45s         Checking existence of `"Allow" Button`
+    t =     9.49s Find the "Allow" Button
+STEP[9s]: health sheet(app): confirm 'Allow'
+    t =     9.53s Tap "UIA.Health.Allow.Button" Button
+    t =     9.53s     Wait for org.nativescript.nsbenchmark to idle
+    t =     9.53s     Find the "UIA.Health.Allow.Button" Button
+    t =     9.55s     Check for interrupting elements affecting "UIA.Health.Allow.Button" Button
+    t =     9.58s     Synthesize event
+    t =     9.87s     Wait for org.nativescript.nsbenchmark to idle
+    t =     9.87s Waiting 15.0s for Any (First Match) to exist
+    t =    10.90s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    10.90s         Checking existence of `Any (First Match)`
+    t =    10.93s Checking existence of `"Health access: not requested" StaticText`
+    t =    10.93s Find the "Health access: not requested" StaticText
+    t =    10.94s Waiting 15.0s for Any (First Match) to exist
+    t =    11.96s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    11.96s         Checking existence of `Any (First Match)`
+    t =    11.99s Checking existence of `Any (First Match)`
+    t =    12.00s Find the Any (First Match)
+    t =    12.01s Checking existence of `"Log 500 Steps" Button`
+    t =    12.02s Checking existence of `"Log 500 Steps" Button`
+    t =    12.03s Find the "Log 500 Steps" Button
+STEP[12s]: iter 0: log 500
+    t =    12.04s Tap "Log 500 Steps" Button
+    t =    12.04s     Wait for org.nativescript.nsbenchmark to idle
+    t =    12.05s     Find the "Log 500 Steps" Button
+    t =    12.05s     Check for interrupting elements affecting "Log 500 Steps" Button
+    t =    12.07s     Synthesize event
+    t =    12.36s     Wait for org.nativescript.nsbenchmark to idle
+    t =    12.63s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    12.64s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    12.71s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    12.73s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    12.80s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    12.81s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    12.88s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    12.89s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    12.96s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    12.97s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.04s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.05s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.12s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.20s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.28s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.77s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.85s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    13.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    13.94s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.02s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.09s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.10s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.17s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.18s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.25s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.26s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.33s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.41s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.50s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.57s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.64s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    14.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    14.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.22s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.30s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.38s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.45s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.46s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.53s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.54s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.61s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.62s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.69s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.70s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.77s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.78s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.85s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.86s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    15.93s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    15.94s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.01s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.03s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.09s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.11s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.18s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.26s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.34s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.35s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.42s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.43s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.50s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.51s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.58s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.59s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    16.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    16.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.22s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.30s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.38s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.45s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.46s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.53s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.54s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.61s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.62s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.69s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.71s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.77s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.79s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.85s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.87s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    17.93s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    17.95s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.02s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.03s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.10s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.11s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.18s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.26s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.34s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.35s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.41s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.43s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.51s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.57s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.59s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.67s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.75s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.83s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    18.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    18.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.22s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.30s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.38s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.45s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.47s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.53s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.55s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.61s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.63s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.69s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.71s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.78s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.79s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.86s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.87s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    19.94s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    19.95s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.02s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.03s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.10s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.11s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.18s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.26s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.34s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.35s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.42s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.43s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.50s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.51s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.58s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.59s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.66s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.67s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.74s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.75s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.82s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.83s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.90s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.91s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    20.98s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    20.99s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.06s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.07s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.14s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.16s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.22s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.24s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.31s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.32s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.39s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.40s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.47s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.48s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.55s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.56s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.63s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.64s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.71s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.72s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.79s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.80s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.87s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.88s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    21.95s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    21.96s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.03s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.04s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.11s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.12s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.19s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.27s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.35s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.77s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.85s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    22.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    22.93s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.01s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.08s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.09s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.16s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.17s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.24s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.25s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.32s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.33s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.40s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.41s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.47s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.49s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.55s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.57s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.64s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.65s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.72s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.73s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.80s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.81s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.88s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.89s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    23.96s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    23.97s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.04s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.05s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.12s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.20s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.22s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.30s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.38s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.45s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.46s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.53s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.54s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.61s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.62s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.69s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.70s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.77s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.78s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.86s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    24.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    24.94s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.01s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.02s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.09s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.10s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.17s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.18s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.25s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.26s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.33s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.41s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.50s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.57s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    25.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    25.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.23s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.31s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.38s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.39s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.46s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.47s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.54s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.55s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.62s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.63s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.80s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.81s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.87s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.88s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    26.95s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    26.96s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.03s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.04s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.11s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.12s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.19s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.20s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.27s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.28s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.35s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.36s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.43s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.44s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.51s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.52s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    27.59s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    27.60s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+STEP[27s]: iter 0: go home
+    t =    27.67s Checking existence of `"Transcribe" Button`
+    t =    27.68s Checking existence of `"Health" Button`
+    t =    27.69s Checking existence of `Any (First Match)`
+    t =    27.70s Checking existence of `Button (Element at index 0)`
+    t =    27.71s Find the Button (Element at index 0)
+STEP[27s]: goHome: tapping candidate 0
+    t =    27.73s Tap "BackButton" Button
+    t =    27.73s     Wait for org.nativescript.nsbenchmark to idle
+    t =    27.73s     Find the "BackButton" Button
+    t =    27.74s     Check for interrupting elements affecting "BackButton" Button
+    t =    27.75s     Synthesize event
+    t =    28.04s     Wait for org.nativescript.nsbenchmark to idle
+    t =    28.35s Checking existence of `"Transcribe" Button`
+    t =    28.36s Waiting 3.0s for "Transcribe" Button to exist
+    t =    29.38s     Checking `Expect predicate `existsNoRetry == 1` for object "Transcribe" Button`
+    t =    29.38s         Checking existence of `"Transcribe" Button`
+STEP[29s]: iter 0: nav Transcribe
+    t =    29.39s Checking existence of `"Transcribe" Button`
+    t =    29.40s Tap "Transcribe" Button
+    t =    29.40s     Wait for org.nativescript.nsbenchmark to idle
+    t =    29.40s     Find the "Transcribe" Button
+    t =    29.40s     Check for interrupting elements affecting "Transcribe" Button
+    t =    29.41s     Synthesize event
+    t =    29.70s     Wait for org.nativescript.nsbenchmark to idle
+    t =    30.46s Waiting 10.0s for Any (First Match) to exist
+    t =    31.49s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    31.50s         Checking existence of `Any (First Match)`
+    t =    31.51s Checking existence of `Any (First Match)`
+    t =    31.52s Find the Any (First Match)
+STEP[31s]: iter 0: speech authorize
+    t =    31.53s Checking existence of `"Request Access" Button`
+    t =    31.54s Checking existence of `"Request Access" Button`
+    t =    31.55s Find the "Request Access" Button
+    t =    31.56s Tap "Request Access" Button
+    t =    31.57s     Wait for org.nativescript.nsbenchmark to idle
+    t =    31.57s     Find the "Request Access" Button
+    t =    31.58s     Check for interrupting elements affecting "Request Access" Button
+    t =    31.59s     Synthesize event
+    t =    31.88s     Wait for org.nativescript.nsbenchmark to idle
+    t =    32.15s Waiting 3.0s for "Allow" Button to exist
+    t =    33.19s     Checking `Expect predicate `existsNoRetry == 1` for object "Allow" Button`
+    t =    33.19s         Checking existence of `"Allow" Button`
+STEP[33s]: system alert: 'Allow'
+    t =    33.23s Tap "Allow" Button
+    t =    33.23s     Wait for com.apple.springboard to idle
+    t =    33.23s     Find the "Allow" Button
+    t =    33.25s     Check for interrupting elements affecting "Allow" Button
+    t =    33.28s     Synthesize event
+    t =    33.57s     Wait for com.apple.springboard to idle
+    t =    33.79s Waiting 15.0s for Any (First Match) to exist
+    t =    34.81s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    34.81s         Checking existence of `Any (First Match)`
+    t =    34.84s Checking existence of `"Speech access: not requested" StaticText`
+    t =    34.85s Find the "Speech access: not requested" StaticText
+    t =    34.86s Checking existence of `"Transcribe Sample" Button`
+    t =    34.87s Checking existence of `"Transcribe Sample" Button`
+    t =    34.88s Find the "Transcribe Sample" Button
+STEP[34s]: iter 0: transcribe
+    t =    34.89s Tap "Transcribe Sample" Button
+    t =    34.89s     Wait for org.nativescript.nsbenchmark to idle
+    t =    34.90s     Find the "Transcribe Sample" Button
+    t =    34.90s     Check for interrupting elements affecting "Transcribe Sample" Button
+    t =    34.92s     Synthesize event
+    t =    35.20s     Wait for org.nativescript.nsbenchmark to idle
+    t =    35.47s Waiting 45.0s for Any (First Match) to exist
+    t =    36.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    36.48s         Checking existence of `Any (First Match)`
+    t =    36.50s         Capturing element debug description
+    t =    37.53s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    37.54s         Checking existence of `Any (First Match)`
+    t =    37.56s         Capturing element debug description
+    t =    38.47s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    38.48s         Checking existence of `Any (First Match)`
+    t =    38.50s         Capturing element debug description
+    t =    39.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    39.51s         Checking existence of `Any (First Match)`
+    t =    39.54s         Capturing element debug description
+    t =    40.56s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    40.56s         Checking existence of `Any (First Match)`
+    t =    40.58s         Capturing element debug description
+    t =    41.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    41.48s         Checking existence of `Any (First Match)`
+    t =    41.50s         Capturing element debug description
+    t =    42.52s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    42.53s         Checking existence of `Any (First Match)`
+    t =    42.55s         Capturing element debug description
+    t =    43.56s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    43.56s         Checking existence of `Any (First Match)`
+    t =    43.59s         Capturing element debug description
+    t =    44.50s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    44.50s         Checking existence of `Any (First Match)`
+    t =    44.52s         Capturing element debug description
+    t =    45.53s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    45.53s         Checking existence of `Any (First Match)`
+    t =    45.56s         Capturing element debug description
+    t =    46.47s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    46.48s         Checking existence of `Any (First Match)`
+    t =    46.50s         Capturing element debug description
+    t =    47.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    47.51s         Checking existence of `Any (First Match)`
+    t =    47.54s         Capturing element debug description
+    t =    48.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    48.55s         Checking existence of `Any (First Match)`
+    t =    48.57s         Capturing element debug description
+    t =    49.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    49.48s         Checking existence of `Any (First Match)`
+    t =    49.50s         Capturing element debug description
+    t =    50.50s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    50.51s         Checking existence of `Any (First Match)`
+    t =    50.53s         Capturing element debug description
+    t =    51.53s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    51.54s         Checking existence of `Any (First Match)`
+    t =    51.56s         Capturing element debug description
+    t =    52.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    52.55s         Checking existence of `Any (First Match)`
+    t =    52.57s         Capturing element debug description
+    t =    53.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    53.48s         Checking existence of `Any (First Match)`
+    t =    53.50s         Capturing element debug description
+    t =    54.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    54.51s         Checking existence of `Any (First Match)`
+    t =    54.54s         Capturing element debug description
+    t =    55.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    55.55s         Checking existence of `Any (First Match)`
+    t =    55.56s         Capturing element debug description
+    t =    56.57s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    56.57s         Checking existence of `Any (First Match)`
+    t =    56.59s         Capturing element debug description
+    t =    57.50s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    57.50s         Checking existence of `Any (First Match)`
+    t =    57.52s         Capturing element debug description
+    t =    58.53s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    58.54s         Checking existence of `Any (First Match)`
+    t =    58.56s         Capturing element debug description
+    t =    59.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    59.48s         Checking existence of `Any (First Match)`
+    t =    59.50s         Capturing element debug description
+    t =    60.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    60.51s         Checking existence of `Any (First Match)`
+    t =    60.54s         Capturing element debug description
+    t =    61.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    61.48s         Checking existence of `Any (First Match)`
+    t =    61.50s         Capturing element debug description
+    t =    62.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    62.51s         Checking existence of `Any (First Match)`
+    t =    62.54s         Capturing element debug description
+    t =    63.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    63.55s         Checking existence of `Any (First Match)`
+    t =    63.57s         Capturing element debug description
+    t =    64.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    64.48s         Checking existence of `Any (First Match)`
+    t =    64.50s         Capturing element debug description
+    t =    65.53s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    65.53s         Checking existence of `Any (First Match)`
+    t =    65.55s         Capturing element debug description
+    t =    66.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    66.48s         Checking existence of `Any (First Match)`
+    t =    66.50s         Capturing element debug description
+    t =    67.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    67.51s         Checking existence of `Any (First Match)`
+    t =    67.52s         Capturing element debug description
+    t =    68.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    68.55s         Checking existence of `Any (First Match)`
+    t =    68.57s         Capturing element debug description
+    t =    69.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    69.48s         Checking existence of `Any (First Match)`
+    t =    69.50s         Capturing element debug description
+    t =    70.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    70.51s         Checking existence of `Any (First Match)`
+    t =    70.54s         Capturing element debug description
+    t =    71.56s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    71.56s         Checking existence of `Any (First Match)`
+    t =    71.59s         Capturing element debug description
+    t =    72.50s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    72.50s         Checking existence of `Any (First Match)`
+    t =    72.52s         Capturing element debug description
+    t =    73.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    73.54s         Checking existence of `Any (First Match)`
+    t =    73.56s         Capturing element debug description
+    t =    74.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    74.48s         Checking existence of `Any (First Match)`
+    t =    74.50s         Capturing element debug description
+    t =    75.52s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    75.52s         Checking existence of `Any (First Match)`
+    t =    75.54s         Capturing element debug description
+    t =    76.56s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    76.56s         Checking existence of `Any (First Match)`
+    t =    76.59s         Capturing element debug description
+    t =    77.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    77.51s         Checking existence of `Any (First Match)`
+    t =    77.54s         Capturing element debug description
+    t =    78.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    78.55s         Checking existence of `Any (First Match)`
+    t =    78.57s         Capturing element debug description
+    t =    79.50s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    79.50s         Checking existence of `Any (First Match)`
+    t =    79.52s         Capturing element debug description
+    t =    80.48s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    80.48s         Checking existence of `Any (First Match)`
+    t =    80.50s         Capturing element debug description
+    t =    80.50s     Checking existence of `Any (First Match)`
+    t =    80.52s Collecting debug information to assist test failure triage
+    t =    80.52s     Requesting snapshot of accessibility hierarchy for app with pid 58145
+    t =    80.53s Checking existence of `Any (First Match)`
+    t =    80.54s Checking existence of `Any (First Match)`
+    t =    80.55s Checking existence of `Any (First Match)`
+    t =    80.56s Find the Any (First Match)
+STEP[80s]: iter 0: done
+    t =    80.57s Terminate org.nativescript.nsbenchmark:58145
+STEP[81s]: iter 1: launch org.nativescript.nsbenchmark
+    t =    81.60s Open org.nativescript.nsbenchmark
+    t =    81.60s     Launch org.nativescript.nsbenchmark
+    t =    81.72s         Setting up automation session
+    t =    82.32s         Wait for org.nativescript.nsbenchmark to idle
+    t =    83.49s Checking existence of `"Health" Button`
+    t =    83.52s Waiting 20.0s for "Health" Button to exist
+    t =    84.54s     Checking `Expect predicate `existsNoRetry == 1` for object "Health" Button`
+    t =    84.55s         Checking existence of `"Health" Button`
+STEP[84s]: iter 1: nav Health
+    t =    84.56s Checking existence of `"Health" Button`
+    t =    84.57s Tap "Health" Button
+    t =    84.57s     Wait for org.nativescript.nsbenchmark to idle
+    t =    84.57s     Find the "Health" Button
+    t =    84.57s     Check for interrupting elements affecting "Health" Button
+    t =    84.58s     Synthesize event
+    t =    84.87s     Wait for org.nativescript.nsbenchmark to idle
+    t =    85.70s Waiting 10.0s for Any (First Match) to exist
+    t =    86.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    86.74s         Checking existence of `Any (First Match)`
+    t =    86.76s Checking existence of `Any (First Match)`
+    t =    86.77s Find the Any (First Match)
+    t =    86.78s Checking existence of `"Health access: granted" StaticText`
+    t =    86.79s Find the "Health access: granted" StaticText
+    t =    86.80s Waiting 15.0s for Any (First Match) to exist
+    t =    87.82s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    87.82s         Checking existence of `Any (First Match)`
+    t =    87.83s Checking existence of `Any (First Match)`
+    t =    87.84s Find the Any (First Match)
+    t =    87.85s Checking existence of `"Log 500 Steps" Button`
+    t =    87.86s Checking existence of `"Log 500 Steps" Button`
+    t =    87.87s Find the "Log 500 Steps" Button
+STEP[87s]: iter 1: log 500
+    t =    87.88s Tap "Log 500 Steps" Button
+    t =    87.88s     Wait for org.nativescript.nsbenchmark to idle
+    t =    87.88s     Find the "Log 500 Steps" Button
+    t =    87.89s     Check for interrupting elements affecting "Log 500 Steps" Button
+    t =    87.91s     Synthesize event
+    t =    88.20s     Wait for org.nativescript.nsbenchmark to idle
+    t =    88.48s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    88.49s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    88.56s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    88.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    88.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    88.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    88.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    88.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    88.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    88.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    88.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    88.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    88.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    88.99s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.07s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.14s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.15s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.22s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.23s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.30s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.31s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.38s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.39s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.46s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.47s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.54s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.55s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.62s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.63s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.70s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.71s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.78s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.79s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.86s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.87s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    89.94s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    89.95s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.02s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.04s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.10s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.11s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.18s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.26s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.34s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.35s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.42s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.43s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.50s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.51s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.58s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.59s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.66s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.68s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.74s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.76s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.82s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.84s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.90s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    90.92s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    90.98s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.00s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.07s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.08s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.15s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.16s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.23s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.24s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.31s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.32s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.39s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.40s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.47s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.48s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.55s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.56s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.63s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.64s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.71s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.72s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.79s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.80s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.87s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.89s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    91.95s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    91.97s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.04s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.05s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.11s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.19s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.27s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.77s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.85s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    92.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    92.93s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.01s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.08s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.09s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.16s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.17s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.24s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.25s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.32s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.33s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.40s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.41s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.48s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.49s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.56s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.57s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.64s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.65s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.72s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.73s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.80s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.81s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.88s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.89s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    93.96s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    93.97s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.04s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.05s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.12s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.20s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.28s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.62s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.77s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.85s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    94.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    94.93s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.01s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.08s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.09s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.16s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.17s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.24s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.25s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.32s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.33s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.40s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.41s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.48s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.49s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.56s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.57s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.64s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.65s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.72s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.73s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.80s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.81s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.88s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.89s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    95.96s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    95.97s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.04s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.05s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.12s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.19s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.28s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.77s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.85s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    96.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    96.93s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.01s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.08s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.09s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.16s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.17s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.24s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.26s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.32s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.40s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.50s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.57s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    97.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    97.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.07s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.08s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.15s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.16s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.22s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.23s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.30s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.31s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.38s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.39s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.46s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.47s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.54s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.55s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.62s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.63s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.70s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.72s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.78s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.80s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.87s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.88s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    98.95s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    98.96s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.03s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.04s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.11s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.12s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.19s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.20s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.27s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.28s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.35s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.36s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.43s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.44s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.51s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.52s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.59s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.60s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.67s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.68s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.75s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.76s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.83s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.84s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.91s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =    99.92s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =    99.99s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.00s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.07s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.09s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.15s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.17s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.23s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.25s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.31s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.32s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.39s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.40s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.46s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.48s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.55s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.56s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.63s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.64s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.71s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.72s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.79s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.80s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.87s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.88s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   100.95s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   100.96s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.03s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.05s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.11s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.19s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.28s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.77s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.85s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   101.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   101.93s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.01s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.08s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.09s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.16s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.17s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.24s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.25s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.32s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.40s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.48s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.50s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.56s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   102.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   102.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   103.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   103.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   103.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   103.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   103.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   103.22s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   103.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   103.30s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   103.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   103.38s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   103.45s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   103.46s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+STEP[103s]: iter 1: go home
+    t =   103.53s Checking existence of `"Transcribe" Button`
+    t =   103.54s Checking existence of `"Health" Button`
+    t =   103.56s Checking existence of `Any (First Match)`
+    t =   103.57s Checking existence of `Button (Element at index 0)`
+    t =   103.58s Find the Button (Element at index 0)
+STEP[103s]: goHome: tapping candidate 0
+    t =   103.59s Tap "BackButton" Button
+    t =   103.59s     Wait for org.nativescript.nsbenchmark to idle
+    t =   103.59s     Find the "BackButton" Button
+    t =   103.60s     Check for interrupting elements affecting "BackButton" Button
+    t =   103.62s     Synthesize event
+    t =   103.90s     Wait for org.nativescript.nsbenchmark to idle
+    t =   104.22s Checking existence of `"Transcribe" Button`
+    t =   104.23s Waiting 3.0s for "Transcribe" Button to exist
+    t =   105.25s     Checking `Expect predicate `existsNoRetry == 1` for object "Transcribe" Button`
+    t =   105.26s         Checking existence of `"Transcribe" Button`
+STEP[105s]: iter 1: nav Transcribe
+    t =   105.28s Checking existence of `"Transcribe" Button`
+    t =   105.29s Tap "Transcribe" Button
+    t =   105.29s     Wait for org.nativescript.nsbenchmark to idle
+    t =   105.29s     Find the "Transcribe" Button
+    t =   105.30s     Check for interrupting elements affecting "Transcribe" Button
+    t =   105.31s     Synthesize event
+    t =   105.60s     Wait for org.nativescript.nsbenchmark to idle
+    t =   106.37s Waiting 10.0s for Any (First Match) to exist
+    t =   107.41s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   107.41s         Checking existence of `Any (First Match)`
+    t =   107.43s Checking existence of `Any (First Match)`
+    t =   107.44s Find the Any (First Match)
+    t =   107.45s Checking existence of `"Speech access: granted" StaticText`
+    t =   107.46s Find the "Speech access: granted" StaticText
+    t =   107.46s Checking existence of `"Transcribe Sample" Button`
+    t =   107.47s Checking existence of `"Transcribe Sample" Button`
+    t =   107.48s Find the "Transcribe Sample" Button
+STEP[107s]: iter 1: transcribe
+    t =   107.50s Tap "Transcribe Sample" Button
+    t =   107.50s     Wait for org.nativescript.nsbenchmark to idle
+    t =   107.50s     Find the "Transcribe Sample" Button
+    t =   107.51s     Check for interrupting elements affecting "Transcribe Sample" Button
+    t =   107.52s     Synthesize event
+    t =   107.81s     Wait for org.nativescript.nsbenchmark to idle
+    t =   108.10s Waiting 45.0s for Any (First Match) to exist
+    t =   109.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   109.11s         Checking existence of `Any (First Match)`
+    t =   109.14s         Capturing element debug description
+    t =   110.16s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   110.16s         Checking existence of `Any (First Match)`
+    t =   110.19s         Capturing element debug description
+    t =   111.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   111.11s         Checking existence of `Any (First Match)`
+    t =   111.13s         Capturing element debug description
+    t =   112.16s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   112.16s         Checking existence of `Any (First Match)`
+    t =   112.19s         Capturing element debug description
+    t =   113.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   113.11s         Checking existence of `Any (First Match)`
+    t =   113.14s         Capturing element debug description
+    t =   114.16s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   114.16s         Checking existence of `Any (First Match)`
+    t =   114.19s         Capturing element debug description
+    t =   115.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   115.11s         Checking existence of `Any (First Match)`
+    t =   115.13s         Capturing element debug description
+    t =   116.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   116.11s         Checking existence of `Any (First Match)`
+    t =   116.14s         Capturing element debug description
+    t =   117.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   117.14s         Checking existence of `Any (First Match)`
+    t =   117.16s         Capturing element debug description
+    t =   118.18s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   118.18s         Checking existence of `Any (First Match)`
+    t =   118.20s         Capturing element debug description
+    t =   119.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   119.11s         Checking existence of `Any (First Match)`
+    t =   119.13s         Capturing element debug description
+    t =   120.13s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   120.13s         Checking existence of `Any (First Match)`
+    t =   120.15s         Capturing element debug description
+    t =   121.16s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   121.16s         Checking existence of `Any (First Match)`
+    t =   121.19s         Capturing element debug description
+    t =   122.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   122.11s         Checking existence of `Any (First Match)`
+    t =   122.13s         Capturing element debug description
+    t =   123.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   123.11s         Checking existence of `Any (First Match)`
+    t =   123.14s         Capturing element debug description
+    t =   124.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   124.15s         Checking existence of `Any (First Match)`
+    t =   124.17s         Capturing element debug description
+    t =   125.18s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   125.18s         Checking existence of `Any (First Match)`
+    t =   125.20s         Capturing element debug description
+    t =   126.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   126.11s         Checking existence of `Any (First Match)`
+    t =   126.14s         Capturing element debug description
+    t =   127.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   127.15s         Checking existence of `Any (First Match)`
+    t =   127.17s         Capturing element debug description
+    t =   128.18s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   128.18s         Checking existence of `Any (First Match)`
+    t =   128.20s         Capturing element debug description
+    t =   129.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   129.11s         Checking existence of `Any (First Match)`
+    t =   129.14s         Capturing element debug description
+    t =   130.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   130.15s         Checking existence of `Any (First Match)`
+    t =   130.17s         Capturing element debug description
+    t =   131.18s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   131.18s         Checking existence of `Any (First Match)`
+    t =   131.20s         Capturing element debug description
+    t =   132.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   132.11s         Checking existence of `Any (First Match)`
+    t =   132.14s         Capturing element debug description
+    t =   133.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   133.11s         Checking existence of `Any (First Match)`
+    t =   133.14s         Capturing element debug description
+    t =   134.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   134.15s         Checking existence of `Any (First Match)`
+    t =   134.17s         Capturing element debug description
+    t =   135.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   135.10s         Checking existence of `Any (First Match)`
+    t =   135.13s         Capturing element debug description
+    t =   136.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   136.15s         Checking existence of `Any (First Match)`
+    t =   136.17s         Capturing element debug description
+    t =   137.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   137.10s         Checking existence of `Any (First Match)`
+    t =   137.13s         Capturing element debug description
+    t =   138.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   138.15s         Checking existence of `Any (First Match)`
+    t =   138.17s         Capturing element debug description
+    t =   139.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   139.10s         Checking existence of `Any (First Match)`
+    t =   139.13s         Capturing element debug description
+    t =   140.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   140.15s         Checking existence of `Any (First Match)`
+    t =   140.17s         Capturing element debug description
+    t =   141.20s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   141.20s         Checking existence of `Any (First Match)`
+    t =   141.22s         Capturing element debug description
+    t =   142.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   142.14s         Checking existence of `Any (First Match)`
+    t =   142.16s         Capturing element debug description
+    t =   143.18s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   143.18s         Checking existence of `Any (First Match)`
+    t =   143.20s         Capturing element debug description
+    t =   144.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   144.12s         Checking existence of `Any (First Match)`
+    t =   144.14s         Capturing element debug description
+    t =   145.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   145.11s         Checking existence of `Any (First Match)`
+    t =   145.14s         Capturing element debug description
+    t =   146.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   146.15s         Checking existence of `Any (First Match)`
+    t =   146.17s         Capturing element debug description
+    t =   147.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   147.10s         Checking existence of `Any (First Match)`
+    t =   147.12s         Capturing element debug description
+    t =   148.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   148.15s         Checking existence of `Any (First Match)`
+    t =   148.17s         Capturing element debug description
+    t =   149.20s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   149.20s         Checking existence of `Any (First Match)`
+    t =   149.21s         Capturing element debug description
+    t =   150.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   150.11s         Checking existence of `Any (First Match)`
+    t =   150.14s         Capturing element debug description
+    t =   151.16s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   151.16s         Checking existence of `Any (First Match)`
+    t =   151.18s         Capturing element debug description
+    t =   152.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   152.11s         Checking existence of `Any (First Match)`
+    t =   152.14s         Capturing element debug description
+    t =   153.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   153.11s         Checking existence of `Any (First Match)`
+    t =   153.14s         Capturing element debug description
+    t =   153.14s     Checking existence of `Any (First Match)`
+    t =   153.15s Collecting debug information to assist test failure triage
+    t =   153.15s     Requesting snapshot of accessibility hierarchy for app with pid 58271
+    t =   153.17s Checking existence of `Any (First Match)`
+    t =   153.18s Checking existence of `Any (First Match)`
+    t =   153.19s Checking existence of `Any (First Match)`
+    t =   153.19s Find the Any (First Match)
+STEP[153s]: iter 1: done
+    t =   153.20s Terminate org.nativescript.nsbenchmark:58271
+STEP[154s]: iter 2: launch org.nativescript.nsbenchmark
+    t =   154.26s Open org.nativescript.nsbenchmark
+    t =   154.26s     Launch org.nativescript.nsbenchmark
+    t =   154.37s         Setting up automation session
+    t =   154.97s         Wait for org.nativescript.nsbenchmark to idle
+    t =   156.14s Checking existence of `"Health" Button`
+    t =   156.17s Waiting 20.0s for "Health" Button to exist
+    t =   157.20s     Checking `Expect predicate `existsNoRetry == 1` for object "Health" Button`
+    t =   157.20s         Checking existence of `"Health" Button`
+STEP[157s]: iter 2: nav Health
+    t =   157.22s Checking existence of `"Health" Button`
+    t =   157.22s Tap "Health" Button
+    t =   157.22s     Wait for org.nativescript.nsbenchmark to idle
+    t =   157.22s     Find the "Health" Button
+    t =   157.23s     Check for interrupting elements affecting "Health" Button
+    t =   157.24s     Synthesize event
+    t =   157.53s     Wait for org.nativescript.nsbenchmark to idle
+    t =   158.36s Waiting 10.0s for Any (First Match) to exist
+    t =   159.39s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   159.39s         Checking existence of `Any (First Match)`
+    t =   159.40s Checking existence of `Any (First Match)`
+    t =   159.41s Find the Any (First Match)
+    t =   159.42s Checking existence of `"Health access: granted" StaticText`
+    t =   159.43s Find the "Health access: granted" StaticText
+    t =   159.44s Waiting 15.0s for Any (First Match) to exist
+    t =   160.44s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   160.45s         Checking existence of `Any (First Match)`
+    t =   160.47s Checking existence of `Any (First Match)`
+    t =   160.48s Find the Any (First Match)
+    t =   160.50s Checking existence of `"Log 500 Steps" Button`
+    t =   160.51s Checking existence of `"Log 500 Steps" Button`
+    t =   160.51s Find the "Log 500 Steps" Button
+STEP[160s]: iter 2: log 500
+    t =   160.53s Tap "Log 500 Steps" Button
+    t =   160.53s     Wait for org.nativescript.nsbenchmark to idle
+    t =   160.53s     Find the "Log 500 Steps" Button
+    t =   160.54s     Check for interrupting elements affecting "Log 500 Steps" Button
+    t =   160.55s     Synthesize event
+    t =   160.84s     Wait for org.nativescript.nsbenchmark to idle
+    t =   161.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.23s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.30s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.31s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.38s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.39s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.46s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.47s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.53s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.55s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.61s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.63s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.70s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.71s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.78s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.79s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.86s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.87s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   161.94s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   161.95s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.02s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.03s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.10s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.11s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.18s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.26s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.34s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.35s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.42s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.44s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.51s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.52s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.59s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.60s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.67s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.68s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.75s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.76s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.83s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.84s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.91s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   162.92s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   162.99s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.00s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.07s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.08s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.15s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.16s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.23s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.24s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.31s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.32s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.39s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.40s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.47s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.48s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.55s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.56s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.63s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.64s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.71s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.72s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.79s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.80s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.87s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.88s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   163.95s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   163.96s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.03s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.04s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.11s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.12s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.19s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.27s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.77s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.85s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   164.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   164.93s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.01s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.08s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.09s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.16s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.17s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.24s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.25s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.32s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.40s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.50s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.57s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   165.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   165.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.12s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.20s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.28s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.70s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.78s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.86s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   166.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   166.94s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.02s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.09s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.10s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.17s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.18s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.25s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.26s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.33s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.41s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.49s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.56s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.57s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.64s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.65s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.72s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.73s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.80s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.81s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.88s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   167.96s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   167.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.04s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.22s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.30s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.38s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.45s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.46s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.53s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.54s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.61s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.62s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.69s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.70s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.77s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.78s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.85s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.86s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   168.93s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   168.94s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.01s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.03s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.09s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.11s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.17s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.26s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.33s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.41s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.50s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.57s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.64s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.65s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.72s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.73s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.80s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.88s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   169.96s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   169.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.04s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.22s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.30s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.38s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.45s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.46s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.53s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.54s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.61s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.62s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.69s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.70s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.77s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.78s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.85s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.86s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   170.93s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   170.94s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.01s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.02s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.09s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.10s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.17s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.25s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.33s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.34s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.41s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.42s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.49s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.51s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.57s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.58s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.65s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.66s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.73s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.74s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.81s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.82s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.89s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.90s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   171.97s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   171.98s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.05s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.06s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.13s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.14s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.21s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.23s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.29s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.31s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.37s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.39s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.46s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.47s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.54s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.55s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.62s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.63s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.70s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.71s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.78s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.79s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.86s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.87s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   172.94s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   172.95s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.02s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.03s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.10s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.11s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.18s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.19s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.26s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.27s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.34s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.35s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.42s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.43s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.50s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.51s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.58s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.59s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.66s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.67s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.74s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.75s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.82s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.83s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.90s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   173.92s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   173.98s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.00s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.06s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.08s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.14s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.16s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.23s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.24s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.31s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.32s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.39s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.40s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.47s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.48s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.55s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.56s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.63s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.64s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.71s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.72s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.79s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.80s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.87s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.89s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   174.95s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   174.97s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.03s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.05s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.11s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.13s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.20s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.21s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.28s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.29s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.36s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.37s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.44s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.45s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.52s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.53s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.60s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.61s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.68s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.69s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.76s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.78s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.84s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.86s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   175.92s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   175.94s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   176.00s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   176.02s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+    t =   176.09s Checking existence of `"Sat Jul 25 — 8,500 steps (today)" StaticText`
+    t =   176.10s Find the "Sat Jul 25 — 8,500 steps (today)" StaticText
+STEP[176s]: iter 2: go home
+    t =   176.16s Checking existence of `"Transcribe" Button`
+    t =   176.18s Checking existence of `"Health" Button`
+    t =   176.19s Checking existence of `Any (First Match)`
+    t =   176.20s Checking existence of `Button (Element at index 0)`
+    t =   176.21s Find the Button (Element at index 0)
+STEP[176s]: goHome: tapping candidate 0
+    t =   176.23s Tap "BackButton" Button
+    t =   176.23s     Wait for org.nativescript.nsbenchmark to idle
+    t =   176.23s     Find the "BackButton" Button
+    t =   176.24s     Check for interrupting elements affecting "BackButton" Button
+    t =   176.25s     Synthesize event
+    t =   176.54s     Wait for org.nativescript.nsbenchmark to idle
+    t =   176.83s Checking existence of `"Transcribe" Button`
+    t =   176.84s Waiting 3.0s for "Transcribe" Button to exist
+    t =   177.86s     Checking `Expect predicate `existsNoRetry == 1` for object "Transcribe" Button`
+    t =   177.86s         Checking existence of `"Transcribe" Button`
+STEP[177s]: iter 2: nav Transcribe
+    t =   177.88s Checking existence of `"Transcribe" Button`
+    t =   177.89s Tap "Transcribe" Button
+    t =   177.89s     Wait for org.nativescript.nsbenchmark to idle
+    t =   177.89s     Find the "Transcribe" Button
+    t =   177.90s     Check for interrupting elements affecting "Transcribe" Button
+    t =   177.91s     Synthesize event
+    t =   178.20s     Wait for org.nativescript.nsbenchmark to idle
+    t =   178.97s Waiting 10.0s for Any (First Match) to exist
+    t =   180.01s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   180.01s         Checking existence of `Any (First Match)`
+    t =   180.03s Checking existence of `Any (First Match)`
+    t =   180.04s Find the Any (First Match)
+    t =   180.05s Checking existence of `"Speech access: granted" StaticText`
+    t =   180.06s Find the "Speech access: granted" StaticText
+    t =   180.07s Checking existence of `"Transcribe Sample" Button`
+    t =   180.08s Checking existence of `"Transcribe Sample" Button`
+    t =   180.08s Find the "Transcribe Sample" Button
+STEP[180s]: iter 2: transcribe
+    t =   180.10s Tap "Transcribe Sample" Button
+    t =   180.10s     Wait for org.nativescript.nsbenchmark to idle
+    t =   180.10s     Find the "Transcribe Sample" Button
+    t =   180.11s     Check for interrupting elements affecting "Transcribe Sample" Button
+    t =   180.12s     Synthesize event
+    t =   180.41s     Wait for org.nativescript.nsbenchmark to idle
+    t =   180.70s Waiting 45.0s for Any (First Match) to exist
+    t =   181.73s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   181.74s         Checking existence of `Any (First Match)`
+    t =   181.75s         Capturing element debug description
+    t =   182.78s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   182.78s         Checking existence of `Any (First Match)`
+    t =   182.80s         Capturing element debug description
+    t =   183.72s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   183.72s         Checking existence of `Any (First Match)`
+    t =   183.74s         Capturing element debug description
+    t =   184.76s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   184.76s         Checking existence of `Any (First Match)`
+    t =   184.79s         Capturing element debug description
+    t =   185.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   185.71s         Checking existence of `Any (First Match)`
+    t =   185.74s         Capturing element debug description
+    t =   186.76s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   186.76s         Checking existence of `Any (First Match)`
+    t =   186.79s         Capturing element debug description
+    t =   187.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   187.71s         Checking existence of `Any (First Match)`
+    t =   187.74s         Capturing element debug description
+    t =   188.76s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   188.76s         Checking existence of `Any (First Match)`
+    t =   188.79s         Capturing element debug description
+    t =   189.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   189.71s         Checking existence of `Any (First Match)`
+    t =   189.72s         Capturing element debug description
+    t =   190.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   190.75s         Checking existence of `Any (First Match)`
+    t =   190.77s         Capturing element debug description
+    t =   191.78s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   191.78s         Checking existence of `Any (First Match)`
+    t =   191.80s         Capturing element debug description
+    t =   192.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   192.71s         Checking existence of `Any (First Match)`
+    t =   192.74s         Capturing element debug description
+    t =   193.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   193.75s         Checking existence of `Any (First Match)`
+    t =   193.77s         Capturing element debug description
+    t =   194.78s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   194.78s         Checking existence of `Any (First Match)`
+    t =   194.80s         Capturing element debug description
+    t =   195.70s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   195.70s         Checking existence of `Any (First Match)`
+    t =   195.72s         Capturing element debug description
+    t =   196.73s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   196.73s         Checking existence of `Any (First Match)`
+    t =   196.75s         Capturing element debug description
+    t =   197.77s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   197.77s         Checking existence of `Any (First Match)`
+    t =   197.79s         Capturing element debug description
+    t =   198.80s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   198.80s         Checking existence of `Any (First Match)`
+    t =   198.82s         Capturing element debug description
+    t =   199.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   199.71s         Checking existence of `Any (First Match)`
+    t =   199.74s         Capturing element debug description
+    t =   200.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   200.75s         Checking existence of `Any (First Match)`
+    t =   200.77s         Capturing element debug description
+    t =   201.78s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   201.78s         Checking existence of `Any (First Match)`
+    t =   201.80s         Capturing element debug description
+    t =   202.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   202.71s         Checking existence of `Any (First Match)`
+    t =   202.74s         Capturing element debug description
+    t =   203.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   203.74s         Checking existence of `Any (First Match)`
+    t =   203.76s         Capturing element debug description
+    t =   204.76s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   204.76s         Checking existence of `Any (First Match)`
+    t =   204.79s         Capturing element debug description
+    t =   205.70s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   205.70s         Checking existence of `Any (First Match)`
+    t =   205.72s         Capturing element debug description
+    t =   206.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   206.75s         Checking existence of `Any (First Match)`
+    t =   206.77s         Capturing element debug description
+    t =   207.78s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   207.78s         Checking existence of `Any (First Match)`
+    t =   207.80s         Capturing element debug description
+    t =   208.72s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   208.72s         Checking existence of `Any (First Match)`
+    t =   208.74s         Capturing element debug description
+    t =   209.76s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   209.76s         Checking existence of `Any (First Match)`
+    t =   209.79s         Capturing element debug description
+    t =   210.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   210.71s         Checking existence of `Any (First Match)`
+    t =   210.74s         Capturing element debug description
+    t =   211.76s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   211.76s         Checking existence of `Any (First Match)`
+    t =   211.79s         Capturing element debug description
+    t =   212.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   212.71s         Checking existence of `Any (First Match)`
+    t =   212.74s         Capturing element debug description
+    t =   213.76s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   213.77s         Checking existence of `Any (First Match)`
+    t =   213.79s         Capturing element debug description
+    t =   214.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   214.71s         Checking existence of `Any (First Match)`
+    t =   214.74s         Capturing element debug description
+    t =   215.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   215.75s         Checking existence of `Any (First Match)`
+    t =   215.77s         Capturing element debug description
+    t =   216.70s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   216.70s         Checking existence of `Any (First Match)`
+    t =   216.73s         Capturing element debug description
+    t =   217.75s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   217.75s         Checking existence of `Any (First Match)`
+    t =   217.77s         Capturing element debug description
+    t =   218.80s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   218.80s         Checking existence of `Any (First Match)`
+    t =   218.82s         Capturing element debug description
+    t =   219.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   219.75s         Checking existence of `Any (First Match)`
+    t =   219.77s         Capturing element debug description
+    t =   220.80s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   220.80s         Checking existence of `Any (First Match)`
+    t =   220.83s         Capturing element debug description
+    t =   221.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   221.75s         Checking existence of `Any (First Match)`
+    t =   221.77s         Capturing element debug description
+    t =   222.78s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   222.78s         Checking existence of `Any (First Match)`
+    t =   222.80s         Capturing element debug description
+    t =   223.73s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   223.73s         Checking existence of `Any (First Match)`
+    t =   223.75s         Capturing element debug description
+    t =   224.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   224.75s         Checking existence of `Any (First Match)`
+    t =   224.77s         Capturing element debug description
+    t =   225.71s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   225.71s         Checking existence of `Any (First Match)`
+    t =   225.74s         Capturing element debug description
+    t =   225.74s     Checking existence of `Any (First Match)`
+    t =   225.75s Collecting debug information to assist test failure triage
+    t =   225.75s     Requesting snapshot of accessibility hierarchy for app with pid 58382
+    t =   225.77s Checking existence of `Any (First Match)`
+    t =   225.78s Checking existence of `Any (First Match)`
+    t =   225.78s Checking existence of `Any (First Match)`
+    t =   225.79s Find the Any (First Match)
+STEP[225s]: iter 2: done
+    t =   225.80s Terminate org.nativescript.nsbenchmark:58382
+PERFJSON:{"runs":[{"speech_state":"init_or_task_failed: Failed to initialize recognizer","iter":0,"error_hk_log":true,"speech_granted":true,"hk_rows_ms":1044,"nav_transcribe_ms":2124,"health_granted":true,"nav_health_ms":2219},{"iter":1,"error_hk_log":true,"nav_transcribe_ms":2150,"speech_state":"init_or_task_failed: Failed to initialize recognizer","hk_rows_ms":1028,"nav_health_ms":2202,"health_granted":true,"speech_granted":true},{"speech_state":"init_or_task_failed: Failed to initialize recognizer","error_hk_log":true,"iter":2,"nav_transcribe_ms":2145,"nav_health_ms":2185,"hk_rows_ms":1033,"health_granted":true,"speech_granted":true}],"bundle_id":"org.nativescript.nsbenchmark"}
+    t =   226.88s Tear Down
+Test Case '-[UIDriverUITests.FeatureLatencyTests testFeatureLatencies]' passed (226.942 seconds).
+Test Suite 'FeatureLatencyTests' passed at 2026-07-25 20:04:52.693.
+	 Executed 1 test, with 0 failures (0 unexpected) in 226.942 (226.943) seconds
+Test Suite 'UIDriverUITests.xctest' passed at 2026-07-25 20:04:52.694.
+	 Executed 1 test, with 0 failures (0 unexpected) in 226.942 (226.943) seconds
+Test Suite 'All tests' passed at 2026-07-25 20:04:52.694.
+	 Executed 1 test, with 0 failures (0 unexpected) in 226.942 (226.944) seconds
+2026-07-25 20:04:53.077 xcodebuild[58125:17024180] [MT] IDETestOperationsObserverDebug: 230.995 elapsed -- Testing started completed.
+2026-07-25 20:04:53.077 xcodebuild[58125:17024180] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-07-25 20:04:53.077 xcodebuild[58125:17024180] [MT] IDETestOperationsObserverDebug: 230.995 sec, +230.995 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Logs/Test/Test-UIDriver-2026.07.25_20-01-01--0700.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started

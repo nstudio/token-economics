@@ -1,0 +1,28 @@
+{
+  "runs": [
+    {
+      "health_granted": true,
+      "error": "goHome failed",
+      "error_hk_log": true,
+      "iter": 0,
+      "nav_health_ms": 1763
+    },
+    {
+      "iter": 1,
+      "health_granted": true,
+      "nav_health_ms": 1908,
+      "error_hk_log": true,
+      "error": "goHome failed"
+    },
+    {
+      "health_granted": true,
+      "iter": 2,
+      "error_hk_log": true,
+      "error": "goHome failed",
+      "nav_health_ms": 1769
+    }
+  ],
+  "bundle_id": "io.nstudio.lynx",
+  "trial": "main-lynx-3",
+  "measured_at": "2026-07-26T03:07:06.602Z"
+}

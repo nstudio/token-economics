@@ -1,0 +1,392 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project UIDriver.xcodeproj -scheme UIDriver -destination id=7DFF2660-A10C-449E-867A-92863D91663B
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'UIDriverUITests' in project 'UIDriver' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+    cd /Users/runner/token-economics/harness/perf/uidriver/UIDriver.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+
+ProcessInfoPlistFile /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Info.plist /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/empty-UIDriverUITests.plist (in target 'UIDriverUITests' from project 'UIDriver')
+    cd /Users/runner/token-economics/harness/perf/uidriver
+    builtin-infoPlistUtility /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/empty-UIDriverUITests.plist -producttype com.apple.product-type.bundle.ui-testing -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/ProductTypeInfoPlistAdditions.plist -o /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Info.plist
+
+CopySwiftLibs /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest (in target 'UIDriverUITests' from project 'UIDriver')
+    cd /Users/runner/token-economics/harness/perf/uidriver
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/UIDriverUITests --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Frameworks --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/PlugIns --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/SystemExtensions --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Extensions --platform iphonesimulator --toolchain /var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.42.0.xRBJyY/Metal.xctoolchain --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+2026-07-25 20:10:17.042490-0700 UIDriverUITests-Runner[59100:17042884] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'All tests' started at 2026-07-25 20:10:17.594.
+Test Suite 'UIDriverUITests.xctest' started at 2026-07-25 20:10:17.594.
+Test Suite 'FeatureLatencyTests' started at 2026-07-25 20:10:17.594.
+Test Case '-[UIDriverUITests.FeatureLatencyTests testFeatureLatencies]' started.
+    t =     0.00s Start Test at 2026-07-25 20:10:17.595
+    t =     0.02s Set Up
+STEP[0s]: iter 0: launch io.nstudio.lynx
+    t =     0.02s Open io.nstudio.lynx
+    t =     0.02s     Launch io.nstudio.lynx
+    t =     0.11s         Setting up automation session
+objc[59100]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x108484310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x10850c398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =     0.70s         Wait for io.nstudio.lynx to idle
+    t =     2.03s Checking existence of `"Health" Button`
+    t =     2.10s Waiting 20.0s for Any (First Match) to exist
+    t =     3.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     3.14s         Checking existence of `Any (First Match)`
+STEP[3s]: iter 0: nav Health
+    t =     3.16s Checking existence of `"Health" Button`
+    t =     3.18s Tap Any (First Match)
+    t =     3.18s     Wait for io.nstudio.lynx to idle
+    t =     3.18s     Find the Any (First Match)
+    t =     3.20s     Check for interrupting elements affecting "Health" StaticText
+    t =     3.23s     Synthesize event
+    t =     3.52s     Wait for io.nstudio.lynx to idle
+    t =     3.88s Waiting 10.0s for Any (First Match) to exist
+    t =     4.90s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     4.90s         Checking existence of `Any (First Match)`
+    t =     4.92s Checking existence of `Any (First Match)`
+    t =     4.94s Find the Any (First Match)
+STEP[4s]: iter 0: HK authorize
+    t =     4.96s Checking existence of `"Request Access" Button`
+    t =     4.98s Checking existence of `Any (First Match)`
+    t =     5.00s Find the Any (First Match)
+    t =     5.03s Tap "Request Access" StaticText
+    t =     5.03s     Wait for io.nstudio.lynx to idle
+    t =     5.04s     Find the "Request Access" StaticText
+    t =     5.06s     Check for interrupting elements affecting "Request Access" StaticText
+    t =     5.09s     Synthesize event
+    t =     5.37s     Wait for io.nstudio.lynx to idle
+    t =     5.38s Waiting 3.0s for Any (First Match) to exist
+    t =     6.45s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     6.45s         Checking existence of `Any (First Match)`
+    t =     6.52s Find the Any (First Match)
+STEP[6s]: health sheet(app): tap 'Turn On All'
+    t =     6.57s Tap "Turn On All" StaticText
+    t =     6.57s     Wait for io.nstudio.lynx to idle
+    t =     6.57s     Find the "Turn On All" StaticText
+    t =     6.62s     Check for interrupting elements affecting "Turn On All" StaticText
+    t =     6.66s     Synthesize event
+    t =     6.95s     Wait for io.nstudio.lynx to idle
+    t =     6.96s Waiting 2.0s for "Allow" Button to exist
+    t =     8.00s     Checking `Expect predicate `existsNoRetry == 1` for object "Allow" Button`
+    t =     8.00s         Checking existence of `"Allow" Button`
+    t =     8.07s Find the "Allow" Button
+STEP[8s]: health sheet(app): confirm 'Allow'
+    t =     8.11s Tap "UIA.Health.Allow.Button" Button
+    t =     8.11s     Wait for io.nstudio.lynx to idle
+    t =     8.11s     Find the "UIA.Health.Allow.Button" Button
+    t =     8.15s     Check for interrupting elements affecting "UIA.Health.Allow.Button" Button
+    t =     8.18s     Synthesize event
+    t =     8.46s     Wait for io.nstudio.lynx to idle
+    t =     8.47s Waiting 15.0s for Any (First Match) to exist
+    t =     9.54s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     9.54s         Checking existence of `Any (First Match)`
+    t =     9.58s Checking existence of `"Health access: not requested" StaticText`
+    t =     9.59s Find the "Health access: not requested" StaticText
+    t =     9.61s Waiting 15.0s for Any (First Match) to exist
+    t =    10.65s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    10.65s         Checking existence of `Any (First Match)`
+    t =    10.70s Checking existence of `Any (First Match)`
+    t =    10.72s Find the Any (First Match)
+    t =    10.75s Checking existence of `"Log 500 Steps" Button`
+    t =    10.77s Checking existence of `Any (First Match)`
+    t =    10.79s Find the Any (First Match)
+STEP[10s]: iter 0: log 500
+    t =    10.82s Tap "Log 500 Steps" StaticText
+    t =    10.82s     Wait for io.nstudio.lynx to idle
+    t =    10.82s     Find the "Log 500 Steps" StaticText
+    t =    10.85s     Check for interrupting elements affecting "Log 500 Steps" StaticText
+    t =    10.87s     Synthesize event
+    t =    11.17s     Wait for io.nstudio.lynx to idle
+    t =    11.18s Checking existence of `"Sat Jul 25 — 10,000 steps (today)" StaticText`
+    t =    11.21s Find the "Sat Jul 25 — 10,000 steps (today)" StaticText
+    t =    11.24s Checking existence of `"Sat Jul 25 — 10,500 steps (today)" StaticText`
+STEP[11s]: iter 0: go home
+    t =    11.27s Checking existence of `"Transcribe" Button`
+    t =    11.29s Checking existence of `"Health" Button`
+    t =    11.32s Checking existence of `Any (First Match)`
+    t =    11.35s Checking existence of `Button (Element at index 0)`
+    t =    11.35s Checking existence of `"Back" Button`
+    t =    11.38s Checking existence of `"Home" Button`
+    t =    11.40s Checking existence of `Any (First Match)`
+STEP[11s]: goHome: edge swipe fallback
+    t =    11.43s Press Application 'io.nstudio.lynx'[0.02, 0.50] for 0.1 seconds, then drag to Application 'io.nstudio.lynx'[0.90, 0.50] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds 
+    t =    11.43s     Wait for io.nstudio.lynx to idle
+    t =    11.43s     Find the Application 'io.nstudio.lynx'
+    t =    11.44s     Check for interrupting elements affecting "LynxBenchmark" Application
+    t =    11.45s     Synthesize event
+    t =    11.46s         Find the Application 'io.nstudio.lynx'
+    t =    11.46s         Find the Application 'io.nstudio.lynx'
+    t =    11.47s         Find the Application 'io.nstudio.lynx'
+    t =    11.48s         Find the Application 'io.nstudio.lynx'
+    t =    11.49s         Find the Application 'io.nstudio.lynx'
+    t =    12.50s     Wait for io.nstudio.lynx to idle
+    t =    12.50s Checking existence of `"Transcribe" Button`
+    t =    12.54s Waiting 3.0s for Any (First Match) to exist
+    t =    13.59s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    13.59s         Checking existence of `Any (First Match)`
+    t =    13.64s         Capturing element debug description
+    t =    14.57s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    14.57s         Checking existence of `Any (First Match)`
+    t =    14.62s         Capturing element debug description
+    t =    15.55s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    15.55s         Checking existence of `Any (First Match)`
+    t =    15.60s         Capturing element debug description
+    t =    15.60s     Checking existence of `Any (First Match)`
+    t =    15.63s Collecting debug information to assist test failure triage
+    t =    15.63s     Requesting snapshot of accessibility hierarchy for app with pid 59104
+    t =    15.64s Requesting snapshot of accessibility hierarchy for app with pid 59104
+    t =    15.70s Requesting snapshot of accessibility hierarchy for app with pid 59104
+TREE(goHome failed):
+Attributes: Application, 0x109f8d2c0, pid: 59104, label: 'LynxBenchmark'
+Element subtree:
+ →Application, 0x109f8d2c0, pid: 59104, label: 'LynxBenchmark'
+    Window (Main), 0x109f8d400, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x109f8d540, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x109f8d680, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x109f8d7c0, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x109f8d900, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x109f8da40, {{0.0, 62.0}, {402.0, 778.0}}
+                Other, 0x109f8db80, {{0.0, 62.0}, {402.0, 778.0}}
+                  Other, 0x109f8dcc0, {{0.0, 62.0}, {402.0, 778.0}}
+                    Other, 0x109f8de00, {{0.0, 62.0}, {402.0, 778.0}}
+                      Other, 0x109f8df40, {{0.0, 62.0}, {402.0, 44.0}}
+                        Button, 0x109f8e080, {{0.0, 62.0}, {40.0, 44.0}}, label: 'icon navibar back'
+                          StaticText, 0x109f8e1c0, {{0.0, 62.0}, {0.0, 0.0}}
+                        StaticText, 0x109f8e300, {{60.0, 62.0}, {282.0, 44.0}}, label: 'Health'
+                        Other, 0x109f8e440, {{0.0, 105.7}, {402.0, 0.3}}
+                      Other, 0x109f8e580, {{0.0, 106.0}, {402.0, 734.0}}
+                        Other, 0x109f8e6c0, {{0.0, 106.0}, {402.0, 734.0}}, label: 'lynxview'
+                          ScrollView, 0x109f8e800, {{0.0, 106.0}, {402.0, 734.0}}
+                            Other, 0x109f8e940, {{0.0, 106.0}, {402.0, 753.3}}
+                              Other, 0x109f8ea80, {{18.0, 128.0}, {57.3, 17.0}}
+                                StaticText, 0x109f8ebc0, {{18.0, 128.0}, {57.3, 17.0}}, label: '← Home'
+                              Other, 0x109f8ed00, {{18.0, 163.0}, {366.0, 26.3}}
+                                StaticText, 0x109f8ee40, {{164.7, 163.0}, {73.0, 26.3}}, label: 'Health'
+                              Other, 0x109f8ef80, {{18.0, 257.3}, {366.0, 566.0}}
+                                StaticText, 0x109f8f0c0, {{35.0, 274.3}, {332.0, 17.0}}, label: 'Health access: granted'
+                                Other, 0x109f8f200, {{35.0, 303.3}, {332.0, 48.0}}
+                                  StaticText, 0x109f8f340, {{140.7, 318.3}, {120.7, 18.0}}, label: 'Request Access'
+                                Other, 0x109f8f480, {{35.0, 363.3}, {332.0, 48.0}}
+                                  StaticText, 0x109f8f5c0, {{146.3, 378.3}, {109.7, 18.0}}, label: 'Log 500 Steps'
+                                StaticText, 0x109f8f700, {{35.0, 427.3}, {332.0, 18.0}}, label: 'Last 7 Days'
+                                Other, 0x109f8f840, {{35.0, 457.3}, {332.0, 349.0}}
+                                  Other, 0x109f8f980, {{35.0, 457.3}, {332.0, 43.0}}
+                                    StaticText, 0x109f8fac0, {{48.0, 470.3}, {306.0, 17.0}}, label: 'Sat Jul 25 — 10,500 steps (today)'
+                                  Other, 0x109f8fc00, {{35.0, 508.3}, {332.0, 43.0}}
+                                    StaticText, 0x109f8fd40, {{48.0, 521.3}, {306.0, 17.0}}, label: 'Fri Jul 24 — 0 steps'
+                                  Other, 0x109f8fe80, {{35.0, 559.3}, {332.0, 43.0}}
+                                    StaticText, 0x109f8b840, {{48.0, 572.3}, {306.0, 17.0}}, label: 'Thu Jul 23 — 0 steps'
+                                  Other, 0x109f88a00, {{35.0, 610.3}, {332.0, 43.0}}
+                                    StaticText, 0x109fcc000, {{48.0, 623.3}, {306.0, 17.0}}, label: 'Wed Jul 22 — 0 steps'
+                                  Other, 0x109fcc140, {{35.0, 661.3}, {332.0, 43.0}}
+                                    StaticText, 0x109fcc280, {{48.0, 674.3}, {306.0, 17.0}}, label: 'Tue Jul 21 — 0 steps'
+                                  Other, 0x109fcc3c0, {{35.0, 712.3}, {332.0, 43.0}}
+                                    StaticText, 0x109fcc500, {{48.0, 725.3}, {306.0, 17.0}}, label: 'Mon Jul 20 — 0 steps'
+                                  Other, 0x109fcc640, {{35.0, 763.3}, {332.0, 43.0}}
+                                    StaticText, 0x109fcc780, {{48.0, 776.3}, {306.0, 17.0}}, label: 'Sun Jul 19 — 0 steps'
+                Other, 0x109fcc8c0, {{0.0, 62.0}, {402.0, 778.0}}
+                  Other, 0x109fcca00, {{0.0, 62.0}, {402.0, 778.0}}
+Path to element:
+ →Application, 0x109f8d2c0, pid: 59104, label: 'LynxBenchmark'
+Query chain:
+ →Find: Application 'io.nstudio.lynx'
+  Output: {
+    Application, 0x109fccb40, pid: 59104, label: 'LynxBenchmark'
+  }
+
+    t =    15.72s Terminate io.nstudio.lynx:59104
+STEP[16s]: iter 1: launch io.nstudio.lynx
+    t =    16.78s Open io.nstudio.lynx
+    t =    16.78s     Launch io.nstudio.lynx
+    t =    16.89s         Setting up automation session
+    t =    17.43s         Wait for io.nstudio.lynx to idle
+    t =    18.75s Checking existence of `"Health" Button`
+    t =    18.82s Waiting 20.0s for Any (First Match) to exist
+    t =    19.88s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    19.88s         Checking existence of `Any (First Match)`
+STEP[19s]: iter 1: nav Health
+    t =    19.91s Checking existence of `"Health" Button`
+    t =    19.93s Tap Any (First Match)
+    t =    19.93s     Wait for io.nstudio.lynx to idle
+    t =    19.93s     Find the Any (First Match)
+    t =    19.95s     Check for interrupting elements affecting "Health" StaticText
+    t =    19.98s     Synthesize event
+    t =    20.27s     Wait for io.nstudio.lynx to idle
+    t =    20.62s Waiting 10.0s for Any (First Match) to exist
+    t =    21.69s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    21.69s         Checking existence of `Any (First Match)`
+    t =    21.72s Checking existence of `Any (First Match)`
+    t =    21.74s Find the Any (First Match)
+    t =    21.76s Checking existence of `"Health access: granted" StaticText`
+    t =    21.78s Find the "Health access: granted" StaticText
+    t =    21.80s Waiting 15.0s for Any (First Match) to exist
+    t =    22.84s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    22.84s         Checking existence of `Any (First Match)`
+    t =    22.88s Checking existence of `Any (First Match)`
+    t =    22.91s Find the Any (First Match)
+    t =    22.93s Checking existence of `"Log 500 Steps" Button`
+    t =    22.96s Checking existence of `Any (First Match)`
+    t =    22.98s Find the Any (First Match)
+STEP[22s]: iter 1: log 500
+    t =    23.01s Tap "Log 500 Steps" StaticText
+    t =    23.01s     Wait for io.nstudio.lynx to idle
+    t =    23.01s     Find the "Log 500 Steps" StaticText
+    t =    23.03s     Check for interrupting elements affecting "Log 500 Steps" StaticText
+    t =    23.06s     Synthesize event
+    t =    23.36s     Wait for io.nstudio.lynx to idle
+    t =    23.37s Checking existence of `"Sat Jul 25 — 10,500 steps (today)" StaticText`
+    t =    23.40s Find the "Sat Jul 25 — 10,500 steps (today)" StaticText
+    t =    23.43s Checking existence of `"Sat Jul 25 — 11,000 steps (today)" StaticText`
+STEP[23s]: iter 1: go home
+    t =    23.45s Checking existence of `"Transcribe" Button`
+    t =    23.48s Checking existence of `"Health" Button`
+    t =    23.51s Checking existence of `Any (First Match)`
+    t =    23.53s Checking existence of `Button (Element at index 0)`
+    t =    23.54s Checking existence of `"Back" Button`
+    t =    23.57s Checking existence of `"Home" Button`
+    t =    23.59s Checking existence of `Any (First Match)`
+STEP[23s]: goHome: edge swipe fallback
+    t =    23.62s Press Application 'io.nstudio.lynx'[0.02, 0.50] for 0.1 seconds, then drag to Application 'io.nstudio.lynx'[0.90, 0.50] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds 
+    t =    23.62s     Wait for io.nstudio.lynx to idle
+    t =    23.62s     Find the Application 'io.nstudio.lynx'
+    t =    23.63s     Check for interrupting elements affecting "LynxBenchmark" Application
+    t =    23.64s     Synthesize event
+    t =    23.65s         Find the Application 'io.nstudio.lynx'
+    t =    23.65s         Find the Application 'io.nstudio.lynx'
+    t =    23.66s         Find the Application 'io.nstudio.lynx'
+    t =    23.67s         Find the Application 'io.nstudio.lynx'
+    t =    23.68s         Find the Application 'io.nstudio.lynx'
+    t =    24.69s     Wait for io.nstudio.lynx to idle
+    t =    24.70s Checking existence of `"Transcribe" Button`
+    t =    24.74s Waiting 3.0s for Any (First Match) to exist
+    t =    25.77s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    25.77s         Checking existence of `Any (First Match)`
+    t =    25.82s         Capturing element debug description
+    t =    26.77s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    26.77s         Checking existence of `Any (First Match)`
+    t =    26.82s         Capturing element debug description
+    t =    27.74s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    27.75s         Checking existence of `Any (First Match)`
+    t =    27.79s         Capturing element debug description
+    t =    27.79s     Checking existence of `Any (First Match)`
+    t =    27.82s Collecting debug information to assist test failure triage
+    t =    27.82s     Requesting snapshot of accessibility hierarchy for app with pid 59135
+    t =    27.84s Terminate io.nstudio.lynx:59135
+STEP[28s]: iter 2: launch io.nstudio.lynx
+    t =    28.91s Open io.nstudio.lynx
+    t =    28.91s     Launch io.nstudio.lynx
+    t =    29.02s         Setting up automation session
+    t =    29.56s         Wait for io.nstudio.lynx to idle
+    t =    30.86s Checking existence of `"Health" Button`
+    t =    30.94s Waiting 20.0s for Any (First Match) to exist
+    t =    31.97s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    31.97s         Checking existence of `Any (First Match)`
+STEP[31s]: iter 2: nav Health
+    t =    32.00s Checking existence of `"Health" Button`
+    t =    32.02s Tap Any (First Match)
+    t =    32.02s     Wait for io.nstudio.lynx to idle
+    t =    32.02s     Find the Any (First Match)
+    t =    32.04s     Check for interrupting elements affecting "Health" StaticText
+    t =    32.07s     Synthesize event
+    t =    32.36s     Wait for io.nstudio.lynx to idle
+    t =    32.73s Waiting 10.0s for Any (First Match) to exist
+    t =    33.77s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    33.77s         Checking existence of `Any (First Match)`
+    t =    33.80s Checking existence of `Any (First Match)`
+    t =    33.82s Find the Any (First Match)
+    t =    33.84s Checking existence of `"Health access: granted" StaticText`
+    t =    33.85s Find the "Health access: granted" StaticText
+    t =    33.87s Waiting 15.0s for Any (First Match) to exist
+    t =    34.90s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    34.90s         Checking existence of `Any (First Match)`
+    t =    34.95s Checking existence of `Any (First Match)`
+    t =    34.97s Find the Any (First Match)
+    t =    35.00s Checking existence of `"Log 500 Steps" Button`
+    t =    35.02s Checking existence of `Any (First Match)`
+    t =    35.04s Find the Any (First Match)
+STEP[35s]: iter 2: log 500
+    t =    35.07s Tap "Log 500 Steps" StaticText
+    t =    35.07s     Wait for io.nstudio.lynx to idle
+    t =    35.07s     Find the "Log 500 Steps" StaticText
+    t =    35.10s     Check for interrupting elements affecting "Log 500 Steps" StaticText
+    t =    35.12s     Synthesize event
+    t =    35.42s     Wait for io.nstudio.lynx to idle
+    t =    35.44s Checking existence of `"Sat Jul 25 — 11,000 steps (today)" StaticText`
+    t =    35.46s Find the "Sat Jul 25 — 11,000 steps (today)" StaticText
+    t =    35.49s Checking existence of `"Sat Jul 25 — 11,500 steps (today)" StaticText`
+STEP[35s]: iter 2: go home
+    t =    35.52s Checking existence of `"Transcribe" Button`
+    t =    35.54s Checking existence of `"Health" Button`
+    t =    35.57s Checking existence of `Any (First Match)`
+    t =    35.59s Checking existence of `Button (Element at index 0)`
+    t =    35.60s Checking existence of `"Back" Button`
+    t =    35.63s Checking existence of `"Home" Button`
+    t =    35.65s Checking existence of `Any (First Match)`
+STEP[35s]: goHome: edge swipe fallback
+    t =    35.68s Press Application 'io.nstudio.lynx'[0.02, 0.50] for 0.1 seconds, then drag to Application 'io.nstudio.lynx'[0.90, 0.50] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds 
+    t =    35.68s     Wait for io.nstudio.lynx to idle
+    t =    35.68s     Find the Application 'io.nstudio.lynx'
+    t =    35.69s     Check for interrupting elements affecting "LynxBenchmark" Application
+    t =    35.70s     Synthesize event
+    t =    35.71s         Find the Application 'io.nstudio.lynx'
+    t =    35.71s         Find the Application 'io.nstudio.lynx'
+    t =    35.72s         Find the Application 'io.nstudio.lynx'
+    t =    35.73s         Find the Application 'io.nstudio.lynx'
+    t =    35.74s         Find the Application 'io.nstudio.lynx'
+    t =    36.75s     Wait for io.nstudio.lynx to idle
+    t =    36.76s Checking existence of `"Transcribe" Button`
+    t =    36.80s Waiting 3.0s for Any (First Match) to exist
+    t =    37.84s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    37.84s         Checking existence of `Any (First Match)`
+    t =    37.89s         Capturing element debug description
+    t =    38.80s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    38.80s         Checking existence of `Any (First Match)`
+    t =    38.85s         Capturing element debug description
+    t =    39.80s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    39.80s         Checking existence of `Any (First Match)`
+    t =    39.85s         Capturing element debug description
+    t =    39.85s     Checking existence of `Any (First Match)`
+    t =    39.88s Collecting debug information to assist test failure triage
+    t =    39.88s     Requesting snapshot of accessibility hierarchy for app with pid 59152
+    t =    39.89s Terminate io.nstudio.lynx:59152
+PERFJSON:{"runs":[{"iter":0,"error":"goHome failed","hk_log_roundtrip_ms":447,"nav_health_ms":1757,"hk_rows_ms":1085,"health_granted":true},{"error":"goHome failed","nav_health_ms":1811,"hk_log_roundtrip_ms":451,"hk_rows_ms":1085,"health_granted":true,"iter":1},{"health_granted":true,"iter":2,"nav_health_ms":1795,"hk_rows_ms":1078,"error":"goHome failed","hk_log_roundtrip_ms":447}],"bundle_id":"io.nstudio.lynx"}
+    t =    40.96s Tear Down
+Test Case '-[UIDriverUITests.FeatureLatencyTests testFeatureLatencies]' passed (41.041 seconds).
+Test Suite 'FeatureLatencyTests' passed at 2026-07-25 20:10:58.637.
+	 Executed 1 test, with 0 failures (0 unexpected) in 41.041 (41.042) seconds
+Test Suite 'UIDriverUITests.xctest' passed at 2026-07-25 20:10:58.638.
+	 Executed 1 test, with 0 failures (0 unexpected) in 41.041 (41.043) seconds
+Test Suite 'All tests' passed at 2026-07-25 20:10:58.638.
+	 Executed 1 test, with 0 failures (0 unexpected) in 41.041 (41.044) seconds
+2026-07-25 20:10:58.953 xcodebuild[59094:17042677] [MT] IDETestOperationsObserverDebug: 44.997 elapsed -- Testing started completed.
+2026-07-25 20:10:58.953 xcodebuild[59094:17042677] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-07-25 20:10:58.953 xcodebuild[59094:17042677] [MT] IDETestOperationsObserverDebug: 44.997 sec, +44.997 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Logs/Test/Test-UIDriver-2026.07.25_20-10-13--0700.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started

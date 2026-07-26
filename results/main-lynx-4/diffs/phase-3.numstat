@@ -1,0 +1,6 @@
+2	0	ios/SparklingGo.xcodeproj/project.pbxproj
+78	0	ios/SparklingGo/SparklingGo/MethodServices/SpeechRecognitionManager.swift
+100	0	ios/SparklingGo/SparklingGo/MethodServices/TranscribeMethods.swift
+50	0	src/native/speech.ts
+11	0	src/pages/transcribe/App.css
+76	4	src/pages/transcribe/App.vue

@@ -1,0 +1,158 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-lynx-4",
+  "framework": "lynx",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "lynx-docs": {
+        "command": "node",
+        "args": [
+          "/Users/runner/token-economics/harness/node_modules/@lynx-js/docs-mcp-server/dist/main.js"
+        ]
+      }
+    }
+  },
+  "started_at": "2026-07-25T23:03:34Z",
+  "outcome": "phases-complete",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "lynx_docs_mcp": "0.2.4"
+  },
+  "baseline_sha": "0e94c5988db3150aaf565278dfc4c5fc967bc34f",
+  "phases": {
+    "1": {
+      "session_id": "541a7f93-a251-424d-8c86-0c4e53102385",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 51,
+      "duration_ms": 251915,
+      "total_cost_usd": 1.5959383,
+      "usage": {
+        "input_tokens": 70,
+        "cache_creation_input_tokens": 84504,
+        "cache_read_input_tokens": 2707811,
+        "output_tokens": 18372,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 84504,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 463,
+            "cache_read_input_tokens": 113673,
+            "cache_creation_input_tokens": 192,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 192
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 253,
+      "end_sha": "aeda3b32815bf6d5e7682f853ee1df598d53e73a"
+    },
+    "2": {
+      "session_id": "5e00fbb4-666e-45be-a362-f0026f63e70b",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 209,
+      "duration_ms": 1637365,
+      "total_cost_usd": 12.8010738,
+      "usage": {
+        "input_tokens": 294,
+        "cache_creation_input_tokens": 309570,
+        "cache_read_input_tokens": 30887626,
+        "output_tokens": 111714,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 309570,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 744,
+            "cache_read_input_tokens": 333026,
+            "cache_creation_input_tokens": 228,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 228
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 1639,
+      "end_sha": "fa288b76ae58062371eaa34e22a61a7057107291"
+    },
+    "3": {
+      "session_id": "e832a100-d384-49e8-8769-8982e288383a",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 112,
+      "duration_ms": 757704,
+      "total_cost_usd": 6.1336653,
+      "usage": {
+        "input_tokens": 166,
+        "cache_creation_input_tokens": 230834,
+        "cache_read_input_tokens": 13509521,
+        "output_tokens": 46301,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 230834,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 823,
+            "cache_read_input_tokens": 254179,
+            "cache_creation_input_tokens": 339,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 339
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 759,
+      "end_sha": "564b8060f6520c65515d3f1224a87cd1f6242b84"
+    }
+  },
+  "finished_at": "2026-07-25T23:48:32Z"
+}

@@ -1,0 +1,33 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-lynx-5",
+  "framework": "lynx",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "lynx-docs": {
+        "command": "node",
+        "args": [
+          "/Users/runner/token-economics/harness/node_modules/@lynx-js/docs-mcp-server/dist/main.js"
+        ]
+      }
+    }
+  },
+  "started_at": "2026-07-25T23:49:10Z",
+  "outcome": "infra-invalid-auth",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "lynx_docs_mcp": "0.2.4"
+  },
+  "baseline_sha": "0e94c5988db3150aaf565278dfc4c5fc967bc34f",
+  "notes": "preflight auth failure (OAuth token rotated mid-batch); no measured sessions ran; re-run as fresh trial"
+}

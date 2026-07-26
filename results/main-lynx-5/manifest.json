@@ -1,0 +1,158 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-lynx-5",
+  "framework": "lynx",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "lynx-docs": {
+        "command": "node",
+        "args": [
+          "/Users/runner/token-economics/harness/node_modules/@lynx-js/docs-mcp-server/dist/main.js"
+        ]
+      }
+    }
+  },
+  "started_at": "2026-07-26T00:09:56Z",
+  "outcome": "phases-complete",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "lynx_docs_mcp": "0.2.4"
+  },
+  "baseline_sha": "0e94c5988db3150aaf565278dfc4c5fc967bc34f",
+  "phases": {
+    "1": {
+      "session_id": "2dbff484-57cd-4ff2-9e61-72b4f4eed2ee",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 76,
+      "duration_ms": 377112,
+      "total_cost_usd": 2.5943665999999994,
+      "usage": {
+        "input_tokens": 2485,
+        "cache_creation_input_tokens": 111156,
+        "cache_read_input_tokens": 5161782,
+        "output_tokens": 24710,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 111156,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 400,
+            "cache_read_input_tokens": 137865,
+            "cache_creation_input_tokens": 2652,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2652
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 378,
+      "end_sha": "f3c95e38757bb1e0b8bd1f0af84dc7d0a2c72109"
+    },
+    "2": {
+      "session_id": "ee4ee5dd-6f35-4a20-a872-5421578637cb",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 95,
+      "duration_ms": 653633,
+      "total_cost_usd": 4.963456800000002,
+      "usage": {
+        "input_tokens": 130,
+        "cache_creation_input_tokens": 192514,
+        "cache_read_input_tokens": 9829646,
+        "output_tokens": 57221,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 192514,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 690,
+            "cache_read_input_tokens": 215927,
+            "cache_creation_input_tokens": 271,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 271
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 654,
+      "end_sha": "ed2cb9ba760c018c02a718488780d8e6f3b65776"
+    },
+    "3": {
+      "session_id": "c117426b-d2a6-4fe0-adfa-2f831355c165",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 149,
+      "duration_ms": 1048666,
+      "total_cost_usd": 7.863328349999999,
+      "usage": {
+        "input_tokens": 224,
+        "cache_creation_input_tokens": 226791,
+        "cache_read_input_tokens": 15761830,
+        "output_tokens": 64186,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 226791,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 892,
+            "cache_read_input_tokens": 249101,
+            "cache_creation_input_tokens": 1374,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1374
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 1050,
+      "end_sha": "85933b73c4631786f32f6708a99b02154ca4c708"
+    }
+  },
+  "finished_at": "2026-07-26T00:45:20Z"
+}

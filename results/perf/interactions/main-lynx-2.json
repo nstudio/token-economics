@@ -1,0 +1,37 @@
+{
+  "bundle_id": "io.nstudio.lynx",
+  "runs": [
+    {
+      "hk_rows_ms": 1070,
+      "health_granted": true,
+      "nav_health_ms": 1776,
+      "nav_transcribe_ms": 1750,
+      "speech_state": "init_or_task_failed: Failed to initialize recognizer",
+      "hk_log_roundtrip_ms": 444,
+      "iter": 0,
+      "speech_granted": true
+    },
+    {
+      "health_granted": true,
+      "hk_rows_ms": 1061,
+      "hk_log_roundtrip_ms": 425,
+      "nav_health_ms": 1761,
+      "iter": 1,
+      "nav_transcribe_ms": 1733,
+      "speech_granted": true,
+      "speech_state": "init_or_task_failed: Failed to initialize recognizer"
+    },
+    {
+      "speech_granted": true,
+      "nav_transcribe_ms": 1716,
+      "health_granted": true,
+      "iter": 2,
+      "speech_state": "init_or_task_failed: Failed to initialize recognizer",
+      "hk_rows_ms": 1076,
+      "nav_health_ms": 1774,
+      "hk_log_roundtrip_ms": 441
+    }
+  ],
+  "trial": "main-lynx-2",
+  "measured_at": "2026-07-26T03:01:00.110Z"
+}

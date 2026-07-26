@@ -1,0 +1,87 @@
+{
+  "trial": "main-lynx-1",
+  "bundle_id": "io.nstudio.lynx",
+  "sim_udid": "7DFF2660-A10C-449E-867A-92863D91663B",
+  "launches_n": 5,
+  "measured_at": "2026-07-26T01:59:37.880Z",
+  "size": {
+    "bundle_bytes": 147034112,
+    "executable_bytes": 4816896,
+    "frameworks": {
+      "BaseDevtool.framework": 1949696,
+      "DebugRouter.framework": 2605056,
+      "Lynx.framework": 95076352,
+      "LynxBase.framework": 1617920,
+      "LynxDevtool.framework": 20148224,
+      "LynxService.framework": 409600,
+      "LynxServiceAPI.framework": 335872,
+      "Mantle.framework": 638976,
+      "PrimJS.framework": 10129408,
+      "SDWebImage.framework": 2355200,
+      "SDWebImageWebPCoder.framework": 405504,
+      "SnapKit.framework": 1220608,
+      "SocketRocket.framework": 659456,
+      "libwebp.framework": 3858432
+    },
+    "installed_bytes": 147034112
+  },
+  "launches": [
+    {
+      "t0": 1785031111196,
+      "simctl_return_ms": 352,
+      "cpu_settle_ms": 1833,
+      "pid": 48310,
+      "markers": {
+        "bootstrap": 317,
+        "active": 317
+      }
+    },
+    {
+      "t0": 1785031121267,
+      "simctl_return_ms": 350,
+      "cpu_settle_ms": 1589,
+      "pid": 48372,
+      "markers": {
+        "bootstrap": 313,
+        "active": 313
+      }
+    },
+    {
+      "t0": 1785031131085,
+      "simctl_return_ms": 344,
+      "cpu_settle_ms": 1598,
+      "pid": 48430,
+      "markers": {
+        "bootstrap": 308,
+        "active": 309
+      }
+    },
+    {
+      "t0": 1785031140924,
+      "simctl_return_ms": 365,
+      "cpu_settle_ms": 1615,
+      "pid": 48490,
+      "markers": {
+        "bootstrap": 330,
+        "active": 330
+      }
+    },
+    {
+      "t0": 1785031150752,
+      "simctl_return_ms": 336,
+      "cpu_settle_ms": 1597,
+      "pid": 48555,
+      "markers": {
+        "bootstrap": 299,
+        "active": 299
+      }
+    }
+  ],
+  "idle": {
+    "rss_kb_median": 294352,
+    "cpu_pct_median": 0,
+    "cpu_pct_max": 0,
+    "phys_footprint_kb": 49152,
+    "samples": 10
+  }
+}

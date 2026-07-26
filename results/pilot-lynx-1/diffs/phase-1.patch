@@ -1,0 +1,635 @@
+diff --git a/app.config.ts b/app.config.ts
+index f41b568..e2ac679 100644
+--- a/app.config.ts
++++ b/app.config.ts
+@@ -8,7 +8,8 @@ const lynxConfig = defineConfig({
+   source: {
+     entry: {
+       main: './src/pages/main/index.ts',
+-      second: './src/pages/second/index.ts',
++      health: './src/pages/health/index.ts',
++      transcribe: './src/pages/transcribe/index.ts',
+     },
+   },
+   output: {
+@@ -56,8 +57,11 @@ const config: AppConfig = {
+     main: {
+       path: './lynxPages/main',
+     },
+-    second: {
+-      path: './lynxPages/second',
++    health: {
++      path: './lynxPages/health',
++    },
++    transcribe: {
++      path: './lynxPages/transcribe',
+     },
+   },
+   plugin: [
+diff --git a/src/App.css b/src/App.css
+index 3def6b3..0a9bb89 100644
+--- a/src/App.css
++++ b/src/App.css
+@@ -1,165 +1,159 @@
+-.app {
++:root {
++  --color-bg: #f2f2f7;
++  --color-card: #ffffff;
++  --color-text: #1c1c1e;
++  --color-text-secondary: #6e6e73;
++  --color-accent: #007aff;
++  --color-border: #e5e5ea;
++  --color-disabled-bg: #e5e5ea;
++  --color-disabled-text: #a0a0a5;
++  --color-today-bg: #e8f1ff;
++}
++
++.screen-scroll {
++  height: 100vh;
++  width: 100%;
++  background: var(--color-bg);
++}
++
++.screen {
+   min-height: 100vh;
+-  padding: 22px 18px 36px;
+-  background: linear-gradient(140deg, #25f4ee 0%, #009995 55%, #fe2c3a 100%);
+-  gap: 18px;
++  background: var(--color-bg);
+   display: flex;
+   flex-direction: column;
+-  align-items: center;
++  padding-bottom: 40px;
+ }
+ 
+-.hero {
+-  align-items: center;
++.nav-bar {
+   display: flex;
+-  flex-direction: column;
+-  gap: 12px;
+-  text-align: center;
+-  width: 100%;
+-  max-width: 720px;
+-  color: #ffffff;
+-  margin-bottom: 50px;
++  align-items: center;
++  padding: 16px 20px 4px;
+ }
+ 
+-.eyebrow {
+-  padding: 6px 12px;
+-  border: 1px solid rgba(255, 255, 255, 0.35);
+-  border-radius: 999px;
+-  background: rgba(0, 153, 149, 0.25);
+-  font-size: 12px;
+-  font-weight: 700;
+-  letter-spacing: 0.4px;
+-  color: #ffffff;
++.nav-back__text {
++  color: var(--color-accent);
++  font-size: 16px;
++  font-weight: 600;
+ }
+ 
+-.logo {
+-  width: 104px;
+-  height: 104px;
+-  border-radius: 28px;
+-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+-  background: rgba(255, 255, 255, 0.1);
++.header {
++  padding: 12px 20px 24px;
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  gap: 6px;
++  text-align: center;
+ }
+ 
+ .title {
+-  font-size: 22px;
++  font-size: 28px;
+   font-weight: 800;
+-  letter-spacing: 0.2px;
++  color: var(--color-text);
+ }
+ 
+ .subtitle {
+-  font-size: 14px;
+-  line-height: 20px;
+-  color: #e6fbff;
++  font-size: 15px;
++  color: var(--color-text-secondary);
+ }
+ 
+-.card {
+-  width: 100%;
+-  max-width: 720px;
+-  background: rgba(255, 255, 255, 0.96);
+-  border: 1px solid #b7f2f0;
+-  border-radius: 16px;
+-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+-  padding: 16px;
+-  gap: 12px;
++.content {
++  padding: 0 20px;
+   display: flex;
+   flex-direction: column;
++  gap: 14px;
+ }
+ 
+-.card__header {
+-  display: flex;
++.button {
++  background: var(--color-accent);
++  border-radius: 12px;
++  padding: 16px;
+   align-items: center;
+-  justify-content: space-between;
+-  gap: 10px;
++  justify-content: center;
++  display: flex;
+ }
+ 
+-.card__title {
++.button__text {
++  color: #ffffff;
+   font-size: 16px;
+-  font-weight: 800;
+-  color: #0e191f;
++  font-weight: 700;
+ }
+ 
+-.card__tag {
+-  padding: 6px 12px;
+-  background: linear-gradient(90deg, #25f4ee 0%, #009995 100%);
+-  color: #ffffff;
+-  border-radius: 999px;
+-  font-size: 12px;
+-  font-weight: 700;
+-  border: 1px solid #009995;
++.button--secondary {
++  background: var(--color-card);
++  border: 1px solid var(--color-accent);
+ }
+ 
+-.card__tag--outline {
+-  background: rgba(254, 44, 58, 0.08);
+-  color: #fe2c3a;
+-  border: 1px solid #fe2c3a;
++.button--secondary .button__text {
++  color: var(--color-accent);
+ }
+ 
+-.label {
+-  font-size: 14px;
+-  color: #0e191f;
+-  font-weight: 700;
++.button--disabled {
++  background: var(--color-disabled-bg);
++  border: 1px solid var(--color-disabled-bg);
+ }
+ 
+-.input {
+-  border: 1px solid #009995;
+-  background: #f2fbfa;
+-  border-radius: 10px;
+-  padding: 12px;
+-  font-size: 14px;
+-  line-height: 20px;
+-  color: #0f172a;
++.button--disabled .button__text {
++  color: var(--color-disabled-text);
+ }
+ 
+-.input__hint {
+-  font-size: 12px;
+-  color: #335260;
++.status-line {
++  font-size: 15px;
++  color: var(--color-text-secondary);
++  padding: 4px 2px;
++}
++
++.section-header {
++  font-size: 13px;
++  font-weight: 700;
++  text-transform: uppercase;
++  letter-spacing: 0.4px;
++  color: var(--color-text-secondary);
++  padding: 12px 2px 4px;
+ }
+ 
+-.primary {
+-  background: linear-gradient(90deg, #25f4ee 0%, #009995 100%);
+-  border: 1px solid #009995;
++.card {
++  background: var(--color-card);
+   border-radius: 12px;
+-  padding: 14px;
+-  align-items: center;
+-  justify-content: center;
++  padding: 4px 12px;
++}
++
++.empty-state {
++  color: var(--color-text-secondary);
++  font-size: 14px;
++  text-align: center;
++  padding: 28px 12px;
++}
++
++.list-row {
+   display: flex;
+-  box-shadow: 0 8px 22px rgba(0, 153, 149, 0.35);
+-  gap: 8px;
++  align-items: center;
++  padding: 12px 8px;
++  border-bottom: 1px solid var(--color-border);
+ }
+ 
+-.primary__text {
+-  color: #ffffff;
+-  font-weight: 800;
++.list-row:last-child {
++  border-bottom: none;
++}
++
++.list-row--today {
++  background: var(--color-today-bg);
++  border-radius: 8px;
++}
++
++.list-row__text {
+   font-size: 15px;
++  color: var(--color-text);
+ }
+ 
+-.primary__icon {
+-  color: #ffffff;
+-  font-size: 16px;
+-  font-weight: 800;
++.transcript {
++  background: var(--color-card);
++  border-radius: 12px;
++  padding: 16px;
++  min-height: 140px;
+ }
+ 
+-.pill {
+-  align-items: center;
+-  padding: 8px 10px;
+-  border-radius: 10px;
+-  border: 1px solid #009995;
+-  background: #f2fbfa;
+-  color: #0f172a;
+-  font-size: 12px;
+-  line-height: 18px;
+-  word-break: break-all;
+-}
+-
+-.pill--mono {
+-  font-family: 'Menlo', 'SFMono-Regular', Consolas, monospace;
+-}
+-
+-.result {
+-  background: #fff6f7;
+-  border: 1px dashed #fe2c3a;
+-  border-radius: 10px;
+-  padding: 12px;
+-  color: #3f0a10;
+-  min-height: 64px;
+-  line-height: 20px;
++.transcript__text {
++  font-size: 15px;
++  line-height: 21px;
++  color: var(--color-text);
+ }
+diff --git a/src/pages/health/App.css b/src/pages/health/App.css
+new file mode 100644
+index 0000000..06dc5f2
+--- /dev/null
++++ b/src/pages/health/App.css
+@@ -0,0 +1 @@
++@import url('../../App.css');
+diff --git a/src/pages/health/App.vue b/src/pages/health/App.vue
+new file mode 100644
+index 0000000..fac36e7
+--- /dev/null
++++ b/src/pages/health/App.vue
+@@ -0,0 +1,32 @@
++<script setup lang="ts">
++import { close } from 'sparkling-navigation'
++
++import './App.css'
++
++function goBack() {
++  close()
++}
++</script>
++
++<template>
++  <scroll-view class="screen-scroll" scroll-orientation="vertical">
++    <view class="screen">
++      <view class="nav-bar" @tap="goBack">
++        <text class="nav-back__text">← Home</text>
++      </view>
++      <view class="content">
++        <text class="status-line">Health access: not requested</text>
++        <view class="button button--secondary">
++          <text class="button__text">Request Access</text>
++        </view>
++        <view class="button button--disabled">
++          <text class="button__text">Log 500 Steps</text>
++        </view>
++        <text class="section-header">Last 7 Days</text>
++        <view class="card">
++          <text class="empty-state">No data yet</text>
++        </view>
++      </view>
++    </view>
++  </scroll-view>
++</template>
+diff --git a/src/pages/second/index.ts b/src/pages/health/index.ts
+similarity index 100%
+rename from src/pages/second/index.ts
+rename to src/pages/health/index.ts
+diff --git a/src/pages/main/App.css b/src/pages/main/App.css
+index db275da..06dc5f2 100644
+--- a/src/pages/main/App.css
++++ b/src/pages/main/App.css
+@@ -1,6 +1 @@
+ @import url('../../App.css');
+-
+-.page-scroll {
+-  height: 100vh;
+-  width: 100%;
+-}
+diff --git a/src/pages/main/App.vue b/src/pages/main/App.vue
+index 48a10b7..39b7fbc 100644
+--- a/src/pages/main/App.vue
++++ b/src/pages/main/App.vue
+@@ -1,41 +1,41 @@
+ <script setup lang="ts">
+-import { onMounted } from 'vue-lynx'
+-import * as router from 'sparkling-navigation'
++import { navigate } from 'sparkling-navigation'
++import type { NavigateResponse } from 'sparkling-navigation'
+ 
+ import './App.css'
+-import sparklingLogo from '../../assets/sparkling_icon.png'
+ 
+-const secondPageScheme = 'hybrid://lynxview_page?bundle=second.lynx.bundle&title=Second%20Page&screen_orientation=portrait'
+-
+-onMounted(() => {
+-  console.info('Hello, Sparkling Vue template')
+-})
++function openHealth() {
++  navigate(
++    { path: 'health.lynx.bundle', options: { params: { title: 'Health', screen_orientation: 'portrait' } } },
++    (result: NavigateResponse) => {
++      console.info('navigate to health result', JSON.stringify(result))
++    }
++  )
++}
+ 
+-function openSecondPage() {
+-  router.open({ scheme: secondPageScheme }, (result: router.OpenResponse) => {
+-    console.info('router.open result', JSON.stringify(result))
+-  })
++function openTranscribe() {
++  navigate(
++    { path: 'transcribe.lynx.bundle', options: { params: { title: 'Transcribe', screen_orientation: 'portrait' } } },
++    (result: NavigateResponse) => {
++      console.info('navigate to transcribe result', JSON.stringify(result))
++    }
++  )
+ }
+ </script>
+ 
+ <template>
+-  <scroll-view class="page-scroll" scroll-orientation="vertical">
+-    <view class="app">
+-      <view class="hero">
+-        <text class="eyebrow">Sparkling · Vue Lynx</text>
+-        <image :src="sparklingLogo" class="logo" />
+-        <text class="title">Sparkling Starter</text>
++  <scroll-view class="screen-scroll" scroll-orientation="vertical">
++    <view class="screen">
++      <view class="header">
++        <text class="title">Native Bench</text>
++        <text class="subtitle">Token economics benchmark</text>
+       </view>
+-      <view class="card">
+-        <view class="card__header">
+-          <text class="card__title">Multi page demo</text>
+-          <text class="card__tag card__tag--outline">Router</text>
++      <view class="content">
++        <view class="button" @tap="openHealth">
++          <text class="button__text">Health</text>
+         </view>
+-        <text class="label">Scheme</text>
+-        <text class="pill pill--mono">{{ secondPageScheme }}</text>
+-        <view class="primary" @tap="openSecondPage">
+-          <text class="primary__text">Open second page</text>
+-          <text class="primary__icon">→</text>
++        <view class="button" @tap="openTranscribe">
++          <text class="button__text">Transcribe</text>
+         </view>
+       </view>
+     </view>
+diff --git a/src/pages/second/App.css b/src/pages/second/App.css
+deleted file mode 100644
+index d94d53b..0000000
+--- a/src/pages/second/App.css
++++ /dev/null
+@@ -1,98 +0,0 @@
+-:root {
+-  background-color: #fff;
+-  --color-text: #000;
+-}
+-
+-.Background {
+-  position: fixed;
+-  background: radial-gradient(
+-    71.43% 62.3% at 46.43% 36.43%,
+-    rgba(18, 229, 229, 0) 15%,
+-    rgba(239, 155, 255, 0.3) 56.35%,
+-    #ff6448 100%
+-  );
+-  box-shadow: 0 12.93px 28.74px 0 #ffd28db2 inset;
+-  border-radius: 50%;
+-  width: 200vw;
+-  height: 200vw;
+-  top: -60vw;
+-  left: -14.27vw;
+-  transform: rotate(15.25deg);
+-}
+-
+-.page {
+-  background: linear-gradient(135deg, #eef7ff 0%, #fdf4ff 100%);
+-  min-height: 100vh;
+-}
+-
+-.App {
+-  position: relative;
+-  min-height: 100vh;
+-  display: flex;
+-  flex-direction: column;
+-  align-items: center;
+-  justify-content: flex-start;
+-  padding: 50px 18px;
+-  gap: 16px;
+-}
+-
+-text {
+-  color: var(--color-text);
+-}
+-
+-.Banner {
+-  display: flex;
+-  flex-direction: column;
+-  align-items: center;
+-  justify-content: center;
+-  z-index: 1;
+-  margin-bottom: 10px;
+-  height: auto;
+-}
+-
+-.Title {
+-  margin-top: 50px;
+-  font-size: 24px;
+-  font-weight: 700;
+-  letter-spacing: 0.3px;
+-}
+-
+-.Content {
+-  display: flex;
+-  flex-direction: column;
+-  align-items: center;
+-  justify-content: flex-start;
+-  width: 100%;
+-  max-width: 480px;
+-  padding: 0 12px 40px;
+-  margin-top: 10px;
+-  gap: 12px;
+-}
+-
+-.Button {
+-  background-color: #4879ff;
+-  color: #fff;
+-  padding: 12px 20px;
+-  border-radius: 12px;
+-  font-size: 16px;
+-  font-weight: 600;
+-  margin: 4px 0;
+-  text-align: center;
+-  align-self: stretch;
+-  display: flex;
+-  justify-content: center;
+-  max-width: 420px;
+-  box-shadow: 0 8px 20px rgba(72, 121, 255, 0.18);
+-}
+-
+-.GlobalProps {
+-  font-size: 12px;
+-  padding: 12px;
+-  margin-top: 6px;
+-  border-radius: 12px;
+-  background: #0b1720;
+-  color: #c8e6ff;
+-  line-height: 18px;
+-  min-height: 120px;
+-  letter-spacing: 0.2px;
+-}
+diff --git a/src/pages/second/App.vue b/src/pages/second/App.vue
+deleted file mode 100644
+index 0648e25..0000000
+--- a/src/pages/second/App.vue
++++ /dev/null
+@@ -1,28 +0,0 @@
+-<script setup lang="ts">
+-import { onMounted } from 'vue-lynx'
+-import { close } from 'sparkling-navigation'
+-
+-import './App.css'
+-
+-onMounted(() => {
+-  console.info('Hello, Sparkling second page')
+-  console.info('lynx.__globalProps', lynx.__globalProps)
+-})
+-
+-function onClose() {
+-  close()
+-}
+-</script>
+-
+-<template>
+-  <view class="page">
+-    <view class="App">
+-      <view class="Banner">
+-        <text class="Title">This is the second page</text>
+-      </view>
+-      <view class="Content">
+-        <text class="Button" @tap="onClose">Close</text>
+-      </view>
+-    </view>
+-  </view>
+-</template>
+diff --git a/src/pages/transcribe/App.css b/src/pages/transcribe/App.css
+new file mode 100644
+index 0000000..06dc5f2
+--- /dev/null
++++ b/src/pages/transcribe/App.css
+@@ -0,0 +1 @@
++@import url('../../App.css');
+diff --git a/src/pages/transcribe/App.vue b/src/pages/transcribe/App.vue
+new file mode 100644
+index 0000000..c0f049d
+--- /dev/null
++++ b/src/pages/transcribe/App.vue
+@@ -0,0 +1,31 @@
++<script setup lang="ts">
++import { close } from 'sparkling-navigation'
++
++import './App.css'
++
++function goBack() {
++  close()
++}
++</script>
++
++<template>
++  <scroll-view class="screen-scroll" scroll-orientation="vertical">
++    <view class="screen">
++      <view class="nav-bar" @tap="goBack">
++        <text class="nav-back__text">← Home</text>
++      </view>
++      <view class="content">
++        <text class="status-line">Speech access: not requested</text>
++        <view class="button button--secondary">
++          <text class="button__text">Request Access</text>
++        </view>
++        <view class="button button--disabled">
++          <text class="button__text">Transcribe Sample</text>
++        </view>
++        <view class="transcript">
++          <text class="transcript__text empty-state">No transcript yet</text>
++        </view>
++      </view>
++    </view>
++  </scroll-view>
++</template>
+diff --git a/src/pages/transcribe/index.ts b/src/pages/transcribe/index.ts
+new file mode 100644
+index 0000000..d617546
+--- /dev/null
++++ b/src/pages/transcribe/index.ts
+@@ -0,0 +1,6 @@
++import { createApp } from 'vue-lynx'
++
++import App from './App.vue'
++
++const app = createApp(App)
++app.mount()

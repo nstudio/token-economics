@@ -1,0 +1,269 @@
+diff --git a/ios/SparklingGo.xcodeproj/project.pbxproj b/ios/SparklingGo.xcodeproj/project.pbxproj
+index 88fd8f7..0db3600 100644
+--- a/ios/SparklingGo.xcodeproj/project.pbxproj
++++ b/ios/SparklingGo.xcodeproj/project.pbxproj
+@@ -817,6 +817,7 @@
+ 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count to show your recent activity.";
+ 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench logs steps you record from within the app.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
++				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Native Bench uses speech recognition to transcribe the sample audio.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+@@ -862,6 +863,7 @@
+ 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count to show your recent activity.";
+ 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench logs steps you record from within the app.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
++				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Native Bench uses speech recognition to transcribe the sample audio.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+diff --git a/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift b/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+index ac62a12..7a5fde4 100644
+--- a/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
++++ b/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+@@ -19,7 +19,7 @@ class RouterServiceImpl: RouterService {
+     func openScheme(withParams params: Sparkling_Router.OpenMethodParamModel, completion: @escaping SparklingMethod.PipeMethod.CompletionBlock) {
+         let urlString = params.scheme
+         let context = SPKContext()
+-        context.lynxModule = ["HealthKitModule": NSNumber(value: 0)]
++        context.lynxModule = ["HealthKitModule": NSNumber(value: 0), "SpeechModule": NSNumber(value: 0)]
+ 
+         DispatchQueue.main.async {
+             func openWithRouter(completionHandler: ((Bool) -> Void)? = nil) {
+diff --git a/ios/SparklingGo/SparklingGo/MethodServices/SpeechModule.swift b/ios/SparklingGo/SparklingGo/MethodServices/SpeechModule.swift
+new file mode 100644
+index 0000000..3f007c1
+--- /dev/null
++++ b/ios/SparklingGo/SparklingGo/MethodServices/SpeechModule.swift
+@@ -0,0 +1,97 @@
++// Copyright 2025 The Sparkling Authors. All rights reserved.
++// Licensed under the Apache License Version 2.0 that can be found in the
++// LICENSE file in the root directory of this source tree.
++
++import Foundation
++import Speech
++import Lynx
++
++@objc(SpeechModule)
++final class SpeechModule: NSObject, LynxModule {
++    static var name: String { "SpeechModule" }
++
++    static var methodLookup: [String: String] {
++        return [
++            "getAuthorizationStatus": NSStringFromSelector(#selector(getAuthorizationStatus(_:))),
++            "requestAuthorization": NSStringFromSelector(#selector(requestAuthorization(_:))),
++            "transcribeSample": NSStringFromSelector(#selector(transcribeSample(_:))),
++        ]
++    }
++
++    private static let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
++    private static var activeTask: SFSpeechRecognitionTask?
++
++    override init() {
++        super.init()
++    }
++
++    init(param: Any) {
++        super.init()
++    }
++
++    @objc func getAuthorizationStatus(_ callback: @escaping LynxCallbackBlock) {
++        callback(Self.statusString(for: SFSpeechRecognizer.authorizationStatus()))
++    }
++
++    @objc func requestAuthorization(_ callback: @escaping LynxCallbackBlock) {
++        SFSpeechRecognizer.requestAuthorization { status in
++            DispatchQueue.main.async {
++                callback(["status": Self.statusString(for: status)])
++            }
++        }
++    }
++
++    @objc func transcribeSample(_ callback: @escaping LynxCallbackBlock) {
++        guard SFSpeechRecognizer.authorizationStatus() == .authorized else {
++            callback(["event": "error", "error": "Speech access not granted"])
++            return
++        }
++        guard let recognizer = Self.recognizer else {
++            callback(["event": "error", "error": "Failed to initialize recognizer"])
++            return
++        }
++        guard recognizer.isAvailable else {
++            callback(["event": "error", "error": "Speech recognizer is not currently available"])
++            return
++        }
++        guard let url = Bundle.main.url(forResource: "sample", withExtension: "wav") else {
++            callback(["event": "error", "error": "Bundled sample audio not found"])
++            return
++        }
++
++        Self.activeTask?.cancel()
++        Self.activeTask = nil
++
++        let request = SFSpeechURLRecognitionRequest(url: url)
++        request.shouldReportPartialResults = true
++
++        Self.activeTask = recognizer.recognitionTask(with: request) { result, error in
++            if let error = error {
++                DispatchQueue.main.async {
++                    callback(["event": "error", "error": error.localizedDescription])
++                }
++                Self.activeTask = nil
++                return
++            }
++            guard let result = result else { return }
++            DispatchQueue.main.async {
++                callback([
++                    "event": result.isFinal ? "final" : "partial",
++                    "transcript": result.bestTranscription.formattedString,
++                ])
++            }
++            if result.isFinal {
++                Self.activeTask = nil
++            }
++        }
++    }
++
++    private static func statusString(for status: SFSpeechRecognizerAuthorizationStatus) -> String {
++        switch status {
++        case .authorized: return "authorized"
++        case .denied, .restricted: return "denied"
++        case .notDetermined: return "notDetermined"
++        @unknown default: return "notDetermined"
++        }
++    }
++}
+diff --git a/public/sample.wav b/public/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/public/sample.wav differ
+diff --git a/src/App.css b/src/App.css
+index 506f3f4..3042bac 100644
+--- a/src/App.css
++++ b/src/App.css
+@@ -226,3 +226,9 @@
+   font-size: 14px;
+   color: #0e191f;
+ }
++
++.result__meta {
++  font-size: 13px;
++  font-weight: 700;
++  color: #335260;
++}
+diff --git a/src/pages/transcribe/App.vue b/src/pages/transcribe/App.vue
+index 6b800bc..120c27f 100644
+--- a/src/pages/transcribe/App.vue
++++ b/src/pages/transcribe/App.vue
+@@ -1,11 +1,68 @@
+ <script setup lang="ts">
++import { onMounted, ref } from 'vue'
+ import { close } from 'sparkling-navigation'
+ 
+ import './App.css'
+ 
++type AuthStatus = 'notDetermined' | 'authorized' | 'denied'
++
++const authStatus = ref<AuthStatus>('notDetermined')
++const statusLine = ref('Speech access: not requested')
++const isTranscribing = ref(false)
++const transcript = ref('')
++const completedIn = ref<number | null>(null)
++
++let startedAtMs = 0
++
+ function goHome() {
+   close()
+ }
++
++function statusLabel(status: AuthStatus): string {
++  if (status === 'authorized') return 'Speech access: granted'
++  if (status === 'denied') return 'Speech access: denied'
++  return 'Speech access: not requested'
++}
++
++function refreshStatus() {
++  NativeModules.SpeechModule.getAuthorizationStatus((status) => {
++    authStatus.value = status as AuthStatus
++    statusLine.value = statusLabel(authStatus.value)
++  })
++}
++
++function requestAccess() {
++  NativeModules.SpeechModule.requestAuthorization((result) => {
++    authStatus.value = result.status as AuthStatus
++    statusLine.value = result.error ?? statusLabel(authStatus.value)
++  })
++}
++
++function transcribeSample() {
++  if (authStatus.value !== 'authorized' || isTranscribing.value) return
++  isTranscribing.value = true
++  transcript.value = ''
++  completedIn.value = null
++  statusLine.value = 'Transcribing…'
++  startedAtMs = Date.now()
++  NativeModules.SpeechModule.transcribeSample((result) => {
++    if (result.event === 'error') {
++      isTranscribing.value = false
++      statusLine.value = result.error ?? 'Transcription failed'
++      return
++    }
++    transcript.value = result.transcript ?? ''
++    if (result.event === 'final') {
++      isTranscribing.value = false
++      completedIn.value = (Date.now() - startedAtMs) / 1000
++      statusLine.value = statusLabel(authStatus.value)
++    }
++  })
++}
++
++onMounted(() => {
++  refreshStatus()
++})
+ </script>
+ 
+ <template>
+@@ -13,14 +70,19 @@ function goHome() {
+     <view class="app">
+       <text class="back-link" @tap="goHome">← Home</text>
+       <view class="card">
+-        <text class="status-line">Speech access: not requested</text>
+-        <view class="primary">
++        <text class="status-line">{{ statusLine }}</text>
++        <view class="primary" @tap="requestAccess">
+           <text class="primary__text">Request Access</text>
+         </view>
+-        <view class="primary primary--disabled">
++        <view
++          :class="['primary', (authStatus !== 'authorized' || isTranscribing) && 'primary--disabled']"
++          @tap="transcribeSample"
++        >
+           <text class="primary__text">Transcribe Sample</text>
+         </view>
+-        <text class="empty-state">No transcript yet</text>
++        <text v-if="!transcript" class="empty-state">No transcript yet</text>
++        <text v-else class="result">{{ transcript }}</text>
++        <text v-if="completedIn !== null" class="result__meta">Completed in {{ completedIn.toFixed(1) }} s</text>
+       </view>
+     </view>
+   </scroll-view>
+diff --git a/src/typing.d.ts b/src/typing.d.ts
+index 4de4bee..11235fe 100644
+--- a/src/typing.d.ts
++++ b/src/typing.d.ts
+@@ -17,6 +17,13 @@ declare module '@lynx-js/types' {
+         callback: (result: { success: boolean; error?: string; days?: { dateMs: number; steps: number; isToday: boolean }[] }) => void,
+       ): void;
+     };
++    SpeechModule: {
++      getAuthorizationStatus(callback: (status: string) => void): void;
++      requestAuthorization(callback: (result: { status: string; error?: string }) => void): void;
++      transcribeSample(
++        callback: (result: { event: 'partial' | 'final' | 'error'; transcript?: string; error?: string }) => void,
++      ): void;
++    };
+   }
+ }
+ 

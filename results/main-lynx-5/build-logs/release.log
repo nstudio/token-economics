@@ -1,0 +1,221 @@
+npm warn Unknown user config "min-release-age". This will stop working in the next major version of npm.
+
+> lynx-benchmark@1.0.0 build
+> sparkling-app-cli build --copy
+
+Building Lynx bundle with config from app.config.ts
+
+  Rspeedy v0.13.6 (Rsbuild v1.7.3, Rspack v1.7.12)
+
+(node:47689) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+info    build started...
+ready   built in 0.37 s
+
+File (lynx)                   Size       
+dist/main.lynx.bundle         89.5 kB 
+dist/transcribe.lynx.bundle   92.5 kB 
+dist/health.lynx.bundle       93.1 kB 
+
+                     Total:   275.1 kB   275.1 kB
+
+Copying dist -> android/app/src/main/assets
+Copying dist -> ios/SparklingGo/SparklingGo/Resources/Assets
+Assets copied successfully.
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -workspace ios/SparklingGo.xcworkspace -scheme SparklingGo -configuration Release -destination "generic/platform=iOS Simulator" build
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (24 targets)
+    Target 'SparklingGo' in project 'SparklingGo'
+        ➜ Implicit dependency on target 'Pods-SparklingGo' in project 'Pods' via file 'Pods_SparklingGo.framework' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'BaseDevtool' in project 'BaseDevtool' via options '-framework BaseDevtool' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'DebugRouter' in project 'DebugRouter' via options '-framework DebugRouter' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Lynx' in project 'Lynx' via options '-framework Lynx' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'LynxBase' in project 'LynxBase' via options '-framework LynxBase' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'LynxDevtool' in project 'LynxDevtool' via options '-framework LynxDevtool' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'LynxService' in project 'LynxService' via options '-framework LynxService' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'LynxServiceAPI' in project 'LynxServiceAPI' via options '-framework LynxServiceAPI' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Mantle' in project 'Mantle' via options '-framework Mantle' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'PrimJS' in project 'PrimJS' via options '-framework PrimJS' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'SDWebImage' in project 'SDWebImage' via options '-framework SDWebImage' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'SDWebImageWebPCoder' in project 'SDWebImageWebPCoder' via options '-framework SDWebImageWebPCoder' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'SnapKit' in project 'SnapKit' via options '-framework SnapKit' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'SocketRocket' in project 'SocketRocket' via options '-framework SocketRocket' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Sparkling' in project 'Sparkling' via options '-framework Sparkling' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'SparklingMethod' in project 'SparklingMethod' via options '-framework SparklingMethod' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Sparkling-Router' in project 'Sparkling-Router' via options '-framework Sparkling_Router' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'libwebp' in project 'libwebp' via options '-framework libwebp' in build setting 'OTHER_LDFLAGS'
+    Target 'Pods-SparklingGo' in project 'Pods'
+        ➜ Explicit dependency on target 'BaseDevtool' in project 'BaseDevtool'
+        ➜ Explicit dependency on target 'DebugRouter' in project 'DebugRouter'
+        ➜ Explicit dependency on target 'Lynx' in project 'Lynx'
+        ➜ Explicit dependency on target 'LynxBase' in project 'LynxBase'
+        ➜ Explicit dependency on target 'LynxDevtool' in project 'LynxDevtool'
+        ➜ Explicit dependency on target 'LynxService' in project 'LynxService'
+        ➜ Explicit dependency on target 'LynxServiceAPI' in project 'LynxServiceAPI'
+        ➜ Explicit dependency on target 'Mantle' in project 'Mantle'
+        ➜ Explicit dependency on target 'PrimJS' in project 'PrimJS'
+        ➜ Explicit dependency on target 'SDWebImage' in project 'SDWebImage'
+        ➜ Explicit dependency on target 'SDWebImageWebPCoder' in project 'SDWebImageWebPCoder'
+        ➜ Explicit dependency on target 'SnapKit' in project 'SnapKit'
+        ➜ Explicit dependency on target 'SocketRocket' in project 'SocketRocket'
+        ➜ Explicit dependency on target 'Sparkling' in project 'Sparkling'
+        ➜ Explicit dependency on target 'Sparkling-Router' in project 'Sparkling-Router'
+        ➜ Explicit dependency on target 'SparklingMethod' in project 'SparklingMethod'
+        ➜ Explicit dependency on target 'libwebp' in project 'libwebp'
+    Target 'Sparkling-Router' in project 'Sparkling-Router'
+        ➜ Explicit dependency on target 'Mantle' in project 'Mantle'
+        ➜ Explicit dependency on target 'SparklingMethod' in project 'SparklingMethod'
+    Target 'Sparkling' in project 'Sparkling'
+        ➜ Explicit dependency on target 'Lynx' in project 'Lynx'
+        ➜ Explicit dependency on target 'SnapKit' in project 'SnapKit'
+        ➜ Explicit dependency on target 'Sparkling-sparklingPageResource' in project 'Sparkling'
+        ➜ Explicit dependency on target 'SparklingMethod' in project 'SparklingMethod'
+    Target 'SparklingMethod' in project 'SparklingMethod'
+        ➜ Explicit dependency on target 'Lynx' in project 'Lynx'
+        ➜ Explicit dependency on target 'Mantle' in project 'Mantle'
+        ➜ Explicit dependency on target 'PrimJS' in project 'PrimJS'
+    Target 'Sparkling-sparklingPageResource' in project 'Sparkling' (no dependencies)
+    Target 'SnapKit' in project 'SnapKit'
+        ➜ Explicit dependency on target 'SnapKit-SnapKit_Privacy' in project 'SnapKit'
+    Target 'SnapKit-SnapKit_Privacy' in project 'SnapKit' (no dependencies)
+    Target 'Mantle' in project 'Mantle' (no dependencies)
+    Target 'LynxService' in project 'LynxService'
+        ➜ Explicit dependency on target 'Lynx' in project 'Lynx'
+        ➜ Explicit dependency on target 'LynxBase' in project 'LynxBase'
+        ➜ Explicit dependency on target 'LynxDevtool' in project 'LynxDevtool'
+        ➜ Explicit dependency on target 'LynxServiceAPI' in project 'LynxServiceAPI'
+        ➜ Explicit dependency on target 'SDWebImage' in project 'SDWebImage'
+        ➜ Explicit dependency on target 'SDWebImageWebPCoder' in project 'SDWebImageWebPCoder'
+    Target 'SDWebImageWebPCoder' in project 'SDWebImageWebPCoder'
+        ➜ Explicit dependency on target 'SDWebImage' in project 'SDWebImage'
+        ➜ Explicit dependency on target 'libwebp' in project 'libwebp'
+    Target 'libwebp' in project 'libwebp' (no dependencies)
+    Target 'SDWebImage' in project 'SDWebImage' (no dependencies)
+    Target 'LynxDevtool' in project 'LynxDevtool'
+        ➜ Explicit dependency on target 'BaseDevtool' in project 'BaseDevtool'
+        ➜ Explicit dependency on target 'DebugRouter' in project 'DebugRouter'
+        ➜ Explicit dependency on target 'Lynx' in project 'Lynx'
+        ➜ Explicit dependency on target 'LynxBase' in project 'LynxBase'
+        ➜ Explicit dependency on target 'LynxDevtool-LynxDebugResources' in project 'LynxDevtool'
+        ➜ Explicit dependency on target 'PrimJS' in project 'PrimJS'
+        ➜ Explicit dependency on target 'SocketRocket' in project 'SocketRocket'
+    Target 'LynxDevtool-LynxDebugResources' in project 'LynxDevtool'
+        ➜ Implicit dependency on target 'BaseDevtool' in project 'BaseDevtool' via options '-framework BaseDevtool' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'DebugRouter' in project 'DebugRouter' via options '-framework DebugRouter' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Lynx' in project 'Lynx' via options '-framework Lynx' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'LynxBase' in project 'LynxBase' via options '-framework LynxBase' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'PrimJS' in project 'PrimJS' via options '-framework PrimJS' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'SocketRocket' in project 'SocketRocket' via options '-framework SocketRocket' in build setting 'OTHER_LDFLAGS'
+    Target 'SocketRocket' in project 'SocketRocket' (no dependencies)
+    Target 'BaseDevtool' in project 'BaseDevtool'
+        ➜ Explicit dependency on target 'BaseDevtool-LynxBaseDevToolResources' in project 'BaseDevtool'
+        ➜ Explicit dependency on target 'DebugRouter' in project 'DebugRouter'
+        ➜ Explicit dependency on target 'Lynx' in project 'Lynx'
+        ➜ Explicit dependency on target 'LynxBase' in project 'LynxBase'
+    Target 'BaseDevtool-LynxBaseDevToolResources' in project 'BaseDevtool'
+        ➜ Implicit dependency on target 'DebugRouter' in project 'DebugRouter' via options '-framework DebugRouter' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Lynx' in project 'Lynx' via options '-framework Lynx' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'LynxBase' in project 'LynxBase' via options '-framework LynxBase' in build setting 'OTHER_LDFLAGS'
+    Target 'Lynx' in project 'Lynx'
+        ➜ Explicit dependency on target 'Lynx-LynxResources' in project 'Lynx'
+        ➜ Explicit dependency on target 'LynxBase' in project 'LynxBase'
+        ➜ Explicit dependency on target 'LynxServiceAPI' in project 'LynxServiceAPI'
+        ➜ Explicit dependency on target 'PrimJS' in project 'PrimJS'
+    Target 'Lynx-LynxResources' in project 'Lynx'
+        ➜ Implicit dependency on target 'LynxBase' in project 'LynxBase' via options '-framework LynxBase' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'LynxServiceAPI' in project 'LynxServiceAPI' via options '-framework LynxServiceAPI' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'PrimJS' in project 'PrimJS' via options '-framework PrimJS' in build setting 'OTHER_LDFLAGS'
+    Target 'PrimJS' in project 'PrimJS' (no dependencies)
+    Target 'LynxBase' in project 'LynxBase'
+        ➜ Explicit dependency on target 'LynxServiceAPI' in project 'LynxServiceAPI'
+    Target 'LynxServiceAPI' in project 'LynxServiceAPI' (no dependencies)
+    Target 'DebugRouter' in project 'DebugRouter' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x objective-c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -V
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/runner/token-economics/lynx-benchmark/ios/SparklingGo/SparklingGo/Preview Content/Preview Assets.xcassets /Users/runner/token-economics/lynx-benchmark/ios/SparklingGo/SparklingGo/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x assembler-with-cpp -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x objective-c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x assembler-with-cpp -c /dev/null
+
+Build description signature: faacefb714a1915291f1ec1cfa8c037d
+Build description path: /Users/runner/Library/Developer/Xcode/DerivedData/SparklingGo-gaxngdfqfnurlideafnykwrjqgdj/Build/Intermediates.noindex/XCBuildData/faacefb714a1915291f1ec1cfa8c037d.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+    cd /Users/runner/token-economics/lynx-benchmark/ios
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+
+error: Multiple commands produce '/Users/runner/Library/Developer/Xcode/DerivedData/SparklingGo-gaxngdfqfnurlideafnykwrjqgdj/Build/Products/Release-iphonesimulator/SparklingGo.app/sample.wav'
+    note: Target 'SparklingGo' (project 'SparklingGo') has copy command from '/Users/runner/token-economics/lynx-benchmark/ios/SparklingGo/SparklingGo/Resources/Assets/sample.wav' to '/Users/runner/Library/Developer/Xcode/DerivedData/SparklingGo-gaxngdfqfnurlideafnykwrjqgdj/Build/Products/Release-iphonesimulator/SparklingGo.app/sample.wav'
+    note: Target 'SparklingGo' (project 'SparklingGo') has copy command from '/Users/runner/token-economics/lynx-benchmark/ios/SparklingGo/SparklingGo/SpeechAssets/sample.wav' to '/Users/runner/Library/Developer/Xcode/DerivedData/SparklingGo-gaxngdfqfnurlideafnykwrjqgdj/Build/Products/Release-iphonesimulator/SparklingGo.app/sample.wav'
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/SocketRocket.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 11.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'SocketRocket' from project 'SocketRocket')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/SDWebImage.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 9.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'SDWebImage' from project 'SDWebImage')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/Lynx.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'Lynx' from project 'Lynx')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/SDWebImageWebPCoder.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 9.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'SDWebImageWebPCoder' from project 'SDWebImageWebPCoder')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/LynxService.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'LynxService' from project 'LynxService')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/BaseDevtool.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'BaseDevtool' from project 'BaseDevtool')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/libwebp.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 9.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'libwebp' from project 'libwebp')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/LynxBase.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'LynxBase' from project 'LynxBase')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/DebugRouter.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'DebugRouter' from project 'DebugRouter')
+warning: Run script build phase 'Create Symlinks to Header Folders' will be run during every build because it does not specify any outputs. To address this issue, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'DebugRouter' from project 'DebugRouter')
+warning: no rule to process file '/Users/runner/token-economics/lynx-benchmark/ios/Pods/DebugRouter/debug_router/native/BUILD.gn' of type 'text' for architecture 'arm64' (in target 'DebugRouter' from project 'DebugRouter')
+warning: no rule to process file '/Users/runner/token-economics/lynx-benchmark/ios/Pods/DebugRouter/debug_router/native/base/LICENSE' of type 'text' for architecture 'arm64' (in target 'DebugRouter' from project 'DebugRouter')
+warning: no rule to process file '/Users/runner/token-economics/lynx-benchmark/ios/Pods/DebugRouter/debug_router/native/BUILD.gn' of type 'text' for architecture 'x86_64' (in target 'DebugRouter' from project 'DebugRouter')
+warning: no rule to process file '/Users/runner/token-economics/lynx-benchmark/ios/Pods/DebugRouter/debug_router/native/base/LICENSE' of type 'text' for architecture 'x86_64' (in target 'DebugRouter' from project 'DebugRouter')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/PrimJS.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 9.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'PrimJS' from project 'PrimJS')
+warning: Run script build phase 'Create Symlinks to Header Folders' will be run during every build because it does not specify any outputs. To address this issue, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'PrimJS' from project 'PrimJS')
+warning: duplicate output file '/Users/runner/Library/Developer/Xcode/DerivedData/SparklingGo-gaxngdfqfnurlideafnykwrjqgdj/Build/Products/Release-iphonesimulator/SparklingGo.app/sample.wav' on task: CpResource /Users/runner/Library/Developer/Xcode/DerivedData/SparklingGo-gaxngdfqfnurlideafnykwrjqgdj/Build/Products/Release-iphonesimulator/SparklingGo.app/sample.wav /Users/runner/token-economics/lynx-benchmark/ios/SparklingGo/SparklingGo/SpeechAssets/sample.wav (in target 'SparklingGo' from project 'SparklingGo')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/LynxDevtool.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'LynxDevtool' from project 'LynxDevtool')
+warning: Run script build phase 'Create Symlinks to Header Folders' will be run during every build because it does not specify any outputs. To address this issue, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'LynxDevtool' from project 'LynxDevtool')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/Mantle.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 9.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'Mantle' from project 'Mantle')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/LynxServiceAPI.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'LynxServiceAPI' from project 'LynxServiceAPI')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/Lynx.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'Lynx-LynxResources' from project 'Lynx')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/BaseDevtool.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'BaseDevtool-LynxBaseDevToolResources' from project 'BaseDevtool')
+/Users/runner/token-economics/lynx-benchmark/ios/Pods/LynxDevtool.xcodeproj: warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 10.0, but the range of supported deployment target versions is 12.0 to 26.5.99. (in target 'LynxDevtool-LynxDebugResources' from project 'LynxDevtool')
+** BUILD FAILED **
+
+
+The following build commands failed:
+	Building workspace SparklingGo with scheme SparklingGo and configuration Release
+(1 failure)

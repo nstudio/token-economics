@@ -1,0 +1,1062 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project UIDriver.xcodeproj -scheme UIDriver -destination id=7DFF2660-A10C-449E-867A-92863D91663B
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'UIDriverUITests' in project 'UIDriver' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+    cd /Users/runner/token-economics/harness/perf/uidriver/UIDriver.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /Users/runner/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+
+ProcessInfoPlistFile /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Info.plist /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/empty-UIDriverUITests.plist (in target 'UIDriverUITests' from project 'UIDriver')
+    cd /Users/runner/token-economics/harness/perf/uidriver
+    builtin-infoPlistUtility /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/empty-UIDriverUITests.plist -producttype com.apple.product-type.bundle.ui-testing -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/ProductTypeInfoPlistAdditions.plist -o /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Info.plist
+
+CopySwiftLibs /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest (in target 'UIDriverUITests' from project 'UIDriver')
+    cd /Users/runner/token-economics/harness/perf/uidriver
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/UIDriverUITests --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Frameworks --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/PlugIns --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/SystemExtensions --scan-folder /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Extensions --platform iphonesimulator --toolchain /var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.42.0.xRBJyY/Metal.xctoolchain --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Products/Debug-iphonesimulator/UIDriverUITests-Runner.app/PlugIns/UIDriverUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Build/Intermediates.noindex/UIDriver.build/Debug-iphonesimulator/UIDriverUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+2026-07-25 20:04:58.215108-0700 UIDriverUITests-Runner[58531:17031478] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'All tests' started at 2026-07-25 20:04:58.771.
+Test Suite 'UIDriverUITests.xctest' started at 2026-07-25 20:04:58.772.
+Test Suite 'FeatureLatencyTests' started at 2026-07-25 20:04:58.772.
+Test Case '-[UIDriverUITests.FeatureLatencyTests testFeatureLatencies]' started.
+    t =     0.00s Start Test at 2026-07-25 20:04:58.772
+    t =     0.02s Set Up
+STEP[0s]: iter 0: launch io.nstudio.lynx
+    t =     0.02s Open io.nstudio.lynx
+    t =     0.02s     Launch io.nstudio.lynx
+    t =     0.11s         Setting up automation session
+objc[58531]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x106528310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x106e44398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =     0.70s         Wait for io.nstudio.lynx to idle
+    t =     2.03s Checking existence of `"Health" Button`
+    t =     2.07s Waiting 20.0s for Any (First Match) to exist
+    t =     3.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     3.09s         Checking existence of `Any (First Match)`
+STEP[3s]: iter 0: nav Health
+    t =     3.13s Checking existence of `"Health" Button`
+    t =     3.14s Tap Any (First Match)
+    t =     3.14s     Wait for io.nstudio.lynx to idle
+    t =     3.15s     Find the Any (First Match)
+    t =     3.16s     Check for interrupting elements affecting "Health" StaticText
+    t =     3.19s     Synthesize event
+    t =     3.48s     Wait for io.nstudio.lynx to idle
+    t =     3.83s Waiting 10.0s for Any (First Match) to exist
+    t =     4.86s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     4.86s         Checking existence of `Any (First Match)`
+    t =     4.89s Checking existence of `Any (First Match)`
+    t =     4.91s Find the Any (First Match)
+STEP[4s]: iter 0: HK authorize
+    t =     4.92s Checking existence of `"Request Access" Button`
+    t =     4.94s Checking existence of `Any (First Match)`
+    t =     4.96s Find the Any (First Match)
+    t =     4.99s Tap "Request Access" StaticText
+    t =     4.99s     Wait for io.nstudio.lynx to idle
+    t =     4.99s     Find the "Request Access" StaticText
+    t =     5.01s     Check for interrupting elements affecting "Request Access" StaticText
+    t =     5.04s     Synthesize event
+    t =     5.32s     Wait for io.nstudio.lynx to idle
+    t =     5.34s Waiting 3.0s for Any (First Match) to exist
+    t =     6.37s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     6.37s         Checking existence of `Any (First Match)`
+    t =     6.43s Find the Any (First Match)
+STEP[6s]: health sheet(app): tap 'Turn On All'
+    t =     6.48s Tap "Turn On All" StaticText
+    t =     6.48s     Wait for io.nstudio.lynx to idle
+    t =     6.49s     Find the "Turn On All" StaticText
+    t =     6.53s     Check for interrupting elements affecting "Turn On All" StaticText
+    t =     6.57s     Synthesize event
+    t =     6.86s     Wait for io.nstudio.lynx to idle
+    t =     6.87s Waiting 2.0s for "Allow" Button to exist
+    t =     7.89s     Checking `Expect predicate `existsNoRetry == 1` for object "Allow" Button`
+    t =     7.89s         Checking existence of `"Allow" Button`
+    t =     7.94s Find the "Allow" Button
+STEP[7s]: health sheet(app): confirm 'Allow'
+    t =     7.98s Tap "UIA.Health.Allow.Button" Button
+    t =     7.98s     Wait for io.nstudio.lynx to idle
+    t =     7.98s     Find the "UIA.Health.Allow.Button" Button
+    t =     8.02s     Check for interrupting elements affecting "UIA.Health.Allow.Button" Button
+    t =     8.04s     Synthesize event
+    t =     8.33s     Wait for io.nstudio.lynx to idle
+    t =     8.34s Waiting 15.0s for Any (First Match) to exist
+    t =     9.36s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     9.36s         Checking existence of `Any (First Match)`
+    t =     9.40s Checking existence of `"Health access: not requested" StaticText`
+    t =     9.42s Find the "Health access: not requested" StaticText
+    t =     9.43s Waiting 15.0s for Any (First Match) to exist
+    t =    10.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    10.46s         Checking existence of `Any (First Match)`
+    t =    10.49s         Capturing element debug description
+    t =    11.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    11.52s         Checking existence of `Any (First Match)`
+    t =    11.55s         Capturing element debug description
+    t =    12.47s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    12.48s         Checking existence of `Any (First Match)`
+    t =    12.51s         Capturing element debug description
+    t =    13.44s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    13.44s         Checking existence of `Any (First Match)`
+    t =    13.48s         Capturing element debug description
+    t =    14.49s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    14.49s         Checking existence of `Any (First Match)`
+    t =    14.53s         Capturing element debug description
+    t =    15.44s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    15.44s         Checking existence of `Any (First Match)`
+    t =    15.48s         Capturing element debug description
+    t =    16.51s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    16.51s         Checking existence of `Any (First Match)`
+    t =    16.55s         Capturing element debug description
+    t =    17.47s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    17.48s         Checking existence of `Any (First Match)`
+    t =    17.51s         Capturing element debug description
+    t =    18.44s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    18.44s         Checking existence of `Any (First Match)`
+    t =    18.48s         Capturing element debug description
+    t =    19.49s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    19.49s         Checking existence of `Any (First Match)`
+    t =    19.53s         Capturing element debug description
+    t =    20.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    20.46s         Checking existence of `Any (First Match)`
+    t =    20.49s         Capturing element debug description
+    t =    21.52s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    21.52s         Checking existence of `Any (First Match)`
+    t =    21.56s         Capturing element debug description
+    t =    22.49s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    22.49s         Checking existence of `Any (First Match)`
+    t =    22.53s         Capturing element debug description
+    t =    23.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    23.46s         Checking existence of `Any (First Match)`
+    t =    23.49s         Capturing element debug description
+    t =    24.43s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    24.44s         Checking existence of `Any (First Match)`
+    t =    24.47s         Capturing element debug description
+    t =    24.47s     Checking existence of `Any (First Match)`
+    t =    24.49s Collecting debug information to assist test failure triage
+    t =    24.49s     Requesting snapshot of accessibility hierarchy for app with pid 58536
+    t =    24.51s Checking existence of `Any (First Match)`
+    t =    24.52s Checking existence of `"Log 500 Steps" Button`
+    t =    24.54s Checking existence of `Any (First Match)`
+    t =    24.56s Find the Any (First Match)
+STEP[24s]: iter 0: log 500
+    t =    24.59s Tap "Log 500 Steps" StaticText
+    t =    24.59s     Wait for io.nstudio.lynx to idle
+    t =    24.59s     Find the "Log 500 Steps" StaticText
+    t =    24.61s     Check for interrupting elements affecting "Log 500 Steps" StaticText
+    t =    24.64s     Synthesize event
+    t =    24.93s     Wait for io.nstudio.lynx to idle
+    t =    24.93s Checking existence of `Any (First Match)`
+    t =    25.02s Checking existence of `Any (First Match)`
+    t =    25.10s Checking existence of `Any (First Match)`
+    t =    25.17s Checking existence of `Any (First Match)`
+    t =    25.25s Checking existence of `Any (First Match)`
+    t =    25.33s Checking existence of `Any (First Match)`
+    t =    25.41s Checking existence of `Any (First Match)`
+    t =    25.48s Checking existence of `Any (First Match)`
+    t =    25.56s Checking existence of `Any (First Match)`
+    t =    25.64s Checking existence of `Any (First Match)`
+    t =    25.72s Checking existence of `Any (First Match)`
+    t =    25.79s Checking existence of `Any (First Match)`
+    t =    25.87s Checking existence of `Any (First Match)`
+    t =    25.95s Checking existence of `Any (First Match)`
+    t =    26.02s Checking existence of `Any (First Match)`
+    t =    26.10s Checking existence of `Any (First Match)`
+    t =    26.17s Checking existence of `Any (First Match)`
+    t =    26.25s Checking existence of `Any (First Match)`
+    t =    26.33s Checking existence of `Any (First Match)`
+    t =    26.40s Checking existence of `Any (First Match)`
+    t =    26.48s Checking existence of `Any (First Match)`
+    t =    26.56s Checking existence of `Any (First Match)`
+    t =    26.63s Checking existence of `Any (First Match)`
+    t =    26.71s Checking existence of `Any (First Match)`
+    t =    26.79s Checking existence of `Any (First Match)`
+    t =    26.87s Checking existence of `Any (First Match)`
+    t =    26.94s Checking existence of `Any (First Match)`
+    t =    27.02s Checking existence of `Any (First Match)`
+    t =    27.10s Checking existence of `Any (First Match)`
+    t =    27.18s Checking existence of `Any (First Match)`
+    t =    27.25s Checking existence of `Any (First Match)`
+    t =    27.33s Checking existence of `Any (First Match)`
+    t =    27.41s Checking existence of `Any (First Match)`
+    t =    27.48s Checking existence of `Any (First Match)`
+    t =    27.56s Checking existence of `Any (First Match)`
+    t =    27.64s Checking existence of `Any (First Match)`
+    t =    27.71s Checking existence of `Any (First Match)`
+    t =    27.79s Checking existence of `Any (First Match)`
+    t =    27.87s Checking existence of `Any (First Match)`
+    t =    27.95s Checking existence of `Any (First Match)`
+    t =    28.02s Checking existence of `Any (First Match)`
+    t =    28.10s Checking existence of `Any (First Match)`
+    t =    28.17s Checking existence of `Any (First Match)`
+    t =    28.25s Checking existence of `Any (First Match)`
+    t =    28.32s Checking existence of `Any (First Match)`
+    t =    28.40s Checking existence of `Any (First Match)`
+    t =    28.47s Checking existence of `Any (First Match)`
+    t =    28.55s Checking existence of `Any (First Match)`
+    t =    28.63s Checking existence of `Any (First Match)`
+    t =    28.70s Checking existence of `Any (First Match)`
+    t =    28.78s Checking existence of `Any (First Match)`
+    t =    28.86s Checking existence of `Any (First Match)`
+    t =    28.94s Checking existence of `Any (First Match)`
+    t =    29.01s Checking existence of `Any (First Match)`
+    t =    29.09s Checking existence of `Any (First Match)`
+    t =    29.17s Checking existence of `Any (First Match)`
+    t =    29.25s Checking existence of `Any (First Match)`
+    t =    29.32s Checking existence of `Any (First Match)`
+    t =    29.40s Checking existence of `Any (First Match)`
+    t =    29.48s Checking existence of `Any (First Match)`
+    t =    29.55s Checking existence of `Any (First Match)`
+    t =    29.63s Checking existence of `Any (First Match)`
+    t =    29.71s Checking existence of `Any (First Match)`
+    t =    29.79s Checking existence of `Any (First Match)`
+    t =    29.86s Checking existence of `Any (First Match)`
+    t =    29.94s Checking existence of `Any (First Match)`
+    t =    30.02s Checking existence of `Any (First Match)`
+    t =    30.10s Checking existence of `Any (First Match)`
+    t =    30.17s Checking existence of `Any (First Match)`
+    t =    30.25s Checking existence of `Any (First Match)`
+    t =    30.33s Checking existence of `Any (First Match)`
+    t =    30.40s Checking existence of `Any (First Match)`
+    t =    30.48s Checking existence of `Any (First Match)`
+    t =    30.56s Checking existence of `Any (First Match)`
+    t =    30.64s Checking existence of `Any (First Match)`
+    t =    30.71s Checking existence of `Any (First Match)`
+    t =    30.79s Checking existence of `Any (First Match)`
+    t =    30.87s Checking existence of `Any (First Match)`
+    t =    30.95s Checking existence of `Any (First Match)`
+    t =    31.02s Checking existence of `Any (First Match)`
+    t =    31.10s Checking existence of `Any (First Match)`
+    t =    31.18s Checking existence of `Any (First Match)`
+    t =    31.26s Checking existence of `Any (First Match)`
+    t =    31.33s Checking existence of `Any (First Match)`
+    t =    31.41s Checking existence of `Any (First Match)`
+    t =    31.49s Checking existence of `Any (First Match)`
+    t =    31.56s Checking existence of `Any (First Match)`
+    t =    31.64s Checking existence of `Any (First Match)`
+    t =    31.72s Checking existence of `Any (First Match)`
+    t =    31.80s Checking existence of `Any (First Match)`
+    t =    31.87s Checking existence of `Any (First Match)`
+    t =    31.95s Checking existence of `Any (First Match)`
+    t =    32.03s Checking existence of `Any (First Match)`
+    t =    32.11s Checking existence of `Any (First Match)`
+    t =    32.18s Checking existence of `Any (First Match)`
+    t =    32.26s Checking existence of `Any (First Match)`
+    t =    32.33s Checking existence of `Any (First Match)`
+    t =    32.41s Checking existence of `Any (First Match)`
+    t =    32.49s Checking existence of `Any (First Match)`
+    t =    32.57s Checking existence of `Any (First Match)`
+    t =    32.64s Checking existence of `Any (First Match)`
+    t =    32.72s Checking existence of `Any (First Match)`
+    t =    32.80s Checking existence of `Any (First Match)`
+    t =    32.88s Checking existence of `Any (First Match)`
+    t =    32.95s Checking existence of `Any (First Match)`
+    t =    33.03s Checking existence of `Any (First Match)`
+    t =    33.11s Checking existence of `Any (First Match)`
+    t =    33.19s Checking existence of `Any (First Match)`
+    t =    33.26s Checking existence of `Any (First Match)`
+    t =    33.34s Checking existence of `Any (First Match)`
+    t =    33.42s Checking existence of `Any (First Match)`
+    t =    33.49s Checking existence of `Any (First Match)`
+    t =    33.57s Checking existence of `Any (First Match)`
+    t =    33.65s Checking existence of `Any (First Match)`
+    t =    33.73s Checking existence of `Any (First Match)`
+    t =    33.80s Checking existence of `Any (First Match)`
+    t =    33.88s Checking existence of `Any (First Match)`
+    t =    33.96s Checking existence of `Any (First Match)`
+    t =    34.04s Checking existence of `Any (First Match)`
+    t =    34.11s Checking existence of `Any (First Match)`
+    t =    34.19s Checking existence of `Any (First Match)`
+    t =    34.27s Checking existence of `Any (First Match)`
+    t =    34.34s Checking existence of `Any (First Match)`
+    t =    34.42s Checking existence of `Any (First Match)`
+    t =    34.50s Checking existence of `Any (First Match)`
+    t =    34.58s Checking existence of `Any (First Match)`
+    t =    34.65s Checking existence of `Any (First Match)`
+    t =    34.73s Checking existence of `Any (First Match)`
+    t =    34.81s Checking existence of `Any (First Match)`
+    t =    34.88s Checking existence of `Any (First Match)`
+    t =    34.96s Checking existence of `Any (First Match)`
+    t =    35.04s Checking existence of `Any (First Match)`
+    t =    35.11s Checking existence of `Any (First Match)`
+    t =    35.19s Checking existence of `Any (First Match)`
+    t =    35.27s Checking existence of `Any (First Match)`
+    t =    35.34s Checking existence of `Any (First Match)`
+    t =    35.42s Checking existence of `Any (First Match)`
+    t =    35.50s Checking existence of `Any (First Match)`
+    t =    35.58s Checking existence of `Any (First Match)`
+    t =    35.65s Checking existence of `Any (First Match)`
+    t =    35.73s Checking existence of `Any (First Match)`
+    t =    35.81s Checking existence of `Any (First Match)`
+    t =    35.88s Checking existence of `Any (First Match)`
+    t =    35.96s Checking existence of `Any (First Match)`
+    t =    36.04s Checking existence of `Any (First Match)`
+    t =    36.11s Checking existence of `Any (First Match)`
+    t =    36.19s Checking existence of `Any (First Match)`
+    t =    36.26s Checking existence of `Any (First Match)`
+    t =    36.34s Checking existence of `Any (First Match)`
+    t =    36.42s Checking existence of `Any (First Match)`
+    t =    36.49s Checking existence of `Any (First Match)`
+    t =    36.57s Checking existence of `Any (First Match)`
+    t =    36.65s Checking existence of `Any (First Match)`
+    t =    36.72s Checking existence of `Any (First Match)`
+    t =    36.80s Checking existence of `Any (First Match)`
+    t =    36.88s Checking existence of `Any (First Match)`
+    t =    36.96s Checking existence of `Any (First Match)`
+    t =    37.03s Checking existence of `Any (First Match)`
+    t =    37.11s Checking existence of `Any (First Match)`
+    t =    37.19s Checking existence of `Any (First Match)`
+    t =    37.27s Checking existence of `Any (First Match)`
+    t =    37.34s Checking existence of `Any (First Match)`
+    t =    37.42s Checking existence of `Any (First Match)`
+    t =    37.50s Checking existence of `Any (First Match)`
+    t =    37.58s Checking existence of `Any (First Match)`
+    t =    37.65s Checking existence of `Any (First Match)`
+    t =    37.73s Checking existence of `Any (First Match)`
+    t =    37.81s Checking existence of `Any (First Match)`
+    t =    37.89s Checking existence of `Any (First Match)`
+    t =    37.96s Checking existence of `Any (First Match)`
+    t =    38.04s Checking existence of `Any (First Match)`
+    t =    38.12s Checking existence of `Any (First Match)`
+    t =    38.20s Checking existence of `Any (First Match)`
+    t =    38.27s Checking existence of `Any (First Match)`
+    t =    38.35s Checking existence of `Any (First Match)`
+    t =    38.42s Checking existence of `Any (First Match)`
+    t =    38.50s Checking existence of `Any (First Match)`
+    t =    38.57s Checking existence of `Any (First Match)`
+    t =    38.65s Checking existence of `Any (First Match)`
+    t =    38.73s Checking existence of `Any (First Match)`
+    t =    38.80s Checking existence of `Any (First Match)`
+    t =    38.88s Checking existence of `Any (First Match)`
+    t =    38.95s Checking existence of `Any (First Match)`
+    t =    39.03s Checking existence of `Any (First Match)`
+    t =    39.11s Checking existence of `Any (First Match)`
+    t =    39.19s Checking existence of `Any (First Match)`
+    t =    39.26s Checking existence of `Any (First Match)`
+    t =    39.34s Checking existence of `Any (First Match)`
+    t =    39.42s Checking existence of `Any (First Match)`
+    t =    39.50s Checking existence of `Any (First Match)`
+    t =    39.57s Checking existence of `Any (First Match)`
+    t =    39.65s Checking existence of `Any (First Match)`
+    t =    39.73s Checking existence of `Any (First Match)`
+    t =    39.81s Checking existence of `Any (First Match)`
+    t =    39.88s Checking existence of `Any (First Match)`
+STEP[39s]: iter 0: go home
+    t =    39.96s Checking existence of `"Transcribe" Button`
+    t =    39.98s Checking existence of `"Health" Button`
+    t =    40.00s Checking existence of `Any (First Match)`
+    t =    40.02s Checking existence of `Button (Element at index 0)`
+    t =    40.02s Checking existence of `"Back" Button`
+    t =    40.04s Checking existence of `"Home" Button`
+    t =    40.06s Checking existence of `Any (First Match)`
+STEP[40s]: goHome: edge swipe fallback
+    t =    40.08s Press Application 'io.nstudio.lynx'[0.02, 0.50] for 0.1 seconds, then drag to Application 'io.nstudio.lynx'[0.90, 0.50] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds 
+    t =    40.08s     Wait for io.nstudio.lynx to idle
+    t =    40.08s     Find the Application 'io.nstudio.lynx'
+    t =    40.09s     Check for interrupting elements affecting "LynxBenchmark" Application
+    t =    40.10s     Synthesize event
+    t =    40.10s         Find the Application 'io.nstudio.lynx'
+    t =    40.10s         Find the Application 'io.nstudio.lynx'
+    t =    40.11s         Find the Application 'io.nstudio.lynx'
+    t =    40.12s         Find the Application 'io.nstudio.lynx'
+    t =    40.13s         Find the Application 'io.nstudio.lynx'
+    t =    41.13s     Wait for io.nstudio.lynx to idle
+    t =    41.14s Checking existence of `"Transcribe" Button`
+    t =    41.16s Waiting 3.0s for Any (First Match) to exist
+    t =    42.21s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    42.21s         Checking existence of `Any (First Match)`
+    t =    42.25s         Capturing element debug description
+    t =    43.19s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    43.19s         Checking existence of `Any (First Match)`
+    t =    43.23s         Capturing element debug description
+    t =    44.17s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    44.18s         Checking existence of `Any (First Match)`
+    t =    44.21s         Capturing element debug description
+    t =    44.21s     Checking existence of `Any (First Match)`
+    t =    44.23s Collecting debug information to assist test failure triage
+    t =    44.23s     Requesting snapshot of accessibility hierarchy for app with pid 58536
+    t =    44.25s Requesting snapshot of accessibility hierarchy for app with pid 58536
+    t =    44.28s Requesting snapshot of accessibility hierarchy for app with pid 58536
+TREE(goHome failed):
+Attributes: Application, 0x107e5d040, pid: 58536, label: 'LynxBenchmark'
+Element subtree:
+ →Application, 0x107e5d040, pid: 58536, label: 'LynxBenchmark'
+    Window (Main), 0x107e5fc00, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x107e5ee40, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x107e5d180, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x107e5d2c0, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x107e5d400, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x107e5db80, {{0.0, 62.0}, {402.0, 778.0}}
+                Other, 0x107e5ebc0, {{0.0, 62.0}, {402.0, 778.0}}
+                  Other, 0x107e5ea80, {{0.0, 62.0}, {402.0, 778.0}}
+                    Other, 0x107e5f480, {{0.0, 62.0}, {402.0, 778.0}}
+                      Other, 0x107e5ef80, {{0.0, 62.0}, {402.0, 44.0}}
+                        Button, 0x107e5fd40, {{0.0, 62.0}, {40.0, 44.0}}, label: 'icon navibar back'
+                          StaticText, 0x107e5f840, {{0.0, 62.0}, {0.0, 0.0}}
+                        StaticText, 0x107e5fe80, {{60.0, 62.0}, {282.0, 44.0}}, label: 'Health'
+                        Other, 0x107e5f200, {{0.0, 105.7}, {402.0, 0.3}}
+                      Other, 0x107e5f340, {{0.0, 106.0}, {402.0, 734.0}}
+                        Other, 0x107e5f700, {{0.0, 106.0}, {402.0, 734.0}}, label: 'lynxview'
+                          ScrollView, 0x107e5ed00, {{0.0, 106.0}, {402.0, 734.0}}
+                            Other, 0x107e5fac0, {{0.0, 106.0}, {402.0, 734.0}}
+                              StaticText, 0x107e5d540, {{18.0, 128.0}, {57.3, 17.0}}, label: '← Home'
+                              Other, 0x107e5da40, {{18.0, 163.0}, {366.0, 258.0}}
+                                StaticText, 0x107e5d900, {{35.0, 180.0}, {332.0, 17.0}}, label: 'Health access: granted'
+                                Other, 0x107e5d680, {{35.0, 209.0}, {332.0, 48.0}}
+                                  StaticText, 0x107e5d7c0, {{140.7, 224.0}, {120.7, 18.0}}, label: 'Request Access'
+                                Other, 0x107e5f5c0, {{35.0, 269.0}, {332.0, 48.0}}
+                                  StaticText, 0x107e5f0c0, {{146.3, 284.0}, {109.7, 18.0}}, label: 'Log 500 Steps'
+                                StaticText, 0x107e5f980, {{35.0, 333.0}, {332.0, 18.0}}, label: 'Last 7 Days'
+                                StaticText, 0x107e5e940, {{35.0, 363.0}, {332.0, 41.0}}, label: 'Unable to load step data'
+                Other, 0x107f8d180, {{0.0, 62.0}, {402.0, 778.0}}
+                  Other, 0x107f8d040, {{0.0, 62.0}, {402.0, 778.0}}
+Path to element:
+ →Application, 0x107e5d040, pid: 58536, label: 'LynxBenchmark'
+Query chain:
+ →Find: Application 'io.nstudio.lynx'
+  Output: {
+    Application, 0x107f8cf00, pid: 58536, label: 'LynxBenchmark'
+  }
+
+    t =    44.29s Terminate io.nstudio.lynx:58536
+STEP[45s]: iter 1: launch io.nstudio.lynx
+    t =    45.33s Open io.nstudio.lynx
+    t =    45.33s     Launch io.nstudio.lynx
+    t =    45.44s         Setting up automation session
+    t =    45.97s         Wait for io.nstudio.lynx to idle
+    t =    47.29s Checking existence of `"Health" Button`
+    t =    47.35s Waiting 20.0s for Any (First Match) to exist
+    t =    48.39s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    48.39s         Checking existence of `Any (First Match)`
+STEP[48s]: iter 1: nav Health
+    t =    48.42s Checking existence of `"Health" Button`
+    t =    48.44s Tap Any (First Match)
+    t =    48.44s     Wait for io.nstudio.lynx to idle
+    t =    48.44s     Find the Any (First Match)
+    t =    48.46s     Check for interrupting elements affecting "Health" StaticText
+    t =    48.50s     Synthesize event
+    t =    48.90s     Wait for io.nstudio.lynx to idle
+    t =    49.25s Waiting 10.0s for Any (First Match) to exist
+    t =    50.29s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    50.29s         Checking existence of `Any (First Match)`
+    t =    50.33s Checking existence of `Any (First Match)`
+    t =    50.35s Find the Any (First Match)
+    t =    50.36s Checking existence of `"Health access: granted" StaticText`
+    t =    50.38s Find the "Health access: granted" StaticText
+    t =    50.40s Waiting 15.0s for Any (First Match) to exist
+    t =    51.42s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    51.43s         Checking existence of `Any (First Match)`
+    t =    51.46s         Capturing element debug description
+    t =    52.41s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    52.41s         Checking existence of `Any (First Match)`
+    t =    52.45s         Capturing element debug description
+    t =    53.49s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    53.49s         Checking existence of `Any (First Match)`
+    t =    53.53s         Capturing element debug description
+    t =    54.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    54.46s         Checking existence of `Any (First Match)`
+    t =    54.50s         Capturing element debug description
+    t =    55.41s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    55.41s         Checking existence of `Any (First Match)`
+    t =    55.44s         Capturing element debug description
+    t =    56.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    56.46s         Checking existence of `Any (First Match)`
+    t =    56.49s         Capturing element debug description
+    t =    57.41s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    57.41s         Checking existence of `Any (First Match)`
+    t =    57.45s         Capturing element debug description
+    t =    58.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    58.46s         Checking existence of `Any (First Match)`
+    t =    58.50s         Capturing element debug description
+    t =    59.41s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    59.41s         Checking existence of `Any (First Match)`
+    t =    59.45s         Capturing element debug description
+    t =    60.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    60.46s         Checking existence of `Any (First Match)`
+    t =    60.50s         Capturing element debug description
+    t =    61.41s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    61.41s         Checking existence of `Any (First Match)`
+    t =    61.45s         Capturing element debug description
+    t =    62.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    62.46s         Checking existence of `Any (First Match)`
+    t =    62.50s         Capturing element debug description
+    t =    63.41s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    63.41s         Checking existence of `Any (First Match)`
+    t =    63.45s         Capturing element debug description
+    t =    64.46s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    64.46s         Checking existence of `Any (First Match)`
+    t =    64.49s         Capturing element debug description
+    t =    65.40s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    65.40s         Checking existence of `Any (First Match)`
+    t =    65.43s         Capturing element debug description
+    t =    65.44s     Checking existence of `Any (First Match)`
+    t =    65.46s Collecting debug information to assist test failure triage
+    t =    65.46s     Requesting snapshot of accessibility hierarchy for app with pid 58601
+    t =    65.47s Checking existence of `Any (First Match)`
+    t =    65.49s Checking existence of `"Log 500 Steps" Button`
+    t =    65.51s Checking existence of `Any (First Match)`
+    t =    65.52s Find the Any (First Match)
+STEP[65s]: iter 1: log 500
+    t =    65.55s Tap "Log 500 Steps" StaticText
+    t =    65.55s     Wait for io.nstudio.lynx to idle
+    t =    65.56s     Find the "Log 500 Steps" StaticText
+    t =    65.58s     Check for interrupting elements affecting "Log 500 Steps" StaticText
+    t =    65.60s     Synthesize event
+    t =    65.90s     Wait for io.nstudio.lynx to idle
+    t =    65.90s Checking existence of `Any (First Match)`
+    t =    65.99s Checking existence of `Any (First Match)`
+    t =    66.08s Checking existence of `Any (First Match)`
+    t =    66.16s Checking existence of `Any (First Match)`
+    t =    66.24s Checking existence of `Any (First Match)`
+    t =    66.33s Checking existence of `Any (First Match)`
+    t =    66.41s Checking existence of `Any (First Match)`
+    t =    66.49s Checking existence of `Any (First Match)`
+    t =    66.57s Checking existence of `Any (First Match)`
+    t =    66.65s Checking existence of `Any (First Match)`
+    t =    66.74s Checking existence of `Any (First Match)`
+    t =    66.82s Checking existence of `Any (First Match)`
+    t =    66.90s Checking existence of `Any (First Match)`
+    t =    66.99s Checking existence of `Any (First Match)`
+    t =    67.07s Checking existence of `Any (First Match)`
+    t =    67.15s Checking existence of `Any (First Match)`
+    t =    67.23s Checking existence of `Any (First Match)`
+    t =    67.32s Checking existence of `Any (First Match)`
+    t =    67.40s Checking existence of `Any (First Match)`
+    t =    67.48s Checking existence of `Any (First Match)`
+    t =    67.57s Checking existence of `Any (First Match)`
+    t =    67.65s Checking existence of `Any (First Match)`
+    t =    67.73s Checking existence of `Any (First Match)`
+    t =    67.81s Checking existence of `Any (First Match)`
+    t =    67.90s Checking existence of `Any (First Match)`
+    t =    67.98s Checking existence of `Any (First Match)`
+    t =    68.06s Checking existence of `Any (First Match)`
+    t =    68.14s Checking existence of `Any (First Match)`
+    t =    68.22s Checking existence of `Any (First Match)`
+    t =    68.30s Checking existence of `Any (First Match)`
+    t =    68.39s Checking existence of `Any (First Match)`
+    t =    68.47s Checking existence of `Any (First Match)`
+    t =    68.55s Checking existence of `Any (First Match)`
+    t =    68.64s Checking existence of `Any (First Match)`
+    t =    68.72s Checking existence of `Any (First Match)`
+    t =    68.80s Checking existence of `Any (First Match)`
+    t =    68.87s Checking existence of `Any (First Match)`
+    t =    68.95s Checking existence of `Any (First Match)`
+    t =    69.03s Checking existence of `Any (First Match)`
+    t =    69.11s Checking existence of `Any (First Match)`
+    t =    69.19s Checking existence of `Any (First Match)`
+    t =    69.27s Checking existence of `Any (First Match)`
+    t =    69.35s Checking existence of `Any (First Match)`
+    t =    69.44s Checking existence of `Any (First Match)`
+    t =    69.52s Checking existence of `Any (First Match)`
+    t =    69.60s Checking existence of `Any (First Match)`
+    t =    69.68s Checking existence of `Any (First Match)`
+    t =    69.77s Checking existence of `Any (First Match)`
+    t =    69.85s Checking existence of `Any (First Match)`
+    t =    69.93s Checking existence of `Any (First Match)`
+    t =    70.02s Checking existence of `Any (First Match)`
+    t =    70.10s Checking existence of `Any (First Match)`
+    t =    70.18s Checking existence of `Any (First Match)`
+    t =    70.26s Checking existence of `Any (First Match)`
+    t =    70.35s Checking existence of `Any (First Match)`
+    t =    70.43s Checking existence of `Any (First Match)`
+    t =    70.51s Checking existence of `Any (First Match)`
+    t =    70.60s Checking existence of `Any (First Match)`
+    t =    70.68s Checking existence of `Any (First Match)`
+    t =    70.76s Checking existence of `Any (First Match)`
+    t =    70.84s Checking existence of `Any (First Match)`
+    t =    70.93s Checking existence of `Any (First Match)`
+    t =    71.01s Checking existence of `Any (First Match)`
+    t =    71.09s Checking existence of `Any (First Match)`
+    t =    71.17s Checking existence of `Any (First Match)`
+    t =    71.26s Checking existence of `Any (First Match)`
+    t =    71.34s Checking existence of `Any (First Match)`
+    t =    71.42s Checking existence of `Any (First Match)`
+    t =    71.51s Checking existence of `Any (First Match)`
+    t =    71.59s Checking existence of `Any (First Match)`
+    t =    71.67s Checking existence of `Any (First Match)`
+    t =    71.76s Checking existence of `Any (First Match)`
+    t =    71.84s Checking existence of `Any (First Match)`
+    t =    71.92s Checking existence of `Any (First Match)`
+    t =    72.00s Checking existence of `Any (First Match)`
+    t =    72.09s Checking existence of `Any (First Match)`
+    t =    72.17s Checking existence of `Any (First Match)`
+    t =    72.25s Checking existence of `Any (First Match)`
+    t =    72.34s Checking existence of `Any (First Match)`
+    t =    72.42s Checking existence of `Any (First Match)`
+    t =    72.50s Checking existence of `Any (First Match)`
+    t =    72.58s Checking existence of `Any (First Match)`
+    t =    72.66s Checking existence of `Any (First Match)`
+    t =    72.75s Checking existence of `Any (First Match)`
+    t =    72.83s Checking existence of `Any (First Match)`
+    t =    72.91s Checking existence of `Any (First Match)`
+    t =    72.99s Checking existence of `Any (First Match)`
+    t =    73.08s Checking existence of `Any (First Match)`
+    t =    73.16s Checking existence of `Any (First Match)`
+    t =    73.24s Checking existence of `Any (First Match)`
+    t =    73.33s Checking existence of `Any (First Match)`
+    t =    73.41s Checking existence of `Any (First Match)`
+    t =    73.49s Checking existence of `Any (First Match)`
+    t =    73.57s Checking existence of `Any (First Match)`
+    t =    73.66s Checking existence of `Any (First Match)`
+    t =    73.74s Checking existence of `Any (First Match)`
+    t =    73.82s Checking existence of `Any (First Match)`
+    t =    73.91s Checking existence of `Any (First Match)`
+    t =    73.99s Checking existence of `Any (First Match)`
+    t =    74.07s Checking existence of `Any (First Match)`
+    t =    74.15s Checking existence of `Any (First Match)`
+    t =    74.24s Checking existence of `Any (First Match)`
+    t =    74.32s Checking existence of `Any (First Match)`
+    t =    74.40s Checking existence of `Any (First Match)`
+    t =    74.48s Checking existence of `Any (First Match)`
+    t =    74.57s Checking existence of `Any (First Match)`
+    t =    74.65s Checking existence of `Any (First Match)`
+    t =    74.73s Checking existence of `Any (First Match)`
+    t =    74.82s Checking existence of `Any (First Match)`
+    t =    74.90s Checking existence of `Any (First Match)`
+    t =    74.98s Checking existence of `Any (First Match)`
+    t =    75.07s Checking existence of `Any (First Match)`
+    t =    75.15s Checking existence of `Any (First Match)`
+    t =    75.23s Checking existence of `Any (First Match)`
+    t =    75.31s Checking existence of `Any (First Match)`
+    t =    75.40s Checking existence of `Any (First Match)`
+    t =    75.48s Checking existence of `Any (First Match)`
+    t =    75.56s Checking existence of `Any (First Match)`
+    t =    75.64s Checking existence of `Any (First Match)`
+    t =    75.72s Checking existence of `Any (First Match)`
+    t =    75.81s Checking existence of `Any (First Match)`
+    t =    75.89s Checking existence of `Any (First Match)`
+    t =    75.97s Checking existence of `Any (First Match)`
+    t =    76.05s Checking existence of `Any (First Match)`
+    t =    76.13s Checking existence of `Any (First Match)`
+    t =    76.22s Checking existence of `Any (First Match)`
+    t =    76.30s Checking existence of `Any (First Match)`
+    t =    76.38s Checking existence of `Any (First Match)`
+    t =    76.47s Checking existence of `Any (First Match)`
+    t =    76.55s Checking existence of `Any (First Match)`
+    t =    76.63s Checking existence of `Any (First Match)`
+    t =    76.71s Checking existence of `Any (First Match)`
+    t =    76.79s Checking existence of `Any (First Match)`
+    t =    76.88s Checking existence of `Any (First Match)`
+    t =    76.96s Checking existence of `Any (First Match)`
+    t =    77.04s Checking existence of `Any (First Match)`
+    t =    77.12s Checking existence of `Any (First Match)`
+    t =    77.20s Checking existence of `Any (First Match)`
+    t =    77.29s Checking existence of `Any (First Match)`
+    t =    77.37s Checking existence of `Any (First Match)`
+    t =    77.45s Checking existence of `Any (First Match)`
+    t =    77.54s Checking existence of `Any (First Match)`
+    t =    77.62s Checking existence of `Any (First Match)`
+    t =    77.70s Checking existence of `Any (First Match)`
+    t =    77.78s Checking existence of `Any (First Match)`
+    t =    77.87s Checking existence of `Any (First Match)`
+    t =    77.95s Checking existence of `Any (First Match)`
+    t =    78.03s Checking existence of `Any (First Match)`
+    t =    78.11s Checking existence of `Any (First Match)`
+    t =    78.19s Checking existence of `Any (First Match)`
+    t =    78.27s Checking existence of `Any (First Match)`
+    t =    78.36s Checking existence of `Any (First Match)`
+    t =    78.44s Checking existence of `Any (First Match)`
+    t =    78.52s Checking existence of `Any (First Match)`
+    t =    78.60s Checking existence of `Any (First Match)`
+    t =    78.69s Checking existence of `Any (First Match)`
+    t =    78.77s Checking existence of `Any (First Match)`
+    t =    78.85s Checking existence of `Any (First Match)`
+    t =    78.93s Checking existence of `Any (First Match)`
+    t =    79.01s Checking existence of `Any (First Match)`
+    t =    79.09s Checking existence of `Any (First Match)`
+    t =    79.17s Checking existence of `Any (First Match)`
+    t =    79.25s Checking existence of `Any (First Match)`
+    t =    79.33s Checking existence of `Any (First Match)`
+    t =    79.41s Checking existence of `Any (First Match)`
+    t =    79.49s Checking existence of `Any (First Match)`
+    t =    79.57s Checking existence of `Any (First Match)`
+    t =    79.66s Checking existence of `Any (First Match)`
+    t =    79.74s Checking existence of `Any (First Match)`
+    t =    79.82s Checking existence of `Any (First Match)`
+    t =    79.91s Checking existence of `Any (First Match)`
+    t =    79.99s Checking existence of `Any (First Match)`
+    t =    80.07s Checking existence of `Any (First Match)`
+    t =    80.15s Checking existence of `Any (First Match)`
+    t =    80.24s Checking existence of `Any (First Match)`
+    t =    80.32s Checking existence of `Any (First Match)`
+    t =    80.40s Checking existence of `Any (First Match)`
+    t =    80.48s Checking existence of `Any (First Match)`
+    t =    80.57s Checking existence of `Any (First Match)`
+    t =    80.65s Checking existence of `Any (First Match)`
+    t =    80.73s Checking existence of `Any (First Match)`
+    t =    80.82s Checking existence of `Any (First Match)`
+    t =    80.90s Checking existence of `Any (First Match)`
+STEP[80s]: iter 1: go home
+    t =    80.98s Checking existence of `"Transcribe" Button`
+    t =    81.00s Checking existence of `"Health" Button`
+    t =    81.02s Checking existence of `Any (First Match)`
+    t =    81.04s Checking existence of `Button (Element at index 0)`
+    t =    81.04s Checking existence of `"Back" Button`
+    t =    81.06s Checking existence of `"Home" Button`
+    t =    81.08s Checking existence of `Any (First Match)`
+STEP[81s]: goHome: edge swipe fallback
+    t =    81.10s Press Application 'io.nstudio.lynx'[0.02, 0.50] for 0.1 seconds, then drag to Application 'io.nstudio.lynx'[0.90, 0.50] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds 
+    t =    81.10s     Wait for io.nstudio.lynx to idle
+    t =    81.10s     Find the Application 'io.nstudio.lynx'
+    t =    81.11s     Check for interrupting elements affecting "LynxBenchmark" Application
+    t =    81.12s     Synthesize event
+    t =    81.12s         Find the Application 'io.nstudio.lynx'
+    t =    81.12s         Find the Application 'io.nstudio.lynx'
+    t =    81.13s         Find the Application 'io.nstudio.lynx'
+    t =    81.14s         Find the Application 'io.nstudio.lynx'
+    t =    81.15s         Find the Application 'io.nstudio.lynx'
+    t =    82.16s     Wait for io.nstudio.lynx to idle
+    t =    82.17s Checking existence of `"Transcribe" Button`
+    t =    82.20s Waiting 3.0s for Any (First Match) to exist
+    t =    83.22s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    83.23s         Checking existence of `Any (First Match)`
+    t =    83.26s         Capturing element debug description
+    t =    84.21s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    84.21s         Checking existence of `Any (First Match)`
+    t =    84.25s         Capturing element debug description
+    t =    85.20s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    85.20s         Checking existence of `Any (First Match)`
+    t =    85.23s         Capturing element debug description
+    t =    85.23s     Checking existence of `Any (First Match)`
+    t =    85.26s Collecting debug information to assist test failure triage
+    t =    85.26s     Requesting snapshot of accessibility hierarchy for app with pid 58601
+    t =    85.27s Terminate io.nstudio.lynx:58601
+STEP[86s]: iter 2: launch io.nstudio.lynx
+    t =    86.33s Open io.nstudio.lynx
+    t =    86.33s     Launch io.nstudio.lynx
+    t =    86.44s         Setting up automation session
+    t =    86.98s         Wait for io.nstudio.lynx to idle
+    t =    88.30s Checking existence of `"Health" Button`
+    t =    88.37s Waiting 20.0s for Any (First Match) to exist
+    t =    89.42s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    89.42s         Checking existence of `Any (First Match)`
+STEP[89s]: iter 2: nav Health
+    t =    89.44s Checking existence of `"Health" Button`
+    t =    89.46s Tap Any (First Match)
+    t =    89.46s     Wait for io.nstudio.lynx to idle
+    t =    89.46s     Find the Any (First Match)
+    t =    89.48s     Check for interrupting elements affecting "Health" StaticText
+    t =    89.50s     Synthesize event
+    t =    89.79s     Wait for io.nstudio.lynx to idle
+    t =    90.15s Waiting 10.0s for Any (First Match) to exist
+    t =    91.18s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    91.18s         Checking existence of `Any (First Match)`
+    t =    91.21s Checking existence of `Any (First Match)`
+    t =    91.23s Find the Any (First Match)
+    t =    91.25s Checking existence of `"Health access: granted" StaticText`
+    t =    91.27s Find the "Health access: granted" StaticText
+    t =    91.28s Waiting 15.0s for Any (First Match) to exist
+    t =    92.32s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    92.32s         Checking existence of `Any (First Match)`
+    t =    92.36s         Capturing element debug description
+    t =    93.29s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    93.29s         Checking existence of `Any (First Match)`
+    t =    93.33s         Capturing element debug description
+    t =    94.36s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    94.36s         Checking existence of `Any (First Match)`
+    t =    94.39s         Capturing element debug description
+    t =    95.32s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    95.33s         Checking existence of `Any (First Match)`
+    t =    95.36s         Capturing element debug description
+    t =    96.28s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    96.28s         Checking existence of `Any (First Match)`
+    t =    96.32s         Capturing element debug description
+    t =    97.34s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    97.34s         Checking existence of `Any (First Match)`
+    t =    97.38s         Capturing element debug description
+    t =    98.29s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    98.29s         Checking existence of `Any (First Match)`
+    t =    98.33s         Capturing element debug description
+    t =    99.36s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    99.36s         Checking existence of `Any (First Match)`
+    t =    99.38s         Capturing element debug description
+    t =   100.30s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   100.30s         Checking existence of `Any (First Match)`
+    t =   100.34s         Capturing element debug description
+    t =   101.36s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   101.36s         Checking existence of `Any (First Match)`
+    t =   101.40s         Capturing element debug description
+    t =   102.31s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   102.31s         Checking existence of `Any (First Match)`
+    t =   102.35s         Capturing element debug description
+    t =   103.36s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   103.36s         Checking existence of `Any (First Match)`
+    t =   103.40s         Capturing element debug description
+    t =   104.31s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   104.31s         Checking existence of `Any (First Match)`
+    t =   104.35s         Capturing element debug description
+    t =   105.30s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   105.30s         Checking existence of `Any (First Match)`
+    t =   105.33s         Capturing element debug description
+    t =   106.31s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   106.31s         Checking existence of `Any (First Match)`
+    t =   106.34s         Capturing element debug description
+    t =   106.34s     Checking existence of `Any (First Match)`
+    t =   106.36s Collecting debug information to assist test failure triage
+    t =   106.36s     Requesting snapshot of accessibility hierarchy for app with pid 58663
+    t =   106.37s Checking existence of `Any (First Match)`
+    t =   106.39s Checking existence of `"Log 500 Steps" Button`
+    t =   106.41s Checking existence of `Any (First Match)`
+    t =   106.43s Find the Any (First Match)
+STEP[106s]: iter 2: log 500
+    t =   106.46s Tap "Log 500 Steps" StaticText
+    t =   106.46s     Wait for io.nstudio.lynx to idle
+    t =   106.46s     Find the "Log 500 Steps" StaticText
+    t =   106.48s     Check for interrupting elements affecting "Log 500 Steps" StaticText
+    t =   106.51s     Synthesize event
+    t =   106.80s     Wait for io.nstudio.lynx to idle
+    t =   106.81s Checking existence of `Any (First Match)`
+    t =   106.90s Checking existence of `Any (First Match)`
+    t =   106.98s Checking existence of `Any (First Match)`
+    t =   107.07s Checking existence of `Any (First Match)`
+    t =   107.16s Checking existence of `Any (First Match)`
+    t =   107.24s Checking existence of `Any (First Match)`
+    t =   107.33s Checking existence of `Any (First Match)`
+    t =   107.41s Checking existence of `Any (First Match)`
+    t =   107.49s Checking existence of `Any (First Match)`
+    t =   107.57s Checking existence of `Any (First Match)`
+    t =   107.66s Checking existence of `Any (First Match)`
+    t =   107.74s Checking existence of `Any (First Match)`
+    t =   107.82s Checking existence of `Any (First Match)`
+    t =   107.90s Checking existence of `Any (First Match)`
+    t =   107.99s Checking existence of `Any (First Match)`
+    t =   108.07s Checking existence of `Any (First Match)`
+    t =   108.16s Checking existence of `Any (First Match)`
+    t =   108.24s Checking existence of `Any (First Match)`
+    t =   108.32s Checking existence of `Any (First Match)`
+    t =   108.41s Checking existence of `Any (First Match)`
+    t =   108.49s Checking existence of `Any (First Match)`
+    t =   108.57s Checking existence of `Any (First Match)`
+    t =   108.66s Checking existence of `Any (First Match)`
+    t =   108.74s Checking existence of `Any (First Match)`
+    t =   108.82s Checking existence of `Any (First Match)`
+    t =   108.91s Checking existence of `Any (First Match)`
+    t =   108.99s Checking existence of `Any (First Match)`
+    t =   109.07s Checking existence of `Any (First Match)`
+    t =   109.15s Checking existence of `Any (First Match)`
+    t =   109.24s Checking existence of `Any (First Match)`
+    t =   109.32s Checking existence of `Any (First Match)`
+    t =   109.40s Checking existence of `Any (First Match)`
+    t =   109.49s Checking existence of `Any (First Match)`
+    t =   109.57s Checking existence of `Any (First Match)`
+    t =   109.65s Checking existence of `Any (First Match)`
+    t =   109.73s Checking existence of `Any (First Match)`
+    t =   109.80s Checking existence of `Any (First Match)`
+    t =   109.89s Checking existence of `Any (First Match)`
+    t =   109.97s Checking existence of `Any (First Match)`
+    t =   110.05s Checking existence of `Any (First Match)`
+    t =   110.13s Checking existence of `Any (First Match)`
+    t =   110.22s Checking existence of `Any (First Match)`
+    t =   110.30s Checking existence of `Any (First Match)`
+    t =   110.38s Checking existence of `Any (First Match)`
+    t =   110.46s Checking existence of `Any (First Match)`
+    t =   110.55s Checking existence of `Any (First Match)`
+    t =   110.63s Checking existence of `Any (First Match)`
+    t =   110.71s Checking existence of `Any (First Match)`
+    t =   110.80s Checking existence of `Any (First Match)`
+    t =   110.88s Checking existence of `Any (First Match)`
+    t =   110.96s Checking existence of `Any (First Match)`
+    t =   111.04s Checking existence of `Any (First Match)`
+    t =   111.13s Checking existence of `Any (First Match)`
+    t =   111.21s Checking existence of `Any (First Match)`
+    t =   111.29s Checking existence of `Any (First Match)`
+    t =   111.38s Checking existence of `Any (First Match)`
+    t =   111.46s Checking existence of `Any (First Match)`
+    t =   111.54s Checking existence of `Any (First Match)`
+    t =   111.62s Checking existence of `Any (First Match)`
+    t =   111.71s Checking existence of `Any (First Match)`
+    t =   111.79s Checking existence of `Any (First Match)`
+    t =   111.87s Checking existence of `Any (First Match)`
+    t =   111.96s Checking existence of `Any (First Match)`
+    t =   112.04s Checking existence of `Any (First Match)`
+    t =   112.12s Checking existence of `Any (First Match)`
+    t =   112.20s Checking existence of `Any (First Match)`
+    t =   112.29s Checking existence of `Any (First Match)`
+    t =   112.37s Checking existence of `Any (First Match)`
+    t =   112.45s Checking existence of `Any (First Match)`
+    t =   112.54s Checking existence of `Any (First Match)`
+    t =   112.62s Checking existence of `Any (First Match)`
+    t =   112.70s Checking existence of `Any (First Match)`
+    t =   112.78s Checking existence of `Any (First Match)`
+    t =   112.87s Checking existence of `Any (First Match)`
+    t =   112.95s Checking existence of `Any (First Match)`
+    t =   113.03s Checking existence of `Any (First Match)`
+    t =   113.11s Checking existence of `Any (First Match)`
+    t =   113.19s Checking existence of `Any (First Match)`
+    t =   113.28s Checking existence of `Any (First Match)`
+    t =   113.36s Checking existence of `Any (First Match)`
+    t =   113.44s Checking existence of `Any (First Match)`
+    t =   113.52s Checking existence of `Any (First Match)`
+    t =   113.61s Checking existence of `Any (First Match)`
+    t =   113.69s Checking existence of `Any (First Match)`
+    t =   113.77s Checking existence of `Any (First Match)`
+    t =   113.86s Checking existence of `Any (First Match)`
+    t =   113.94s Checking existence of `Any (First Match)`
+    t =   114.02s Checking existence of `Any (First Match)`
+    t =   114.10s Checking existence of `Any (First Match)`
+    t =   114.19s Checking existence of `Any (First Match)`
+    t =   114.27s Checking existence of `Any (First Match)`
+    t =   114.35s Checking existence of `Any (First Match)`
+    t =   114.44s Checking existence of `Any (First Match)`
+    t =   114.52s Checking existence of `Any (First Match)`
+    t =   114.60s Checking existence of `Any (First Match)`
+    t =   114.68s Checking existence of `Any (First Match)`
+    t =   114.77s Checking existence of `Any (First Match)`
+    t =   114.85s Checking existence of `Any (First Match)`
+    t =   114.93s Checking existence of `Any (First Match)`
+    t =   115.01s Checking existence of `Any (First Match)`
+    t =   115.09s Checking existence of `Any (First Match)`
+    t =   115.17s Checking existence of `Any (First Match)`
+    t =   115.25s Checking existence of `Any (First Match)`
+    t =   115.33s Checking existence of `Any (First Match)`
+    t =   115.42s Checking existence of `Any (First Match)`
+    t =   115.50s Checking existence of `Any (First Match)`
+    t =   115.58s Checking existence of `Any (First Match)`
+    t =   115.66s Checking existence of `Any (First Match)`
+    t =   115.75s Checking existence of `Any (First Match)`
+    t =   115.83s Checking existence of `Any (First Match)`
+    t =   115.91s Checking existence of `Any (First Match)`
+    t =   116.00s Checking existence of `Any (First Match)`
+    t =   116.08s Checking existence of `Any (First Match)`
+    t =   116.16s Checking existence of `Any (First Match)`
+    t =   116.24s Checking existence of `Any (First Match)`
+    t =   116.33s Checking existence of `Any (First Match)`
+    t =   116.41s Checking existence of `Any (First Match)`
+    t =   116.49s Checking existence of `Any (First Match)`
+    t =   116.57s Checking existence of `Any (First Match)`
+    t =   116.65s Checking existence of `Any (First Match)`
+    t =   116.73s Checking existence of `Any (First Match)`
+    t =   116.82s Checking existence of `Any (First Match)`
+    t =   116.90s Checking existence of `Any (First Match)`
+    t =   116.98s Checking existence of `Any (First Match)`
+    t =   117.07s Checking existence of `Any (First Match)`
+    t =   117.15s Checking existence of `Any (First Match)`
+    t =   117.23s Checking existence of `Any (First Match)`
+    t =   117.32s Checking existence of `Any (First Match)`
+    t =   117.40s Checking existence of `Any (First Match)`
+    t =   117.48s Checking existence of `Any (First Match)`
+    t =   117.56s Checking existence of `Any (First Match)`
+    t =   117.64s Checking existence of `Any (First Match)`
+    t =   117.72s Checking existence of `Any (First Match)`
+    t =   117.81s Checking existence of `Any (First Match)`
+    t =   117.89s Checking existence of `Any (First Match)`
+    t =   117.97s Checking existence of `Any (First Match)`
+    t =   118.05s Checking existence of `Any (First Match)`
+    t =   118.14s Checking existence of `Any (First Match)`
+    t =   118.22s Checking existence of `Any (First Match)`
+    t =   118.30s Checking existence of `Any (First Match)`
+    t =   118.39s Checking existence of `Any (First Match)`
+    t =   118.47s Checking existence of `Any (First Match)`
+    t =   118.55s Checking existence of `Any (First Match)`
+    t =   118.63s Checking existence of `Any (First Match)`
+    t =   118.71s Checking existence of `Any (First Match)`
+    t =   118.79s Checking existence of `Any (First Match)`
+    t =   118.87s Checking existence of `Any (First Match)`
+    t =   118.95s Checking existence of `Any (First Match)`
+    t =   119.03s Checking existence of `Any (First Match)`
+    t =   119.11s Checking existence of `Any (First Match)`
+    t =   119.19s Checking existence of `Any (First Match)`
+    t =   119.28s Checking existence of `Any (First Match)`
+    t =   119.36s Checking existence of `Any (First Match)`
+    t =   119.44s Checking existence of `Any (First Match)`
+    t =   119.52s Checking existence of `Any (First Match)`
+    t =   119.61s Checking existence of `Any (First Match)`
+    t =   119.69s Checking existence of `Any (First Match)`
+    t =   119.77s Checking existence of `Any (First Match)`
+    t =   119.84s Checking existence of `Any (First Match)`
+    t =   119.92s Checking existence of `Any (First Match)`
+    t =   120.00s Checking existence of `Any (First Match)`
+    t =   120.08s Checking existence of `Any (First Match)`
+    t =   120.16s Checking existence of `Any (First Match)`
+    t =   120.24s Checking existence of `Any (First Match)`
+    t =   120.33s Checking existence of `Any (First Match)`
+    t =   120.41s Checking existence of `Any (First Match)`
+    t =   120.49s Checking existence of `Any (First Match)`
+    t =   120.57s Checking existence of `Any (First Match)`
+    t =   120.66s Checking existence of `Any (First Match)`
+    t =   120.74s Checking existence of `Any (First Match)`
+    t =   120.82s Checking existence of `Any (First Match)`
+    t =   120.90s Checking existence of `Any (First Match)`
+    t =   120.98s Checking existence of `Any (First Match)`
+    t =   121.07s Checking existence of `Any (First Match)`
+    t =   121.15s Checking existence of `Any (First Match)`
+    t =   121.23s Checking existence of `Any (First Match)`
+    t =   121.32s Checking existence of `Any (First Match)`
+    t =   121.40s Checking existence of `Any (First Match)`
+    t =   121.47s Checking existence of `Any (First Match)`
+    t =   121.56s Checking existence of `Any (First Match)`
+    t =   121.64s Checking existence of `Any (First Match)`
+    t =   121.72s Checking existence of `Any (First Match)`
+    t =   121.80s Checking existence of `Any (First Match)`
+STEP[121s]: iter 2: go home
+    t =   121.88s Checking existence of `"Transcribe" Button`
+    t =   121.90s Checking existence of `"Health" Button`
+    t =   121.92s Checking existence of `Any (First Match)`
+    t =   121.94s Checking existence of `Button (Element at index 0)`
+    t =   121.94s Checking existence of `"Back" Button`
+    t =   121.96s Checking existence of `"Home" Button`
+    t =   121.98s Checking existence of `Any (First Match)`
+STEP[121s]: goHome: edge swipe fallback
+    t =   122.00s Press Application 'io.nstudio.lynx'[0.02, 0.50] for 0.1 seconds, then drag to Application 'io.nstudio.lynx'[0.90, 0.50] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds 
+    t =   122.00s     Wait for io.nstudio.lynx to idle
+    t =   122.00s     Find the Application 'io.nstudio.lynx'
+    t =   122.01s     Check for interrupting elements affecting "LynxBenchmark" Application
+    t =   122.02s     Synthesize event
+    t =   122.02s         Find the Application 'io.nstudio.lynx'
+    t =   122.02s         Find the Application 'io.nstudio.lynx'
+    t =   122.03s         Find the Application 'io.nstudio.lynx'
+    t =   122.04s         Find the Application 'io.nstudio.lynx'
+    t =   122.05s         Find the Application 'io.nstudio.lynx'
+    t =   123.06s     Wait for io.nstudio.lynx to idle
+    t =   123.07s Checking existence of `"Transcribe" Button`
+    t =   123.09s Waiting 3.0s for Any (First Match) to exist
+    t =   124.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   124.14s         Checking existence of `Any (First Match)`
+    t =   124.18s         Capturing element debug description
+    t =   125.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   125.11s         Checking existence of `Any (First Match)`
+    t =   125.14s         Capturing element debug description
+    t =   126.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   126.09s         Checking existence of `Any (First Match)`
+    t =   126.13s         Capturing element debug description
+    t =   126.13s     Checking existence of `Any (First Match)`
+    t =   126.16s Collecting debug information to assist test failure triage
+    t =   126.16s     Requesting snapshot of accessibility hierarchy for app with pid 58663
+    t =   126.17s Terminate io.nstudio.lynx:58663
+PERFJSON:{"runs":[{"health_granted":true,"error":"goHome failed","error_hk_log":true,"iter":0,"nav_health_ms":1763},{"iter":1,"health_granted":true,"nav_health_ms":1908,"error_hk_log":true,"error":"goHome failed"},{"health_granted":true,"iter":2,"error_hk_log":true,"error":"goHome failed","nav_health_ms":1769}],"bundle_id":"io.nstudio.lynx"}
+    t =   127.24s Tear Down
+Test Case '-[UIDriverUITests.FeatureLatencyTests testFeatureLatencies]' passed (127.368 seconds).
+Test Suite 'FeatureLatencyTests' passed at 2026-07-25 20:07:06.141.
+	 Executed 1 test, with 0 failures (0 unexpected) in 127.368 (127.369) seconds
+Test Suite 'UIDriverUITests.xctest' passed at 2026-07-25 20:07:06.142.
+	 Executed 1 test, with 0 failures (0 unexpected) in 127.368 (127.370) seconds
+Test Suite 'All tests' passed at 2026-07-25 20:07:06.143.
+	 Executed 1 test, with 0 failures (0 unexpected) in 127.368 (127.371) seconds
+2026-07-25 20:07:06.502 xcodebuild[58515:17031223] [MT] IDETestOperationsObserverDebug: 131.376 elapsed -- Testing started completed.
+2026-07-25 20:07:06.503 xcodebuild[58515:17031223] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-07-25 20:07:06.503 xcodebuild[58515:17031223] [MT] IDETestOperationsObserverDebug: 131.376 sec, +131.376 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/UIDriver-ekqcqbpucoqmcgbikewqdmafsmmj/Logs/Test/Test-UIDriver-2026.07.25_20-04-54--0700.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started

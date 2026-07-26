@@ -1,0 +1,178 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index 7d1f318..eb9934e 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -24,6 +24,8 @@
+ 	<string>Native Bench reads your step count to show recent activity.</string>
+ 	<key>NSHealthUpdateUsageDescription</key>
+ 	<string>Native Bench saves the step counts you log.</string>
++	<key>NSSpeechRecognitionUsageDescription</key>
++	<string>Native Bench uses speech recognition to transcribe the sample audio.</string>
+ 	<key>LSRequiresIPhoneOS</key>
+ 	<true/>
+ 	<key>UILaunchStoryboardName</key>
+diff --git a/app/assets/sample.wav b/app/assets/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/app/assets/sample.wav differ
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+index 5964a1f..50447e4 100644
+--- a/app/components/Transcribe.vue
++++ b/app/components/Transcribe.vue
+@@ -1,16 +1,150 @@
+ <template>
+-    <Page>
++    <Page @navigatedTo="onNavigatedTo">
+         <ActionBar title="Transcribe" />
+ 
+         <StackLayout class="p-6">
+-            <Label text="Speech access: not requested" class="text-base text-gray-600 mb-6" textWrap="true" />
++            <Label :text="statusText" class="text-base text-gray-600 mb-6" textWrap="true" />
+ 
+-            <Button text="Request Access" class="bg-blue-500 text-white rounded-lg p-4 mb-3" />
+-            <Button text="Transcribe Sample" :isEnabled="false" class="bg-gray-300 text-gray-500 rounded-lg p-4 mb-8" />
++            <Button text="Request Access" class="bg-blue-500 text-white rounded-lg p-4 mb-3" @tap="onRequestAccess" />
++            <Button
++                text="Transcribe Sample"
++                :isEnabled="canTranscribe"
++                :class="transcribeButtonClass"
++                @tap="onTranscribe"
++            />
+ 
+-            <Label text="No transcript yet" class="text-gray-400" textWrap="true" />
++            <Label v-if="transcript" :text="transcript" class="text-base text-gray-800 mb-1" textWrap="true" />
++            <Label v-else text="No transcript yet" class="text-gray-400" textWrap="true" />
++
++            <Label v-if="elapsedText" :text="elapsedText" class="text-sm text-gray-500" textWrap="true" />
+         </StackLayout>
+     </Page>
+ </template>
+ 
+-<script setup lang="ts"></script>
++<script setup lang="ts">
++import { ref, computed } from 'nativescript-vue'
++import { Utils, knownFolders } from '@nativescript/core'
++
++type AuthState = 'not-requested' | 'granted' | 'denied'
++
++const authState = ref<AuthState>('not-requested')
++const errorMessage = ref('')
++const isTranscribing = ref(false)
++const transcript = ref('')
++const elapsedSeconds = ref<number | null>(null)
++
++let activeRecognizer: SFSpeechRecognizer | null = null
++let activeTask: SFSpeechRecognitionTask | null = null
++
++const canTranscribe = computed(() => authState.value === 'granted' && !isTranscribing.value)
++
++const transcribeButtonClass = computed(() =>
++    canTranscribe.value ? 'bg-blue-500 text-white rounded-lg p-4 mb-8' : 'bg-gray-300 text-gray-500 rounded-lg p-4 mb-8'
++)
++
++const statusText = computed(() => {
++    if (errorMessage.value) {
++        return errorMessage.value
++    }
++    if (isTranscribing.value) {
++        return 'Transcribing…'
++    }
++    switch (authState.value) {
++        case 'granted':
++            return 'Speech access: granted'
++        case 'denied':
++            return 'Speech access: denied'
++        default:
++            return 'Speech access: not requested'
++    }
++})
++
++const elapsedText = computed(() =>
++    elapsedSeconds.value !== null ? `Completed in ${elapsedSeconds.value.toFixed(1)} s` : ''
++)
++
++function statusFromAuth(status: SFSpeechRecognizerAuthorizationStatus): AuthState {
++    switch (status) {
++        case SFSpeechRecognizerAuthorizationStatus.Authorized:
++            return 'granted'
++        case SFSpeechRecognizerAuthorizationStatus.Denied:
++        case SFSpeechRecognizerAuthorizationStatus.Restricted:
++            return 'denied'
++        default:
++            return 'not-requested'
++    }
++}
++
++function requestAuthorization(): Promise<SFSpeechRecognizerAuthorizationStatus> {
++    return new Promise((resolve) => {
++        SFSpeechRecognizer.requestAuthorization((status) => {
++            Utils.dispatchToMainThread(() => resolve(status))
++        })
++    })
++}
++
++function refreshStatus() {
++    authState.value = statusFromAuth(SFSpeechRecognizer.authorizationStatus())
++}
++
++function onNavigatedTo() {
++    errorMessage.value = ''
++    refreshStatus()
++}
++
++async function onRequestAccess() {
++    errorMessage.value = ''
++    try {
++        await requestAuthorization()
++        refreshStatus()
++    } catch (e) {
++        errorMessage.value = e instanceof Error ? e.message : String(e)
++    }
++}
++
++function onTranscribe() {
++    if (!canTranscribe.value) {
++        return
++    }
++    errorMessage.value = ''
++    transcript.value = ''
++    elapsedSeconds.value = null
++
++    const recognizer = new SFSpeechRecognizer({ locale: NSLocale.localeWithLocaleIdentifier('en-US') })
++    if (!recognizer.available) {
++        errorMessage.value = 'Speech recognition is not available on this device'
++        return
++    }
++
++    const audioPath = `${knownFolders.currentApp().path}/assets/sample.wav`
++    const request = new SFSpeechURLRecognitionRequest({ URL: NSURL.fileURLWithPath(audioPath) })
++    request.shouldReportPartialResults = true
++    request.requiresOnDeviceRecognition = false
++
++    isTranscribing.value = true
++    const startTime = Date.now()
++
++    activeRecognizer = recognizer
++    activeTask = recognizer.recognitionTaskWithRequestResultHandler(request, (result, error) => {
++        Utils.dispatchToMainThread(() => {
++            if (error) {
++                isTranscribing.value = false
++                errorMessage.value = error.localizedDescription
++                activeTask = null
++                activeRecognizer = null
++                return
++            }
++            if (!result) {
++                return
++            }
++            transcript.value = result.bestTranscription.formattedString
++            if (result.final) {
++                elapsedSeconds.value = (Date.now() - startTime) / 1000
++                isTranscribing.value = false
++                activeTask = null
++                activeRecognizer = null
++            }
++        })
++    })
++}
++</script>

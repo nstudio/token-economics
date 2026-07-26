@@ -1,0 +1,8 @@
+6	2	ios/SparklingGo.xcodeproj/project.pbxproj
+108	0	ios/SparklingGo/SparklingGo/MethodServices/HealthKitManager.swift
+96	0	ios/SparklingGo/SparklingGo/MethodServices/HealthMethods.swift
+8	0	ios/SparklingGo/SparklingGo/SparklingGo.entitlements
+1	0	package-lock.json
+1	0	package.json
+11	0	src/pages/health/App.css
+111	4	src/pages/health/App.vue

@@ -1,0 +1,6 @@
+2	0	ios/SparklingGo.xcodeproj/project.pbxproj
+121	0	ios/SparklingGo/SparklingGo/NativeModules/NativeSpeechModule.swift
+1	1	ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift
+6	0	src/App.css
+87	4	src/pages/transcribe/App.vue
+42	0	src/pages/transcribe/native.ts

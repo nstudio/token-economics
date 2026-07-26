@@ -1,0 +1,33 @@
+@import url('../../App.css');
+
+.page-scroll {
+  height: 100vh;
+  width: 100%;
+}
+
+.day-list {
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.day-row {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f2fbfa;
+}
+
+.day-row--today {
+  background: rgba(37, 244, 238, 0.18);
+  border: 1px solid #009995;
+}
+
+.day-row__text {
+  font-size: 14px;
+  color: #0e191f;
+  font-weight: 600;
+}
+
+.day-row__text--today {
+  font-weight: 800;
+}

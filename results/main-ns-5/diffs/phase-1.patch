@@ -1,0 +1,85 @@
+diff --git a/app/components/Health.vue b/app/components/Health.vue
+new file mode 100644
+index 0000000..775d1ed
+--- /dev/null
++++ b/app/components/Health.vue
+@@ -0,0 +1,17 @@
++<template>
++    <Page>
++        <ActionBar title="Health" />
++        <ScrollView>
++            <StackLayout class="p-6">
++                <Label text="Health access: not requested" class="text-base text-gray-600 mb-4" textWrap="true" />
++                <Button text="Request Access" class="mb-3 bg-blue-500 text-white rounded-lg p-4" />
++                <Button text="Log 500 Steps" :isEnabled="false" class="mb-8 bg-gray-300 text-gray-500 rounded-lg p-4" />
++                <Label text="Last 7 Days" class="text-lg font-bold mb-2" />
++                <Label text="No data yet" class="text-gray-400 text-center" textWrap="true" />
++            </StackLayout>
++        </ScrollView>
++    </Page>
++</template>
++
++<script setup lang="ts">
++</script>
+diff --git a/app/components/Home.vue b/app/components/Home.vue
+index 9cd4386..0306995 100644
+--- a/app/components/Home.vue
++++ b/app/components/Home.vue
+@@ -1,19 +1,26 @@
+ <template>
+     <Frame>
+         <Page>
+-            <ActionBar>
+-                <Label text="Home"/>
+-            </ActionBar>
+-
+-            <GridLayout>
+-                <Label class="text-xl align-middle text-center text-gray-500" :text="message" />
+-            </GridLayout>
++            <StackLayout class="p-6" verticalAlignment="middle">
++                <Label text="Native Bench" class="text-3xl font-bold text-center" textWrap="true" />
++                <Label text="Token economics benchmark" class="text-base text-gray-500 text-center mt-2 mb-10" textWrap="true" />
++                <Button text="Health" class="mb-4 bg-blue-500 text-white rounded-lg p-4" @tap="goHealth" />
++                <Button text="Transcribe" class="bg-blue-500 text-white rounded-lg p-4" @tap="goTranscribe" />
++            </StackLayout>
+         </Page>
+     </Frame>
+ </template>
+ 
+ <script setup lang="ts">
+-  import { computed } from 'nativescript-vue'
++    import { $navigateTo } from 'nativescript-vue'
++    import Health from './Health.vue'
++    import Transcribe from './Transcribe.vue'
++
++    function goHealth() {
++        $navigateTo(Health)
++    }
+ 
+-  const message = computed(() => "Blank {N}-Vue app");
++    function goTranscribe() {
++        $navigateTo(Transcribe)
++    }
+ </script>
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+new file mode 100644
+index 0000000..67f7d59
+--- /dev/null
++++ b/app/components/Transcribe.vue
+@@ -0,0 +1,16 @@
++<template>
++    <Page>
++        <ActionBar title="Transcribe" />
++        <ScrollView>
++            <StackLayout class="p-6">
++                <Label text="Speech access: not requested" class="text-base text-gray-600 mb-4" textWrap="true" />
++                <Button text="Request Access" class="mb-3 bg-blue-500 text-white rounded-lg p-4" />
++                <Button text="Transcribe Sample" :isEnabled="false" class="mb-8 bg-gray-300 text-gray-500 rounded-lg p-4" />
++                <Label text="No transcript yet" class="text-gray-400 text-center" textWrap="true" />
++            </StackLayout>
++        </ScrollView>
++    </Page>
++</template>
++
++<script setup lang="ts">
++</script>

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@lynx-js/docs-mcp-server": "^0.2.4"
+  }
+}

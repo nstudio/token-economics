@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lynx-docs": {
+      "command": "node",
+      "args": ["../harness/node_modules/@lynx-js/docs-mcp-server/dist/main.js"]
+    }
+  }
+}

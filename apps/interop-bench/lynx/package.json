@@ -1,0 +1,39 @@
+{
+  "name": "lynx-benchmark",
+  "version": "1.0.0",
+  "description": "Brownfield Lynx app based on Sparkling",
+  "homepage": "https://tiktok.github.io/sparkling/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tiktok/sparkling",
+    "directory": "template/sparkling-app-template"
+  },
+  "type": "module",
+  "dependencies": {
+    "sparkling-navigation": "^2.0.1",
+    "vue": "^3.5.0",
+    "vue-lynx": "^0.5.1"
+  },
+  "devDependencies": {
+    "@lynx-js/qrcode-rsbuild-plugin": "^0.4.4",
+    "@lynx-js/rspeedy": "^0.13.3",
+    "@lynx-js/types": "^3.6.0",
+    "@rsbuild/plugin-vue": "^1.2.6",
+    "@vitest/coverage-v8": "^4.0.18",
+    "prettier": "^3.8.1",
+    "sparkling-app-cli": "~2.0.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "engines": {
+    "node": "^22 || ^24"
+  },
+  "private": false,
+  "scripts": {
+    "build": "sparkling-app-cli build --copy",
+    "autolink": "sparkling-app-cli autolink",
+    "test": "vitest run --passWithNoTests",
+    "run:android": "sparkling-app-cli run:android",
+    "run:ios": "sparkling-app-cli run:ios --copy"
+  }
+}

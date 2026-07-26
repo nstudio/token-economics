@@ -1,0 +1,88 @@
+{
+  "runs": {
+    "ns": 3,
+    "lynx": 3
+  },
+  "scenarios": [
+    {
+      "id": "js_compute",
+      "ops": 2000000,
+      "ns_ms": 57,
+      "lynx_ms": 271,
+      "ns_per_op_us": null,
+      "lynx_per_op_us": null,
+      "ratio_lynx_over_ns": 4.8,
+      "checks_match": true
+    },
+    {
+      "id": "json_roundtrip",
+      "ops": 500,
+      "ns_ms": 4,
+      "lynx_ms": 17,
+      "ns_per_op_us": null,
+      "lynx_per_op_us": null,
+      "ratio_lynx_over_ns": 4.3,
+      "checks_match": true
+    },
+    {
+      "id": "prim_latency",
+      "ops": 1000,
+      "ns_ms": 1,
+      "lynx_ms": 130,
+      "ns_per_op_us": 1,
+      "lynx_per_op_us": 130,
+      "ratio_lynx_over_ns": 130,
+      "checks_match": true
+    },
+    {
+      "id": "str_latency",
+      "ops": 1000,
+      "ns_ms": 1,
+      "lynx_ms": 131,
+      "ns_per_op_us": 1,
+      "lynx_per_op_us": 131,
+      "ratio_lynx_over_ns": 131,
+      "checks_match": true
+    },
+    {
+      "id": "prim_burst",
+      "ops": 10000,
+      "ns_ms": 5,
+      "lynx_ms": 1191,
+      "ns_per_op_us": 1,
+      "lynx_per_op_us": 119,
+      "ratio_lynx_over_ns": 238.2,
+      "checks_match": true
+    },
+    {
+      "id": "marshal_1mb",
+      "ops": 5,
+      "ns_ms": 5,
+      "lynx_ms": 10,
+      "ns_per_op_us": 1000,
+      "lynx_per_op_us": 2000,
+      "ratio_lynx_over_ns": 2,
+      "checks_match": true
+    },
+    {
+      "id": "checksum_js",
+      "ops": 3,
+      "ns_ms": 74,
+      "lynx_ms": 444,
+      "ns_per_op_us": null,
+      "lynx_per_op_us": null,
+      "ratio_lynx_over_ns": 6,
+      "checks_match": true
+    },
+    {
+      "id": "checksum_native",
+      "ops": 3,
+      "ns_ms": 3,
+      "lynx_ms": 9,
+      "ns_per_op_us": null,
+      "lynx_per_op_us": null,
+      "ratio_lynx_over_ns": 3,
+      "checks_match": true
+    }
+  ]
+}

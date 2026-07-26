@@ -1,0 +1,314 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index d537114..f8c7ea0 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -22,6 +22,10 @@
+ 	<string>1.0.0</string>
+ 	<key>LSRequiresIPhoneOS</key>
+ 	<true/>
++	<key>NSHealthShareUsageDescription</key>
++	<string>Native Bench reads your step count to display your recent history.</string>
++	<key>NSHealthUpdateUsageDescription</key>
++	<string>Native Bench writes step count samples that you log in the app.</string>
+ 	<key>UILaunchStoryboardName</key>
+ 	<string>LaunchScreen</string>
+ 	<key>UIRequiresFullScreen</key>
+diff --git a/App_Resources/iOS/app.entitlements b/App_Resources/iOS/app.entitlements
+new file mode 100644
+index 0000000..e10f430
+--- /dev/null
++++ b/App_Resources/iOS/app.entitlements
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>com.apple.developer.healthkit</key>
++	<true/>
++</dict>
++</plist>
+diff --git a/App_Resources/iOS/build.xcconfig b/App_Resources/iOS/build.xcconfig
+index 80bc992..5751b7c 100644
+--- a/App_Resources/iOS/build.xcconfig
++++ b/App_Resources/iOS/build.xcconfig
+@@ -5,3 +5,4 @@
+ // DEVELOPMENT_TEAM = YOUR_TEAM_ID;
+ ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ IPHONEOS_DEPLOYMENT_TARGET = 16.0;
++OTHER_LDFLAGS = $(inherited) -framework HealthKit
+diff --git a/app/components/Health.vue b/app/components/Health.vue
+index 775d1ed..2a35da4 100644
+--- a/app/components/Health.vue
++++ b/app/components/Health.vue
+@@ -1,17 +1,174 @@
+ <template>
+-    <Page>
++    <Page @navigatedTo="refreshStatus">
+         <ActionBar title="Health" />
+         <ScrollView>
+             <StackLayout class="p-6">
+-                <Label text="Health access: not requested" class="text-base text-gray-600 mb-4" textWrap="true" />
+-                <Button text="Request Access" class="mb-3 bg-blue-500 text-white rounded-lg p-4" />
+-                <Button text="Log 500 Steps" :isEnabled="false" class="mb-8 bg-gray-300 text-gray-500 rounded-lg p-4" />
++                <Label :text="statusText" class="text-base text-gray-600 mb-4" textWrap="true" />
++                <Button text="Request Access" class="mb-3 bg-blue-500 text-white rounded-lg p-4" @tap="requestAccess" />
++                <Button
++                    text="Log 500 Steps"
++                    :isEnabled="accessGranted"
++                    :class="accessGranted ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500'"
++                    class="mb-8 rounded-lg p-4"
++                    @tap="logSteps"
++                />
+                 <Label text="Last 7 Days" class="text-lg font-bold mb-2" />
+-                <Label text="No data yet" class="text-gray-400 text-center" textWrap="true" />
++                <StackLayout v-if="accessGranted">
++                    <Label
++                        v-for="row in days"
++                        :key="row.text"
++                        :text="row.text"
++                        :class="row.isToday ? 'font-bold text-blue-600' : 'text-gray-700'"
++                        class="mb-1"
++                        textWrap="true"
++                    />
++                </StackLayout>
++                <Label v-else text="Health access needed" class="text-gray-400 text-center" textWrap="true" />
+             </StackLayout>
+         </ScrollView>
+     </Page>
+ </template>
+ 
+ <script setup lang="ts">
++import { ref } from 'vue'
++import { Utils } from '@nativescript/core'
++
++// Apple's HKAuthorizationStatus/HKQueryOptions/HKObjectQueryNoLimit are fixed
++// integer constants; using them directly avoids depending on the exact shape
++// the metadata generator produces for nested enum namespaces.
++const HK_AUTH_DENIED = 1
++const HK_AUTH_AUTHORIZED = 2
++const HK_QUERY_NO_OPTIONS = 0
++const HK_QUERY_NO_LIMIT = 0
++
++const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
++const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
++
++interface DayRow {
++    text: string
++    isToday: boolean
++}
++
++const statusText = ref('Health access: not requested')
++const accessGranted = ref(false)
++const days = ref<DayRow[]>([])
++
++function stepType() {
++    return HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
++}
++
++function dayKey(date: Date): string {
++    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
++}
++
++function formatRow(date: Date, steps: number, isToday: boolean): string {
++    const label = `${WEEKDAYS[date.getDay()]} ${MONTHS[date.getMonth()]} ${date.getDate()} — ${steps.toLocaleString('en-US')} steps`
++    return isToday ? `${label} (today)` : label
++}
++
++function refreshStatus() {
++    if (!HKHealthStore.isHealthDataAvailable()) {
++        statusText.value = 'Health error: HealthKit is not available on this device'
++        accessGranted.value = false
++        days.value = []
++        return
++    }
++
++    const store = new HKHealthStore()
++    const status = store.authorizationStatusForType(stepType())
++
++    if (status === HK_AUTH_AUTHORIZED) {
++        statusText.value = 'Health access: granted'
++        accessGranted.value = true
++        loadLastSevenDays()
++    } else if (status === HK_AUTH_DENIED) {
++        statusText.value = 'Health access: denied'
++        accessGranted.value = false
++        days.value = []
++    } else {
++        statusText.value = 'Health access: not requested'
++        accessGranted.value = false
++        days.value = []
++    }
++}
++
++function requestAccess() {
++    if (!HKHealthStore.isHealthDataAvailable()) {
++        statusText.value = 'Health error: HealthKit is not available on this device'
++        return
++    }
++
++    const store = new HKHealthStore()
++    const types = NSSet.setWithObject(stepType())
++
++    store.requestAuthorizationToShareTypesReadTypesCompletion(types, types, (success, error) => {
++        Utils.dispatchToMainThread(() => {
++            if (!success && error) {
++                statusText.value = `Health error: ${error.localizedDescription}`
++            }
++            refreshStatus()
++        })
++    })
++}
++
++function logSteps() {
++    const quantity = HKQuantity.quantityWithUnitDoubleValue(HKUnit.countUnit(), 500)
++    const now = new Date()
++    const sample = HKQuantitySample.quantitySampleWithTypeQuantityStartDateEndDate(stepType(), quantity, now, now)
++    const store = new HKHealthStore()
++
++    store.saveObjectWithCompletion(sample, (success, error) => {
++        Utils.dispatchToMainThread(() => {
++            if (success) {
++                loadLastSevenDays()
++            } else {
++                statusText.value = `Health error: ${error ? error.localizedDescription : 'failed to save steps'}`
++            }
++        })
++    })
++}
++
++function loadLastSevenDays() {
++    const store = new HKHealthStore()
++    const now = new Date()
++    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
++    const startOfWindow = new Date(startOfToday)
++    startOfWindow.setDate(startOfWindow.getDate() - 6)
++
++    const predicate = HKQuery.predicateForSamplesWithStartDateEndDateOptions(startOfWindow, now, HK_QUERY_NO_OPTIONS)
++    const query = HKSampleQuery.alloc().initWithSampleTypePredicateLimitSortDescriptorsResultsHandler(
++        stepType(),
++        predicate,
++        HK_QUERY_NO_LIMIT,
++        null,
++        (_query, results, error) => {
++            Utils.dispatchToMainThread(() => {
++                if (error) {
++                    statusText.value = `Health error: ${error.localizedDescription}`
++                    return
++                }
++
++                const totals = new Map<string, number>()
++                const count = results ? results.count : 0
++                for (let i = 0; i < count; i++) {
++                    const sample = results!.objectAtIndex(i)
++                    const key = dayKey(sample.startDate)
++                    const steps = sample.quantity.doubleValueForUnit(HKUnit.countUnit())
++                    totals.set(key, (totals.get(key) ?? 0) + steps)
++                }
++
++                const rows: DayRow[] = []
++                for (let offset = 0; offset < 7; offset++) {
++                    const d = new Date(startOfToday)
++                    d.setDate(d.getDate() - offset)
++                    const isToday = offset === 0
++                    const steps = Math.round(totals.get(dayKey(d)) ?? 0)
++                    rows.push({ text: formatRow(d, steps, isToday), isToday })
++                }
++                days.value = rows
++            })
++        },
++    )
++    store.executeQuery(query)
++}
+ </script>
+diff --git a/types/healthkit.d.ts b/types/healthkit.d.ts
+new file mode 100644
+index 0000000..912a1e2
+--- /dev/null
++++ b/types/healthkit.d.ts
+@@ -0,0 +1,86 @@
++// Minimal ambient declarations for the HealthKit symbols used from app/components/Health.vue.
++// The iOS runtime exposes these as real globals at build time; full framework
++// typings are only generated on demand via `ns typings ios`, so they are
++// declared by hand here to keep the app's TypeScript checks clean.
++
++interface HKObjectTypeRef {}
++interface HKSampleTypeRef extends HKObjectTypeRef {}
++interface HKQuantityTypeRef extends HKSampleTypeRef {}
++interface HKUnitRef {}
++interface HKQuantityRef {
++  doubleValueForUnit(unit: HKUnitRef): number
++}
++interface HKQuantitySampleRef {
++  startDate: Date
++  quantity: HKQuantityRef
++}
++interface HKPredicateRef {}
++interface HKSampleArrayRef {
++  count: number
++  objectAtIndex(index: number): HKQuantitySampleRef
++}
++
++declare const HKQuantityTypeIdentifierStepCount: string
++
++declare const HKQuantityType: {
++  quantityTypeForIdentifier(identifier: string): HKQuantityTypeRef
++}
++
++declare const HKUnit: {
++  countUnit(): HKUnitRef
++}
++
++declare const HKQuantity: {
++  quantityWithUnitDoubleValue(unit: HKUnitRef, value: number): HKQuantityRef
++}
++
++declare const HKQuantitySample: {
++  quantitySampleWithTypeQuantityStartDateEndDate(
++    type: HKQuantityTypeRef,
++    quantity: HKQuantityRef,
++    startDate: Date,
++    endDate: Date,
++  ): HKQuantitySampleRef
++}
++
++declare const HKQuery: {
++  predicateForSamplesWithStartDateEndDateOptions(startDate: Date, endDate: Date, options: number): HKPredicateRef
++}
++
++declare const HKSampleQuery: {
++  alloc(): {
++    initWithSampleTypePredicateLimitSortDescriptorsResultsHandler(
++      sampleType: HKSampleTypeRef,
++      predicate: HKPredicateRef,
++      limit: number,
++      sortDescriptors: null,
++      resultsHandler: (query: unknown, results: HKSampleArrayRef | null, error: NSErrorRef | null) => void,
++    ): unknown
++  }
++}
++
++interface NSErrorRef {
++  localizedDescription: string
++}
++
++interface NSSetRef {}
++
++declare const NSSet: {
++  setWithObject(object: unknown): NSSetRef
++}
++
++interface HKHealthStoreRef {
++  authorizationStatusForType(type: HKObjectTypeRef): number
++  requestAuthorizationToShareTypesReadTypesCompletion(
++    typesToShare: NSSetRef,
++    typesToRead: NSSetRef,
++    completion: (success: boolean, error: NSErrorRef | null) => void,
++  ): void
++  saveObjectWithCompletion(object: HKQuantitySampleRef, completion: (success: boolean, error: NSErrorRef | null) => void): void
++  executeQuery(query: unknown): void
++}
++
++declare const HKHealthStore: {
++  new (): HKHealthStoreRef
++  isHealthDataAvailable(): boolean
++}

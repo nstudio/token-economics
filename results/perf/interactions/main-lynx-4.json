@@ -1,0 +1,31 @@
+{
+  "runs": [
+    {
+      "iter": 0,
+      "error": "goHome failed",
+      "hk_log_roundtrip_ms": 447,
+      "nav_health_ms": 1757,
+      "hk_rows_ms": 1085,
+      "health_granted": true
+    },
+    {
+      "error": "goHome failed",
+      "nav_health_ms": 1811,
+      "hk_log_roundtrip_ms": 451,
+      "hk_rows_ms": 1085,
+      "health_granted": true,
+      "iter": 1
+    },
+    {
+      "health_granted": true,
+      "iter": 2,
+      "nav_health_ms": 1795,
+      "hk_rows_ms": 1078,
+      "error": "goHome failed",
+      "hk_log_roundtrip_ms": 447
+    }
+  ],
+  "bundle_id": "io.nstudio.lynx",
+  "trial": "main-lynx-4",
+  "measured_at": "2026-07-26T03:10:59.047Z"
+}

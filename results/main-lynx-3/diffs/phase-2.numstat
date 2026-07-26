@@ -1,0 +1,6 @@
+13	2	ios/SparklingGo.xcodeproj/project.pbxproj
+113	0	ios/SparklingGo/SparklingGo/MethodServices/HealthKitModule.swift
+2	1	ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+8	0	ios/SparklingGo/SparklingGo/SparklingGo.entitlements
+90	4	src/pages/health/App.vue
+11	0	src/typing.d.ts

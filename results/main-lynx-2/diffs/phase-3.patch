@@ -1,0 +1,261 @@
+diff --git a/ios/SparklingGo.xcodeproj/project.pbxproj b/ios/SparklingGo.xcodeproj/project.pbxproj
+index 172dd56..d714937 100644
+--- a/ios/SparklingGo.xcodeproj/project.pbxproj
++++ b/ios/SparklingGo.xcodeproj/project.pbxproj
+@@ -811,6 +811,7 @@
+ 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count from Health to show your recent activity.";
+ 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench writes step counts to Health when you log steps.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
++				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Native Bench uses speech recognition to transcribe the sample audio.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+@@ -855,6 +856,7 @@
+ 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count from Health to show your recent activity.";
+ 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench writes step counts to Health when you log steps.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
++				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Native Bench uses speech recognition to transcribe the sample audio.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+diff --git a/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift b/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+index ae65c91..edb9d7c 100644
+--- a/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
++++ b/ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+@@ -19,7 +19,7 @@ class RouterServiceImpl: RouterService {
+     func openScheme(withParams params: Sparkling_Router.OpenMethodParamModel, completion: @escaping SparklingMethod.PipeMethod.CompletionBlock) {
+         let urlString = params.scheme
+         let context = SPKContext()
+-        context.lynxModule = ["HealthKitModule": 0] as [String: Any]
++        context.lynxModule = ["HealthKitModule": 0, "SpeechModule": 0] as [String: Any]
+ 
+         DispatchQueue.main.async {
+             func openWithRouter(completionHandler: ((Bool) -> Void)? = nil) {
+diff --git a/ios/SparklingGo/SparklingGo/NativeModules/SpeechModule.swift b/ios/SparklingGo/SparklingGo/NativeModules/SpeechModule.swift
+new file mode 100644
+index 0000000..965dccc
+--- /dev/null
++++ b/ios/SparklingGo/SparklingGo/NativeModules/SpeechModule.swift
+@@ -0,0 +1,91 @@
++import Foundation
++import Speech
++import Lynx
++
++@objc(SpeechModule)
++@objcMembers
++public final class SpeechModule: NSObject, LynxContextModule {
++
++    public static var name: String { "SpeechModule" }
++
++    public static var methodLookup: [String: String] {
++        [
++            "getAuthorizationStatus": NSStringFromSelector(#selector(getAuthorizationStatus(_:))),
++            "requestAuthorization": NSStringFromSelector(#selector(requestAuthorization(_:))),
++            "transcribe": NSStringFromSelector(#selector(transcribe(_:))),
++        ]
++    }
++
++    private weak var lynxContext: LynxContext?
++    private var recognitionTask: SFSpeechRecognitionTask?
++
++    public init(lynxContext: LynxContext) {
++        self.lynxContext = lynxContext
++        super.init()
++    }
++
++    public init(lynxContext: LynxContext, withParam param: Any) {
++        self.lynxContext = lynxContext
++        super.init()
++    }
++
++    public override init() {
++        super.init()
++    }
++
++    public init(param: Any) {
++        super.init()
++    }
++
++    private func statusString(_ status: SFSpeechRecognizerAuthorizationStatus) -> String {
++        switch status {
++        case .authorized: return "authorized"
++        case .denied, .restricted: return "denied"
++        case .notDetermined: return "notDetermined"
++        @unknown default: return "notDetermined"
++        }
++    }
++
++    @objc func getAuthorizationStatus(_ callback: @escaping (NSDictionary) -> Void) {
++        callback(["status": statusString(SFSpeechRecognizer.authorizationStatus())])
++    }
++
++    @objc func requestAuthorization(_ callback: @escaping (NSDictionary) -> Void) {
++        SFSpeechRecognizer.requestAuthorization { [weak self] status in
++            guard let self = self else { return }
++            callback(["status": self.statusString(status), "error": NSNull()])
++        }
++    }
++
++    @objc func transcribe(_ callback: @escaping (NSDictionary) -> Void) {
++        guard let url = Bundle.main.url(forResource: "sample", withExtension: "wav") else {
++            callback(["success": false, "transcript": NSNull(), "error": "Sample audio file not found in bundle"])
++            return
++        }
++        guard let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US")) else {
++            callback(["success": false, "transcript": NSNull(), "error": "Speech recognizer is not available"])
++            return
++        }
++
++        let request = SFSpeechURLRecognitionRequest(url: url)
++        request.shouldReportPartialResults = true
++
++        var didComplete = false
++        recognitionTask = recognizer.recognitionTask(with: request) { [weak self] result, error in
++            guard let self = self, !didComplete else { return }
++
++            if let result = result {
++                self.lynxContext?.sendGlobalEvent("speechPartial", withParams: [result.bestTranscription.formattedString])
++                if result.isFinal {
++                    didComplete = true
++                    callback(["success": true, "transcript": result.bestTranscription.formattedString, "error": NSNull()])
++                }
++            }
++
++            if let error = error {
++                didComplete = true
++                callback(["success": false, "transcript": NSNull(), "error": error.localizedDescription])
++            }
++        }
++    }
++}
+diff --git a/public/sample.wav b/public/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/public/sample.wav differ
+diff --git a/src/pages/transcribe/App.vue b/src/pages/transcribe/App.vue
+index f938a1a..a5d09ee 100644
+--- a/src/pages/transcribe/App.vue
++++ b/src/pages/transcribe/App.vue
+@@ -1,27 +1,90 @@
+ <script setup lang="ts">
++import { onMounted, ref, useGlobalEvent } from 'vue-lynx'
+ import { close } from 'sparkling-navigation'
+ 
+ import './App.css'
+ 
++const accessStatus = ref<SpeechAccessStatus>('notDetermined')
++const statusMessage = ref('Speech access: not requested')
++const transcript = ref('')
++const completedLine = ref('')
++const transcribing = ref(false)
++
++let startTime = 0
++
++function accessLabel(status: SpeechAccessStatus): string {
++  if (status === 'authorized') return 'granted'
++  if (status === 'denied') return 'denied'
++  return 'not requested'
++}
++
++function refreshStatus() {
++  NativeModules.SpeechModule.getAuthorizationStatus((result) => {
++    accessStatus.value = result.status
++    statusMessage.value = `Speech access: ${accessLabel(result.status)}`
++  })
++}
++
++function requestAccess() {
++  NativeModules.SpeechModule.requestAuthorization((result) => {
++    accessStatus.value = result.status
++    statusMessage.value = result.error ?? `Speech access: ${accessLabel(result.status)}`
++  })
++}
++
++function transcribeSample() {
++  if (accessStatus.value !== 'authorized' || transcribing.value) return
++  transcribing.value = true
++  transcript.value = ''
++  completedLine.value = ''
++  statusMessage.value = 'Transcribing…'
++  startTime = Date.now()
++  NativeModules.SpeechModule.transcribe((result) => {
++    transcribing.value = false
++    if (!result.success) {
++      statusMessage.value = result.error ?? 'Transcription failed'
++      return
++    }
++    transcript.value = result.transcript ?? ''
++    statusMessage.value = `Speech access: ${accessLabel(accessStatus.value)}`
++    completedLine.value = `Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} s`
++  })
++}
++
+ function goHome() {
+   close()
+ }
++
++useGlobalEvent('speechPartial', (text) => {
++  if (transcribing.value) {
++    transcript.value = text as string
++  }
++})
++
++onMounted(() => {
++  refreshStatus()
++})
+ </script>
+ 
+ <template>
+   <scroll-view class="page-scroll" scroll-orientation="vertical">
+     <view class="screen">
+-      <text class="status-line">Speech access: not requested</text>
++      <text class="status-line">{{ statusMessage }}</text>
+       <view class="button-row">
+-        <view class="button">
++        <view class="button" @tap="requestAccess">
+           <text class="button-text">Request Access</text>
+         </view>
+-        <view class="button button--disabled">
++        <view
++          :class="['button', { 'button--disabled': accessStatus !== 'authorized' || transcribing }]"
++          @tap="transcribeSample"
++        >
+           <text class="button-text">Transcribe Sample</text>
+         </view>
+       </view>
+       <view class="transcript-area">
+-        <text class="transcript-text">No transcript yet</text>
++        <text v-if="!transcript" class="transcript-text">No transcript yet</text>
++        <text v-else class="transcript-text">{{ transcript }}</text>
++        <text v-if="completedLine" class="transcript-meta">{{ completedLine }}</text>
+       </view>
+       <view class="back-row">
+         <view class="button button--secondary" @tap="goHome">
+diff --git a/src/typing.d.ts b/src/typing.d.ts
+index 4eb96b2..684f411 100644
+--- a/src/typing.d.ts
++++ b/src/typing.d.ts
+@@ -11,6 +11,7 @@ declare module '@lynx-js/types' {
+ 
+ declare global {
+   type HealthAccessStatus = 'notDetermined' | 'authorized' | 'denied';
++  type SpeechAccessStatus = 'notDetermined' | 'authorized' | 'denied';
+ 
+   interface HealthKitDayEntry {
+     text: string;
+@@ -26,6 +27,15 @@ declare global {
+       logSteps(steps: number, callback: (result: { success: boolean; error: string | null }) => void): void;
+       getLast7Days(callback: (days: HealthKitDayEntry[]) => void): void;
+     };
++    SpeechModule: {
++      getAuthorizationStatus(callback: (result: { status: SpeechAccessStatus }) => void): void;
++      requestAuthorization(
++        callback: (result: { status: SpeechAccessStatus; error: string | null }) => void,
++      ): void;
++      transcribe(
++        callback: (result: { success: boolean; transcript: string | null; error: string | null }) => void,
++      ): void;
++    };
+   };
+ }
+ 

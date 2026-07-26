@@ -1,0 +1,341 @@
+diff --git a/ios/SparklingGo.xcodeproj/project.pbxproj b/ios/SparklingGo.xcodeproj/project.pbxproj
+index b185ed7..a32abf8 100644
+--- a/ios/SparklingGo.xcodeproj/project.pbxproj
++++ b/ios/SparklingGo.xcodeproj/project.pbxproj
+@@ -811,6 +811,7 @@
+ 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count to display recent activity.";
+ 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench writes step count samples that you log in the app.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
++				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Native Bench uses speech recognition to transcribe the bundled sample audio.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+@@ -855,6 +856,7 @@
+ 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Native Bench reads your step count to display recent activity.";
+ 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Native Bench writes step count samples that you log in the app.";
+ 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to the photo library to save downloaded images.";
++				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Native Bench uses speech recognition to transcribe the bundled sample audio.";
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+ 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+diff --git a/ios/SparklingGo/SparklingGo/NativeModules/NativeSpeechModule.swift b/ios/SparklingGo/SparklingGo/NativeModules/NativeSpeechModule.swift
+new file mode 100644
+index 0000000..a59731c
+--- /dev/null
++++ b/ios/SparklingGo/SparklingGo/NativeModules/NativeSpeechModule.swift
+@@ -0,0 +1,121 @@
++// Copyright 2025 The Sparkling Authors. All rights reserved.
++// Licensed under the Apache License Version 2.0 that can be found in the
++// LICENSE file in the root directory of this source tree.
++
++import Foundation
++import Lynx
++#if canImport(Speech)
++import Speech
++#endif
++
++#if canImport(Speech)
++
++@objc(NativeSpeechModule)
++@objcMembers
++public final class NativeSpeechModule: NSObject, LynxContextModule {
++
++    public static var name: String { "NativeSpeechModule" }
++
++    public static var methodLookup: [String: String] {
++        [
++            "getAuthorizationStatus": NSStringFromSelector(#selector(getAuthorizationStatus(_:))),
++            "requestAuthorization": NSStringFromSelector(#selector(requestAuthorization(_:))),
++            "transcribeSample": NSStringFromSelector(#selector(transcribeSample(_:))),
++        ]
++    }
++
++    private static let partialResultEvent = "kNativeSpeechPartialResult"
++
++    private weak var lynxContext: LynxContext?
++    private let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
++    private var recognitionTask: SFSpeechRecognitionTask?
++
++    public required init(lynxContext: LynxContext) {
++        self.lynxContext = lynxContext
++        super.init()
++    }
++
++    public init(lynxContext: LynxContext, withParam param: Any) {
++        self.lynxContext = lynxContext
++        super.init()
++    }
++
++    public override init() {
++        super.init()
++    }
++
++    public init(param: Any) {
++        super.init()
++    }
++
++    private func currentStatus() -> String {
++        switch SFSpeechRecognizer.authorizationStatus() {
++        case .authorized:
++            return "authorized"
++        case .denied, .restricted:
++            return "denied"
++        case .notDetermined:
++            return "notRequested"
++        @unknown default:
++            return "notRequested"
++        }
++    }
++
++    func getAuthorizationStatus(_ callback: @escaping (NSDictionary) -> Void) {
++        callback(["status": currentStatus()])
++    }
++
++    func requestAuthorization(_ callback: @escaping (NSDictionary) -> Void) {
++        SFSpeechRecognizer.requestAuthorization { [weak self] _ in
++            DispatchQueue.main.async {
++                callback(["status": self?.currentStatus() ?? "denied"])
++            }
++        }
++    }
++
++    func transcribeSample(_ callback: @escaping (NSDictionary) -> Void) {
++        guard currentStatus() == "authorized" else {
++            callback(["success": false, "error": "Speech access is not granted"])
++            return
++        }
++        guard let recognizer = recognizer, recognizer.isAvailable else {
++            callback(["success": false, "error": "Speech recognizer is not available"])
++            return
++        }
++        guard let url = Bundle.main.url(forResource: "sample", withExtension: "wav") else {
++            callback(["success": false, "error": "Sample audio file not found in bundle"])
++            return
++        }
++
++        recognitionTask?.cancel()
++        recognitionTask = nil
++
++        let request = SFSpeechURLRecognitionRequest(url: url)
++        request.shouldReportPartialResults = true
++
++        recognitionTask = recognizer.recognitionTask(with: request) { [weak self] result, error in
++            guard let self = self else { return }
++            if let error = error {
++                DispatchQueue.main.async {
++                    self.recognitionTask = nil
++                    callback(["success": false, "error": error.localizedDescription])
++                }
++                return
++            }
++            guard let result = result else { return }
++            let text = result.bestTranscription.formattedString
++            if result.isFinal {
++                DispatchQueue.main.async {
++                    self.recognitionTask = nil
++                    callback(["success": true, "transcript": text])
++                }
++            } else {
++                DispatchQueue.main.async {
++                    self.lynxContext?.sendGlobalEvent(NativeSpeechModule.partialResultEvent, withParams: [text])
++                }
++            }
++        }
++    }
++}
++
++#endif
+diff --git a/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift b/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift
+index bdcda89..fe5df33 100644
+--- a/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift
++++ b/ios/SparklingGo/SparklingGo/SparklingSwiftVC.swift
+@@ -29,7 +29,7 @@ struct SPKSwiftVC: UIViewControllerRepresentable {
+         let context = SPKContext()
+         let elements = SparklingLynxElement(lynxElementName: "input", lynxElementClassName: LynxInput.self)
+         context.customUIElements = [elements]
+-        context.lynxModule = ["NativeHealthModule": 0]
++        context.lynxModule = ["NativeHealthModule": 0, "NativeSpeechModule": 0]
+         let vc = SPKRouter.create(withURL: url, context: context, frame: self.state_frame)
+         let naviVC = UINavigationController(rootViewController: vc)
+         return naviVC
+diff --git a/src/App.css b/src/App.css
+index 0a9bb89..91042ff 100644
+--- a/src/App.css
++++ b/src/App.css
+@@ -157,3 +157,9 @@
+   line-height: 21px;
+   color: var(--color-text);
+ }
++
++.transcript__meta {
++  font-size: 13px;
++  color: var(--color-text-secondary);
++  padding-top: 10px;
++}
+diff --git a/src/pages/transcribe/App.vue b/src/pages/transcribe/App.vue
+index c0f049d..8fff55c 100644
+--- a/src/pages/transcribe/App.vue
++++ b/src/pages/transcribe/App.vue
+@@ -1,11 +1,92 @@
+ <script setup lang="ts">
++import { computed, onMounted, onUnmounted, ref } from 'vue-lynx'
+ import { close } from 'sparkling-navigation'
+ 
+ import './App.css'
++import { getAuthorizationStatus, requestAuthorization, transcribeSample } from './native'
++import type { SpeechAuthStatus } from './native'
++
++const VIEW_DID_APPEAR_EVENT = 'kHybridKitEventViewDidAppear'
++
++const authStatus = ref<SpeechAuthStatus>('notRequested')
++const errorText = ref<string | null>(null)
++const isTranscribing = ref(false)
++const transcript = ref('')
++const completedSeconds = ref<string | null>(null)
++
++const statusLine = computed(() => {
++  if (isTranscribing.value) {
++    return 'Transcribing…'
++  }
++  if (errorText.value) {
++    return errorText.value
++  }
++  switch (authStatus.value) {
++    case 'authorized':
++      return 'Speech access: granted'
++    case 'denied':
++      return 'Speech access: denied'
++    default:
++      return 'Speech access: not requested'
++  }
++})
++
++const canTranscribe = computed(() => authStatus.value === 'authorized' && !isTranscribing.value)
++
++async function refreshStatus() {
++  const result = await getAuthorizationStatus()
++  authStatus.value = result.status
++}
++
++async function requestAccess() {
++  errorText.value = null
++  const result = await requestAuthorization()
++  authStatus.value = result.status
++  if (result.error) {
++    errorText.value = result.error
++  }
++}
++
++async function transcribe() {
++  if (!canTranscribe.value) {
++    return
++  }
++  errorText.value = null
++  transcript.value = ''
++  completedSeconds.value = null
++  isTranscribing.value = true
++  const startedAt = Date.now()
++  try {
++    const result = await transcribeSample((partial) => {
++      transcript.value = partial
++    })
++    if (!result.success) {
++      errorText.value = result.error ?? 'Transcription failed'
++      return
++    }
++    transcript.value = result.transcript ?? ''
++    completedSeconds.value = ((Date.now() - startedAt) / 1000).toFixed(1)
++  } finally {
++    isTranscribing.value = false
++  }
++}
+ 
+ function goBack() {
+   close()
+ }
++
++function onViewDidAppear() {
++  refreshStatus()
++}
++
++onMounted(() => {
++  refreshStatus()
++  lynx.getJSModule?.('GlobalEventEmitter')?.addListener?.(VIEW_DID_APPEAR_EVENT, onViewDidAppear)
++})
++
++onUnmounted(() => {
++  lynx.getJSModule?.('GlobalEventEmitter')?.removeListener?.(VIEW_DID_APPEAR_EVENT, onViewDidAppear)
++})
+ </script>
+ 
+ <template>
+@@ -15,15 +96,17 @@ function goBack() {
+         <text class="nav-back__text">← Home</text>
+       </view>
+       <view class="content">
+-        <text class="status-line">Speech access: not requested</text>
+-        <view class="button button--secondary">
++        <text class="status-line">{{ statusLine }}</text>
++        <view class="button button--secondary" @tap="requestAccess">
+           <text class="button__text">Request Access</text>
+         </view>
+-        <view class="button button--disabled">
++        <view :class="['button', { 'button--disabled': !canTranscribe }]" @tap="transcribe">
+           <text class="button__text">Transcribe Sample</text>
+         </view>
+         <view class="transcript">
+-          <text class="transcript__text empty-state">No transcript yet</text>
++          <text v-if="transcript" class="transcript__text">{{ transcript }}</text>
++          <text v-else class="transcript__text empty-state">No transcript yet</text>
++          <text v-if="completedSeconds !== null" class="transcript__meta">Completed in {{ completedSeconds }} s</text>
+         </view>
+       </view>
+     </view>
+diff --git a/src/pages/transcribe/native.ts b/src/pages/transcribe/native.ts
+new file mode 100644
+index 0000000..14bf219
+--- /dev/null
++++ b/src/pages/transcribe/native.ts
+@@ -0,0 +1,42 @@
++export type SpeechAuthStatus = 'notRequested' | 'authorized' | 'denied'
++
++const PARTIAL_RESULT_EVENT = 'kNativeSpeechPartialResult'
++
++interface StatusResult {
++  status: SpeechAuthStatus
++  error?: string
++}
++
++interface TranscribeResult {
++  success: boolean
++  transcript?: string
++  error?: string
++}
++
++function speechModule() {
++  return NativeModules.NativeSpeechModule
++}
++
++export function getAuthorizationStatus(): Promise<StatusResult> {
++  return new Promise((resolve) => {
++    speechModule().getAuthorizationStatus((result: StatusResult) => resolve(result))
++  })
++}
++
++export function requestAuthorization(): Promise<StatusResult> {
++  return new Promise((resolve) => {
++    speechModule().requestAuthorization((result: StatusResult) => resolve(result))
++  })
++}
++
++export function transcribeSample(onPartial: (text: string) => void): Promise<TranscribeResult> {
++  const emitter = lynx.getJSModule?.('GlobalEventEmitter')
++  const onPartialResult = (text: string) => onPartial(text)
++  emitter?.addListener?.(PARTIAL_RESULT_EVENT, onPartialResult)
++  return new Promise((resolve) => {
++    speechModule().transcribeSample((result: TranscribeResult) => {
++      emitter?.removeListener?.(PARTIAL_RESULT_EVENT, onPartialResult)
++      resolve(result)
++    })
++  })
++}

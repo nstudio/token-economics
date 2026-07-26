@@ -1,0 +1,17 @@
+@import url('../../App.css');
+
+.page-scroll {
+  height: 100vh;
+  width: 100%;
+}
+
+.day-row {
+  font-size: 15px;
+  color: #3a3a3c;
+  padding: 6px 0;
+}
+
+.day-row--today {
+  color: #007aff;
+  font-weight: 700;
+}

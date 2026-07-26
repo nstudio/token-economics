@@ -1,0 +1,22 @@
+Preparing project...
+vite v8.1.5 building client environment for development...
+[2Ktransforming...✓ 430 modules transformed.
+rendering chunks...
+.ns-vite-build/package.json      0.28 kB
+.ns-vite-build/bundle.mjs       44.21 kB │ map:    72.80 kB
+.ns-vite-build/vendor.mjs    2,445.10 kB │ map: 4,920.29 kB
+
+✓ built in 1.77s
+Updating runtime package.json with configuration values...
+Project successfully prepared (ios)
+Building project...
+Xcode build...
+note: Using codesigning identity override: 
+warning: Stale file '/Users/runner/token-economics/ns-benchmark/platforms/ios/build/Debug-iphonesimulator/nsbenchmark.app/app.entitlements' is located outside of the allowed root paths.
+
+note: Run script build phase 'NativeScript PreBuild' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'nsbenchmark' from project 'nsbenchmark')
+note: Run script build phase 'NativeScript PostBuild' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'nsbenchmark' from project 'nsbenchmark')
+note: Run script build phase 'NativeScript PreLink' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'nsbenchmark' from project 'nsbenchmark')
+Project successfully built.
+Build time: 33.968 s.
+The build result is located at: /Users/runner/token-economics/ns-benchmark/platforms/ios/build/Debug-iphonesimulator/nsbenchmark.app

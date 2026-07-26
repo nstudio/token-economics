@@ -1,0 +1,114 @@
+<template>
+    <Page @navigatedTo="onShow">
+        <ActionBar title="Transcribe" />
+
+        <StackLayout class="p-6">
+            <Label :text="statusText" class="text-base mb-4" textWrap="true" />
+
+            <Button text="Request Access" class="text-lg p-3 mb-3 bg-blue-500 text-white rounded-lg" @tap="onRequestAccess" />
+            <Button
+                text="Transcribe Sample"
+                :isEnabled="canTranscribe"
+                :class="canTranscribe ? 'text-lg p-3 mb-6 bg-blue-500 text-white rounded-lg' : 'text-lg p-3 mb-6 bg-gray-300 text-gray-500 rounded-lg'"
+                @tap="onTranscribeSample"
+            />
+
+            <Label v-if="transcript" :text="transcript" class="text-base mb-1" textWrap="true" />
+            <Label v-if="elapsedText" :text="elapsedText" class="text-sm text-gray-500" textWrap="true" />
+            <Label v-if="!transcript" text="No transcript yet" class="text-base text-gray-500" textWrap="true" />
+        </StackLayout>
+    </Page>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { knownFolders } from '@nativescript/core'
+
+type AuthStatus = 'not-determined' | 'granted' | 'denied'
+
+const statusText = ref('Speech access: not requested')
+const authStatus = ref<AuthStatus>('not-determined')
+const isTranscribing = ref(false)
+const transcript = ref('')
+const elapsedText = ref('')
+
+const canTranscribe = computed(() => authStatus.value === 'granted' && !isTranscribing.value)
+
+let recognizer: SFSpeechRecognizer | null = null
+function speechRecognizer(): SFSpeechRecognizer {
+    if (!recognizer) recognizer = SFSpeechRecognizer.new()
+    return recognizer
+}
+
+function sampleFileUrl(): NSURL {
+    const path = knownFolders.currentApp().getFile('assets/sample.wav').path
+    return NSURL.fileURLWithPath(path)
+}
+
+function errorText(e: unknown): string {
+    const err = e as { localizedDescription?: string; message?: string } | undefined
+    if (err?.localizedDescription) return err.localizedDescription
+    if (err?.message) return err.message
+    return String(e)
+}
+
+function refreshAuthStatus() {
+    const status = SFSpeechRecognizer.authorizationStatus()
+    if (status === SFSpeechRecognizerAuthorizationStatus.Authorized) {
+        authStatus.value = 'granted'
+        statusText.value = 'Speech access: granted'
+    } else if (status === SFSpeechRecognizerAuthorizationStatus.Denied || status === SFSpeechRecognizerAuthorizationStatus.Restricted) {
+        authStatus.value = 'denied'
+        statusText.value = 'Speech access: denied'
+    } else {
+        authStatus.value = 'not-determined'
+        statusText.value = 'Speech access: not requested'
+    }
+}
+
+async function onRequestAccess() {
+    await new Promise<void>((resolve) => {
+        SFSpeechRecognizer.requestAuthorization(() => resolve())
+    })
+    refreshAuthStatus()
+}
+
+async function onTranscribeSample() {
+    if (!canTranscribe.value) return
+    isTranscribing.value = true
+    statusText.value = 'Transcribing…'
+    transcript.value = ''
+    elapsedText.value = ''
+    const startedAt = Date.now()
+
+    try {
+        const finalText = await new Promise<string>((resolve, reject) => {
+            const request = SFSpeechURLRecognitionRequest.alloc().initWithURL(sampleFileUrl())
+            request.shouldReportPartialResults = true
+            speechRecognizer().recognitionTaskWithRequestResultHandler(request, (result, error) => {
+                if (error) {
+                    reject(error)
+                    return
+                }
+                if (!result) return
+                transcript.value = result.bestTranscription.formattedString
+                if (result.final) {
+                    resolve(result.bestTranscription.formattedString)
+                }
+            })
+        })
+        transcript.value = finalText
+        const elapsedSeconds = (Date.now() - startedAt) / 1000
+        elapsedText.value = `Completed in ${elapsedSeconds.toFixed(1)} s`
+        statusText.value = 'Speech access: granted'
+    } catch (e) {
+        statusText.value = errorText(e)
+    } finally {
+        isTranscribing.value = false
+    }
+}
+
+function onShow() {
+    refreshAuthStatus()
+}
+</script>

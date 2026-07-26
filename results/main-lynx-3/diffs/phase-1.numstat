@@ -1,0 +1,11 @@
+7	3	app.config.ts
+63	0	src/App.css
+6	0	src/pages/health/App.css
+28	0	src/pages/health/App.vue
+0	0	src/pages/{second => health}/index.ts
+12	23	src/pages/main/App.vue
+0	98	src/pages/second/App.css
+0	28	src/pages/second/App.vue
+6	0	src/pages/transcribe/App.css
+27	0	src/pages/transcribe/App.vue
+6	0	src/pages/transcribe/index.ts

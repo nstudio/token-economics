@@ -1,0 +1,7 @@
+3	0	app.config.ts
+2	0	ios/SparklingGo.xcodeproj/project.pbxproj
+1	1	ios/SparklingGo/SparklingGo/MethodServices/RouterServiceImpl.swift
+105	0	ios/SparklingGo/SparklingGo/NativeModules/SpeechModule.swift
+5	0	src/pages/transcribe/App.css
+71	4	src/pages/transcribe/App.vue
+5	0	src/typing.d.ts

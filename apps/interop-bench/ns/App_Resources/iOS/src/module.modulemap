@@ -1,0 +1,4 @@
+module InteropFixture {
+    header "InteropFixture.h"
+    export *
+}

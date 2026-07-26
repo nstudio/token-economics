@@ -1,0 +1,234 @@
+.app {
+  min-height: 100vh;
+  padding: 22px 18px 36px;
+  background: linear-gradient(140deg, #25f4ee 0%, #009995 55%, #fe2c3a 100%);
+  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  width: 100%;
+  max-width: 720px;
+  color: #ffffff;
+  margin-bottom: 50px;
+}
+
+.eyebrow {
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 153, 149, 0.25);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+}
+
+.logo {
+  width: 104px;
+  height: 104px;
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: #e6fbff;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #b7f2f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card__title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0e191f;
+}
+
+.card__tag {
+  padding: 6px 12px;
+  background: linear-gradient(90deg, #25f4ee 0%, #009995 100%);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid #009995;
+}
+
+.card__tag--outline {
+  background: rgba(254, 44, 58, 0.08);
+  color: #fe2c3a;
+  border: 1px solid #fe2c3a;
+}
+
+.label {
+  font-size: 14px;
+  color: #0e191f;
+  font-weight: 700;
+}
+
+.input {
+  border: 1px solid #009995;
+  background: #f2fbfa;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0f172a;
+}
+
+.input__hint {
+  font-size: 12px;
+  color: #335260;
+}
+
+.primary {
+  background: linear-gradient(90deg, #25f4ee 0%, #009995 100%);
+  border: 1px solid #009995;
+  border-radius: 12px;
+  padding: 14px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  box-shadow: 0 8px 22px rgba(0, 153, 149, 0.35);
+  gap: 8px;
+}
+
+.primary__text {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.primary__icon {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.pill {
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #009995;
+  background: #f2fbfa;
+  color: #0f172a;
+  font-size: 12px;
+  line-height: 18px;
+  word-break: break-all;
+}
+
+.pill--mono {
+  font-family: 'Menlo', 'SFMono-Regular', Consolas, monospace;
+}
+
+.result {
+  background: #fff6f7;
+  border: 1px dashed #fe2c3a;
+  border-radius: 10px;
+  padding: 12px;
+  color: #3f0a10;
+  min-height: 64px;
+  line-height: 20px;
+}
+
+.nav-buttons {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.back-link {
+  align-self: flex-start;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.primary--disabled {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(0, 153, 149, 0.3);
+  box-shadow: none;
+}
+
+.primary--disabled .primary__text {
+  color: rgba(14, 25, 31, 0.45);
+}
+
+.status-line {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0e191f;
+}
+
+.section-header {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0e191f;
+  margin-top: 4px;
+}
+
+.empty-state {
+  font-size: 14px;
+  color: #335260;
+  padding: 12px 0;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e6f4f3;
+}
+
+.list-row--today {
+  background: rgba(37, 244, 238, 0.1);
+  border-radius: 8px;
+  padding: 10px 8px;
+}
+
+.list-row__label {
+  font-size: 14px;
+  color: #0e191f;
+}
+
+.result__meta {
+  font-size: 13px;
+  font-weight: 700;
+  color: #335260;
+}

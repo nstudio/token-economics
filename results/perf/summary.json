@@ -1,0 +1,347 @@
+{
+  "trials": [
+    {
+      "trial": "main-lynx-1",
+      "fw": "lynx",
+      "bundle_mb": 140.22265625,
+      "installed_mb": 140.22265625,
+      "executable_mb": 4.59375,
+      "frameworks_mb": 134.859375,
+      "devtool_mb": 23.55859375,
+      "launch_ms_median": 313,
+      "launch_ms_range": [
+        299,
+        330
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1598,
+      "idle_rss_mb": 287.453125,
+      "idle_footprint_mb": 48,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-lynx-2",
+      "fw": "lynx",
+      "bundle_mb": 140.1796875,
+      "installed_mb": 140.1796875,
+      "executable_mb": 4.5546875,
+      "frameworks_mb": 134.859375,
+      "devtool_mb": 23.55859375,
+      "launch_ms_median": 314,
+      "launch_ms_range": [
+        313,
+        317
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1595,
+      "idle_rss_mb": 287.828125,
+      "idle_footprint_mb": 49,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-lynx-3",
+      "fw": "lynx",
+      "bundle_mb": 140.203125,
+      "installed_mb": 140.203125,
+      "executable_mb": 4.57421875,
+      "frameworks_mb": 134.859375,
+      "devtool_mb": 23.55859375,
+      "launch_ms_median": 319,
+      "launch_ms_range": [
+        303,
+        329
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1675,
+      "idle_rss_mb": 287.46875,
+      "idle_footprint_mb": 48,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-lynx-4",
+      "fw": "lynx",
+      "bundle_mb": 140.4765625,
+      "installed_mb": 140.4765625,
+      "executable_mb": 4.76171875,
+      "frameworks_mb": 134.859375,
+      "devtool_mb": 23.55859375,
+      "launch_ms_median": 319,
+      "launch_ms_range": [
+        317,
+        325
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1688,
+      "idle_rss_mb": 287.546875,
+      "idle_footprint_mb": 48,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-1",
+      "fw": "ns",
+      "bundle_mb": 93.3046875,
+      "installed_mb": 93.3046875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 318,
+      "launch_ms_range": [
+        304,
+        336
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1576,
+      "idle_rss_mb": 221.421875,
+      "idle_footprint_mb": 38,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-2",
+      "fw": "ns",
+      "bundle_mb": 93.30859375,
+      "installed_mb": 93.30859375,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 316,
+      "launch_ms_range": [
+        310,
+        326
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1485,
+      "idle_rss_mb": 213.828125,
+      "idle_footprint_mb": 37,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-3",
+      "fw": "ns",
+      "bundle_mb": 93.30859375,
+      "installed_mb": 93.30859375,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 316,
+      "launch_ms_range": [
+        315,
+        329
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1447,
+      "idle_rss_mb": 216.515625,
+      "idle_footprint_mb": 37,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-4",
+      "fw": "ns",
+      "bundle_mb": 93.30859375,
+      "installed_mb": 93.30859375,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 316,
+      "launch_ms_range": [
+        313,
+        320
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1529,
+      "idle_rss_mb": 215.296875,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-5",
+      "fw": "ns",
+      "bundle_mb": 93.3046875,
+      "installed_mb": 93.3046875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 319,
+      "launch_ms_range": [
+        315,
+        320
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1550,
+      "idle_rss_mb": 215.359375,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    }
+  ],
+  "aggregates": {
+    "ns": {
+      "n": 5,
+      "bundle_mb": {
+        "median": 93.30859375,
+        "range": [
+          93.3046875,
+          93.30859375
+        ]
+      },
+      "installed_mb": {
+        "median": 93.30859375,
+        "range": [
+          93.3046875,
+          93.30859375
+        ]
+      },
+      "executable_mb": {
+        "median": 23.3984375,
+        "range": [
+          23.3984375,
+          23.3984375
+        ]
+      },
+      "frameworks_mb": {
+        "median": 68.1171875,
+        "range": [
+          68.1171875,
+          68.1171875
+        ]
+      },
+      "devtool_mb": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_ms": {
+        "median": 316,
+        "range": [
+          316,
+          319
+        ]
+      },
+      "cpu_settle_ms": {
+        "median": 1529,
+        "range": [
+          1447,
+          1576
+        ]
+      },
+      "idle_rss_mb": {
+        "median": 215.359375,
+        "range": [
+          213.828125,
+          221.421875
+        ]
+      },
+      "idle_footprint_mb": {
+        "median": 38,
+        "range": [
+          37,
+          40
+        ]
+      },
+      "idle_cpu_pct": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_sources": [
+        "active"
+      ]
+    },
+    "lynx": {
+      "n": 4,
+      "bundle_mb": {
+        "median": 140.212890625,
+        "range": [
+          140.1796875,
+          140.4765625
+        ]
+      },
+      "installed_mb": {
+        "median": 140.212890625,
+        "range": [
+          140.1796875,
+          140.4765625
+        ]
+      },
+      "executable_mb": {
+        "median": 4.583984375,
+        "range": [
+          4.5546875,
+          4.76171875
+        ]
+      },
+      "frameworks_mb": {
+        "median": 134.859375,
+        "range": [
+          134.859375,
+          134.859375
+        ]
+      },
+      "devtool_mb": {
+        "median": 23.55859375,
+        "range": [
+          23.55859375,
+          23.55859375
+        ]
+      },
+      "launch_ms": {
+        "median": 316.5,
+        "range": [
+          313,
+          319
+        ]
+      },
+      "cpu_settle_ms": {
+        "median": 1636.5,
+        "range": [
+          1595,
+          1688
+        ]
+      },
+      "idle_rss_mb": {
+        "median": 287.5078125,
+        "range": [
+          287.453125,
+          287.828125
+        ]
+      },
+      "idle_footprint_mb": {
+        "median": 48,
+        "range": [
+          48,
+          49
+        ]
+      },
+      "idle_cpu_pct": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_sources": [
+        "active"
+      ]
+    }
+  }
+}

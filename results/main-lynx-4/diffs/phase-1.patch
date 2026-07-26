@@ -1,0 +1,279 @@
+diff --git a/app.config.ts b/app.config.ts
+index f41b568..ad7c6b1 100644
+--- a/app.config.ts
++++ b/app.config.ts
+@@ -9,6 +9,8 @@ const lynxConfig = defineConfig({
+     entry: {
+       main: './src/pages/main/index.ts',
+       second: './src/pages/second/index.ts',
++      health: './src/pages/health/index.ts',
++      transcribe: './src/pages/transcribe/index.ts',
+     },
+   },
+   output: {
+@@ -59,6 +61,12 @@ const config: AppConfig = {
+     second: {
+       path: './lynxPages/second',
+     },
++    health: {
++      path: './lynxPages/health',
++    },
++    transcribe: {
++      path: './lynxPages/transcribe',
++    },
+   },
+   plugin: [
+     [
+diff --git a/src/pages/health/App.css b/src/pages/health/App.css
+new file mode 100644
+index 0000000..c6fd276
+--- /dev/null
++++ b/src/pages/health/App.css
+@@ -0,0 +1,42 @@
++@import url('../../App.css');
++
++.page-scroll {
++  height: 100vh;
++  width: 100%;
++}
++
++.back {
++  align-self: flex-start;
++}
++
++.back__text {
++  color: #ffffff;
++  font-size: 14px;
++  font-weight: 700;
++}
++
++.status-line {
++  font-size: 14px;
++  color: #0e191f;
++  font-weight: 700;
++}
++
++.primary--disabled {
++  opacity: 0.4;
++}
++
++.section-header {
++  font-size: 15px;
++  font-weight: 800;
++  color: #0e191f;
++  margin-top: 4px;
++}
++
++.empty-state {
++  background: #f2fbfa;
++  border: 1px dashed #009995;
++  border-radius: 10px;
++  padding: 12px;
++  color: #335260;
++  min-height: 48px;
++}
+diff --git a/src/pages/health/App.vue b/src/pages/health/App.vue
+new file mode 100644
+index 0000000..d2011f7
+--- /dev/null
++++ b/src/pages/health/App.vue
+@@ -0,0 +1,35 @@
++<script setup lang="ts">
++import { close } from 'sparkling-navigation'
++
++import './App.css'
++
++function onBack() {
++  close()
++}
++</script>
++
++<template>
++  <scroll-view class="page-scroll" scroll-orientation="vertical">
++    <view class="app">
++      <view class="back" @tap="onBack">
++        <text class="back__text">← Home</text>
++      </view>
++      <view class="hero">
++        <text class="title">Health</text>
++      </view>
++      <view class="card">
++        <text class="status-line">Health access: not requested</text>
++        <view class="primary">
++          <text class="primary__text">Request Access</text>
++        </view>
++        <view class="primary primary--disabled">
++          <text class="primary__text">Log 500 Steps</text>
++        </view>
++        <text class="section-header">Last 7 Days</text>
++        <view class="empty-state">
++          <text>No data yet</text>
++        </view>
++      </view>
++    </view>
++  </scroll-view>
++</template>
+diff --git a/src/pages/health/index.ts b/src/pages/health/index.ts
+new file mode 100644
+index 0000000..d617546
+--- /dev/null
++++ b/src/pages/health/index.ts
+@@ -0,0 +1,6 @@
++import { createApp } from 'vue-lynx'
++
++import App from './App.vue'
++
++const app = createApp(App)
++app.mount()
+diff --git a/src/pages/main/App.vue b/src/pages/main/App.vue
+index 48a10b7..741dff6 100644
+--- a/src/pages/main/App.vue
++++ b/src/pages/main/App.vue
+@@ -1,18 +1,19 @@
+ <script setup lang="ts">
+-import { onMounted } from 'vue-lynx'
+ import * as router from 'sparkling-navigation'
+ 
+ import './App.css'
+-import sparklingLogo from '../../assets/sparkling_icon.png'
+ 
+-const secondPageScheme = 'hybrid://lynxview_page?bundle=second.lynx.bundle&title=Second%20Page&screen_orientation=portrait'
++const healthScheme = 'hybrid://lynxview_page?bundle=health.lynx.bundle&title=Health&screen_orientation=portrait'
++const transcribeScheme = 'hybrid://lynxview_page?bundle=transcribe.lynx.bundle&title=Transcribe&screen_orientation=portrait'
+ 
+-onMounted(() => {
+-  console.info('Hello, Sparkling Vue template')
+-})
++function openHealth() {
++  router.open({ scheme: healthScheme }, (result: router.OpenResponse) => {
++    console.info('router.open result', JSON.stringify(result))
++  })
++}
+ 
+-function openSecondPage() {
+-  router.open({ scheme: secondPageScheme }, (result: router.OpenResponse) => {
++function openTranscribe() {
++  router.open({ scheme: transcribeScheme }, (result: router.OpenResponse) => {
+     console.info('router.open result', JSON.stringify(result))
+   })
+ }
+@@ -22,19 +23,16 @@ function openSecondPage() {
+   <scroll-view class="page-scroll" scroll-orientation="vertical">
+     <view class="app">
+       <view class="hero">
+-        <text class="eyebrow">Sparkling · Vue Lynx</text>
+-        <image :src="sparklingLogo" class="logo" />
+-        <text class="title">Sparkling Starter</text>
++        <text class="title">Native Bench</text>
++        <text class="subtitle">Token economics benchmark</text>
+       </view>
+       <view class="card">
+-        <view class="card__header">
+-          <text class="card__title">Multi page demo</text>
+-          <text class="card__tag card__tag--outline">Router</text>
++        <view class="primary" @tap="openHealth">
++          <text class="primary__text">Health</text>
++          <text class="primary__icon">→</text>
+         </view>
+-        <text class="label">Scheme</text>
+-        <text class="pill pill--mono">{{ secondPageScheme }}</text>
+-        <view class="primary" @tap="openSecondPage">
+-          <text class="primary__text">Open second page</text>
++        <view class="primary" @tap="openTranscribe">
++          <text class="primary__text">Transcribe</text>
+           <text class="primary__icon">→</text>
+         </view>
+       </view>
+diff --git a/src/pages/transcribe/App.css b/src/pages/transcribe/App.css
+new file mode 100644
+index 0000000..32364e6
+--- /dev/null
++++ b/src/pages/transcribe/App.css
+@@ -0,0 +1,35 @@
++@import url('../../App.css');
++
++.page-scroll {
++  height: 100vh;
++  width: 100%;
++}
++
++.back {
++  align-self: flex-start;
++}
++
++.back__text {
++  color: #ffffff;
++  font-size: 14px;
++  font-weight: 700;
++}
++
++.status-line {
++  font-size: 14px;
++  color: #0e191f;
++  font-weight: 700;
++}
++
++.primary--disabled {
++  opacity: 0.4;
++}
++
++.transcript-area {
++  background: #f2fbfa;
++  border: 1px dashed #009995;
++  border-radius: 10px;
++  padding: 12px;
++  color: #335260;
++  min-height: 96px;
++}
+diff --git a/src/pages/transcribe/App.vue b/src/pages/transcribe/App.vue
+new file mode 100644
+index 0000000..d484a59
+--- /dev/null
++++ b/src/pages/transcribe/App.vue
+@@ -0,0 +1,34 @@
++<script setup lang="ts">
++import { close } from 'sparkling-navigation'
++
++import './App.css'
++
++function onBack() {
++  close()
++}
++</script>
++
++<template>
++  <scroll-view class="page-scroll" scroll-orientation="vertical">
++    <view class="app">
++      <view class="back" @tap="onBack">
++        <text class="back__text">← Home</text>
++      </view>
++      <view class="hero">
++        <text class="title">Transcribe</text>
++      </view>
++      <view class="card">
++        <text class="status-line">Speech access: not requested</text>
++        <view class="primary">
++          <text class="primary__text">Request Access</text>
++        </view>
++        <view class="primary primary--disabled">
++          <text class="primary__text">Transcribe Sample</text>
++        </view>
++        <view class="transcript-area">
++          <text>No transcript yet</text>
++        </view>
++      </view>
++    </view>
++  </scroll-view>
++</template>
+diff --git a/src/pages/transcribe/index.ts b/src/pages/transcribe/index.ts
+new file mode 100644
+index 0000000..d617546
+--- /dev/null
++++ b/src/pages/transcribe/index.ts
+@@ -0,0 +1,6 @@
++import { createApp } from 'vue-lynx'
++
++import App from './App.vue'
++
++const app = createApp(App)
++app.mount()

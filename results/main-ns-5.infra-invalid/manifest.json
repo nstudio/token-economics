@@ -1,0 +1,31 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-ns-5",
+  "framework": "ns",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "nativescript-docs": {
+        "type": "http",
+        "url": "https://docs.nativescript.org/mcp"
+      }
+    }
+  },
+  "started_at": "2026-07-25T23:48:32Z",
+  "outcome": "infra-invalid-auth",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "lynx_docs_mcp": "0.2.4"
+  },
+  "baseline_sha": "99df01add12df6252b707435cdf3bac85a43aca8",
+  "notes": "preflight auth failure (OAuth token rotated mid-batch); no measured sessions ran; re-run as fresh trial"
+}
