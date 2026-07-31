@@ -7,6 +7,7 @@
   "docsMcpName": "expo",
   "mcpConfig": "mcp/expo.mcp.json",
   "docsMcpVersion": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)",
+  "docsMcpKind": "tools",
   "buildGate": "npx expo prebuild --platform ios && xcodebuild -workspace ios/ExpoBenchmark.xcworkspace -scheme ExpoBenchmark -configuration Debug -destination \"generic/platform=iOS Simulator\" build",
   "appLocator": {
     "kind": "xcodebuild",

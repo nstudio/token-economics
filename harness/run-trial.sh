@@ -196,22 +196,47 @@ preflight() {
 }
 
 preflight_mcp() {
-  # An MCP server the agent cannot actually reach silently changes what is being
-  # measured (docs friction collapses to zero). Verify the server loads before
-  # spending a measured session on it.
-  note "preflight: verifying docs MCP '$DOCS_MCP_NAME' loads"
+  # A docs MCP the agent cannot reach does not weaken the comparison — it
+  # invalidates it: docs friction collapses to zero on one arm only, and the
+  # trial still "succeeds". So this is a hard gate, not a note.
+  #
+  # Resources-based servers (no tools) can't be probed this way; for those the
+  # answer is recorded but not enforced.
+  note "preflight: verifying docs MCP '$DOCS_MCP_NAME' loads (kind: $DOCS_MCP_KIND)"
   local pf="$TRIAL_DIR/preflight-mcp.json"
-  ( cd "$REPO" && CLAUDE_CONFIG_DIR="$SCRATCH_CONFIG" claude -p "List the MCP tools or resources you can access. Reply with their names only." \
-      --output-format json --model "$MODEL" --max-turns 2 \
+  local probe="Do not use any tools. Answer from your system prompt only: do you have any tools whose names begin with mcp__${DOCS_MCP_NAME}? Reply exactly MCP_PRESENT or MCP_ABSENT."
+  ( cd "$REPO" && CLAUDE_CONFIG_DIR="$SCRATCH_CONFIG" claude -p "$probe" \
+      --output-format json --model "$MODEL" --max-turns 3 \
       --mcp-config "$MCP_CONFIG" --strict-mcp-config \
       --dangerously-skip-permissions ) >"$pf" 2>"$pf.stderr"
+  local result
+  result="$(json_field "$pf" result)"
   manifest_set "mcp_preflight" "$(node -e '
     const fs = require("fs");
     let s = {};
     try { s = JSON.parse(fs.readFileSync(process.argv[1], "utf8")); } catch (e) {}
-    console.log(JSON.stringify({ result: s.result ?? null, is_error: s.is_error ?? null }));
-  ' "$pf")"
-  note "preflight mcp: recorded (review manifest.mcp_preflight if docs counts look wrong)"
+    console.log(JSON.stringify({
+      kind: process.argv[2],
+      result: s.result ?? null,
+      is_error: s.is_error ?? null,
+      enforced: process.argv[2] === "tools"
+    }));
+  ' "$pf" "$DOCS_MCP_KIND")"
+
+  if [ "$DOCS_MCP_KIND" != "tools" ]; then
+    note "preflight mcp: recorded, not enforced (resources-based server exposes no tools)"
+    return 0
+  fi
+  case "$result" in
+    *MCP_PRESENT*) note "preflight mcp: ok — $DOCS_MCP_NAME tools are loaded" ;;
+    *) manifest_set "outcome" '"infra-invalid-mcp"'
+       die "docs MCP '$DOCS_MCP_NAME' did not load (probe said: ${result:-<no answer>}).
+  This trial is INFRA-INVALID, not a framework result — running one arm without its
+  docs server would invalidate the comparison. Fix and re-run:
+    claude mcp add --scope user --transport http $DOCS_MCP_NAME <url>
+    claude mcp login $DOCS_MCP_NAME
+  Then delete $TRIAL_DIR and start again." ;;
+  esac
 }
 
 make_scratch_config() {

@@ -7,6 +7,7 @@
   "docsMcpName": "lynx-docs",
   "mcpConfig": "mcp/lynx.mcp.json",
   "docsMcpVersion": "@lynx-js/docs-mcp-server 0.2.4 (pinned, local)",
+  "docsMcpKind": "resources",
   "buildGate": "npm run build && xcodebuild -workspace ios/SparklingGo.xcworkspace -scheme SparklingGo -configuration Debug -destination \"generic/platform=iOS Simulator\" build",
   "appLocator": {
     "kind": "xcodebuild",

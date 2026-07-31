@@ -149,6 +149,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
           RESULTS_DIR: r.resultsPath,
           MCP_CONFIG: r.mcpConfigPath,
           DOCS_MCP_VERSION: r.framework.docsMcpVersion ?? '',
+          DOCS_MCP_KIND: r.framework.docsMcpKind ?? 'tools',
         };
         // Exported, not merely assigned: render_prompt and record_toolchain read
         // several of these out of the environment in node child processes.
