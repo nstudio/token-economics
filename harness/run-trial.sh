@@ -4,50 +4,41 @@ set -uo pipefail
 # Token-economics benchmark trial runner (see ../PLAN.md §4–5).
 #
 # Usage:
-#   ./run-trial.sh <ns|lynx> [trial-id]
+#   ./run-trial.sh <study> <framework> [trial-id]
 #   ./run-trial.sh remediate <trial-id> "<observed failure text>"
 #
+#   ./run-trial.sh ns-vs-expo expo main-expo-1
+#
+# Studies and frameworks are declared as JSON in studies/ and frameworks/ — adding
+# either is a new file, never an edit to this script. List them with:
+#   node lib/registry.mjs list-studies ; node lib/registry.mjs list-frameworks
+#
 # Environment:
-#   MODEL                (default: claude-sonnet-5) — must be identical across all measured trials
-#   MAX_TURNS            (default: 80 per phase)
-#   SKIP_BASELINE_CHECK  (set to 1 to skip the pre-trial baseline build verification)
-#   ANTHROPIC_API_KEY    (recommended for headless runs; Keychain OAuth may also work)
+#   MODEL / MAX_TURNS    override the study's pinned values (never do this mid-study)
+#   ALLOW_FROZEN=1       permit writing trials into a frozen (published) study
+#   SKIP_BASELINE_CHECK  set to 1 to skip the pre-trial baseline build verification
+#   ANTHROPIC_API_KEY    recommended for headless runs; Keychain OAuth may also work
 #
 # Each phase runs in a fresh headless Claude Code session with an isolated
 # CLAUDE_CONFIG_DIR (no global CLAUDE.md, memory, or personal settings) and exactly
 # one docs MCP loaded via --strict-mcp-config. The harness — not the agent — commits
 # after each phase and archives prompts, headless summaries, transcripts, build logs,
-# and diffs under results/<trial-id>/.
+# and diffs under <study results dir>/<trial-id>/.
 
 HARNESS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$HARNESS_DIR")"
-RESULTS_DIR="$ROOT_DIR/results"
-MODEL="${MODEL:-claude-sonnet-5}"
-MAX_TURNS="${MAX_TURNS:-160}"
-BASELINE_TAG="benchmark-baseline"
+REGISTRY="$HARNESS_DIR/lib/registry.mjs"
+source "$HARNESS_DIR/lib/common.sh"
 
-die() { echo "ERROR: $*" >&2; exit 1; }
-note() { echo "==> $*"; }
+die() { te_die "$@"; }
+note() { te_note "$@"; }
 
-configure_framework() {
-  FRAMEWORK="$1"
-  case "$FRAMEWORK" in
-    ns)
-      REPO="$ROOT_DIR/ns-benchmark"
-      export FRAMEWORK_LABEL="NativeScript (Vue 3)"
-      export DOCS_MCP_NAME="nativescript-docs"
-      MCP_CONFIG="$HARNESS_DIR/mcp/ns.mcp.json"
-      export BUILD_GATE='ns build ios'
-      ;;
-    lynx)
-      REPO="$ROOT_DIR/lynx-benchmark"
-      export FRAMEWORK_LABEL="LynxJS (Vue 3, Sparkling host)"
-      export DOCS_MCP_NAME="lynx-docs"
-      MCP_CONFIG="$HARNESS_DIR/mcp/lynx.mcp.json"
-      export BUILD_GATE='npm run build && xcodebuild -workspace ios/SparklingGo.xcworkspace -scheme SparklingGo -configuration Debug -destination "generic/platform=iOS Simulator" build'
-      ;;
-    *) die "unknown framework '$FRAMEWORK' (expected ns or lynx)" ;;
-  esac
+load_context() { # load_context <study> <framework>
+  local sh
+  sh="$(node "$REGISTRY" sh "$1" "$2")" || exit 1
+  eval "$sh"
+  MODEL="${MODEL:-$STUDY_MODEL}"
+  MAX_TURNS="${MAX_TURNS:-$STUDY_MAX_TURNS}"
 }
 
 manifest_set() { # manifest_set <dot.path> <json-value>
@@ -166,19 +157,11 @@ run_phase() { # run_phase <label> <prompt-template>
 archive_app() {
   # Preserve the built simulator .app so acceptance can run via `simctl install`
   # even after a later trial resets the repo.
-  local dest="$TRIAL_DIR/app" app=""
-  case "$FRAMEWORK" in
-    ns) app="$(ls -d "$REPO"/platforms/ios/build/Debug-iphonesimulator/*.app 2>/dev/null | head -1)" ;;
-    lynx)
-      local products
-      products="$(cd "$REPO" && xcodebuild -workspace ios/SparklingGo.xcworkspace -scheme SparklingGo -configuration Debug -destination "generic/platform=iOS Simulator" -showBuildSettings 2>/dev/null | awk -F' = ' '/ BUILT_PRODUCTS_DIR/{print $2; exit}')"
-      app="$(ls -d "$products"/*.app 2>/dev/null | head -1)"
-      ;;
-  esac
-  if [ -n "$app" ] && [ -d "$app" ]; then
+  local dest="$TRIAL_DIR/app" app
+  if app="$(te_locate_app "$FRAMEWORK" "$REPO" debug)"; then
     mkdir -p "$dest"
     ditto "$app" "$dest/$(basename "$app")"
-    note "archived app: results/$TRIAL_ID/app/$(basename "$app")"
+    note "archived app: $STUDY_SLUG/$TRIAL_ID/app/$(basename "$app")"
   else
     note "WARNING: built .app not found — acceptance must run from the current repo state"
   fi
@@ -193,7 +176,7 @@ record_toolchain() {
       xcode: sh("xcodebuild -version | head -1"),
       macos: sh("sw_vers -productVersion"),
       node: sh("node -v"),
-      lynx_docs_mcp: "0.2.4"
+      docs_mcp: process.env.DOCS_MCP_VERSION || null
     }));
   ')"
 }
@@ -212,6 +195,25 @@ preflight() {
   esac
 }
 
+preflight_mcp() {
+  # An MCP server the agent cannot actually reach silently changes what is being
+  # measured (docs friction collapses to zero). Verify the server loads before
+  # spending a measured session on it.
+  note "preflight: verifying docs MCP '$DOCS_MCP_NAME' loads"
+  local pf="$TRIAL_DIR/preflight-mcp.json"
+  ( cd "$REPO" && CLAUDE_CONFIG_DIR="$SCRATCH_CONFIG" claude -p "List the MCP tools or resources you can access. Reply with their names only." \
+      --output-format json --model "$MODEL" --max-turns 2 \
+      --mcp-config "$MCP_CONFIG" --strict-mcp-config \
+      --dangerously-skip-permissions ) >"$pf" 2>"$pf.stderr"
+  manifest_set "mcp_preflight" "$(node -e '
+    const fs = require("fs");
+    let s = {};
+    try { s = JSON.parse(fs.readFileSync(process.argv[1], "utf8")); } catch (e) {}
+    console.log(JSON.stringify({ result: s.result ?? null, is_error: s.is_error ?? null }));
+  ' "$pf")"
+  note "preflight mcp: recorded (review manifest.mcp_preflight if docs counts look wrong)"
+}
+
 make_scratch_config() {
   # Throwaway config dir OUTSIDE results/ — it briefly holds a credentials copy,
   # which must never land in a directory that might get committed.
@@ -222,7 +224,7 @@ make_scratch_config() {
     const seed = { hasCompletedOnboarding: true };
     try {
       const src = JSON.parse(fs.readFileSync(path.join(os.homedir(), ".claude.json"), "utf8"));
-      for (const k of ["oauthAccount", "userID"]) if (src[k] !== undefined) seed[k] = src[k];
+      for (const k of ["oauthAccount", "userID", "mcpOAuth"]) if (src[k] !== undefined) seed[k] = src[k];
     } catch (e) {}
     fs.writeFileSync(path.join(process.argv[1], ".claude.json"), JSON.stringify(seed));
   ' "$SCRATCH_CONFIG"
@@ -253,15 +255,19 @@ reset_repo() {
 if [ "${1:-}" = "remediate" ]; then
   TRIAL_ID="${2:-}"; FAILURES_TEXT="${3:-}"
   [ -n "$TRIAL_ID" ] && [ -n "$FAILURES_TEXT" ] || die "usage: ./run-trial.sh remediate <trial-id> \"<failures>\""
-  TRIAL_DIR="$RESULTS_DIR/$TRIAL_ID"
-  MANIFEST="$TRIAL_DIR/manifest.json"
-  [ -f "$MANIFEST" ] || die "no manifest at $MANIFEST"
+  MANIFEST="$(find "$ROOT_DIR/results" -maxdepth 3 -type d -name "$TRIAL_ID" -exec test -f '{}/manifest.json' \; -print -quit)/manifest.json"
+  [ -f "$MANIFEST" ] || die "no manifest found for trial '$TRIAL_ID' under results/"
+  TRIAL_DIR="$(dirname "$MANIFEST")"
   [ -n "$(json_field "$MANIFEST" phases.R.session_id)" ] && die "trial $TRIAL_ID already had its one remediation round"
-  configure_framework "$(json_field "$MANIFEST" framework)"
+  # Trials predating the study registry have no `study` field; their directory
+  # placement under results/<slug>/ is the authority in that case.
+  TRIAL_STUDY="$(json_field "$MANIFEST" study)"
+  [ -z "$TRIAL_STUDY" ] && TRIAL_STUDY="$(basename "$(dirname "$TRIAL_DIR")")"
+  load_context "$TRIAL_STUDY" "$(json_field "$MANIFEST" framework)"
   make_scratch_config
   export FAILURES="$FAILURES_TEXT"
   manifest_set "remediation_failures" "$(node -e 'console.log(JSON.stringify(process.env.FAILURES))')"
-  run_phase "R" "$HARNESS_DIR/prompts/remediate.md"
+  run_phase "R" "$REMEDIATION_PROMPT"
   rm -rf "$TRIAL_DIR/app"
   archive_app
   note "remediation done — re-run the acceptance checklist and record results in manifest.json (acceptance)"
@@ -269,17 +275,31 @@ if [ "${1:-}" = "remediate" ]; then
 fi
 
 # ---------------------------------------------------------------- trial mode
-configure_framework "${1:-}"
-TRIAL_ID="${2:-$FRAMEWORK-$(date +%Y%m%d-%H%M%S)}"
+STUDY="${1:-}"; FRAMEWORK_ARG="${2:-}"
+[ -n "$STUDY" ] && [ -n "$FRAMEWORK_ARG" ] || die "usage: ./run-trial.sh <study> <framework> [trial-id]
+  studies:    $(node "$REGISTRY" list-studies | tr '\n' ' ')
+  frameworks: $(node "$REGISTRY" list-frameworks | tr '\n' ' ')"
+
+load_context "$STUDY" "$FRAMEWORK_ARG"
+
+if [ "$STUDY_FROZEN" = "1" ] && [ "${ALLOW_FROZEN:-0}" != "1" ]; then
+  die "study '$STUDY_SLUG' is frozen — $STUDY_FROZEN_REASON
+  To reproduce it independently, set ALLOW_FROZEN=1 and use a trial id that cannot
+  collide with the published set (e.g. repro-$FRAMEWORK-1)."
+fi
+
+TRIAL_ID="${3:-$FRAMEWORK-$(date +%Y%m%d-%H%M%S)}"
 TRIAL_DIR="$RESULTS_DIR/$TRIAL_ID"
-[ -e "$TRIAL_DIR" ] && die "results/$TRIAL_ID already exists"
+[ -e "$TRIAL_DIR" ] && die "$STUDY_SLUG/$TRIAL_ID already exists"
 mkdir -p "$TRIAL_DIR"/{build-logs,diffs}
 MANIFEST="$TRIAL_DIR/manifest.json"
 make_scratch_config
 
-note "trial $TRIAL_ID ($FRAMEWORK_LABEL, auth: $AUTH_MODE)"
+note "trial $TRIAL_ID — $STUDY_TITLE / $FRAMEWORK_LABEL (spec $SPEC_VERSION, auth: $AUTH_MODE)"
 manifest_set "auth_mode" "\"$AUTH_MODE\""
 manifest_set "trial_id" "\"$TRIAL_ID\""
+manifest_set "study" "\"$STUDY_SLUG\""
+manifest_set "spec_version" "\"$SPEC_VERSION\""
 manifest_set "framework" "\"$FRAMEWORK\""
 manifest_set "model" "\"$MODEL\""
 manifest_set "max_turns" "$MAX_TURNS"
@@ -298,9 +318,11 @@ if [ "${SKIP_BASELINE_CHECK:-0}" != "1" ]; then
 fi
 
 preflight
+preflight_mcp
 
-for n in 1 2 3; do
-  run_phase "$n" "$HARNESS_DIR/prompts/phase-$n.md" || exit 1
+for n in $PHASE_IDS; do
+  prompt_var="PHASE_PROMPT_$n"
+  run_phase "$n" "${!prompt_var}" || exit 1
 done
 
 archive_app

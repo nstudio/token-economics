@@ -1,6 +1,6 @@
 # Results — Token Economics: NativeScript vs LynxJS (iOS)
 
-Living document. Methods: see [`../PLAN.md`](../PLAN.md). Runner details: [`../harness/README.md`](../harness/README.md).
+Living document. Methods: see [`../../PLAN.md`](../../PLAN.md). Runner details: [`../../harness/README.md`](../../harness/README.md).
 **Shareable results page (charts + self-contained methodology):** https://claude.ai/code/artifact/c1ba1864-3fdb-48e6-afcb-fb067da34bf2 — private by default; share from the page's menu.
 
 **Status (2026-07-25):** pilot + full main run complete — **10/10 trials, 30/30 phases build-green, n=5 per framework** — and the **runtime performance extension is measured** (Release rebuilds of all implementations; see §Performance). Remaining: operator interactive acceptance (apps archived per trial), which finalizes success rates, remediation tokens, and interaction-path perf notes.
@@ -45,7 +45,7 @@ Interactive items (permission flows, step logging + persistence, transcription s
 1. `MAX_TURNS` default raised **80 → 160** (80 demonstrably truncates native phases).
 2. Lynx docs MCP is a **resources** server (no MCP tools; docs read via `lynx-docs://` resources) — analyzer now counts resource reads as docs lookups; server launched from a locally installed pinned copy (0.2.4) instead of `npx` to eliminate cold-start races.
 3. Analyzer surfaces a `capped` column per phase.
-4. Runner now archives each trial's built `.app` under `results/<trial-id>/app/` so acceptance can run (via `simctl install`) even after later trials reset the repos.
+4. Runner now archives each trial's built `.app` under `results/ns-vs-lynx/<trial-id>/app/` so acceptance can run (via `simctl install`) even after later trials reset the repos.
 
 ---
 
@@ -91,7 +91,7 @@ NS agents leaned on the NativeScript docs MCP (median 22 calls/trial, range 14�
 
 ## Performance (2026-07-25) — Release builds, 9 of 10 apps
 
-Token cost measures what it costs to *build*; this section measures what you *get*. Methods in [`../PLAN.md`](../PLAN.md) §8 — in brief: **no new agent trials** (performance belongs to the artifact, not the agent's path); every main-run implementation was reconstructed from its preserved `trials/*` branch, rebuilt in **Release** configuration, and measured on one fixed simulator (iPhone 17 Pro, Xcode 26.5), interleaved, quiet host: full size breakdown, 5 cold launches each, and idle steady-state sampling. Raw per-trial JSON: `perf/`; aggregation: `harness/perf/analyze-perf.mjs`.
+Token cost measures what it costs to *build*; this section measures what you *get*. Methods in [`../../PLAN.md`](../../PLAN.md) §8 — in brief: **no new agent trials** (performance belongs to the artifact, not the agent's path); every main-run implementation was reconstructed from its preserved `trials/*` branch, rebuilt in **Release** configuration, and measured on one fixed simulator (iPhone 17 Pro, Xcode 26.5), interleaved, quiet host: full size breakdown, 5 cold launches each, and idle steady-state sampling. Raw per-trial JSON: `perf/`; aggregation: `harness/perf/analyze-perf.mjs`.
 
 **Corpus note (a finding in itself):** 5/5 NativeScript implementations built in Release untouched. **4/5 Lynx did** — `main-lynx-5` fails Release with *"Multiple commands produce sample.wav"* (that agent wired the audio asset through two copy mechanisms; Debug tolerated it, Release's stricter build graph doesn't). Patching it would invalidate the artifact, so it's excluded and recorded. That failure mode is characteristic of the heavier resource-wiring path.
 
@@ -170,4 +170,4 @@ Simulator on one Mac: absolute numbers are not device numbers — only the compa
 
 ### Pending to close the study
 
-Operator acceptance checklist (SPEC §6) per trial against the archived apps (`results/<id>/app/`, install via `simctl`) → fills `acceptance` in manifests; any failures get the single standardized remediation round (tokens counted into that trial). Then this report gains the success-rate column and final verdict.
+Operator acceptance checklist (SPEC §6) per trial against the archived apps (`results/ns-vs-lynx/<id>/app/`, install via `simctl`) → fills `acceptance` in manifests; any failures get the single standardized remediation round (tokens counted into that trial). Then this report gains the success-rate column and final verdict.

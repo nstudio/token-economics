@@ -159,6 +159,13 @@ token-economics/
     REPORT.md              final write-up + charts
 ```
 
+> **Layout note (2026-07-31):** when a second study was added, the harness became registry-driven and results
+> were namespaced per study — this study's artifacts now live under `results/ns-vs-lynx/`, its spec under
+> `harness/spec/v1.0/`, and runners take a study slug (`./run-trial.sh ns-vs-lynx ns …`). Every file moved as a
+> pure rename; all 361 archived artifacts are byte-identical and every published number re-verified against the
+> pre-move output. See [`harness/README.md`](harness/README.md) for the current structure and
+> [`PLAN-EXPO.md`](PLAN-EXPO.md) for the second study's design.
+
 (Alternative capture path: Claude Code's OpenTelemetry metrics export. Strictly optional — JSONL parsing is self-contained, offline, and reproducible from archived artifacts alone.)
 
 `analyze.mjs` responsibilities: sum usage buckets per session; tool-call histogram (flag docs-MCP calls and WebFetch separately); wall time; LOC added split by extension class (`.vue/.ts/.css` vs `.swift/.h/.m/.plist/.entitlements/xcodeproj`); emit `summary.csv` (one row per trial×phase) and aggregate medians. Charts generated from the CSV for `REPORT.md` — token totals by framework×phase, cost, turns, tool mix, native-vs-JS LOC.

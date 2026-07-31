@@ -1,0 +1,21 @@
+{
+  "slug": "ns-vs-expo-open",
+  "title": "NativeScript vs Expo — wrapper-allowed condition",
+  "specVersion": "v1.1.0-open",
+  "specDir": "spec/v1.1-open",
+  "baselineTag": "benchmark-baseline-v1.1-open",
+  "frameworks": ["ns", "expo"],
+  "resultsDir": "results/ns-vs-expo-open",
+  "model": "claude-sonnet-5",
+  "maxTurns": 160,
+  "phases": [
+    { "id": "1", "label": "App shell", "prompt": "prompts/phase-1.md" },
+    { "id": "2", "label": "Health (HealthKit)", "prompt": "prompts/phase-2.md" },
+    { "id": "3", "label": "Transcribe (Speech)", "prompt": "prompts/phase-3.md" }
+  ],
+  "remediationPrompt": "prompts/remediate.md",
+  "trialSets": { "main": "^main-" },
+  "medianSet": "main",
+  "frozen": false,
+  "notes": "Secondary condition (PLAN-EXPO §5): identical to ns-vs-expo minus the no-capability-wrapper rule, so third-party HealthKit/Speech wrappers are permitted. A separate slug — not a flag on the primary study — so its trials can never be folded into the primary medians by accident. Its spec dir is created only when this condition is run."
+}

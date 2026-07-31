@@ -1,21 +1,25 @@
 #!/usr/bin/env node
 // Token-economics analyzer (see ../PLAN.md §5).
-// Reads results/<trial>/ artifacts, emits results/summary.csv + results/summary.json,
-// prints a per-trial table and per-framework×phase medians.
+//
+// Usage:
+//   node analyze.mjs              # every study in the registry
+//   node analyze.mjs ns-vs-expo   # one study
+//
+// Per study, reads <resultsDir>/<trial>/ artifacts and writes <resultsDir>/summary.csv
+// and <resultsDir>/summary.json, then prints a per-trial table and medians.
+//
+// Studies are analyzed independently and never pooled: a median is only meaningful
+// within one spec version, one model, and one measurement window.
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const HARNESS = path.dirname(fileURLToPath(import.meta.url));
-const RESULTS = path.join(HARNESS, '..', 'results');
+import {
+  ROOT, listStudies, getStudy, getFramework, trialSet, classifyPath,
+} from './lib/registry.mjs';
 
 const READ_TOOLS = new Set(['Read', 'Glob', 'Grep']);
 const EDIT_TOOLS = new Set(['Edit', 'Write', 'MultiEdit', 'NotebookEdit']);
 const WEB_TOOLS = new Set(['WebFetch', 'WebSearch']);
-// Files under these roots (or with these extensions) count as native-side code.
-const NATIVE_ROOTS = ['ios/', 'App_Resources/', 'platforms/'];
-const NATIVE_EXTS = new Set(['swift', 'h', 'm', 'mm', 'pbxproj', 'plist', 'entitlements', 'xcconfig', 'storyboard', 'modulemap']);
 
 function readJSON(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return null; }
@@ -25,11 +29,11 @@ function analyzeTranscript(file) {
   const out = {
     input: 0, output: 0, cache_write: 0, cache_read: 0,
     reads: 0, edits: 0, bash: 0, mcp_docs: 0, web: 0, tasks: 0, other_tools: 0,
-    first_ts: null, last_ts: null,
+    first_ts: null, last_ts: null, first_turn_context: null,
   };
   if (!fs.existsSync(file)) return null;
   const usageById = new Map();
-  let anonUsage = [];
+  const anonUsage = [];
   for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
     if (!line.trim()) continue;
     let e; try { e = JSON.parse(line); } catch { continue; }
@@ -43,6 +47,15 @@ function analyzeTranscript(file) {
       // The same message id can appear once per content block — keep the last snapshot per id.
       if (msg.id) usageById.set(msg.id, msg.usage);
       else anonUsage.push(msg.usage);
+      // Turn 1 pays for the whole fixed prefix: system prompt, CLAUDE.md, and every
+      // MCP tool schema. CLAUDE.md files are structurally identical by protocol, so
+      // the cross-arm delta here is dominated by MCP schema weight (PLAN §4.3).
+      if (out.first_turn_context === null) {
+        out.first_turn_context =
+          (msg.usage.cache_creation_input_tokens ?? 0) +
+          (msg.usage.cache_read_input_tokens ?? 0) +
+          (msg.usage.input_tokens ?? 0);
+      }
     }
     for (const block of Array.isArray(msg.content) ? msg.content : []) {
       if (block.type !== 'tool_use') continue;
@@ -65,8 +78,14 @@ function analyzeTranscript(file) {
   return out;
 }
 
-function analyzeNumstat(file) {
-  const out = { files_changed: 0, loc_js_added: 0, loc_native_added: 0 };
+function analyzeNumstat(file, framework) {
+  const out = {
+    files_changed: 0,
+    loc_js_added: 0,
+    loc_native_added: 0,
+    loc_native_code_added: 0,
+    loc_native_config_added: 0,
+  };
   if (!fs.existsSync(file)) return out;
   for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
     const m = line.match(/^(\d+|-)\t(\d+|-)\t(.+)$/);
@@ -74,12 +93,14 @@ function analyzeNumstat(file) {
     out.files_changed++;
     if (m[1] === '-') continue; // binary
     const added = Number(m[1]);
-    const p = m[3];
-    const ext = (p.split('.').pop() || '').toLowerCase();
-    const native = NATIVE_ROOTS.some(r => p.startsWith(r)) || NATIVE_EXTS.has(ext);
-    if (native) out.loc_native_added += added;
-    else out.loc_js_added += added;
+    switch (classifyPath(m[3], framework)) {
+      case 'native-code': out.loc_native_code_added += added; break;
+      case 'native-config': out.loc_native_config_added += added; break;
+      default: out.loc_js_added += added;
+    }
   }
+  // Kept so the three-way split never moves the published two-way number.
+  out.loc_native_added = out.loc_native_code_added + out.loc_native_config_added;
   return out;
 }
 
@@ -90,82 +111,169 @@ function median(xs) {
   return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
 }
 
-// ---------------------------------------------------------------- collect
-const rows = [];
-if (!fs.existsSync(RESULTS)) {
-  console.error(`no results directory at ${RESULTS}`);
-  process.exit(1);
+function range(xs) {
+  const s = xs.filter(x => typeof x === 'number' && !Number.isNaN(x)).sort((a, b) => a - b);
+  return s.length ? [s[0], s[s.length - 1]] : null;
 }
-for (const trial of fs.readdirSync(RESULTS).sort()) {
-  const dir = path.join(RESULTS, trial);
-  const manifest = readJSON(path.join(dir, 'manifest.json'));
-  if (!manifest) continue;
-  for (const phase of ['1', '2', '3', 'R']) {
-    const p = manifest.phases?.[phase];
-    if (!p) continue;
-    const t = analyzeTranscript(path.join(dir, `phase-${phase}.jsonl`)) ?? {};
-    const d = analyzeNumstat(path.join(dir, 'diffs', `phase-${phase}.numstat`));
-    const wall = t.first_ts && t.last_ts
-      ? (new Date(t.last_ts) - new Date(t.first_ts)) / 1000
-      : (p.duration_ms != null ? p.duration_ms / 1000 : null);
-    rows.push({
-      trial, framework: manifest.framework, model: manifest.model, phase,
-      build_pass: p.build_pass ?? null,
-      capped: p.is_error ?? null,
-      outcome: manifest.outcome ?? null,
-      acceptance: manifest.acceptance?.status ?? null,
-      input: t.input ?? null, output: t.output ?? null,
-      cache_write: t.cache_write ?? null, cache_read: t.cache_read ?? null,
-      total_cost_usd: p.total_cost_usd ?? null,
-      turns: p.num_turns ?? null,
-      wall_s: wall != null ? Math.round(wall) : null,
-      reads: t.reads ?? null, edits: t.edits ?? null, bash: t.bash ?? null,
-      mcp_docs: t.mcp_docs ?? null, web: t.web ?? null, tasks: t.tasks ?? null,
-      other_tools: t.other_tools ?? null,
-      ...d,
-    });
+
+const NUMERIC = [
+  'input', 'output', 'cache_write', 'cache_read', 'total_cost_usd', 'turns', 'wall_s',
+  'mcp_docs', 'web', 'loc_js_added', 'loc_native_added',
+  'loc_native_code_added', 'loc_native_config_added',
+];
+// Aggregated per phase but never summed into a per-trial total: it measures the
+// size of a session's fixed context prefix, so adding three phases' worth is
+// meaningless.
+const PER_PHASE_ONLY = ['first_turn_context'];
+
+// Column order is append-only: the leading columns match the v1.0 summary.csv so a
+// diff against the published file shows added columns, never moved ones.
+const COLS = [
+  'trial', 'framework', 'model', 'phase', 'build_pass', 'capped', 'outcome', 'acceptance',
+  'input', 'output', 'cache_write', 'cache_read', 'total_cost_usd', 'turns', 'wall_s',
+  'reads', 'edits', 'bash', 'mcp_docs', 'web', 'tasks', 'other_tools',
+  'files_changed', 'loc_js_added', 'loc_native_added',
+  'study', 'set', 'spec_version', 'loc_native_code_added', 'loc_native_config_added',
+  'first_turn_context',
+];
+
+function analyzeStudy(study) {
+  const resultsDir = path.join(ROOT, study.resultsDir);
+  if (!fs.existsSync(resultsDir)) return null;
+
+  const phaseIds = study.phases.map(p => p.id).concat('R');
+  const rows = [];
+
+  for (const trial of fs.readdirSync(resultsDir).sort()) {
+    const dir = path.join(resultsDir, trial);
+    const manifest = readJSON(path.join(dir, 'manifest.json'));
+    if (!manifest) continue;
+    const framework = getFramework(manifest.framework);
+    for (const phase of phaseIds) {
+      const p = manifest.phases?.[phase];
+      if (!p) continue;
+      const t = analyzeTranscript(path.join(dir, `phase-${phase}.jsonl`)) ?? {};
+      const d = analyzeNumstat(path.join(dir, 'diffs', `phase-${phase}.numstat`), framework);
+      const wall = t.first_ts && t.last_ts
+        ? (new Date(t.last_ts) - new Date(t.first_ts)) / 1000
+        : (p.duration_ms != null ? p.duration_ms / 1000 : null);
+      rows.push({
+        trial, framework: manifest.framework, model: manifest.model, phase,
+        build_pass: p.build_pass ?? null,
+        capped: p.is_error ?? null,
+        outcome: manifest.outcome ?? null,
+        acceptance: manifest.acceptance?.status ?? null,
+        input: t.input ?? null, output: t.output ?? null,
+        cache_write: t.cache_write ?? null, cache_read: t.cache_read ?? null,
+        total_cost_usd: p.total_cost_usd ?? null,
+        turns: p.num_turns ?? null,
+        wall_s: wall != null ? Math.round(wall) : null,
+        reads: t.reads ?? null, edits: t.edits ?? null, bash: t.bash ?? null,
+        mcp_docs: t.mcp_docs ?? null, web: t.web ?? null, tasks: t.tasks ?? null,
+        other_tools: t.other_tools ?? null,
+        study: study.slug,
+        set: trialSet(study, trial),
+        spec_version: manifest.spec_version ?? study.specVersion,
+        first_turn_context: t.first_turn_context ?? null,
+        ...d,
+      });
+    }
   }
-}
-if (!rows.length) {
-  console.error('no trials found under results/');
-  process.exit(1);
-}
+  if (!rows.length) return null;
 
-// ---------------------------------------------------------------- emit CSV
-const cols = Object.keys(rows[0]);
-const csv = [cols.join(',')]
-  .concat(rows.map(r => cols.map(c => r[c] ?? '').join(',')))
-  .join('\n');
-fs.writeFileSync(path.join(RESULTS, 'summary.csv'), csv + '\n');
-
-// ---------------------------------------------------------------- aggregates
-const NUMERIC = ['input', 'output', 'cache_write', 'cache_read', 'total_cost_usd', 'turns', 'wall_s', 'mcp_docs', 'web', 'loc_js_added', 'loc_native_added'];
-const aggregates = {};
-for (const fw of ['ns', 'lynx']) {
-  aggregates[fw] = {};
-  for (const phase of ['1', '2', '3', 'R', 'total']) {
-    const sample = phase === 'total'
-      ? Object.values(Object.groupBy(rows.filter(r => r.framework === fw && r.phase !== 'R'), r => r.trial))
-          .map(trialRows => Object.fromEntries(NUMERIC.map(c => [c, trialRows.reduce((a, r) => a + (r[c] ?? 0), 0)])))
-      : rows.filter(r => r.framework === fw && r.phase === phase);
-    if (!sample.length) continue;
-    aggregates[fw][phase === 'total' ? 'total_per_trial' : `phase_${phase}`] = {
-      n: sample.length,
-      ...Object.fromEntries(NUMERIC.map(c => [`median_${c}`, median(sample.map(r => r[c]))])),
-    };
+  // Aggregates per trial set, so pilot calibration runs can never leak into a
+  // headline median (they ran under a different turn cap).
+  const sets = [...new Set(rows.map(r => r.set))];
+  const aggregates = {};
+  for (const set of sets) {
+    aggregates[set] = {};
+    const inSet = rows.filter(r => r.set === set);
+    for (const fw of study.frameworks) {
+      const byFw = inSet.filter(r => r.framework === fw);
+      if (!byFw.length) continue;
+      aggregates[set][fw] = {};
+      for (const phase of [...phaseIds, 'total']) {
+        const sample = phase === 'total'
+          ? Object.values(Object.groupBy(byFw.filter(r => r.phase !== 'R'), r => r.trial))
+              .map(trialRows => Object.fromEntries(
+                NUMERIC.map(c => [c, trialRows.reduce((a, r) => a + (r[c] ?? 0), 0)]),
+              ))
+          : byFw.filter(r => r.phase === phase);
+        if (!sample.length) continue;
+        const metrics = phase === 'total' ? NUMERIC : [...NUMERIC, ...PER_PHASE_ONLY];
+        aggregates[set][fw][phase === 'total' ? 'total_per_trial' : `phase_${phase}`] = {
+          n: sample.length,
+          ...Object.fromEntries(metrics.flatMap(c => [
+            [`median_${c}`, median(sample.map(r => r[c]))],
+            [`range_${c}`, range(sample.map(r => r[c]))],
+          ])),
+        };
+      }
+    }
   }
-}
-fs.writeFileSync(path.join(RESULTS, 'summary.json'), JSON.stringify({ rows, aggregates }, null, 2) + '\n');
 
-// ---------------------------------------------------------------- print
+  const csv = [COLS.join(',')]
+    .concat(rows.map(r => COLS.map(c => r[c] ?? '').join(',')))
+    .join('\n');
+  fs.writeFileSync(path.join(resultsDir, 'summary.csv'), csv + '\n');
+  fs.writeFileSync(
+    path.join(resultsDir, 'summary.json'),
+    JSON.stringify({
+      study: study.slug,
+      title: study.title,
+      spec_version: study.specVersion,
+      frameworks: study.frameworks,
+      median_set: study.medianSet ?? 'main',
+      rows,
+      aggregates,
+    }, null, 2) + '\n',
+  );
+  return { study, rows, aggregates, resultsDir };
+}
+
+/* ------------------------------------------------------------------ print */
+
 const fmt = n => n == null ? '—' : (typeof n === 'number' && !Number.isInteger(n) ? n.toFixed(2) : String(n));
-console.log('\nPer trial × phase:');
-console.log(['trial', 'fw', 'ph', 'build', 'capped', 'input', 'output', 'cache_w', 'cache_r', 'cost$', 'turns', 'wall_s', 'docs', 'loc_js', 'loc_nat'].join('\t'));
-for (const r of rows) {
-  console.log([r.trial, r.framework, r.phase, r.build_pass === null ? '—' : (r.build_pass ? 'ok' : 'FAIL'), r.capped === null ? '—' : (r.capped ? 'YES' : 'no'),
-    fmt(r.input), fmt(r.output), fmt(r.cache_write), fmt(r.cache_read), fmt(r.total_cost_usd),
-    fmt(r.turns), fmt(r.wall_s), fmt(r.mcp_docs), fmt(r.loc_js_added), fmt(r.loc_native_added)].join('\t'));
+
+const only = process.argv[2];
+const slugs = only ? [only] : listStudies();
+let analyzed = 0;
+
+for (const slug of slugs) {
+  const study = getStudy(slug);
+  const res = analyzeStudy(study);
+  if (!res) {
+    if (only) console.error(`no trials found under ${study.resultsDir}`);
+    continue;
+  }
+  analyzed++;
+  const { rows, aggregates, resultsDir } = res;
+  const medianSet = study.medianSet ?? 'main';
+
+  console.log(`\n═══ ${study.title} (${study.slug}, spec ${study.specVersion}) ═══`);
+  console.log('\nPer trial × phase:');
+  console.log(['trial', 'fw', 'ph', 'set', 'build', 'capped', 'input', 'output', 'cache_w', 'cache_r', 'cost$', 'turns', 'wall_s', 'docs', 'loc_js', 'nat_code', 'nat_cfg'].join('\t'));
+  for (const r of rows) {
+    console.log([
+      r.trial, r.framework, r.phase, r.set,
+      r.build_pass === null ? '—' : (r.build_pass ? 'ok' : 'FAIL'),
+      r.capped === null ? '—' : (r.capped ? 'YES' : 'no'),
+      fmt(r.input), fmt(r.output), fmt(r.cache_write), fmt(r.cache_read), fmt(r.total_cost_usd),
+      fmt(r.turns), fmt(r.wall_s), fmt(r.mcp_docs),
+      fmt(r.loc_js_added), fmt(r.loc_native_code_added), fmt(r.loc_native_config_added),
+    ].join('\t'));
+  }
+
+  if (aggregates[medianSet]) {
+    console.log(`\nHeadline medians — trial set '${medianSet}' (other sets are in summary.json):`);
+    console.log(JSON.stringify(aggregates[medianSet], null, 2));
+  } else {
+    console.log(`\nNo '${medianSet}' trials yet; sets present: ${Object.keys(aggregates).join(', ')}`);
+  }
+  console.log(`\nWrote ${path.relative(ROOT, resultsDir)}/summary.csv and summary.json`);
 }
-console.log('\nMedians (per framework × phase, plus per-trial totals over phases 1–3):');
-console.log(JSON.stringify(aggregates, null, 2));
-console.log(`\nWrote results/summary.csv and results/summary.json`);
+
+if (!analyzed) {
+  console.error('no analyzable studies found');
+  process.exit(1);
+}

@@ -1,0 +1,25 @@
+{
+  "id": "ns",
+  "label": "NativeScript (Vue 3)",
+  "repo": "ns-benchmark",
+  "bundleId": "org.nativescript.nsbenchmark",
+  "uiLayer": "Vue 3 (nativescript-vue)",
+  "docsMcpName": "nativescript-docs",
+  "mcpConfig": "mcp/ns.mcp.json",
+  "docsMcpVersion": "docs.nativescript.org/mcp (hosted HTTP — not version-pinnable)",
+  "buildGate": "ns build ios",
+  "appLocator": {
+    "kind": "glob",
+    "pattern": "platforms/ios/build/Debug-iphonesimulator/*.app"
+  },
+  "releaseBuildGate": "ns build ios --release",
+  "releaseAppLocator": {
+    "kind": "glob",
+    "pattern": "platforms/ios/build/Release-iphonesimulator/*.app"
+  },
+  "interopBranch": "interop-bench",
+  "nativeRoots": [
+    "App_Resources/",
+    "platforms/"
+  ]
+}

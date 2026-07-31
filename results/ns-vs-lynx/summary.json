@@ -1,0 +1,2362 @@
+{
+  "study": "ns-vs-lynx",
+  "title": "NativeScript vs LynxJS",
+  "spec_version": "v1.0.0",
+  "frameworks": [
+    "ns",
+    "lynx"
+  ],
+  "median_set": "main",
+  "rows": [
+    {
+      "trial": "main-lynx-1",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 72,
+      "output": 19850,
+      "cache_write": 85348,
+      "cache_read": 2676731,
+      "total_cost_usd": 1.6138443,
+      "turns": 48,
+      "wall_s": 240,
+      "reads": 11,
+      "edits": 10,
+      "bash": 24,
+      "mcp_docs": 1,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34804,
+      "files_changed": 11,
+      "loc_js_added": 137,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-lynx-1",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 182,
+      "output": 67499,
+      "cache_write": 210797,
+      "cache_read": 14519313,
+      "total_cost_usd": 6.634390900000001,
+      "turns": 133,
+      "wall_s": 863,
+      "reads": 29,
+      "edits": 7,
+      "bash": 63,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 20,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34833,
+      "files_changed": 7,
+      "loc_js_added": 124,
+      "loc_native_added": 127,
+      "loc_native_code_added": 111,
+      "loc_native_config_added": 16
+    },
+    {
+      "trial": "main-lynx-1",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 278,
+      "output": 65761,
+      "cache_write": 257993,
+      "cache_read": 23564195,
+      "total_cost_usd": 9.6052675,
+      "turns": 169,
+      "wall_s": 1172,
+      "reads": 38,
+      "edits": 11,
+      "bash": 95,
+      "mcp_docs": 7,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 35036,
+      "files_changed": 7,
+      "loc_js_added": 84,
+      "loc_native_added": 108,
+      "loc_native_code_added": 106,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "main-lynx-2",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 104,
+      "output": 22525,
+      "cache_write": 113958,
+      "cache_read": 5114056,
+      "total_cost_usd": 2.5569427999999994,
+      "turns": 78,
+      "wall_s": 334,
+      "reads": 21,
+      "edits": 11,
+      "bash": 34,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34805,
+      "files_changed": 11,
+      "loc_js_added": 231,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-lynx-2",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 116,
+      "output": 55474,
+      "cache_write": 213425,
+      "cache_read": 9182624,
+      "total_cost_usd": 4.8685942,
+      "turns": 88,
+      "wall_s": 849,
+      "reads": 23,
+      "edits": 7,
+      "bash": 46,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34832,
+      "files_changed": 6,
+      "loc_js_added": 85,
+      "loc_native_added": 148,
+      "loc_native_code_added": 134,
+      "loc_native_config_added": 14
+    },
+    {
+      "trial": "main-lynx-2",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 282,
+      "output": 61660,
+      "cache_write": 301447,
+      "cache_read": 27087892,
+      "total_cost_usd": 10.8615876,
+      "turns": 184,
+      "wall_s": 1163,
+      "reads": 36,
+      "edits": 11,
+      "bash": 105,
+      "mcp_docs": 6,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34847,
+      "files_changed": 6,
+      "loc_js_added": 77,
+      "loc_native_added": 94,
+      "loc_native_code_added": 92,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "main-lynx-3",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 168,
+      "output": 26324,
+      "cache_write": 116694,
+      "cache_read": 7649060,
+      "total_cost_usd": 3.391017,
+      "turns": 90,
+      "wall_s": 456,
+      "reads": 23,
+      "edits": 12,
+      "bash": 44,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34804,
+      "files_changed": 11,
+      "loc_js_added": 155,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-lynx-3",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": true,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 320,
+      "output": 113124,
+      "cache_write": 343670,
+      "cache_read": 37775367,
+      "total_cost_usd": 15.608516349999995,
+      "turns": 161,
+      "wall_s": 4134,
+      "reads": 40,
+      "edits": 20,
+      "bash": 113,
+      "mcp_docs": 5,
+      "web": 2,
+      "tasks": 0,
+      "other_tools": 4,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34830,
+      "files_changed": 6,
+      "loc_js_added": 101,
+      "loc_native_added": 136,
+      "loc_native_code_added": 115,
+      "loc_native_config_added": 21
+    },
+    {
+      "trial": "main-lynx-3",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 220,
+      "output": 54119,
+      "cache_write": 207299,
+      "cache_read": 16255245,
+      "total_cost_usd": 6.933609499999998,
+      "turns": 154,
+      "wall_s": 1029,
+      "reads": 27,
+      "edits": 11,
+      "bash": 77,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 24,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34845,
+      "files_changed": 7,
+      "loc_js_added": 79,
+      "loc_native_added": 100,
+      "loc_native_code_added": 98,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "main-lynx-4",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 70,
+      "output": 18372,
+      "cache_write": 84504,
+      "cache_read": 2707811,
+      "total_cost_usd": 1.5959383,
+      "turns": 51,
+      "wall_s": 252,
+      "reads": 13,
+      "edits": 9,
+      "bash": 25,
+      "mcp_docs": 1,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34804,
+      "files_changed": 8,
+      "loc_js_added": 182,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-lynx-4",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 294,
+      "output": 111714,
+      "cache_write": 309570,
+      "cache_read": 30887626,
+      "total_cost_usd": 12.8010738,
+      "turns": 209,
+      "wall_s": 1637,
+      "reads": 70,
+      "edits": 10,
+      "bash": 95,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34833,
+      "files_changed": 9,
+      "loc_js_added": 185,
+      "loc_native_added": 241,
+      "loc_native_code_added": 227,
+      "loc_native_config_added": 14
+    },
+    {
+      "trial": "main-lynx-4",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 166,
+      "output": 46301,
+      "cache_write": 230834,
+      "cache_read": 13509521,
+      "total_cost_usd": 6.1336653,
+      "turns": 112,
+      "wall_s": 758,
+      "reads": 35,
+      "edits": 7,
+      "bash": 56,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34849,
+      "files_changed": 6,
+      "loc_js_added": 137,
+      "loc_native_added": 180,
+      "loc_native_code_added": 178,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "main-lynx-5",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 2485,
+      "output": 24710,
+      "cache_write": 111156,
+      "cache_read": 5161782,
+      "total_cost_usd": 2.5943665999999994,
+      "turns": 76,
+      "wall_s": 377,
+      "reads": 18,
+      "edits": 10,
+      "bash": 39,
+      "mcp_docs": 1,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34804,
+      "files_changed": 12,
+      "loc_js_added": 179,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-lynx-5",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 130,
+      "output": 57221,
+      "cache_write": 192514,
+      "cache_read": 9829646,
+      "total_cost_usd": 4.963456800000002,
+      "turns": 95,
+      "wall_s": 654,
+      "reads": 31,
+      "edits": 11,
+      "bash": 33,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 16,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34833,
+      "files_changed": 8,
+      "loc_js_added": 124,
+      "loc_native_added": 218,
+      "loc_native_code_added": 204,
+      "loc_native_config_added": 14
+    },
+    {
+      "trial": "main-lynx-5",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 224,
+      "output": 64186,
+      "cache_write": 226791,
+      "cache_read": 15761830,
+      "total_cost_usd": 7.863328349999999,
+      "turns": 149,
+      "wall_s": 1049,
+      "reads": 47,
+      "edits": 8,
+      "bash": 71,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34850,
+      "files_changed": 6,
+      "loc_js_added": 96,
+      "loc_native_added": 165,
+      "loc_native_code_added": 161,
+      "loc_native_config_added": 4
+    },
+    {
+      "trial": "main-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 73,
+      "output": 11466,
+      "cache_write": 55190,
+      "cache_read": 2226468,
+      "total_cost_usd": 1.1720153999999998,
+      "turns": 54,
+      "wall_s": 218,
+      "reads": 12,
+      "edits": 3,
+      "bash": 22,
+      "mcp_docs": 7,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34488,
+      "files_changed": 3,
+      "loc_js_added": 51,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 183,
+      "output": 51535,
+      "cache_write": 165126,
+      "cache_read": 11235934,
+      "total_cost_usd": 5.1358692,
+      "turns": 124,
+      "wall_s": 1007,
+      "reads": 31,
+      "edits": 7,
+      "bash": 60,
+      "mcp_docs": 7,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34516,
+      "files_changed": 6,
+      "loc_js_added": 200,
+      "loc_native_added": 15,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 15
+    },
+    {
+      "trial": "main-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 60,
+      "output": 15403,
+      "cache_write": 62800,
+      "cache_read": 2002497,
+      "total_cost_usd": 1.2095310999999997,
+      "turns": 40,
+      "wall_s": 293,
+      "reads": 8,
+      "edits": 4,
+      "bash": 21,
+      "mcp_docs": 5,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34531,
+      "files_changed": 5,
+      "loc_js_added": 125,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "main-ns-2",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 66,
+      "output": 8979,
+      "cache_write": 46594,
+      "cache_read": 1791982,
+      "total_cost_usd": 0.9527576000000001,
+      "turns": 49,
+      "wall_s": 169,
+      "reads": 16,
+      "edits": 3,
+      "bash": 16,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34489,
+      "files_changed": 3,
+      "loc_js_added": 52,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-ns-2",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 122,
+      "output": 53760,
+      "cache_write": 129138,
+      "cache_read": 6221451,
+      "total_cost_usd": 3.4487932999999997,
+      "turns": 80,
+      "wall_s": 799,
+      "reads": 10,
+      "edits": 4,
+      "bash": 44,
+      "mcp_docs": 15,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 4,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34572,
+      "files_changed": 4,
+      "loc_js_added": 184,
+      "loc_native_added": 14,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 14
+    },
+    {
+      "trial": "main-ns-2",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 42,
+      "output": 14747,
+      "cache_write": 49403,
+      "cache_read": 1174642,
+      "total_cost_usd": 0.8709086,
+      "turns": 33,
+      "wall_s": 172,
+      "reads": 8,
+      "edits": 3,
+      "bash": 16,
+      "mcp_docs": 4,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34530,
+      "files_changed": 4,
+      "loc_js_added": 103,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "main-ns-3",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 73,
+      "output": 12932,
+      "cache_write": 63326,
+      "cache_read": 2399699,
+      "total_cost_usd": 1.2947957,
+      "turns": 52,
+      "wall_s": 224,
+      "reads": 16,
+      "edits": 4,
+      "bash": 16,
+      "mcp_docs": 4,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34489,
+      "files_changed": 4,
+      "loc_js_added": 59,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-ns-3",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 242,
+      "output": 59840,
+      "cache_write": 186640,
+      "cache_read": 15127434,
+      "total_cost_usd": 6.557150199999999,
+      "turns": 152,
+      "wall_s": 972,
+      "reads": 32,
+      "edits": 8,
+      "bash": 80,
+      "mcp_docs": 10,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34572,
+      "files_changed": 5,
+      "loc_js_added": 169,
+      "loc_native_added": 15,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 15
+    },
+    {
+      "trial": "main-ns-3",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 2304,
+      "output": 12158,
+      "cache_write": 47841,
+      "cache_read": 1143858,
+      "total_cost_usd": 0.8202524,
+      "turns": 33,
+      "wall_s": 153,
+      "reads": 9,
+      "edits": 3,
+      "bash": 20,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 0,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34530,
+      "files_changed": 4,
+      "loc_js_added": 99,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "main-ns-4",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 111,
+      "output": 16571,
+      "cache_write": 76852,
+      "cache_read": 4029237,
+      "total_cost_usd": 1.9194970999999994,
+      "turns": 77,
+      "wall_s": 421,
+      "reads": 17,
+      "edits": 5,
+      "bash": 37,
+      "mcp_docs": 7,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34488,
+      "files_changed": 3,
+      "loc_js_added": 58,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-ns-4",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 230,
+      "output": 52794,
+      "cache_write": 169076,
+      "cache_read": 13398701,
+      "total_cost_usd": 5.8537004999999995,
+      "turns": 147,
+      "wall_s": 884,
+      "reads": 31,
+      "edits": 10,
+      "bash": 72,
+      "mcp_docs": 13,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34515,
+      "files_changed": 6,
+      "loc_js_added": 203,
+      "loc_native_added": 13,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 13
+    },
+    {
+      "trial": "main-ns-4",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 108,
+      "output": 26538,
+      "cache_write": 128385,
+      "cache_read": 5219520,
+      "total_cost_usd": 2.7352819999999993,
+      "turns": 71,
+      "wall_s": 487,
+      "reads": 17,
+      "edits": 9,
+      "bash": 29,
+      "mcp_docs": 7,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34530,
+      "files_changed": 5,
+      "loc_js_added": 135,
+      "loc_native_added": 3,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 3
+    },
+    {
+      "trial": "main-ns-5",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 88,
+      "output": 16198,
+      "cache_write": 73250,
+      "cache_read": 3134987,
+      "total_cost_usd": 1.6239611,
+      "turns": 58,
+      "wall_s": 256,
+      "reads": 14,
+      "edits": 3,
+      "bash": 20,
+      "mcp_docs": 8,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34490,
+      "files_changed": 3,
+      "loc_js_added": 49,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "main-ns-5",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 80,
+      "output": 47439,
+      "cache_write": 118168,
+      "cache_read": 3482965,
+      "total_cost_usd": 2.4664814999999995,
+      "turns": 60,
+      "wall_s": 516,
+      "reads": 11,
+      "edits": 5,
+      "bash": 29,
+      "mcp_docs": 12,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34517,
+      "files_changed": 5,
+      "loc_js_added": 248,
+      "loc_native_added": 13,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 13
+    },
+    {
+      "trial": "main-ns-5",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 58,
+      "output": 18060,
+      "cache_write": 67472,
+      "cache_read": 1905181,
+      "total_cost_usd": 1.2482172999999996,
+      "turns": 39,
+      "wall_s": 249,
+      "reads": 4,
+      "edits": 2,
+      "bash": 23,
+      "mcp_docs": 5,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "main",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34532,
+      "files_changed": 3,
+      "loc_js_added": 93,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "pilot-lynx-1",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 106,
+      "output": 22313,
+      "cache_write": 109756,
+      "cache_read": 4953723,
+      "total_cost_usd": 2.4804568999999996,
+      "turns": 71,
+      "wall_s": 360,
+      "reads": 28,
+      "edits": 11,
+      "bash": 27,
+      "mcp_docs": 1,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "pilot",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34805,
+      "files_changed": 12,
+      "loc_js_added": 215,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "pilot-lynx-1",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": true,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 160,
+      "output": 67546,
+      "cache_write": 209907,
+      "cache_read": 11744999,
+      "total_cost_usd": 5.797385700000001,
+      "turns": 81,
+      "wall_s": 931,
+      "reads": 28,
+      "edits": 8,
+      "bash": 64,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-lynx",
+      "set": "pilot",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34830,
+      "files_changed": 7,
+      "loc_js_added": 151,
+      "loc_native_added": 174,
+      "loc_native_code_added": 160,
+      "loc_native_config_added": 14
+    },
+    {
+      "trial": "pilot-lynx-1",
+      "framework": "lynx",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": true,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 160,
+      "output": 35701,
+      "cache_write": 160538,
+      "cache_read": 7830030,
+      "total_cost_usd": 3.849024000000001,
+      "turns": 81,
+      "wall_s": 485,
+      "reads": 23,
+      "edits": 7,
+      "bash": 44,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-lynx",
+      "set": "pilot",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34845,
+      "files_changed": 6,
+      "loc_js_added": 135,
+      "loc_native_added": 124,
+      "loc_native_code_added": 122,
+      "loc_native_config_added": 2
+    },
+    {
+      "trial": "pilot-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 78,
+      "output": 13216,
+      "cache_write": 72850,
+      "cache_read": 2868211,
+      "total_cost_usd": 1.4967682999999998,
+      "turns": 55,
+      "wall_s": 240,
+      "reads": 17,
+      "edits": 3,
+      "bash": 15,
+      "mcp_docs": 9,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-lynx",
+      "set": "pilot",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34489,
+      "files_changed": 3,
+      "loc_js_added": 51,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "pilot-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 152,
+      "output": 36936,
+      "cache_write": 131736,
+      "cache_read": 7939802,
+      "total_cost_usd": 3.7276166000000006,
+      "turns": 94,
+      "wall_s": 567,
+      "reads": 17,
+      "edits": 7,
+      "bash": 48,
+      "mcp_docs": 10,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-lynx",
+      "set": "pilot",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34515,
+      "files_changed": 4,
+      "loc_js_added": 213,
+      "loc_native_added": 12,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 12
+    },
+    {
+      "trial": "pilot-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": true,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 160,
+      "output": 30881,
+      "cache_write": 151094,
+      "cache_read": 8729714,
+      "total_cost_usd": 4.017835199999998,
+      "turns": 81,
+      "wall_s": 606,
+      "reads": 32,
+      "edits": 3,
+      "bash": 50,
+      "mcp_docs": 2,
+      "web": 2,
+      "tasks": 0,
+      "other_tools": 4,
+      "study": "ns-vs-lynx",
+      "set": "pilot",
+      "spec_version": "v1.0.0",
+      "first_turn_context": 34530,
+      "files_changed": 3,
+      "loc_js_added": 140,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2
+    }
+  ],
+  "aggregates": {
+    "main": {
+      "ns": {
+        "phase_1": {
+          "n": 5,
+          "median_input": 73,
+          "range_input": [
+            66,
+            111
+          ],
+          "median_output": 12932,
+          "range_output": [
+            8979,
+            16571
+          ],
+          "median_cache_write": 63326,
+          "range_cache_write": [
+            46594,
+            76852
+          ],
+          "median_cache_read": 2399699,
+          "range_cache_read": [
+            1791982,
+            4029237
+          ],
+          "median_total_cost_usd": 1.2947957,
+          "range_total_cost_usd": [
+            0.9527576000000001,
+            1.9194970999999994
+          ],
+          "median_turns": 54,
+          "range_turns": [
+            49,
+            77
+          ],
+          "median_wall_s": 224,
+          "range_wall_s": [
+            169,
+            421
+          ],
+          "median_mcp_docs": 7,
+          "range_mcp_docs": [
+            3,
+            8
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 52,
+          "range_loc_js_added": [
+            49,
+            59
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34489,
+          "range_first_turn_context": [
+            34488,
+            34490
+          ]
+        },
+        "phase_2": {
+          "n": 5,
+          "median_input": 183,
+          "range_input": [
+            80,
+            242
+          ],
+          "median_output": 52794,
+          "range_output": [
+            47439,
+            59840
+          ],
+          "median_cache_write": 165126,
+          "range_cache_write": [
+            118168,
+            186640
+          ],
+          "median_cache_read": 11235934,
+          "range_cache_read": [
+            3482965,
+            15127434
+          ],
+          "median_total_cost_usd": 5.1358692,
+          "range_total_cost_usd": [
+            2.4664814999999995,
+            6.557150199999999
+          ],
+          "median_turns": 124,
+          "range_turns": [
+            60,
+            152
+          ],
+          "median_wall_s": 884,
+          "range_wall_s": [
+            516,
+            1007
+          ],
+          "median_mcp_docs": 12,
+          "range_mcp_docs": [
+            7,
+            15
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 200,
+          "range_loc_js_added": [
+            169,
+            248
+          ],
+          "median_loc_native_added": 14,
+          "range_loc_native_added": [
+            13,
+            15
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 14,
+          "range_loc_native_config_added": [
+            13,
+            15
+          ],
+          "median_first_turn_context": 34517,
+          "range_first_turn_context": [
+            34515,
+            34572
+          ]
+        },
+        "phase_3": {
+          "n": 5,
+          "median_input": 60,
+          "range_input": [
+            42,
+            2304
+          ],
+          "median_output": 15403,
+          "range_output": [
+            12158,
+            26538
+          ],
+          "median_cache_write": 62800,
+          "range_cache_write": [
+            47841,
+            128385
+          ],
+          "median_cache_read": 1905181,
+          "range_cache_read": [
+            1143858,
+            5219520
+          ],
+          "median_total_cost_usd": 1.2095310999999997,
+          "range_total_cost_usd": [
+            0.8202524,
+            2.7352819999999993
+          ],
+          "median_turns": 39,
+          "range_turns": [
+            33,
+            71
+          ],
+          "median_wall_s": 249,
+          "range_wall_s": [
+            153,
+            487
+          ],
+          "median_mcp_docs": 5,
+          "range_mcp_docs": [
+            0,
+            7
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 103,
+          "range_loc_js_added": [
+            93,
+            135
+          ],
+          "median_loc_native_added": 2,
+          "range_loc_native_added": [
+            2,
+            3
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 2,
+          "range_loc_native_config_added": [
+            2,
+            3
+          ],
+          "median_first_turn_context": 34530,
+          "range_first_turn_context": [
+            34530,
+            34532
+          ]
+        },
+        "total_per_trial": {
+          "n": 5,
+          "median_input": 316,
+          "range_input": [
+            226,
+            2619
+          ],
+          "median_output": 81697,
+          "range_output": [
+            77486,
+            95903
+          ],
+          "median_cache_write": 283116,
+          "range_cache_write": [
+            225135,
+            374313
+          ],
+          "median_cache_read": 15464899,
+          "range_cache_read": [
+            8523133,
+            22647458
+          ],
+          "median_total_cost_usd": 7.517415699999999,
+          "range_total_cost_usd": [
+            5.2724595,
+            10.508479599999998
+          ],
+          "median_turns": 218,
+          "range_turns": [
+            157,
+            295
+          ],
+          "median_wall_s": 1349,
+          "range_wall_s": [
+            1021,
+            1792
+          ],
+          "median_mcp_docs": 22,
+          "range_mcp_docs": [
+            14,
+            27
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 376,
+          "range_loc_js_added": [
+            327,
+            396
+          ],
+          "median_loc_native_added": 16,
+          "range_loc_native_added": [
+            15,
+            17
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 16,
+          "range_loc_native_config_added": [
+            15,
+            17
+          ]
+        }
+      },
+      "lynx": {
+        "phase_1": {
+          "n": 5,
+          "median_input": 104,
+          "range_input": [
+            70,
+            2485
+          ],
+          "median_output": 22525,
+          "range_output": [
+            18372,
+            26324
+          ],
+          "median_cache_write": 111156,
+          "range_cache_write": [
+            84504,
+            116694
+          ],
+          "median_cache_read": 5114056,
+          "range_cache_read": [
+            2676731,
+            7649060
+          ],
+          "median_total_cost_usd": 2.5569427999999994,
+          "range_total_cost_usd": [
+            1.5959383,
+            3.391017
+          ],
+          "median_turns": 76,
+          "range_turns": [
+            48,
+            90
+          ],
+          "median_wall_s": 334,
+          "range_wall_s": [
+            240,
+            456
+          ],
+          "median_mcp_docs": 1,
+          "range_mcp_docs": [
+            1,
+            3
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 179,
+          "range_loc_js_added": [
+            137,
+            231
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34804,
+          "range_first_turn_context": [
+            34804,
+            34805
+          ]
+        },
+        "phase_2": {
+          "n": 5,
+          "median_input": 182,
+          "range_input": [
+            116,
+            320
+          ],
+          "median_output": 67499,
+          "range_output": [
+            55474,
+            113124
+          ],
+          "median_cache_write": 213425,
+          "range_cache_write": [
+            192514,
+            343670
+          ],
+          "median_cache_read": 14519313,
+          "range_cache_read": [
+            9182624,
+            37775367
+          ],
+          "median_total_cost_usd": 6.634390900000001,
+          "range_total_cost_usd": [
+            4.8685942,
+            15.608516349999995
+          ],
+          "median_turns": 133,
+          "range_turns": [
+            88,
+            209
+          ],
+          "median_wall_s": 863,
+          "range_wall_s": [
+            654,
+            4134
+          ],
+          "median_mcp_docs": 3,
+          "range_mcp_docs": [
+            3,
+            5
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            2
+          ],
+          "median_loc_js_added": 124,
+          "range_loc_js_added": [
+            85,
+            185
+          ],
+          "median_loc_native_added": 148,
+          "range_loc_native_added": [
+            127,
+            241
+          ],
+          "median_loc_native_code_added": 134,
+          "range_loc_native_code_added": [
+            111,
+            227
+          ],
+          "median_loc_native_config_added": 14,
+          "range_loc_native_config_added": [
+            14,
+            21
+          ],
+          "median_first_turn_context": 34833,
+          "range_first_turn_context": [
+            34830,
+            34833
+          ]
+        },
+        "phase_3": {
+          "n": 5,
+          "median_input": 224,
+          "range_input": [
+            166,
+            282
+          ],
+          "median_output": 61660,
+          "range_output": [
+            46301,
+            65761
+          ],
+          "median_cache_write": 230834,
+          "range_cache_write": [
+            207299,
+            301447
+          ],
+          "median_cache_read": 16255245,
+          "range_cache_read": [
+            13509521,
+            27087892
+          ],
+          "median_total_cost_usd": 7.863328349999999,
+          "range_total_cost_usd": [
+            6.1336653,
+            10.8615876
+          ],
+          "median_turns": 154,
+          "range_turns": [
+            112,
+            184
+          ],
+          "median_wall_s": 1049,
+          "range_wall_s": [
+            758,
+            1172
+          ],
+          "median_mcp_docs": 3,
+          "range_mcp_docs": [
+            2,
+            7
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 84,
+          "range_loc_js_added": [
+            77,
+            137
+          ],
+          "median_loc_native_added": 108,
+          "range_loc_native_added": [
+            94,
+            180
+          ],
+          "median_loc_native_code_added": 106,
+          "range_loc_native_code_added": [
+            92,
+            178
+          ],
+          "median_loc_native_config_added": 2,
+          "range_loc_native_config_added": [
+            2,
+            4
+          ],
+          "median_first_turn_context": 34849,
+          "range_first_turn_context": [
+            34845,
+            35036
+          ]
+        },
+        "total_per_trial": {
+          "n": 5,
+          "median_input": 532,
+          "range_input": [
+            502,
+            2839
+          ],
+          "median_output": 153110,
+          "range_output": [
+            139659,
+            193567
+          ],
+          "median_cache_write": 624908,
+          "range_cache_write": [
+            530461,
+            667663
+          ],
+          "median_cache_read": 41384572,
+          "range_cache_read": [
+            30753258,
+            61679672
+          ],
+          "median_total_cost_usd": 18.2871246,
+          "range_total_cost_usd": [
+            15.42115175,
+            25.933142849999996
+          ],
+          "median_turns": 350,
+          "range_turns": [
+            320,
+            405
+          ],
+          "median_wall_s": 2346,
+          "range_wall_s": [
+            2080,
+            5619
+          ],
+          "median_mcp_docs": 10,
+          "range_mcp_docs": [
+            6,
+            11
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            2
+          ],
+          "median_loc_js_added": 393,
+          "range_loc_js_added": [
+            335,
+            504
+          ],
+          "median_loc_native_added": 242,
+          "range_loc_native_added": [
+            235,
+            421
+          ],
+          "median_loc_native_code_added": 226,
+          "range_loc_native_code_added": [
+            213,
+            405
+          ],
+          "median_loc_native_config_added": 18,
+          "range_loc_native_config_added": [
+            16,
+            23
+          ]
+        }
+      }
+    },
+    "pilot": {
+      "ns": {
+        "phase_1": {
+          "n": 1,
+          "median_input": 78,
+          "range_input": [
+            78,
+            78
+          ],
+          "median_output": 13216,
+          "range_output": [
+            13216,
+            13216
+          ],
+          "median_cache_write": 72850,
+          "range_cache_write": [
+            72850,
+            72850
+          ],
+          "median_cache_read": 2868211,
+          "range_cache_read": [
+            2868211,
+            2868211
+          ],
+          "median_total_cost_usd": 1.4967682999999998,
+          "range_total_cost_usd": [
+            1.4967682999999998,
+            1.4967682999999998
+          ],
+          "median_turns": 55,
+          "range_turns": [
+            55,
+            55
+          ],
+          "median_wall_s": 240,
+          "range_wall_s": [
+            240,
+            240
+          ],
+          "median_mcp_docs": 9,
+          "range_mcp_docs": [
+            9,
+            9
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 51,
+          "range_loc_js_added": [
+            51,
+            51
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34489,
+          "range_first_turn_context": [
+            34489,
+            34489
+          ]
+        },
+        "phase_2": {
+          "n": 1,
+          "median_input": 152,
+          "range_input": [
+            152,
+            152
+          ],
+          "median_output": 36936,
+          "range_output": [
+            36936,
+            36936
+          ],
+          "median_cache_write": 131736,
+          "range_cache_write": [
+            131736,
+            131736
+          ],
+          "median_cache_read": 7939802,
+          "range_cache_read": [
+            7939802,
+            7939802
+          ],
+          "median_total_cost_usd": 3.7276166000000006,
+          "range_total_cost_usd": [
+            3.7276166000000006,
+            3.7276166000000006
+          ],
+          "median_turns": 94,
+          "range_turns": [
+            94,
+            94
+          ],
+          "median_wall_s": 567,
+          "range_wall_s": [
+            567,
+            567
+          ],
+          "median_mcp_docs": 10,
+          "range_mcp_docs": [
+            10,
+            10
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 213,
+          "range_loc_js_added": [
+            213,
+            213
+          ],
+          "median_loc_native_added": 12,
+          "range_loc_native_added": [
+            12,
+            12
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 12,
+          "range_loc_native_config_added": [
+            12,
+            12
+          ],
+          "median_first_turn_context": 34515,
+          "range_first_turn_context": [
+            34515,
+            34515
+          ]
+        },
+        "phase_3": {
+          "n": 1,
+          "median_input": 160,
+          "range_input": [
+            160,
+            160
+          ],
+          "median_output": 30881,
+          "range_output": [
+            30881,
+            30881
+          ],
+          "median_cache_write": 151094,
+          "range_cache_write": [
+            151094,
+            151094
+          ],
+          "median_cache_read": 8729714,
+          "range_cache_read": [
+            8729714,
+            8729714
+          ],
+          "median_total_cost_usd": 4.017835199999998,
+          "range_total_cost_usd": [
+            4.017835199999998,
+            4.017835199999998
+          ],
+          "median_turns": 81,
+          "range_turns": [
+            81,
+            81
+          ],
+          "median_wall_s": 606,
+          "range_wall_s": [
+            606,
+            606
+          ],
+          "median_mcp_docs": 2,
+          "range_mcp_docs": [
+            2,
+            2
+          ],
+          "median_web": 2,
+          "range_web": [
+            2,
+            2
+          ],
+          "median_loc_js_added": 140,
+          "range_loc_js_added": [
+            140,
+            140
+          ],
+          "median_loc_native_added": 2,
+          "range_loc_native_added": [
+            2,
+            2
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 2,
+          "range_loc_native_config_added": [
+            2,
+            2
+          ],
+          "median_first_turn_context": 34530,
+          "range_first_turn_context": [
+            34530,
+            34530
+          ]
+        },
+        "total_per_trial": {
+          "n": 1,
+          "median_input": 390,
+          "range_input": [
+            390,
+            390
+          ],
+          "median_output": 81033,
+          "range_output": [
+            81033,
+            81033
+          ],
+          "median_cache_write": 355680,
+          "range_cache_write": [
+            355680,
+            355680
+          ],
+          "median_cache_read": 19537727,
+          "range_cache_read": [
+            19537727,
+            19537727
+          ],
+          "median_total_cost_usd": 9.242220099999997,
+          "range_total_cost_usd": [
+            9.242220099999997,
+            9.242220099999997
+          ],
+          "median_turns": 230,
+          "range_turns": [
+            230,
+            230
+          ],
+          "median_wall_s": 1413,
+          "range_wall_s": [
+            1413,
+            1413
+          ],
+          "median_mcp_docs": 21,
+          "range_mcp_docs": [
+            21,
+            21
+          ],
+          "median_web": 2,
+          "range_web": [
+            2,
+            2
+          ],
+          "median_loc_js_added": 404,
+          "range_loc_js_added": [
+            404,
+            404
+          ],
+          "median_loc_native_added": 14,
+          "range_loc_native_added": [
+            14,
+            14
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 14,
+          "range_loc_native_config_added": [
+            14,
+            14
+          ]
+        }
+      },
+      "lynx": {
+        "phase_1": {
+          "n": 1,
+          "median_input": 106,
+          "range_input": [
+            106,
+            106
+          ],
+          "median_output": 22313,
+          "range_output": [
+            22313,
+            22313
+          ],
+          "median_cache_write": 109756,
+          "range_cache_write": [
+            109756,
+            109756
+          ],
+          "median_cache_read": 4953723,
+          "range_cache_read": [
+            4953723,
+            4953723
+          ],
+          "median_total_cost_usd": 2.4804568999999996,
+          "range_total_cost_usd": [
+            2.4804568999999996,
+            2.4804568999999996
+          ],
+          "median_turns": 71,
+          "range_turns": [
+            71,
+            71
+          ],
+          "median_wall_s": 360,
+          "range_wall_s": [
+            360,
+            360
+          ],
+          "median_mcp_docs": 1,
+          "range_mcp_docs": [
+            1,
+            1
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 215,
+          "range_loc_js_added": [
+            215,
+            215
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34805,
+          "range_first_turn_context": [
+            34805,
+            34805
+          ]
+        },
+        "phase_2": {
+          "n": 1,
+          "median_input": 160,
+          "range_input": [
+            160,
+            160
+          ],
+          "median_output": 67546,
+          "range_output": [
+            67546,
+            67546
+          ],
+          "median_cache_write": 209907,
+          "range_cache_write": [
+            209907,
+            209907
+          ],
+          "median_cache_read": 11744999,
+          "range_cache_read": [
+            11744999,
+            11744999
+          ],
+          "median_total_cost_usd": 5.797385700000001,
+          "range_total_cost_usd": [
+            5.797385700000001,
+            5.797385700000001
+          ],
+          "median_turns": 81,
+          "range_turns": [
+            81,
+            81
+          ],
+          "median_wall_s": 931,
+          "range_wall_s": [
+            931,
+            931
+          ],
+          "median_mcp_docs": 3,
+          "range_mcp_docs": [
+            3,
+            3
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 151,
+          "range_loc_js_added": [
+            151,
+            151
+          ],
+          "median_loc_native_added": 174,
+          "range_loc_native_added": [
+            174,
+            174
+          ],
+          "median_loc_native_code_added": 160,
+          "range_loc_native_code_added": [
+            160,
+            160
+          ],
+          "median_loc_native_config_added": 14,
+          "range_loc_native_config_added": [
+            14,
+            14
+          ],
+          "median_first_turn_context": 34830,
+          "range_first_turn_context": [
+            34830,
+            34830
+          ]
+        },
+        "phase_3": {
+          "n": 1,
+          "median_input": 160,
+          "range_input": [
+            160,
+            160
+          ],
+          "median_output": 35701,
+          "range_output": [
+            35701,
+            35701
+          ],
+          "median_cache_write": 160538,
+          "range_cache_write": [
+            160538,
+            160538
+          ],
+          "median_cache_read": 7830030,
+          "range_cache_read": [
+            7830030,
+            7830030
+          ],
+          "median_total_cost_usd": 3.849024000000001,
+          "range_total_cost_usd": [
+            3.849024000000001,
+            3.849024000000001
+          ],
+          "median_turns": 81,
+          "range_turns": [
+            81,
+            81
+          ],
+          "median_wall_s": 485,
+          "range_wall_s": [
+            485,
+            485
+          ],
+          "median_mcp_docs": 3,
+          "range_mcp_docs": [
+            3,
+            3
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 135,
+          "range_loc_js_added": [
+            135,
+            135
+          ],
+          "median_loc_native_added": 124,
+          "range_loc_native_added": [
+            124,
+            124
+          ],
+          "median_loc_native_code_added": 122,
+          "range_loc_native_code_added": [
+            122,
+            122
+          ],
+          "median_loc_native_config_added": 2,
+          "range_loc_native_config_added": [
+            2,
+            2
+          ],
+          "median_first_turn_context": 34845,
+          "range_first_turn_context": [
+            34845,
+            34845
+          ]
+        },
+        "total_per_trial": {
+          "n": 1,
+          "median_input": 426,
+          "range_input": [
+            426,
+            426
+          ],
+          "median_output": 125560,
+          "range_output": [
+            125560,
+            125560
+          ],
+          "median_cache_write": 480201,
+          "range_cache_write": [
+            480201,
+            480201
+          ],
+          "median_cache_read": 24528752,
+          "range_cache_read": [
+            24528752,
+            24528752
+          ],
+          "median_total_cost_usd": 12.126866600000003,
+          "range_total_cost_usd": [
+            12.126866600000003,
+            12.126866600000003
+          ],
+          "median_turns": 233,
+          "range_turns": [
+            233,
+            233
+          ],
+          "median_wall_s": 1776,
+          "range_wall_s": [
+            1776,
+            1776
+          ],
+          "median_mcp_docs": 7,
+          "range_mcp_docs": [
+            7,
+            7
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 501,
+          "range_loc_js_added": [
+            501,
+            501
+          ],
+          "median_loc_native_added": 298,
+          "range_loc_native_added": [
+            298,
+            298
+          ],
+          "median_loc_native_code_added": 282,
+          "range_loc_native_code_added": [
+            282,
+            282
+          ],
+          "median_loc_native_config_added": 16,
+          "range_loc_native_config_added": [
+            16,
+            16
+          ]
+        }
+      }
+    }
+  }
+}

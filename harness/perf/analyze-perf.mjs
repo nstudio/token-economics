@@ -1,14 +1,21 @@
 #!/usr/bin/env node
-// Aggregates results/perf/<trial>.json into results/perf/summary.json and
+// Aggregates <study>/perf/<trial>.json into <study>/perf/summary.json and
 // prints per-trial and per-framework tables. Launch time preference order:
 // SpringBoard 'launch_done' marker → 'active' marker → CPU-settle fallback
 // (the chosen source is recorded per trial as launch_source).
 
+// Usage: node analyze-perf.mjs <study-slug>
+
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { ROOT, getStudy } from '../lib/registry.mjs';
 
-const PERF = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'results', 'perf');
+const slug = process.argv[2];
+if (!slug) { console.error('usage: node analyze-perf.mjs <study-slug>'); process.exit(2); }
+const study = getStudy(slug);
+const PERF = path.join(ROOT, study.resultsDir, 'perf');
+const FRAMEWORKS = study.frameworks;
+const frameworkOf = trial => FRAMEWORKS.find(fw => trial.includes(`-${fw}-`)) ?? null;
 const median = xs => {
   const s = xs.filter(x => x != null && !Number.isNaN(x)).sort((a, b) => a - b);
   if (!s.length) return null;
@@ -20,11 +27,13 @@ const mm = xs => {
   return s.length ? [s[0], s[s.length - 1]] : [null, null];
 };
 
+if (!fs.existsSync(PERF)) { console.error(`no perf data at ${path.relative(ROOT, PERF)} — run measure.sh first`); process.exit(1); }
 const trials = [];
 for (const f of fs.readdirSync(PERF).sort()) {
-  if (!f.endsWith('.json') || f === 'summary.json') continue;
+  if (!f.endsWith('.json') || f.endsWith('-summary.json') || f === 'summary.json') continue;
   const t = JSON.parse(fs.readFileSync(path.join(PERF, f), 'utf8'));
-  const fw = t.trial.includes('-ns-') ? 'ns' : 'lynx';
+  const fw = frameworkOf(t.trial);
+  if (!fw) { console.error(`skipping ${t.trial}: no framework in study ${study.slug} matches`); continue; }
 
   const per = t.launches.map(l => ({
     done: l.markers.launch_done ?? null,
@@ -58,7 +67,7 @@ for (const f of fs.readdirSync(PERF).sort()) {
 if (!trials.length) { console.error('no perf JSONs found — run measure.sh first'); process.exit(1); }
 
 const agg = {};
-for (const fw of ['ns', 'lynx']) {
+for (const fw of FRAMEWORKS) {
   const rs = trials.filter(t => t.fw === fw);
   if (!rs.length) continue;
   const f = k => ({ median: median(rs.map(r => r[k])), range: mm(rs.map(r => r[k])) });
@@ -73,7 +82,7 @@ for (const fw of ['ns', 'lynx']) {
   };
 }
 
-fs.writeFileSync(path.join(PERF, 'summary.json'), JSON.stringify({ trials, aggregates: agg }, null, 2) + '\n');
+fs.writeFileSync(path.join(PERF, 'summary.json'), JSON.stringify({ study: study.slug, trials, aggregates: agg }, null, 2) + '\n');
 
 const f1 = n => n == null ? '—' : n.toFixed(1);
 const f0 = n => n == null ? '—' : String(Math.round(n));
@@ -86,4 +95,4 @@ for (const t of trials) {
 }
 console.log('\nPer framework (median of trial medians, [min–max]):');
 console.log(JSON.stringify(agg, null, 2));
-console.log('\nWrote results/perf/summary.json');
+console.log(`\nWrote ${path.relative(ROOT, path.join(PERF, 'summary.json'))}`);

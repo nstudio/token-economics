@@ -1,6 +1,7 @@
 # Local working repos — the published, reproducible copies live in apps/
 /ns-benchmark/
 /lynx-benchmark/
+/expo-benchmark/
 
 # The results website is its own repository: github.com/nstudio/agent-tokenomics
 /agent-tokenomics/
@@ -12,8 +13,8 @@ agent-tokenomics/.netlify/
 
 # Per-trial app binaries (~3 GB) — regenerable: Debug apps via the harness,
 # Release apps via harness/perf/build-release.sh from apps/trials sources
-results/*/app/
-results/*/app-release/
+results/**/app/
+results/**/app-release/
 
 .DS_Store
 

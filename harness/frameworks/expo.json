@@ -1,0 +1,55 @@
+{
+  "id": "expo",
+  "label": "Expo (React Native)",
+  "repo": "expo-benchmark",
+  "bundleId": "com.nstudio.expobenchmark",
+  "uiLayer": "React 19 / React Native 0.86 (Expo SDK 57)",
+  "docsMcpName": "expo",
+  "mcpConfig": "mcp/expo.mcp.json",
+  "docsMcpVersion": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)",
+  "buildGate": "npx expo prebuild --platform ios && xcodebuild -workspace ios/ExpoBenchmark.xcworkspace -scheme ExpoBenchmark -configuration Debug -destination \"generic/platform=iOS Simulator\" build",
+  "appLocator": {
+    "kind": "xcodebuild",
+    "args": [
+      "-workspace",
+      "ios/ExpoBenchmark.xcworkspace",
+      "-scheme",
+      "ExpoBenchmark",
+      "-configuration",
+      "Debug",
+      "-destination",
+      "generic/platform=iOS Simulator"
+    ]
+  },
+  "releaseBuildGate": "npx expo prebuild --platform ios && xcodebuild -workspace ios/ExpoBenchmark.xcworkspace -scheme ExpoBenchmark -configuration Release -destination \"generic/platform=iOS Simulator\" build",
+  "releaseAppLocator": {
+    "kind": "xcodebuild",
+    "args": [
+      "-workspace",
+      "ios/ExpoBenchmark.xcworkspace",
+      "-scheme",
+      "ExpoBenchmark",
+      "-configuration",
+      "Release",
+      "-destination",
+      "generic/platform=iOS Simulator"
+    ]
+  },
+  "interopBranch": "interop-bench",
+  "nativeRoots": [
+    "ios/"
+  ],
+  "nativeConfigFiles": [
+    "app.json",
+    "app.config.js",
+    "app.config.ts"
+  ],
+  "nativeConfigRoots": [
+    "plugins/"
+  ],
+  "notes": {
+    "workspaceName": "ios/ExpoBenchmark.xcworkspace and scheme ExpoBenchmark are produced by `expo prebuild` from app.json's `name`; the baseline scaffold pins name=ExpoBenchmark so this locator stays valid.",
+    "cng": "ios/ is generated, not committed — native configuration must go through app.json / config plugins, which is why those paths classify as native-config.",
+    "mcpTier": "Remote tier only. The local tier (expo-mcp package + EXPO_UNSTABLE_MCP_SERVER=1) stays off: simulator tap/screenshot would give this arm a visual verification loop no other arm has."
+  }
+}

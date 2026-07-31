@@ -12,13 +12,14 @@ set -uo pipefail
 
 HARNESS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ROOT_DIR="$(dirname "$HARNESS_DIR")"
-RESULTS_DIR="$ROOT_DIR/results"
-OUT_DIR="$RESULTS_DIR/perf/interactions"
+source "$HARNESS_DIR/lib/common.sh"
+te_resolve_study "${STUDY:-}"
+OUT_DIR="$PERF_DIR/interactions"
 DRIVER="$HARNESS_DIR/perf/uidriver"
 ITERS="${ITERS:-3}"
 SIM_UDID="${SIM_UDID:?set SIM_UDID}"
 
-note() { echo "==> $*"; }
+note() { te_note "$@"; }
 mkdir -p "$OUT_DIR"
 
 measure_one() { # measure_one <trial-id>

@@ -1,0 +1,20 @@
+{
+  "slug": "ns-vs-expo",
+  "title": "NativeScript vs Expo",
+  "specVersion": "v1.1.0",
+  "specDir": "spec/v1.1",
+  "baselineTag": "benchmark-baseline-v1.1",
+  "frameworks": ["ns", "expo"],
+  "resultsDir": "results/ns-vs-expo",
+  "model": "claude-sonnet-5",
+  "maxTurns": 160,
+  "phases": [
+    { "id": "1", "label": "App shell", "prompt": "prompts/phase-1.md" },
+    { "id": "2", "label": "Health (HealthKit)", "prompt": "prompts/phase-2.md" },
+    { "id": "3", "label": "Transcribe (Speech)", "prompt": "prompts/phase-3.md" }
+  ],
+  "remediationPrompt": "prompts/remediate.md",
+  "trialSets": { "pilot": "^pilot-", "main": "^main-" },
+  "medianSet": "main",
+  "frozen": false
+}

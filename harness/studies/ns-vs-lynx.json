@@ -1,0 +1,21 @@
+{
+  "slug": "ns-vs-lynx",
+  "title": "NativeScript vs LynxJS",
+  "specVersion": "v1.0.0",
+  "specDir": "spec/v1.0",
+  "baselineTag": "benchmark-baseline",
+  "frameworks": ["ns", "lynx"],
+  "resultsDir": "results/ns-vs-lynx",
+  "model": "claude-sonnet-5",
+  "maxTurns": 160,
+  "phases": [
+    { "id": "1", "label": "App shell", "prompt": "prompts/phase-1.md" },
+    { "id": "2", "label": "Health (HealthKit)", "prompt": "prompts/phase-2.md" },
+    { "id": "3", "label": "Transcribe (Speech)", "prompt": "prompts/phase-3.md" }
+  ],
+  "remediationPrompt": "prompts/remediate.md",
+  "trialSets": { "pilot": "^pilot-", "main": "^main-" },
+  "medianSet": "main",
+  "frozen": true,
+  "frozenReason": "Published submission (2026-07-25). Historical numbers are never edited in place — a re-run under a changed model, framework version, or spec is a new study slug. Set ALLOW_FROZEN=1 only to reproduce, never to amend."
+}

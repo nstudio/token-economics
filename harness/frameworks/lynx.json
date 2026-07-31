@@ -1,0 +1,42 @@
+{
+  "id": "lynx",
+  "label": "LynxJS (Vue 3, Sparkling host)",
+  "repo": "lynx-benchmark",
+  "bundleId": "io.nstudio.lynx",
+  "uiLayer": "Vue 3 (vue-lynx) on the Sparkling host",
+  "docsMcpName": "lynx-docs",
+  "mcpConfig": "mcp/lynx.mcp.json",
+  "docsMcpVersion": "@lynx-js/docs-mcp-server 0.2.4 (pinned, local)",
+  "buildGate": "npm run build && xcodebuild -workspace ios/SparklingGo.xcworkspace -scheme SparklingGo -configuration Debug -destination \"generic/platform=iOS Simulator\" build",
+  "appLocator": {
+    "kind": "xcodebuild",
+    "args": [
+      "-workspace",
+      "ios/SparklingGo.xcworkspace",
+      "-scheme",
+      "SparklingGo",
+      "-configuration",
+      "Debug",
+      "-destination",
+      "generic/platform=iOS Simulator"
+    ]
+  },
+  "releaseBuildGate": "npm run build && xcodebuild -workspace ios/SparklingGo.xcworkspace -scheme SparklingGo -configuration Release -destination \"generic/platform=iOS Simulator\" build",
+  "releaseAppLocator": {
+    "kind": "xcodebuild",
+    "args": [
+      "-workspace",
+      "ios/SparklingGo.xcworkspace",
+      "-scheme",
+      "SparklingGo",
+      "-configuration",
+      "Release",
+      "-destination",
+      "generic/platform=iOS Simulator"
+    ]
+  },
+  "interopBranch": "interop-bench",
+  "nativeRoots": [
+    "ios/"
+  ]
+}

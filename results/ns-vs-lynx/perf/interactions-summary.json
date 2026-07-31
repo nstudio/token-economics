@@ -1,4 +1,5 @@
 {
+  "study": "ns-vs-lynx",
   "trials": [
     {
       "trial": "main-lynx-1",
@@ -140,6 +141,7 @@
         "init_or_task_failed: Speech error: Failed to initialize recognizer"
       ],
       "nav_health_ms": {
+        "n": 5,
         "median": 1903,
         "range": [
           1784,
@@ -147,6 +149,7 @@
         ]
       },
       "hk_rows_ms": {
+        "n": 5,
         "median": 1059,
         "range": [
           1033,
@@ -154,6 +157,7 @@
         ]
       },
       "hk_log_roundtrip_ms": {
+        "n": 4,
         "median": 642.5,
         "range": [
           385,
@@ -161,6 +165,7 @@
         ]
       },
       "nav_transcribe_ms": {
+        "n": 5,
         "median": 1874,
         "range": [
           1706,
@@ -168,6 +173,7 @@
         ]
       },
       "speech_wall_ms": {
+        "n": 0,
         "median": null,
         "range": [
           null,
@@ -181,6 +187,7 @@
         "init_or_task_failed: Failed to initialize recognizer"
       ],
       "nav_health_ms": {
+        "n": 4,
         "median": 1784.5,
         "range": [
           1769,
@@ -188,6 +195,7 @@
         ]
       },
       "hk_rows_ms": {
+        "n": 3,
         "median": 1085,
         "range": [
           1070,
@@ -195,6 +203,7 @@
         ]
       },
       "hk_log_roundtrip_ms": {
+        "n": 3,
         "median": 447,
         "range": [
           441,
@@ -202,6 +211,7 @@
         ]
       },
       "nav_transcribe_ms": {
+        "n": 2,
         "median": 1757.5,
         "range": [
           1733,
@@ -209,6 +219,7 @@
         ]
       },
       "speech_wall_ms": {
+        "n": 0,
         "median": null,
         "range": [
           null,

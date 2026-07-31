@@ -1,0 +1,146 @@
+{
+  "study": "ns-vs-lynx",
+  "baseline": "ns",
+  "runs": {
+    "ns": 3,
+    "lynx": 3
+  },
+  "scenarios": [
+    {
+      "id": "js_compute",
+      "ops": 2000000,
+      "checks_match": true,
+      "ms": {
+        "ns": 57,
+        "lynx": 271
+      },
+      "per_op_us": {
+        "ns": null,
+        "lynx": null
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 4.8
+      }
+    },
+    {
+      "id": "json_roundtrip",
+      "ops": 500,
+      "checks_match": true,
+      "ms": {
+        "ns": 4,
+        "lynx": 17
+      },
+      "per_op_us": {
+        "ns": null,
+        "lynx": null
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 4.3
+      }
+    },
+    {
+      "id": "prim_latency",
+      "ops": 1000,
+      "checks_match": true,
+      "ms": {
+        "ns": 1,
+        "lynx": 130
+      },
+      "per_op_us": {
+        "ns": 1,
+        "lynx": 130
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 130
+      }
+    },
+    {
+      "id": "str_latency",
+      "ops": 1000,
+      "checks_match": true,
+      "ms": {
+        "ns": 1,
+        "lynx": 131
+      },
+      "per_op_us": {
+        "ns": 1,
+        "lynx": 131
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 131
+      }
+    },
+    {
+      "id": "prim_burst",
+      "ops": 10000,
+      "checks_match": true,
+      "ms": {
+        "ns": 5,
+        "lynx": 1191
+      },
+      "per_op_us": {
+        "ns": 1,
+        "lynx": 119
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 238.2
+      }
+    },
+    {
+      "id": "marshal_1mb",
+      "ops": 5,
+      "checks_match": true,
+      "ms": {
+        "ns": 5,
+        "lynx": 10
+      },
+      "per_op_us": {
+        "ns": 1000,
+        "lynx": 2000
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 2
+      }
+    },
+    {
+      "id": "checksum_js",
+      "ops": 3,
+      "checks_match": true,
+      "ms": {
+        "ns": 74,
+        "lynx": 444
+      },
+      "per_op_us": {
+        "ns": null,
+        "lynx": null
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 6
+      }
+    },
+    {
+      "id": "checksum_native",
+      "ops": 3,
+      "checks_match": true,
+      "ms": {
+        "ns": 3,
+        "lynx": 9
+      },
+      "per_op_us": {
+        "ns": null,
+        "lynx": null
+      },
+      "ratio_over_baseline": {
+        "ns": 1,
+        "lynx": 3
+      }
+    }
+  ]
+}

@@ -14,14 +14,14 @@ set -uo pipefail
 
 HARNESS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ROOT_DIR="$(dirname "$HARNESS_DIR")"
-RESULTS_DIR="$ROOT_DIR/results"
-PERF_DIR="$RESULTS_DIR/perf"
+source "$HARNESS_DIR/lib/common.sh"
+te_resolve_study "${STUDY:-}"
 LAUNCHES="${LAUNCHES:-5}"
 SETTLE_S="${SETTLE_S:-12}"
 SIM_UDID="${SIM_UDID:?set SIM_UDID to the simulator UDID to measure on}"
 
-die() { echo "ERROR: $*" >&2; exit 1; }
-note() { echo "==> $*"; }
+die() { te_die "$@"; }
+note() { te_note "$@"; }
 mkdir -p "$PERF_DIR"
 
 bundle_id_of() { plutil -extract CFBundleIdentifier raw "$1/Info.plist"; }
