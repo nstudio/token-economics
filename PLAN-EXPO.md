@@ -129,22 +129,20 @@ and TestFlight/App Store/Play Store data. There is no documentation-only mode. A
 5. **Record the OAuth dependency** — the Expo arm requires an Expo account and a network round-trip that the NS
    arm does not.
 
-⚠️ **Pilot item #1 — CONFIRMED BLOCKER (tested 2026-07-31).** A headless session in a throwaway
-`CLAUDE_CONFIG_DIR`, given `harness/mcp/expo.mcp.json` under `--strict-mcp-config`, reports
-**`EXPO_MCP_ABSENT`**: no `mcp__expo__*` tools load. The server is OAuth-gated and the host machine has no
-`mcpOAuth` entry for it. `make_scratch_config` now seeds `mcpOAuth` alongside the Claude credential, so the fix
-is a **one-time interactive authorization** in the operator's main config:
+✅ **Pilot item #1 — RESOLVED (2026-07-31).** The Expo MCP is OAuth-gated; `claude mcp add` alone is not
+enough (it writes config, not a token). After `claude mcp add --scope user` + `claude mcp login expo`, a
+headless session in the harness's throwaway `CLAUDE_CONFIG_DIR` successfully calls
+`mcp__expo__learn` — verified end to end, which is the only test that counts.
 
-```sh
-claude mcp add --transport http expo https://mcp.expo.dev/mcp
-claude            # then run /mcp, select expo, complete the browser OAuth
-```
+**A probe-design trap worth recording.** The first gate asked the model to introspect ("do you have tools whose
+names begin with `mcp__expo`?"). After authorization it still answered *absent* while holding working
+`mcp__expo__*` tools — a false negative that would have aborted every Expo trial as infra-invalid. The gate
+now requires the agent to **actually call** its docs tool and echo the tool name, which both arms pass
+(`mcp__expo__learn`, `mcp__nativescript-docs__search_docs`). Models are unreliable narrators of their own
+tool inventory; only an invocation is ground truth.
 
-After that, re-run the probe and require `EXPO_MCP_PRESENT` before any measured trial. `run-trial.sh`'s
-`preflight_mcp` records the result per trial, so a silent regression cannot pass unnoticed — but it does not
-*halt* the trial, and it must: **running the Expo arm with no docs server while NativeScript has one would not
-degrade the comparison, it would invalidate it** (docs friction collapses to zero on one side only). Treat a
-failed MCP preflight as infra-invalid, never as data.
+A failed MCP preflight aborts the trial with `outcome: infra-invalid-mcp` — never recorded as data, because
+running one arm without its docs server would invalidate the comparison rather than weaken it.
 
 ### 2.4 Baseline repo, CNG, and the build gate
 

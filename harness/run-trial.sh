@@ -204,11 +204,14 @@ preflight_mcp() {
   # answer is recorded but not enforced.
   note "preflight: verifying docs MCP '$DOCS_MCP_NAME' loads (kind: $DOCS_MCP_KIND)"
   local pf="$TRIAL_DIR/preflight-mcp.json"
-  local probe="Do not use any tools. Answer from your system prompt only: do you have any tools whose names begin with mcp__${DOCS_MCP_NAME}? Reply exactly MCP_PRESENT or MCP_ABSENT."
+  # Ground truth only: the probe must actually CALL the server. Asking the model
+  # to introspect its own tool list is unreliable — a session holding working
+  # mcp__expo__* tools still answered "absent" when asked that way.
+  local probe="Use your documentation tool to look up anything at all. Then reply with exactly one line: USED=<the exact tool name you called>, or NO_DOCS_TOOL if you have none."
   ( cd "$REPO" && CLAUDE_CONFIG_DIR="$SCRATCH_CONFIG" claude -p "$probe" \
-      --output-format json --model "$MODEL" --max-turns 3 \
+      --output-format json --model "$MODEL" --max-turns 6 \
       --mcp-config "$MCP_CONFIG" --strict-mcp-config \
-      --dangerously-skip-permissions ) >"$pf" 2>"$pf.stderr"
+      --dangerously-skip-permissions </dev/null ) >"$pf" 2>"$pf.stderr"
   local result
   result="$(json_field "$pf" result)"
   manifest_set "mcp_preflight" "$(node -e '
@@ -228,7 +231,7 @@ preflight_mcp() {
     return 0
   fi
   case "$result" in
-    *MCP_PRESENT*) note "preflight mcp: ok — $DOCS_MCP_NAME tools are loaded" ;;
+    *"mcp__${DOCS_MCP_NAME}"*) note "preflight mcp: ok — agent called ${result#*USED=}" ;;
     *) manifest_set "outcome" '"infra-invalid-mcp"'
        die "docs MCP '$DOCS_MCP_NAME' did not load (probe said: ${result:-<no answer>}).
   This trial is INFRA-INVALID, not a framework result — running one arm without its
