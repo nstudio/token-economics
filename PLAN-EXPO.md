@@ -129,11 +129,22 @@ and TestFlight/App Store/Play Store data. There is no documentation-only mode. A
 5. **Record the OAuth dependency** — the Expo arm requires an Expo account and a network round-trip that the NS
    arm does not.
 
-⚠️ **Operational risk, pilot item #1:** `run-trial.sh` mints a throwaway `CLAUDE_CONFIG_DIR` per trial via
-`mktemp`. OAuth'd MCP credentials will not survive that unless they are seeded, the same way
-`make_scratch_config` already seeds the Claude credential. Confirm before any measured run that a scratch-config
-headless session can actually call `mcp__expo__search_documentation`; if it cannot, extend `make_scratch_config`
-to copy the Expo MCP auth material, and record that in the manifest.
+⚠️ **Pilot item #1 — CONFIRMED BLOCKER (tested 2026-07-31).** A headless session in a throwaway
+`CLAUDE_CONFIG_DIR`, given `harness/mcp/expo.mcp.json` under `--strict-mcp-config`, reports
+**`EXPO_MCP_ABSENT`**: no `mcp__expo__*` tools load. The server is OAuth-gated and the host machine has no
+`mcpOAuth` entry for it. `make_scratch_config` now seeds `mcpOAuth` alongside the Claude credential, so the fix
+is a **one-time interactive authorization** in the operator's main config:
+
+```sh
+claude mcp add --transport http expo https://mcp.expo.dev/mcp
+claude            # then run /mcp, select expo, complete the browser OAuth
+```
+
+After that, re-run the probe and require `EXPO_MCP_PRESENT` before any measured trial. `run-trial.sh`'s
+`preflight_mcp` records the result per trial, so a silent regression cannot pass unnoticed — but it does not
+*halt* the trial, and it must: **running the Expo arm with no docs server while NativeScript has one would not
+degrade the comparison, it would invalidate it** (docs friction collapses to zero on one side only). Treat a
+failed MCP preflight as infra-invalid, never as data.
 
 ### 2.4 Baseline repo, CNG, and the build gate
 
@@ -198,6 +209,32 @@ Retro-applied to the v1.0 corpus, the split sharpens the headline considerably:
 essentially equal" is a much more precise claim than the published 16-vs-242, and it isolates the mechanism
 exactly. Worth folding into the v1.0 report as a clarifying addendum (new derived view of unchanged evidence,
 not a revision of any measured number).
+
+### 2.7 The Expo template ships agent onboarding — normalized away, and disclosed
+
+Discovered while scaffolding (2026-07-31). `npx create-expo-app@latest` (SDK 57 default template) ships, in
+addition to app code:
+
+- `AGENTS.md` — "Expo HAS CHANGED. Read the exact versioned docs at docs.expo.dev/versions/v57.0.0/ before
+  writing any code."
+- `CLAUDE.md` — a single line, `@AGENTS.md`, importing the above.
+- `.claude/settings.json` — `{"enabledPlugins": {"expo@claude-plugins-official": true}}`, enabling Expo's
+  **official Claude Code plugin**.
+
+Neither the NativeScript nor the LynxJS scaffold ships anything comparable. Left in place, these would breach
+controls the v1.0 study is built on: the plugin adds tooling beyond the "exactly one docs MCP and nothing else"
+rule (§2.3), and the instruction files break "structurally identical `CLAUDE.md`, same level of help, no
+feature hints" (`PLAN.md` §4.1.4).
+
+**All three are removed at the Expo baseline** and the paired `CLAUDE.md` installed in their place. The full
+contents are recorded verbatim in `harness/baselines/expo/TEMPLATE-INVENTORY.md`, so the normalization is
+auditable rather than invisible.
+
+This is a *real* Expo advantage the benchmark deliberately holds constant, and the report must say so plainly:
+a team starting from the stock template gets agent onboarding and a first-party agent plugin for free, and the
+measured token numbers give Expo no credit for it. It belongs in the confounders list, not a footnote — and it
+is arguably its own follow-up study ("what does shipping agent onboarding buy a framework?"), which this
+harness could now run as another study slug.
 
 ---
 
@@ -313,9 +350,9 @@ concurrently, and mark any usage-limit death `infra-invalid` rather than as a fr
 |---|---|---|
 | 2 | **✅ done** — harness generalized to a framework/study registry (`harness/frameworks/`, `harness/studies/`, `lib/registry.mjs`, `lib/common.sh`); `expo.json` + `mcp/expo.mcp.json` added; three-bucket LOC classifier + `first_turn_context` in `analyze.mjs`; perf suite study-aware; `sync-spec.sh` and `manifest.mjs` added; v1.0 results namespaced under `results/ns-vs-lynx/` with every published number re-verified | harness v1.1 |
 | 1 | **✅ done** — SPEC v1.1 authored (`harness/spec/v1.1/`, two-line diff vs v1.0, assets checksum-identical); Expo `CLAUDE.md` written to `harness/baselines/expo/` structurally identical to the NS one | SPEC v1.1.0 |
-| 0 | Scaffold `expo-benchmark` from default `create-expo-app` (SDK 57), pinning `app.json` `name: ExpoBenchmark` so the registry's workspace/scheme locator stays valid; run `./sync-spec.sh ns-vs-expo`; copy in `harness/baselines/expo/CLAUDE.md`; confirm the §2.4 build gate is green | green blank repo |
-| 3 | Tag `benchmark-baseline-v1.1` in **both** repos (NS gets the two-line spec update) after both build green; `./sync-spec.sh ns-vs-expo --check` | tagged baselines |
-| 4 | **Pilot: 1 NS + 1 Expo.** Clears pilot items #1–#4 (MCP auth in scratch config, prebuild idempotency, §5.1 bundling feasibility, XCUITest label matching). Amend spec/harness here — never after | calibrated harness, frozen spec |
+| 0 | **✅ done 2026-07-31** — `expo-benchmark` scaffolded from the default `create-expo-app` template (SDK 57.0.9 / RN 0.86.2 / React 19.2.3 / Expo Router); `app.json` pinned to `name: ExpoBenchmark` + explicit bundle id, so prebuild emits exactly `ios/ExpoBenchmark.xcworkspace`; template agent files removed per §2.7; paired `CLAUDE.md` and spec v1.1 installed; **§2.4 build gate green** (`** BUILD SUCCEEDED **`) | green blank repo |
+| 3 | **✅ done 2026-07-31** — both repos build green and are tagged `benchmark-baseline-v1.1` (ns `b51dc82` on branch `baseline-v1.1`, expo `e055a19` on `main`); `./sync-spec.sh ns-vs-expo --check` passes | tagged baselines |
+| 4 | **BLOCKED on pilot item #1** — Expo MCP needs one interactive OAuth (§2.3); measured trials cannot start until the probe returns `EXPO_MCP_PRESENT`. Then: pilot 1 NS + 1 Expo, clearing items #2–#4 (prebuild idempotency, §5.1 bundling feasibility, XCUITest label matching). Amend spec/harness here — never after | calibrated harness, frozen spec |
 | 5 | Main run: 5×2 interleaved (`run-main.sh 5`) | `results/` |
 | 6 | Acceptance checklist per trial (+ ≤1 remediation round each, tokens counted) | success rates |
 | 7 | Perf extension: Release rebuilds, size/launch/memory, XCUITest latency, interop bench (three-engine table) | `results/perf/` |
@@ -347,4 +384,7 @@ concurrently, and mark any usage-limit death `infra-invalid` rather than as a fr
 5. **The no-wrapper rule is a constraint on practice.** It isolates interop architecture at the cost of
    realism — which is exactly what §5's open arm exists to quantify.
 6. **Alpha toolchain on the NS side** (9.1-alpha) vs a stable Expo SDK 57 release — carried over from v1.0.
-7. **Stochasticity**: n=5, medians, full raw disclosure — unchanged.
+7. **Expo ships agent onboarding that this benchmark removes** (§2.7): `AGENTS.md`, a `CLAUDE.md`, and an
+   enabled official Claude Code plugin come with the stock template. Normalizing them away is required to hold
+   the study's controls, but it means the measured numbers understate what a real Expo team gets on day one.
+8. **Stochasticity**: n=5, medians, full raw disclosure — unchanged.

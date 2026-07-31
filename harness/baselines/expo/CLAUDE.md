@@ -4,8 +4,8 @@ Expo app using React and React Native with TypeScript, built with the Expo SDK a
 
 ## Layout
 
-- `app/` — Expo Router routes; each file is a screen, `app/_layout.tsx` defines navigation
-- `components/` — shared React components
+- `src/app/` — Expo Router routes; each file is a screen, `src/app/_layout.tsx` defines navigation
+- `src/components/`, `src/hooks/`, `src/constants/` — shared React components, hooks, and theme
 - `modules/` — local native modules created with `npx create-expo-module@latest --local`
 - `app.json` — app config: name, scheme, iOS bundle id, `ios.infoPlist`, `ios.entitlements`, config plugins
 - `SPEC.md`, `spec-assets/` — app specification and fixed assets (read-only)
