@@ -163,8 +163,12 @@ token-economics/
 > were namespaced per study — this study's artifacts now live under `results/ns-vs-lynx/`, its spec under
 > `harness/spec/v1.0/`, and runners take a study slug (`./run-trial.sh ns-vs-lynx ns …`). Every file moved as a
 > pure rename; all 361 archived artifacts are byte-identical and every published number re-verified against the
-> pre-move output. See [`harness/README.md`](harness/README.md) for the current structure and
-> [`PLAN-EXPO.md`](PLAN-EXPO.md) for the second study's design.
+> pre-move output. The analyzer additionally splits the native LOC bucket described above into
+> `loc_native_code_added` (native-language source) and `loc_native_config_added` (plists, entitlements, build
+> settings), with `loc_native_added` still their sum — see the addendum in
+> [`results/ns-vs-lynx/REPORT.md`](results/ns-vs-lynx/REPORT.md), which also reports the new fixed-context
+> (MCP schema weight) measure this section anticipated. See [`harness/README.md`](harness/README.md) for the
+> current structure and [`PLAN-EXPO.md`](PLAN-EXPO.md) for the second study's design.
 
 (Alternative capture path: Claude Code's OpenTelemetry metrics export. Strictly optional — JSONL parsing is self-contained, offline, and reproducible from archived artifacts alone.)
 

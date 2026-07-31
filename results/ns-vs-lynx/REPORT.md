@@ -22,7 +22,7 @@ Model `claude-sonnet-5`, `MAX_TURNS=80` per phase (pilot value — see calibrati
 
 Cache traffic: NS 355.7k cache-write / 19.5M cache-read; Lynx 480.2k / 24.5M. Costs are estimated list-price (subscription auth). Full per-phase rows: `summary.csv`; raw artifacts per trial directory.
 
-**Native-vs-JS code split** (lines added): NativeScript wrote **14 native-side lines** (Info.plist/entitlements config only — all feature logic stayed in TypeScript); LynxJS wrote **298 lines** of Swift/bridge wiring. This is the benchmark's core structural signal, and it showed up on the first trial.
+**Native-vs-JS code split** (lines added): NativeScript wrote **14 native-side lines**, all of them Info.plist/entitlements config — **zero lines of native-language code**; all feature logic stayed in TypeScript. LynxJS wrote **298** native-side lines: **282 of Swift** plus 16 of config. This is the benchmark's core structural signal, and it showed up on the first trial.
 
 **Docs usage:** NS made 21 docs-MCP calls; Lynx made 7 MCP resource reads (its docs MCP is resources-based) and leaned much harder on Bash (135 calls vs NS 113 — notably grepping vendored Pods/Sparkling sources for bridge answers).
 
@@ -65,9 +65,11 @@ Interactive items (permission flows, step logging + persistence, transcription s
 | Wall time | ~22 min (17–30) | ~39 min (35–94) | 1.7× |
 | Cache-read tokens | 15.5M (8.5–22.6M) | 41.4M (30.8–61.7M) | 2.7× |
 | Native-side LOC added | **16** (15–17) | **242** (235–421) | **~15×** |
+| — of which native-language code | **0** (0–0) | **226** (213–405) | — |
+| — of which native config | 16 (15–17) | 18 (16–23) | ~1× |
 | JS/TS-side LOC added | 376 (327–396) | 393 (335–504) | ~1× |
 
-The LOC split is the mechanism in one row: both frameworks wrote essentially the same amount of Vue/TS, but Lynx additionally authored ~240 lines of Swift/bridge per trial — and that authorship plus the discovery around it roughly doubles total token spend.
+The LOC split is the mechanism in one row, and the three-way breakdown (added 2026-07-31, see the addendum below) makes it exact: both frameworks wrote essentially the same amount of Vue/TS **and the same native configuration**, but Lynx additionally authored ~226 lines of Swift per trial while NativeScript authored **none** — and that authorship plus the discovery around it roughly doubles total token spend.
 
 ### Per-phase medians (output tokens · cost · turns)
 
@@ -167,6 +169,40 @@ Disclosures: Lynx runs JS off-main-thread, NS on-main (self-timed totals make th
 ### Limits
 
 Simulator on one Mac: absolute numbers are not device numbers — only the comparative readings transfer, and they share host, simulator runtime, and interleaved scheduling. Sizes are uncompressed simulator builds (no App Store thinning/compression). No scroll/FPS metric — the spec'd app has no scroll-stressing surface, and Lynx's multithreaded-rendering pitch targets exactly that kind of load; that claim is explicitly untested here rather than quietly folded in. Feature-path timings measure tap→UI-observable result via the accessibility tree (includes each framework's render+a11y latency — which is what a user experiences).
+
+## Addendum (2026-07-31) — two new measures over the same evidence
+
+Preparing the second study ([`../../PLAN-EXPO.md`](../../PLAN-EXPO.md)) added two analyzer measures that apply retroactively. **No measured value in this report changed**: both are new derived views of the identical archived transcripts and diffs, recomputed by `harness/analyze.mjs` and verified against the pre-refactor output at 900/900 legacy cells. Evidence integrity is checkable with `node harness/manifest.mjs ns-vs-lynx --check`.
+
+### 1. Native-side LOC now splits code from configuration
+
+The original single "native-side" bucket mixed two different kinds of work: writing Swift, and writing an Info.plist key. Splitting them sharpens the headline considerably.
+
+| Per trial, median (main run, n=5) | NativeScript | LynxJS |
+|---|---|---|
+| Native-**language** code (`.swift`) | **0** | **226** |
+| Native **config** (plist/entitlements) | 16 | 18 |
+| Total native (as originally published) | 16 | 242 |
+
+Per phase, the config work is not merely similar — it is **identical**:
+
+| Phase | NS code / config | Lynx code / config |
+|---|---|---|
+| 1 — UI shell | 0 / 0 | 0 / 0 |
+| 2 — HealthKit | **0 / 14** | 134 / **14** |
+| 3 — Speech | **0 / 2** | 106 / **2** |
+
+Both agents wrote the same 14 lines of HealthKit entitlement/usage-string config, then the same 2 lines for Speech. Every remaining native line on the LynxJS side is Swift the agent had to author, register, and debug. The precise claim is therefore stronger than the original "16 vs 242": **reaching these two platform APIs required the same platform configuration on both frameworks, and 226 lines of Swift on exactly one of them.**
+
+### 2. Fixed context prefix (MCP schema weight) was not a factor here
+
+`PLAN.md` §4.3 called for measuring MCP tool-schema overhead, since schemas ride in context every turn. The analyzer now records `first_turn_context` per phase — the turn-1 fixed prefix (system prompt + `CLAUDE.md` + all MCP tool schemas), taken from provider-reported usage.
+
+| Phase-1 median | NativeScript | LynxJS | Δ |
+|---|---|---|---|
+| Fixed context prefix | 34,489 | 34,804 | **+315 (+0.9%)** |
+
+The two arms' fixed prefixes differ by under 1%. **MCP schema weight did not meaningfully influence this study's result** — the 1.9× output-token gap is agent work, not context overhead. This matters mainly as a baseline for the next study: Expo's official MCP exposes 27 tools against NativeScript's docs-only server, so this is the number that comparison gets measured against.
 
 ### Pending to close the study
 
