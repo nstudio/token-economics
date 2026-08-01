@@ -1,0 +1,40 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-ns-4",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "ns",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "nativescript-docs": {
+        "type": "http",
+        "url": "https://docs.nativescript.org/mcp"
+      }
+    }
+  },
+  "started_at": "2026-08-01T06:58:08Z",
+  "outcome": "in-progress",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "docs.nativescript.org/mcp (hosted HTTP — not version-pinnable)"
+  },
+  "baseline_sha": "b51dc822a7ae9e113ad4e14b0920596172c3ca65",
+  "mcp_preflight": {
+    "phase-1": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
+    }
+  }
+}

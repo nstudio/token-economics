@@ -1,0 +1,370 @@
+diff --git a/app.json b/app.json
+index c584887..f63fc56 100644
+--- a/app.json
++++ b/app.json
+@@ -11,7 +11,8 @@
+       "bundleIdentifier": "com.nstudio.expobenchmark",
+       "infoPlist": {
+         "NSHealthShareUsageDescription": "Native Bench reads your step count to show your recent activity.",
+-        "NSHealthUpdateUsageDescription": "Native Bench writes step count samples that you log in the app."
++        "NSHealthUpdateUsageDescription": "Native Bench writes step count samples that you log in the app.",
++        "NSSpeechRecognitionUsageDescription": "Native Bench uses speech recognition to transcribe the sample audio."
+       },
+       "entitlements": {
+         "com.apple.developer.healthkit": true
+diff --git a/modules/expo-bench-speech/LICENSE b/modules/expo-bench-speech/LICENSE
+new file mode 100644
+index 0000000..30b20e3
+--- /dev/null
++++ b/modules/expo-bench-speech/LICENSE
+@@ -0,0 +1,21 @@
++The MIT License (MIT)
++
++Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
+diff --git a/modules/expo-bench-speech/expo-module.config.json b/modules/expo-bench-speech/expo-module.config.json
+new file mode 100644
+index 0000000..7145251
+--- /dev/null
++++ b/modules/expo-bench-speech/expo-module.config.json
+@@ -0,0 +1,6 @@
++{
++  "platforms": ["apple"],
++  "apple": {
++    "modules": ["ExpoBenchSpeechModule"]
++  }
++}
+diff --git a/modules/expo-bench-speech/ios/ExpoBenchSpeech.podspec b/modules/expo-bench-speech/ios/ExpoBenchSpeech.podspec
+new file mode 100644
+index 0000000..bc43685
+--- /dev/null
++++ b/modules/expo-bench-speech/ios/ExpoBenchSpeech.podspec
+@@ -0,0 +1,25 @@
++Pod::Spec.new do |s|
++  s.name           = 'ExpoBenchSpeech'
++  s.version        = '1.0.0'
++  s.summary        = 'Local Speech framework bridge for transcribing a bundled audio sample'
++  s.description    = 'Local Speech framework bridge for transcribing a bundled audio sample'
++  s.author         = ''
++  s.homepage       = 'https://docs.expo.dev/modules/'
++  s.platforms      = {
++    :ios => '16.4'
++  }
++  s.source         = { git: '' }
++  s.static_framework = true
++
++  s.dependency 'ExpoModulesCore'
++  s.frameworks = 'Speech'
++
++  # Swift/Objective-C compatibility
++  s.pod_target_xcconfig = {
++    'DEFINES_MODULE' => 'YES',
++  }
++
++  s.resource = 'assets/sample.wav'
++
++  s.source_files = "**/*.{h,m,mm,swift,hpp,cpp}"
++end
+diff --git a/modules/expo-bench-speech/ios/ExpoBenchSpeechModule.swift b/modules/expo-bench-speech/ios/ExpoBenchSpeechModule.swift
+new file mode 100644
+index 0000000..b0bb3ba
+--- /dev/null
++++ b/modules/expo-bench-speech/ios/ExpoBenchSpeechModule.swift
+@@ -0,0 +1,90 @@
++import ExpoModulesCore
++import Speech
++
++struct SpeechUnavailableError: Error, LocalizedError {
++  var errorDescription: String? { "Speech recognizer is not available" }
++}
++
++struct SpeechSampleMissingError: Error, LocalizedError {
++  var errorDescription: String? { "Sample audio file not found in bundle" }
++}
++
++public class ExpoBenchSpeechModule: Module {
++  private var recognitionTask: SFSpeechRecognitionTask?
++
++  public func definition() -> ModuleDefinition {
++    Name("ExpoBenchSpeech")
++
++    Events("onPartialTranscript")
++
++    Function("getAuthorizationStatus") { () -> String in
++      self.authorizationStatusString()
++    }
++
++    AsyncFunction("requestAuthorization") { () -> String in
++      await withCheckedContinuation { continuation in
++        SFSpeechRecognizer.requestAuthorization { _ in
++          continuation.resume()
++        }
++      }
++      return self.authorizationStatusString()
++    }
++
++    AsyncFunction("transcribeSample") { () -> String in
++      try await self.transcribeSample()
++    }
++  }
++
++  private func authorizationStatusString() -> String {
++    switch SFSpeechRecognizer.authorizationStatus() {
++    case .notDetermined: return "notDetermined"
++    case .authorized: return "authorized"
++    case .denied, .restricted: return "denied"
++    @unknown default: return "notDetermined"
++    }
++  }
++
++  private func sampleAudioURL() throws -> URL {
++    let moduleBundle = Bundle(for: ExpoBenchSpeechModule.self)
++    let assetBundle: Bundle
++    if let bundleURL = moduleBundle.url(forResource: "ExpoBenchSpeech", withExtension: "bundle"),
++      let resourceBundle = Bundle(url: bundleURL) {
++      assetBundle = resourceBundle
++    } else {
++      assetBundle = moduleBundle
++    }
++    guard let url = assetBundle.url(forResource: "sample", withExtension: "wav") else {
++      throw SpeechSampleMissingError()
++    }
++    return url
++  }
++
++  private func transcribeSample() async throws -> String {
++    guard let recognizer = SFSpeechRecognizer(), recognizer.isAvailable else {
++      throw SpeechUnavailableError()
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: try sampleAudioURL())
++    request.shouldReportPartialResults = true
++
++    return try await withCheckedThrowingContinuation { continuation in
++      var didResume = false
++      self.recognitionTask = recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++          if !didResume {
++            didResume = true
++            continuation.resume(throwing: error)
++          }
++          return
++        }
++        guard let result else { return }
++        let text = result.bestTranscription.formattedString
++        self.sendEvent("onPartialTranscript", ["text": text, "isFinal": result.isFinal])
++        if result.isFinal && !didResume {
++          didResume = true
++          continuation.resume(returning: text)
++        }
++      }
++    }
++  }
++}
+diff --git a/modules/expo-bench-speech/ios/assets/sample.wav b/modules/expo-bench-speech/ios/assets/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/modules/expo-bench-speech/ios/assets/sample.wav differ
+diff --git a/modules/expo-bench-speech/src/ExpoBenchSpeech.types.ts b/modules/expo-bench-speech/src/ExpoBenchSpeech.types.ts
+new file mode 100644
+index 0000000..b75a16f
+--- /dev/null
++++ b/modules/expo-bench-speech/src/ExpoBenchSpeech.types.ts
+@@ -0,0 +1,6 @@
++export type SpeechAuthorizationStatus = 'notDetermined' | 'authorized' | 'denied';
++
++export type PartialTranscriptEvent = {
++  text: string;
++  isFinal: boolean;
++};
+diff --git a/modules/expo-bench-speech/src/ExpoBenchSpeechModule.ts b/modules/expo-bench-speech/src/ExpoBenchSpeechModule.ts
+new file mode 100644
+index 0000000..fe8e3bc
+--- /dev/null
++++ b/modules/expo-bench-speech/src/ExpoBenchSpeechModule.ts
+@@ -0,0 +1,15 @@
++import { NativeModule, requireNativeModule } from 'expo';
++
++import { PartialTranscriptEvent, SpeechAuthorizationStatus } from './ExpoBenchSpeech.types';
++
++type ExpoBenchSpeechModuleEvents = {
++  onPartialTranscript(event: PartialTranscriptEvent): void;
++};
++
++declare class ExpoBenchSpeechModule extends NativeModule<ExpoBenchSpeechModuleEvents> {
++  getAuthorizationStatus(): SpeechAuthorizationStatus;
++  requestAuthorization(): Promise<SpeechAuthorizationStatus>;
++  transcribeSample(): Promise<string>;
++}
++
++export default requireNativeModule<ExpoBenchSpeechModule>('ExpoBenchSpeech');
+diff --git a/modules/expo-bench-speech/src/ExpoBenchSpeechModule.web.ts b/modules/expo-bench-speech/src/ExpoBenchSpeechModule.web.ts
+new file mode 100644
+index 0000000..e2a7620
+--- /dev/null
++++ b/modules/expo-bench-speech/src/ExpoBenchSpeechModule.web.ts
+@@ -0,0 +1,6 @@
++import { registerWebModule, NativeModule } from 'expo';
++
++// ExpoBenchSpeechModule is not available on the web platform.
++class ExpoBenchSpeechModule extends NativeModule<{}> {}
++
++export default registerWebModule(ExpoBenchSpeechModule, 'ExpoBenchSpeechModule');
+diff --git a/screens/TranscribeScreen.tsx b/screens/TranscribeScreen.tsx
+index 40ea145..9ce6472 100644
+--- a/screens/TranscribeScreen.tsx
++++ b/screens/TranscribeScreen.tsx
+@@ -1,20 +1,103 @@
+-import { Pressable, StyleSheet, Text, View } from 'react-native';
++import { useFocusEffect } from '@react-navigation/native';
++import { useCallback, useEffect, useState } from 'react';
++import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
++
++import ExpoBenchSpeech from '../modules/expo-bench-speech/src/ExpoBenchSpeechModule';
++import { SpeechAuthorizationStatus } from '../modules/expo-bench-speech/src/ExpoBenchSpeech.types';
++
++function statusLineText(status: SpeechAuthorizationStatus): string {
++  switch (status) {
++    case 'authorized':
++      return 'Speech access: granted';
++    case 'denied':
++      return 'Speech access: denied';
++    default:
++      return 'Speech access: not requested';
++  }
++}
++
++function errorText(error: unknown): string {
++  return error instanceof Error ? error.message : String(error);
++}
+ 
+ export default function TranscribeScreen() {
++  const [authStatus, setAuthStatus] = useState<SpeechAuthorizationStatus>('notDetermined');
++  const [errorMessage, setErrorMessage] = useState<string | null>(null);
++  const [isTranscribing, setIsTranscribing] = useState(false);
++  const [transcript, setTranscript] = useState<string | null>(null);
++  const [elapsedSeconds, setElapsedSeconds] = useState<number | null>(null);
++
++  useFocusEffect(
++    useCallback(() => {
++      setAuthStatus(ExpoBenchSpeech.getAuthorizationStatus());
++    }, [])
++  );
++
++  useEffect(() => {
++    const subscription = ExpoBenchSpeech.addListener('onPartialTranscript', (event) => {
++      setTranscript(event.text);
++    });
++    return () => subscription.remove();
++  }, []);
++
++  const handleRequestAccess = async () => {
++    setErrorMessage(null);
++    try {
++      const status = await ExpoBenchSpeech.requestAuthorization();
++      setAuthStatus(status);
++    } catch (error) {
++      setErrorMessage(errorText(error));
++    }
++  };
++
++  const handleTranscribe = async () => {
++    setErrorMessage(null);
++    setTranscript(null);
++    setElapsedSeconds(null);
++    setIsTranscribing(true);
++    const startedAt = Date.now();
++    try {
++      const finalTranscript = await ExpoBenchSpeech.transcribeSample();
++      setTranscript(finalTranscript);
++      setElapsedSeconds((Date.now() - startedAt) / 1000);
++    } catch (error) {
++      setErrorMessage(errorText(error));
++    } finally {
++      setIsTranscribing(false);
++    }
++  };
++
++  const canTranscribe = authStatus === 'authorized' && !isTranscribing;
++  const statusText = isTranscribing ? 'Transcribing…' : errorMessage ?? statusLineText(authStatus);
++
+   return (
+     <View style={styles.container}>
+-      <Text style={styles.status}>Speech access: not requested</Text>
++      <Text style={styles.status}>{statusText}</Text>
+ 
+-      <Pressable style={styles.button}>
++      <Pressable style={styles.button} onPress={handleRequestAccess}>
+         <Text style={styles.buttonText}>Request Access</Text>
+       </Pressable>
+-      <Pressable style={[styles.button, styles.buttonDisabled]} disabled>
+-        <Text style={[styles.buttonText, styles.buttonTextDisabled]}>Transcribe Sample</Text>
++      <Pressable
++        style={[styles.button, !canTranscribe && styles.buttonDisabled]}
++        disabled={!canTranscribe}
++        onPress={handleTranscribe}>
++        <Text style={[styles.buttonText, !canTranscribe && styles.buttonTextDisabled]}>Transcribe Sample</Text>
+       </Pressable>
+ 
+-      <View style={styles.transcriptArea}>
+-        <Text style={styles.emptyStateText}>No transcript yet</Text>
+-      </View>
++      <ScrollView
++        style={styles.transcriptArea}
++        contentContainerStyle={transcript === null ? styles.emptyState : undefined}>
++        {transcript === null ? (
++          <Text style={styles.emptyStateText}>No transcript yet</Text>
++        ) : (
++          <>
++            <Text style={styles.transcriptText}>{transcript}</Text>
++            {elapsedSeconds !== null && (
++              <Text style={styles.completedText}>Completed in {elapsedSeconds.toFixed(1)} s</Text>
++            )}
++          </>
++        )}
++      </ScrollView>
+     </View>
+   );
+ }
+@@ -51,6 +134,9 @@ const styles = StyleSheet.create({
+   transcriptArea: {
+     flex: 1,
+     marginTop: 24,
++  },
++  emptyState: {
++    flexGrow: 1,
+     alignItems: 'center',
+     justifyContent: 'center',
+   },
+@@ -58,4 +144,14 @@ const styles = StyleSheet.create({
+     fontSize: 16,
+     color: '#999',
+   },
++  transcriptText: {
++    fontSize: 16,
++    color: '#333',
++    lineHeight: 22,
++  },
++  completedText: {
++    fontSize: 14,
++    color: '#999',
++    marginTop: 12,
++  },
+ });

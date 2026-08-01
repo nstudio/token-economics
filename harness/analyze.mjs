@@ -136,7 +136,7 @@ const COLS = [
   'reads', 'edits', 'bash', 'mcp_docs', 'web', 'tasks', 'other_tools',
   'files_changed', 'loc_js_added', 'loc_native_added',
   'study', 'set', 'spec_version', 'loc_native_code_added', 'loc_native_config_added', 'loc_generated_added',
-  'first_turn_context',
+  'first_turn_context', 'summary_usage_mismatch',
 ];
 
 function analyzeStudy(study) {
@@ -159,6 +159,10 @@ function analyzeStudy(study) {
       const wall = t.first_ts && t.last_ts
         ? (new Date(t.last_ts) - new Date(t.first_ts)) / 1000
         : (p.duration_ms != null ? p.duration_ms / 1000 : null);
+      const summaryOut = p.usage?.output_tokens;
+      const summaryMismatch = summaryOut != null && t.output
+        ? Math.abs(summaryOut - t.output) / t.output > 0.02
+        : false;
       rows.push({
         trial, framework: manifest.framework, model: manifest.model, phase,
         build_pass: p.build_pass ?? null,
@@ -167,7 +171,14 @@ function analyzeStudy(study) {
         acceptance: manifest.acceptance?.status ?? null,
         input: t.input ?? null, output: t.output ?? null,
         cache_write: t.cache_write ?? null, cache_read: t.cache_read ?? null,
-        total_cost_usd: p.total_cost_usd ?? null,
+        // Token counts come from the transcript (PLAN §5.2 — the ground truth);
+        // cost only exists in the headless summary. Those two can disagree: one
+        // observed session reported 430 output tokens and num_turns 1 for a
+        // 632s session the transcript shows as 14,937 tokens. When they diverge,
+        // the summary's cost describes work that did not happen, so it is
+        // withheld rather than published as a number that looks fine.
+        total_cost_usd: summaryMismatch ? null : (p.total_cost_usd ?? null),
+        summary_usage_mismatch: summaryMismatch,
         turns: p.num_turns ?? null,
         wall_s: wall != null ? Math.round(wall) : null,
         reads: t.reads ?? null, edits: t.edits ?? null, bash: t.bash ?? null,
@@ -197,8 +208,16 @@ function analyzeStudy(study) {
       for (const phase of [...phaseIds, 'total']) {
         const sample = phase === 'total'
           ? Object.values(Object.groupBy(byFw.filter(r => r.phase !== 'R'), r => r.trial))
+              // A per-trial total is only meaningful if every phase contributed.
+              // Treating a withheld value as 0 would silently understate the
+              // trial and drag the median down.
               .map(trialRows => Object.fromEntries(
-                NUMERIC.map(c => [c, trialRows.reduce((a, r) => a + (r[c] ?? 0), 0)]),
+                NUMERIC.map(c => [
+                  c,
+                  trialRows.some(r => r[c] == null)
+                    ? null
+                    : trialRows.reduce((a, r) => a + r[c], 0),
+                ]),
               ))
           : byFw.filter(r => r.phase === phase);
         if (!sample.length) continue;

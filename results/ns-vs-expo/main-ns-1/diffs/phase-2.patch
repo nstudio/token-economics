@@ -1,0 +1,219 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index d537114..d661564 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -22,6 +22,10 @@
+ 	<string>1.0.0</string>
+ 	<key>LSRequiresIPhoneOS</key>
+ 	<true/>
++	<key>NSHealthShareUsageDescription</key>
++	<string>Native Bench reads your step count to show recent activity.</string>
++	<key>NSHealthUpdateUsageDescription</key>
++	<string>Native Bench logs step counts you add in the app.</string>
+ 	<key>UILaunchStoryboardName</key>
+ 	<string>LaunchScreen</string>
+ 	<key>UIRequiresFullScreen</key>
+diff --git a/App_Resources/iOS/app.entitlements b/App_Resources/iOS/app.entitlements
+new file mode 100644
+index 0000000..2ab14a2
+--- /dev/null
++++ b/App_Resources/iOS/app.entitlements
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>com.apple.developer.healthkit</key>
++	<true/>
++	<key>com.apple.developer.healthkit.access</key>
++	<array/>
++</dict>
++</plist>
+diff --git a/app/components/Health.vue b/app/components/Health.vue
+index abdac56..e91e8ea 100644
+--- a/app/components/Health.vue
++++ b/app/components/Health.vue
+@@ -1,20 +1,171 @@
+ <template>
+-    <Page>
++    <Page @navigatedTo="refreshAuthStatus">
+         <ActionBar title="Health" />
+ 
+         <ScrollView>
+             <StackLayout class="p-6">
+-                <Label text="Health access: not requested" class="text-base text-gray-500" textWrap="true" />
++                <Label :text="statusText" class="text-base text-gray-500" textWrap="true" />
+ 
+-                <Button text="Request Access" class="mt-4 p-3 bg-blue-500 text-white rounded" />
+-                <Button text="Log 500 Steps" :isEnabled="false" class="mt-2 p-3 bg-gray-300 text-white rounded" />
++                <Button text="Request Access" class="mt-4 p-3 bg-blue-500 text-white rounded" @tap="requestAccess" />
++                <Button
++                    text="Log 500 Steps"
++                    :isEnabled="accessGranted"
++                    :class="accessGranted ? 'mt-2 p-3 bg-blue-500 text-white rounded' : 'mt-2 p-3 bg-gray-300 text-white rounded'"
++                    @tap="logSteps"
++                />
+ 
+                 <Label text="Last 7 Days" class="mt-6 text-lg font-bold" textWrap="true" />
+-                <Label text="No data yet" class="mt-2 text-gray-500" textWrap="true" />
++
++                <template v-if="accessGranted">
++                    <Label v-for="day in days" :key="day.label" :text="day.label"
++                        :class="day.isToday ? 'mt-2 font-bold text-blue-600' : 'mt-2 text-gray-700'" textWrap="true" />
++                </template>
++                <Label v-else :text="healthAccessState === 'denied' ? 'Health access needed' : 'No data yet'"
++                    class="mt-2 text-gray-500" textWrap="true" />
+             </StackLayout>
+         </ScrollView>
+     </Page>
+ </template>
+ 
+ <script setup lang="ts">
++import { ref } from 'vue'
++import { Utils } from '@nativescript/core'
++
++type HealthAccessState = 'not-requested' | 'granted' | 'denied'
++
++const statusText = ref('Health access: not requested')
++const healthAccessState = ref<HealthAccessState>('not-requested')
++const accessGranted = ref(false)
++const days = ref<{ label: string; isToday: boolean }[]>([])
++
++let healthStore: HKHealthStore | null = null
++let stepType: HKQuantityType | null = null
++
++function getHealthStore(): HKHealthStore {
++  if (!healthStore) {
++    healthStore = HKHealthStore.new()
++  }
++  return healthStore
++}
++
++function getStepType(): HKQuantityType {
++  if (!stepType) {
++    stepType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
++  }
++  return stepType
++}
++
++function startOfDay(date: Date): Date {
++  const copy = new Date(date)
++  copy.setHours(0, 0, 0, 0)
++  return copy
++}
++
++function addDays(date: Date, amount: number): Date {
++  const copy = new Date(date)
++  copy.setDate(copy.getDate() + amount)
++  return copy
++}
++
++const WEEKDAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
++const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
++
++function formatDayLabel(date: Date): string {
++  return `${WEEKDAY_NAMES[date.getDay()]} ${MONTH_NAMES[date.getMonth()]} ${date.getDate()}`
++}
++
++function formatSteps(total: number): string {
++  return Math.round(total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
++}
++
++function sumStepsForRange(start: Date, end: Date): Promise<number> {
++  return new Promise((resolve) => {
++    const predicate = HKQuery.predicateForSamplesWithStartDateEndDateOptions(start, end, HKQueryOptions.None)
++    const query = new HKStatisticsQuery({
++      quantityType: getStepType(),
++      quantitySamplePredicate: predicate,
++      options: HKStatisticsOptions.CumulativeSum,
++      completionHandler: (_query, result, error) => {
++        if (error || !result) {
++          resolve(0)
++          return
++        }
++        const sum = result.sumQuantity()
++        resolve(sum ? sum.doubleValueForUnit(HKUnit.countUnit()) : 0)
++      },
++    })
++    getHealthStore().executeQuery(query)
++  })
++}
++
++async function loadLast7Days() {
++  const today = startOfDay(new Date())
++  const ranges = Array.from({ length: 7 }, (_, i) => {
++    const start = addDays(today, -i)
++    return { start, end: addDays(start, 1), isToday: i === 0 }
++  })
++
++  const totals = await Promise.all(ranges.map((range) => sumStepsForRange(range.start, range.end)))
++
++  days.value = ranges.map((range, i) => ({
++    label: `${formatDayLabel(range.start)} — ${formatSteps(totals[i])} steps${range.isToday ? ' (today)' : ''}`,
++    isToday: range.isToday,
++  }))
++}
++
++function refreshAuthStatus() {
++  if (!HKHealthStore.isHealthDataAvailable()) {
++    healthAccessState.value = 'not-requested'
++    accessGranted.value = false
++    statusText.value = 'Health access: not requested'
++    return
++  }
++
++  const status = getHealthStore().authorizationStatusForType(getStepType())
++  if (status === HKAuthorizationStatus.SharingAuthorized) {
++    healthAccessState.value = 'granted'
++    accessGranted.value = true
++    statusText.value = 'Health access: granted'
++    loadLast7Days()
++  } else if (status === HKAuthorizationStatus.SharingDenied) {
++    healthAccessState.value = 'denied'
++    accessGranted.value = false
++    statusText.value = 'Health access: denied'
++  } else {
++    healthAccessState.value = 'not-requested'
++    accessGranted.value = false
++    statusText.value = 'Health access: not requested'
++  }
++}
++
++function requestAccess() {
++  const shareTypes = NSSet.setWithArray<HKSampleType>([getStepType()])
++  const readTypes = NSSet.setWithArray<HKObjectType>([getStepType()])
++
++  getHealthStore().requestAuthorizationToShareTypesReadTypesCompletion(shareTypes, readTypes, (success, error) => {
++    Utils.dispatchToMainThread(() => {
++      if (!success && error) {
++        statusText.value = error.localizedDescription
++        return
++      }
++      refreshAuthStatus()
++    })
++  })
++}
++
++function logSteps() {
++  const now = new Date()
++  const quantity = HKQuantity.quantityWithUnitDoubleValue(HKUnit.countUnit(), 500)
++  const sample = HKQuantitySample.quantitySampleWithTypeQuantityStartDateEndDate(getStepType(), quantity, now, now)
++
++  getHealthStore().saveObjectWithCompletion(sample, (success, error) => {
++    Utils.dispatchToMainThread(() => {
++      if (success) {
++        loadLast7Days()
++      } else if (error) {
++        statusText.value = error.localizedDescription
++      }
++    })
++  })
++}
+ </script>
+diff --git a/types/references.d.ts b/types/references.d.ts
+index dedd793..b8fe492 100644
+--- a/types/references.d.ts
++++ b/types/references.d.ts
+@@ -1 +1,2 @@
+ /// <reference path="../node_modules/@nativescript/types/index.d.ts" />
++/// <reference path="../node_modules/@nativescript/types-ios/lib/ios/objc-x86_64/objc!HealthKit.d.ts" />

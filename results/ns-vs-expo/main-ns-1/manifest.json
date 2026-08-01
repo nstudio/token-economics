@@ -1,0 +1,179 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-ns-1",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "ns",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "nativescript-docs": {
+        "type": "http",
+        "url": "https://docs.nativescript.org/mcp"
+      }
+    }
+  },
+  "started_at": "2026-08-01T03:55:15Z",
+  "outcome": "phases-complete",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "docs.nativescript.org/mcp (hosted HTTP — not version-pinnable)"
+  },
+  "baseline_sha": "b51dc822a7ae9e113ad4e14b0920596172c3ca65",
+  "mcp_preflight": {
+    "phase-1": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
+    },
+    "phase-2": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
+    },
+    "phase-3": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
+    }
+  },
+  "phases": {
+    "1": {
+      "session_id": "ad344eb3-eae8-4881-8a70-1cd4f4b8f615",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 47,
+      "duration_ms": 186802,
+      "total_cost_usd": 0.9872489,
+      "usage": {
+        "input_tokens": 69,
+        "cache_creation_input_tokens": 45186,
+        "cache_read_input_tokens": 1850283,
+        "output_tokens": 10674,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 45186,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 283,
+            "cache_read_input_tokens": 74275,
+            "cache_creation_input_tokens": 307,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 307
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 188,
+      "end_sha": "1e666d470a4844df2dfc8e7f99bead9faf3eb629"
+    },
+    "2": {
+      "session_id": "d74fedb2-80df-4ff0-812d-93017eeea76a",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 114,
+      "duration_ms": 802536,
+      "total_cost_usd": 4.274174199999999,
+      "usage": {
+        "input_tokens": 174,
+        "cache_creation_input_tokens": 138507,
+        "cache_read_input_tokens": 9328654,
+        "output_tokens": 42884,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 138507,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 432,
+            "cache_read_input_tokens": 164803,
+            "cache_creation_input_tokens": 3111,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 3111
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 804,
+      "end_sha": "6a59de5d61bac8d2339ae23f9cf505cb20324c5f"
+    },
+    "3": {
+      "session_id": "f7b828f7-9f7f-4c4f-b65e-6bc23ce73b06",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 30,
+      "duration_ms": 217822,
+      "total_cost_usd": 0.7789164000000001,
+      "usage": {
+        "input_tokens": 40,
+        "cache_creation_input_tokens": 41856,
+        "cache_read_input_tokens": 1130228,
+        "output_tokens": 12523,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 41856,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 781,
+            "cache_read_input_tokens": 70932,
+            "cache_creation_input_tokens": 336,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 336
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 219,
+      "end_sha": "0485723ddb22dcd570a0dcd25ed30d4d92c0cbaf"
+    }
+  },
+  "trial_branch": "trials/main-ns-1",
+  "finished_at": "2026-08-01T04:19:16Z"
+}

@@ -9,6 +9,636 @@
   "median_set": "main",
   "rows": [
     {
+      "trial": "main-expo-1",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 98,
+      "output": 12225,
+      "cache_write": 57386,
+      "cache_read": 2917288,
+      "total_cost_usd": 1.4039344000000002,
+      "summary_usage_mismatch": false,
+      "turns": 56,
+      "wall_s": 604,
+      "reads": 10,
+      "edits": 5,
+      "bash": 30,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34712,
+      "files_changed": 6,
+      "loc_js_added": 216,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0,
+      "loc_generated_added": 275
+    },
+    {
+      "trial": "main-expo-1",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 50,
+      "output": 24442,
+      "cache_write": 53814,
+      "cache_read": 1434866,
+      "total_cost_usd": 1.1208998,
+      "summary_usage_mismatch": false,
+      "turns": 33,
+      "wall_s": 329,
+      "reads": 10,
+      "edits": 7,
+      "bash": 15,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 0,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34731,
+      "files_changed": 9,
+      "loc_js_added": 182,
+      "loc_native_added": 122,
+      "loc_native_code_added": 91,
+      "loc_native_config_added": 31,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-expo-1",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 62,
+      "output": 22641,
+      "cache_write": 59654,
+      "cache_read": 1921167,
+      "total_cost_usd": 1.2748590999999994,
+      "summary_usage_mismatch": false,
+      "turns": 43,
+      "wall_s": 307,
+      "reads": 13,
+      "edits": 9,
+      "bash": 20,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 0,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34735,
+      "files_changed": 10,
+      "loc_js_added": 158,
+      "loc_native_added": 117,
+      "loc_native_code_added": 90,
+      "loc_native_config_added": 27,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-expo-2",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 30,
+      "output": 5917,
+      "cache_write": 31508,
+      "cache_read": 644323,
+      "total_cost_usd": 0.47195789999999993,
+      "summary_usage_mismatch": false,
+      "turns": 17,
+      "wall_s": 142,
+      "reads": 3,
+      "edits": 5,
+      "bash": 7,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34712,
+      "files_changed": 7,
+      "loc_js_added": 157,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0,
+      "loc_generated_added": 275
+    },
+    {
+      "trial": "main-expo-2",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 86,
+      "output": 26538,
+      "cache_write": 63473,
+      "cache_read": 2505763,
+      "total_cost_usd": 1.5316808999999996,
+      "summary_usage_mismatch": false,
+      "turns": 56,
+      "wall_s": 377,
+      "reads": 13,
+      "edits": 6,
+      "bash": 18,
+      "mcp_docs": 1,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 17,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34924,
+      "files_changed": 8,
+      "loc_js_added": 180,
+      "loc_native_added": 154,
+      "loc_native_code_added": 122,
+      "loc_native_config_added": 32,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-expo-2",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 76,
+      "output": 26052,
+      "cache_write": 85116,
+      "cache_read": 3141047,
+      "total_cost_usd": 1.8447921000000003,
+      "summary_usage_mismatch": false,
+      "turns": 52,
+      "wall_s": 429,
+      "reads": 13,
+      "edits": 8,
+      "bash": 27,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34736,
+      "files_changed": 8,
+      "loc_js_added": 123,
+      "loc_native_added": 122,
+      "loc_native_code_added": 94,
+      "loc_native_config_added": 28,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-expo-3",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 42,
+      "output": 14937,
+      "cache_write": 40500,
+      "cache_read": 1139074,
+      "total_cost_usd": null,
+      "summary_usage_mismatch": true,
+      "turns": 1,
+      "wall_s": 626,
+      "reads": 6,
+      "edits": 4,
+      "bash": 11,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 4,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34711,
+      "files_changed": 4,
+      "loc_js_added": 246,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-expo-3",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 77,
+      "output": 29729,
+      "cache_write": 64807,
+      "cache_read": 2820744,
+      "total_cost_usd": 1.6820071999999997,
+      "summary_usage_mismatch": false,
+      "turns": 51,
+      "wall_s": 376,
+      "reads": 16,
+      "edits": 7,
+      "bash": 19,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 5,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34728,
+      "files_changed": 9,
+      "loc_js_added": 184,
+      "loc_native_added": 167,
+      "loc_native_code_added": 134,
+      "loc_native_config_added": 33,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-expo-3",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 42,
+      "output": 19172,
+      "cache_write": 63983,
+      "cache_read": 1253248,
+      "total_cost_usd": 1.0483673999999998,
+      "summary_usage_mismatch": false,
+      "turns": 35,
+      "wall_s": 230,
+      "reads": 13,
+      "edits": 8,
+      "bash": 11,
+      "mcp_docs": 1,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34733,
+      "files_changed": 9,
+      "loc_js_added": 152,
+      "loc_native_added": 125,
+      "loc_native_code_added": 96,
+      "loc_native_config_added": 29,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 69,
+      "output": 10674,
+      "cache_write": 45186,
+      "cache_read": 1850283,
+      "total_cost_usd": 0.9872489,
+      "summary_usage_mismatch": false,
+      "turns": 47,
+      "wall_s": 187,
+      "reads": 14,
+      "edits": 5,
+      "bash": 18,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34517,
+      "files_changed": 3,
+      "loc_js_added": 57,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 174,
+      "output": 42884,
+      "cache_write": 138507,
+      "cache_read": 9328654,
+      "total_cost_usd": 4.274174199999999,
+      "summary_usage_mismatch": false,
+      "turns": 114,
+      "wall_s": 802,
+      "reads": 24,
+      "edits": 6,
+      "bash": 59,
+      "mcp_docs": 8,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34545,
+      "files_changed": 4,
+      "loc_js_added": 157,
+      "loc_native_added": 14,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 14,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 40,
+      "output": 12523,
+      "cache_write": 41856,
+      "cache_read": 1130228,
+      "total_cost_usd": 0.7789164000000001,
+      "summary_usage_mismatch": false,
+      "turns": 30,
+      "wall_s": 218,
+      "reads": 7,
+      "edits": 2,
+      "bash": 15,
+      "mcp_docs": 4,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34611,
+      "files_changed": 3,
+      "loc_js_added": 100,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-2",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 596,
+      "output": 16377,
+      "cache_write": 81766,
+      "cache_read": 3774484,
+      "total_cost_usd": 1.8711151999999995,
+      "summary_usage_mismatch": false,
+      "turns": 63,
+      "wall_s": 272,
+      "reads": 12,
+      "edits": 10,
+      "bash": 22,
+      "mcp_docs": 8,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34573,
+      "files_changed": 4,
+      "loc_js_added": 65,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-2",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 102,
+      "output": 28063,
+      "cache_write": 81977,
+      "cache_read": 3990432,
+      "total_cost_usd": 2.1110166,
+      "summary_usage_mismatch": false,
+      "turns": 64,
+      "wall_s": 375,
+      "reads": 12,
+      "edits": 4,
+      "bash": 32,
+      "mcp_docs": 9,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 5,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34543,
+      "files_changed": 4,
+      "loc_js_added": 160,
+      "loc_native_added": 14,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 14,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-2",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 2685,
+      "output": 50321,
+      "cache_write": 220408,
+      "cache_read": 26671245,
+      "total_cost_usd": 10.256277500000001,
+      "summary_usage_mismatch": false,
+      "turns": 199,
+      "wall_s": 2225,
+      "reads": 42,
+      "edits": 11,
+      "bash": 100,
+      "mcp_docs": 4,
+      "web": 9,
+      "tasks": 0,
+      "other_tools": 2,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34609,
+      "files_changed": 3,
+      "loc_js_added": 103,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-3",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 596,
+      "output": 17157,
+      "cache_write": 60063,
+      "cache_read": 2494782,
+      "total_cost_usd": 1.3686916,
+      "summary_usage_mismatch": false,
+      "turns": 53,
+      "wall_s": 391,
+      "reads": 12,
+      "edits": 3,
+      "bash": 22,
+      "mcp_docs": 7,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34573,
+      "files_changed": 3,
+      "loc_js_added": 34,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-3",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 679,
+      "output": 52071,
+      "cache_write": 174407,
+      "cache_read": 13556072,
+      "total_cost_usd": 5.897129599999998,
+      "summary_usage_mismatch": false,
+      "turns": 156,
+      "wall_s": 1072,
+      "reads": 25,
+      "edits": 6,
+      "bash": 77,
+      "mcp_docs": 12,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 18,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34601,
+      "files_changed": 5,
+      "loc_js_added": 161,
+      "loc_native_added": 13,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 13,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "main-ns-3",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 250,
+      "output": 42447,
+      "cache_write": 153206,
+      "cache_read": 13304061,
+      "total_cost_usd": 5.5486663,
+      "summary_usage_mismatch": false,
+      "turns": 149,
+      "wall_s": 868,
+      "reads": 32,
+      "edits": 3,
+      "bash": 84,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 4,
+      "study": "ns-vs-expo",
+      "set": "main",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34611,
+      "files_changed": 3,
+      "loc_js_added": 112,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
+    },
+    {
       "trial": "pilot-expo-1",
       "framework": "expo",
       "model": "claude-sonnet-5",
@@ -22,6 +652,7 @@
       "cache_write": 74470,
       "cache_read": 3320017,
       "total_cost_usd": 1.7905401000000003,
+      "summary_usage_mismatch": false,
       "turns": 62,
       "wall_s": 478,
       "reads": 16,
@@ -39,7 +670,8 @@
       "loc_js_added": 118,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-expo-1",
@@ -55,6 +687,7 @@
       "cache_write": 87952,
       "cache_read": 3697905,
       "total_cost_usd": 2.0385435000000007,
+      "summary_usage_mismatch": false,
       "turns": 63,
       "wall_s": 442,
       "reads": 18,
@@ -72,7 +705,8 @@
       "loc_js_added": 174,
       "loc_native_added": 137,
       "loc_native_code_added": 104,
-      "loc_native_config_added": 33
+      "loc_native_config_added": 33,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-expo-1",
@@ -88,6 +722,7 @@
       "cache_write": 298206,
       "cache_read": 19357657,
       "total_cost_usd": 8.377759099999999,
+      "summary_usage_mismatch": false,
       "turns": 169,
       "wall_s": 1893,
       "reads": 22,
@@ -105,7 +740,113 @@
       "loc_js_added": 148,
       "loc_native_added": 118,
       "loc_native_code_added": 91,
-      "loc_native_config_added": 27
+      "loc_native_config_added": 27,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "pilot-expo-3",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 38,
+      "output": 7178,
+      "cache_write": 30495,
+      "cache_read": 828324,
+      "total_cost_usd": 0.5400341999999999,
+      "summary_usage_mismatch": false,
+      "turns": 19,
+      "wall_s": 163,
+      "reads": 3,
+      "edits": 9,
+      "bash": 6,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 0,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34712,
+      "files_changed": 9,
+      "loc_js_added": 206,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0,
+      "loc_generated_added": 275
+    },
+    {
+      "trial": "pilot-expo-3",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 38,
+      "output": 22790,
+      "cache_write": 67895,
+      "cache_read": 1116331,
+      "total_cost_usd": 1.0850093,
+      "summary_usage_mismatch": false,
+      "turns": 37,
+      "wall_s": 304,
+      "reads": 15,
+      "edits": 7,
+      "bash": 11,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34730,
+      "files_changed": 9,
+      "loc_js_added": 161,
+      "loc_native_added": 158,
+      "loc_native_code_added": 126,
+      "loc_native_config_added": 32,
+      "loc_generated_added": 0
+    },
+    {
+      "trial": "pilot-expo-3",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 73,
+      "output": 19433,
+      "cache_write": 79613,
+      "cache_read": 2960314,
+      "total_cost_usd": 1.6582702,
+      "summary_usage_mismatch": false,
+      "turns": 53,
+      "wall_s": 297,
+      "reads": 16,
+      "edits": 8,
+      "bash": 18,
+      "mcp_docs": 3,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 6,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34736,
+      "files_changed": 9,
+      "loc_js_added": 116,
+      "loc_native_added": 131,
+      "loc_native_code_added": 103,
+      "loc_native_config_added": 28,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-ns-1",
@@ -121,6 +862,7 @@
       "cache_write": 53741,
       "cache_read": 2433008,
       "total_cost_usd": 1.2157844000000004,
+      "summary_usage_mismatch": false,
       "turns": 53,
       "wall_s": 189,
       "reads": 13,
@@ -138,7 +880,8 @@
       "loc_js_added": 57,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-ns-1",
@@ -154,6 +897,7 @@
       "cache_write": 102429,
       "cache_read": 5111678,
       "total_cost_usd": 3.21164595,
+      "summary_usage_mismatch": false,
       "turns": 82,
       "wall_s": 506,
       "reads": 12,
@@ -171,7 +915,8 @@
       "loc_js_added": 156,
       "loc_native_added": 12,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 12
+      "loc_native_config_added": 12,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-ns-1",
@@ -187,6 +932,7 @@
       "cache_write": 176052,
       "cache_read": 10403051,
       "total_cost_usd": 4.767854299999999,
+      "summary_usage_mismatch": false,
       "turns": 137,
       "wall_s": 790,
       "reads": 35,
@@ -204,10 +950,631 @@
       "loc_js_added": 102,
       "loc_native_added": 2,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     }
   ],
   "aggregates": {
+    "main": {
+      "ns": {
+        "phase_1": {
+          "n": 3,
+          "median_input": 596,
+          "range_input": [
+            69,
+            596
+          ],
+          "median_output": 16377,
+          "range_output": [
+            10674,
+            17157
+          ],
+          "median_cache_write": 60063,
+          "range_cache_write": [
+            45186,
+            81766
+          ],
+          "median_cache_read": 2494782,
+          "range_cache_read": [
+            1850283,
+            3774484
+          ],
+          "median_total_cost_usd": 1.3686916,
+          "range_total_cost_usd": [
+            0.9872489,
+            1.8711151999999995
+          ],
+          "median_turns": 53,
+          "range_turns": [
+            47,
+            63
+          ],
+          "median_wall_s": 272,
+          "range_wall_s": [
+            187,
+            391
+          ],
+          "median_mcp_docs": 7,
+          "range_mcp_docs": [
+            0,
+            8
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 57,
+          "range_loc_js_added": [
+            34,
+            65
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34573,
+          "range_first_turn_context": [
+            34517,
+            34573
+          ]
+        },
+        "phase_2": {
+          "n": 3,
+          "median_input": 174,
+          "range_input": [
+            102,
+            679
+          ],
+          "median_output": 42884,
+          "range_output": [
+            28063,
+            52071
+          ],
+          "median_cache_write": 138507,
+          "range_cache_write": [
+            81977,
+            174407
+          ],
+          "median_cache_read": 9328654,
+          "range_cache_read": [
+            3990432,
+            13556072
+          ],
+          "median_total_cost_usd": 4.274174199999999,
+          "range_total_cost_usd": [
+            2.1110166,
+            5.897129599999998
+          ],
+          "median_turns": 114,
+          "range_turns": [
+            64,
+            156
+          ],
+          "median_wall_s": 802,
+          "range_wall_s": [
+            375,
+            1072
+          ],
+          "median_mcp_docs": 9,
+          "range_mcp_docs": [
+            8,
+            12
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 160,
+          "range_loc_js_added": [
+            157,
+            161
+          ],
+          "median_loc_native_added": 14,
+          "range_loc_native_added": [
+            13,
+            14
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 14,
+          "range_loc_native_config_added": [
+            13,
+            14
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34545,
+          "range_first_turn_context": [
+            34543,
+            34601
+          ]
+        },
+        "phase_3": {
+          "n": 3,
+          "median_input": 250,
+          "range_input": [
+            40,
+            2685
+          ],
+          "median_output": 42447,
+          "range_output": [
+            12523,
+            50321
+          ],
+          "median_cache_write": 153206,
+          "range_cache_write": [
+            41856,
+            220408
+          ],
+          "median_cache_read": 13304061,
+          "range_cache_read": [
+            1130228,
+            26671245
+          ],
+          "median_total_cost_usd": 5.5486663,
+          "range_total_cost_usd": [
+            0.7789164000000001,
+            10.256277500000001
+          ],
+          "median_turns": 149,
+          "range_turns": [
+            30,
+            199
+          ],
+          "median_wall_s": 868,
+          "range_wall_s": [
+            218,
+            2225
+          ],
+          "median_mcp_docs": 4,
+          "range_mcp_docs": [
+            2,
+            4
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            9
+          ],
+          "median_loc_js_added": 103,
+          "range_loc_js_added": [
+            100,
+            112
+          ],
+          "median_loc_native_added": 2,
+          "range_loc_native_added": [
+            2,
+            2
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 2,
+          "range_loc_native_config_added": [
+            2,
+            2
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34611,
+          "range_first_turn_context": [
+            34609,
+            34611
+          ]
+        },
+        "total_per_trial": {
+          "n": 3,
+          "median_input": 1525,
+          "range_input": [
+            283,
+            3383
+          ],
+          "median_output": 94761,
+          "range_output": [
+            66081,
+            111675
+          ],
+          "median_cache_write": 384151,
+          "range_cache_write": [
+            225549,
+            387676
+          ],
+          "median_cache_read": 29354915,
+          "range_cache_read": [
+            12309165,
+            34436161
+          ],
+          "median_total_cost_usd": 12.814487499999998,
+          "range_total_cost_usd": [
+            6.040339499999999,
+            14.2384093
+          ],
+          "median_turns": 326,
+          "range_turns": [
+            191,
+            358
+          ],
+          "median_wall_s": 2331,
+          "range_wall_s": [
+            1207,
+            2872
+          ],
+          "median_mcp_docs": 21,
+          "range_mcp_docs": [
+            12,
+            21
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            9
+          ],
+          "median_loc_js_added": 314,
+          "range_loc_js_added": [
+            307,
+            328
+          ],
+          "median_loc_native_added": 16,
+          "range_loc_native_added": [
+            15,
+            16
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 16,
+          "range_loc_native_config_added": [
+            15,
+            16
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ]
+        }
+      },
+      "expo": {
+        "phase_1": {
+          "n": 3,
+          "median_input": 42,
+          "range_input": [
+            30,
+            98
+          ],
+          "median_output": 12225,
+          "range_output": [
+            5917,
+            14937
+          ],
+          "median_cache_write": 40500,
+          "range_cache_write": [
+            31508,
+            57386
+          ],
+          "median_cache_read": 1139074,
+          "range_cache_read": [
+            644323,
+            2917288
+          ],
+          "median_total_cost_usd": 0.9379461500000001,
+          "range_total_cost_usd": [
+            0.47195789999999993,
+            1.4039344000000002
+          ],
+          "median_turns": 17,
+          "range_turns": [
+            1,
+            56
+          ],
+          "median_wall_s": 604,
+          "range_wall_s": [
+            142,
+            626
+          ],
+          "median_mcp_docs": 0,
+          "range_mcp_docs": [
+            0,
+            0
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 216,
+          "range_loc_js_added": [
+            157,
+            246
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_loc_generated_added": 275,
+          "range_loc_generated_added": [
+            0,
+            275
+          ],
+          "median_first_turn_context": 34712,
+          "range_first_turn_context": [
+            34711,
+            34712
+          ]
+        },
+        "phase_2": {
+          "n": 3,
+          "median_input": 77,
+          "range_input": [
+            50,
+            86
+          ],
+          "median_output": 26538,
+          "range_output": [
+            24442,
+            29729
+          ],
+          "median_cache_write": 63473,
+          "range_cache_write": [
+            53814,
+            64807
+          ],
+          "median_cache_read": 2505763,
+          "range_cache_read": [
+            1434866,
+            2820744
+          ],
+          "median_total_cost_usd": 1.5316808999999996,
+          "range_total_cost_usd": [
+            1.1208998,
+            1.6820071999999997
+          ],
+          "median_turns": 51,
+          "range_turns": [
+            33,
+            56
+          ],
+          "median_wall_s": 376,
+          "range_wall_s": [
+            329,
+            377
+          ],
+          "median_mcp_docs": 1,
+          "range_mcp_docs": [
+            0,
+            2
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 182,
+          "range_loc_js_added": [
+            180,
+            184
+          ],
+          "median_loc_native_added": 154,
+          "range_loc_native_added": [
+            122,
+            167
+          ],
+          "median_loc_native_code_added": 122,
+          "range_loc_native_code_added": [
+            91,
+            134
+          ],
+          "median_loc_native_config_added": 32,
+          "range_loc_native_config_added": [
+            31,
+            33
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34731,
+          "range_first_turn_context": [
+            34728,
+            34924
+          ]
+        },
+        "phase_3": {
+          "n": 3,
+          "median_input": 62,
+          "range_input": [
+            42,
+            76
+          ],
+          "median_output": 22641,
+          "range_output": [
+            19172,
+            26052
+          ],
+          "median_cache_write": 63983,
+          "range_cache_write": [
+            59654,
+            85116
+          ],
+          "median_cache_read": 1921167,
+          "range_cache_read": [
+            1253248,
+            3141047
+          ],
+          "median_total_cost_usd": 1.2748590999999994,
+          "range_total_cost_usd": [
+            1.0483673999999998,
+            1.8447921000000003
+          ],
+          "median_turns": 43,
+          "range_turns": [
+            35,
+            52
+          ],
+          "median_wall_s": 307,
+          "range_wall_s": [
+            230,
+            429
+          ],
+          "median_mcp_docs": 1,
+          "range_mcp_docs": [
+            0,
+            2
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 152,
+          "range_loc_js_added": [
+            123,
+            158
+          ],
+          "median_loc_native_added": 122,
+          "range_loc_native_added": [
+            117,
+            125
+          ],
+          "median_loc_native_code_added": 94,
+          "range_loc_native_code_added": [
+            90,
+            96
+          ],
+          "median_loc_native_config_added": 28,
+          "range_loc_native_config_added": [
+            27,
+            29
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34735,
+          "range_first_turn_context": [
+            34733,
+            34736
+          ]
+        },
+        "total_per_trial": {
+          "n": 3,
+          "median_input": 192,
+          "range_input": [
+            161,
+            210
+          ],
+          "median_output": 59308,
+          "range_output": [
+            58507,
+            63838
+          ],
+          "median_cache_write": 170854,
+          "range_cache_write": [
+            169290,
+            180097
+          ],
+          "median_cache_read": 6273321,
+          "range_cache_read": [
+            5213066,
+            6291133
+          ],
+          "median_total_cost_usd": 3.8240621,
+          "range_total_cost_usd": [
+            3.7996932999999995,
+            3.8484309
+          ],
+          "median_turns": 125,
+          "range_turns": [
+            87,
+            132
+          ],
+          "median_wall_s": 1232,
+          "range_wall_s": [
+            948,
+            1240
+          ],
+          "median_mcp_docs": 3,
+          "range_mcp_docs": [
+            0,
+            3
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 556,
+          "range_loc_js_added": [
+            460,
+            582
+          ],
+          "median_loc_native_added": 276,
+          "range_loc_native_added": [
+            239,
+            292
+          ],
+          "median_loc_native_code_added": 216,
+          "range_loc_native_code_added": [
+            181,
+            230
+          ],
+          "median_loc_native_config_added": 60,
+          "range_loc_native_config_added": [
+            58,
+            62
+          ],
+          "median_loc_generated_added": 275,
+          "range_loc_generated_added": [
+            0,
+            275
+          ]
+        }
+      }
+    },
     "pilot": {
       "ns": {
         "phase_1": {
@@ -274,6 +1641,11 @@
           ],
           "median_loc_native_config_added": 0,
           "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
             0,
             0
           ],
@@ -350,6 +1722,11 @@
             12,
             12
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34601,
           "range_first_turn_context": [
             34601,
@@ -423,6 +1800,11 @@
             2,
             2
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34556,
           "range_first_turn_context": [
             34556,
@@ -495,45 +1877,50 @@
           "range_loc_native_config_added": [
             14,
             14
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
           ]
         }
       },
       "expo": {
         "phase_1": {
-          "n": 1,
-          "median_input": 89,
+          "n": 2,
+          "median_input": 63.5,
           "range_input": [
-            89,
+            38,
             89
           ],
-          "median_output": 23113,
+          "median_output": 15145.5,
           "range_output": [
-            23113,
+            7178,
             23113
           ],
-          "median_cache_write": 74470,
+          "median_cache_write": 52482.5,
           "range_cache_write": [
-            74470,
+            30495,
             74470
           ],
-          "median_cache_read": 3320017,
+          "median_cache_read": 2074170.5,
           "range_cache_read": [
-            3320017,
+            828324,
             3320017
           ],
-          "median_total_cost_usd": 1.7905401000000003,
+          "median_total_cost_usd": 1.1652871500000002,
           "range_total_cost_usd": [
-            1.7905401000000003,
+            0.5400341999999999,
             1.7905401000000003
           ],
-          "median_turns": 62,
+          "median_turns": 40.5,
           "range_turns": [
-            62,
+            19,
             62
           ],
-          "median_wall_s": 478,
+          "median_wall_s": 320.5,
           "range_wall_s": [
-            478,
+            163,
             478
           ],
           "median_mcp_docs": 0,
@@ -546,10 +1933,10 @@
             0,
             0
           ],
-          "median_loc_js_added": 118,
+          "median_loc_js_added": 162,
           "range_loc_js_added": [
             118,
-            118
+            206
           ],
           "median_loc_native_added": 0,
           "range_loc_native_added": [
@@ -566,47 +1953,52 @@
             0,
             0
           ],
-          "median_first_turn_context": 34740,
+          "median_loc_generated_added": 137.5,
+          "range_loc_generated_added": [
+            0,
+            275
+          ],
+          "median_first_turn_context": 34726,
           "range_first_turn_context": [
-            34740,
+            34712,
             34740
           ]
         },
         "phase_2": {
-          "n": 1,
-          "median_input": 98,
+          "n": 2,
+          "median_input": 68,
           "range_input": [
-            98,
+            38,
             98
           ],
-          "median_output": 26692,
+          "median_output": 24741,
           "range_output": [
-            26692,
+            22790,
             26692
           ],
-          "median_cache_write": 87952,
+          "median_cache_write": 77923.5,
           "range_cache_write": [
-            87952,
+            67895,
             87952
           ],
-          "median_cache_read": 3697905,
+          "median_cache_read": 2407118,
           "range_cache_read": [
-            3697905,
+            1116331,
             3697905
           ],
-          "median_total_cost_usd": 2.0385435000000007,
+          "median_total_cost_usd": 1.5617764000000003,
           "range_total_cost_usd": [
-            2.0385435000000007,
+            1.0850093,
             2.0385435000000007
           ],
-          "median_turns": 63,
+          "median_turns": 50,
           "range_turns": [
-            63,
+            37,
             63
           ],
-          "median_wall_s": 442,
+          "median_wall_s": 373,
           "range_wall_s": [
-            442,
+            304,
             442
           ],
           "median_mcp_docs": 2,
@@ -619,171 +2011,186 @@
             0,
             0
           ],
-          "median_loc_js_added": 174,
+          "median_loc_js_added": 167.5,
           "range_loc_js_added": [
-            174,
+            161,
             174
           ],
-          "median_loc_native_added": 137,
+          "median_loc_native_added": 147.5,
           "range_loc_native_added": [
             137,
-            137
+            158
           ],
-          "median_loc_native_code_added": 104,
+          "median_loc_native_code_added": 115,
           "range_loc_native_code_added": [
             104,
-            104
+            126
           ],
-          "median_loc_native_config_added": 33,
+          "median_loc_native_config_added": 32.5,
           "range_loc_native_config_added": [
-            33,
+            32,
             33
           ],
-          "median_first_turn_context": 34766,
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34748,
           "range_first_turn_context": [
-            34766,
+            34730,
             34766
           ]
         },
         "phase_3": {
-          "n": 1,
-          "median_input": 304,
+          "n": 2,
+          "median_input": 188.5,
           "range_input": [
-            304,
+            73,
             304
           ],
-          "median_output": 51969,
+          "median_output": 35701,
           "range_output": [
-            51969,
+            19433,
             51969
           ],
-          "median_cache_write": 298206,
+          "median_cache_write": 188909.5,
           "range_cache_write": [
-            298206,
+            79613,
             298206
           ],
-          "median_cache_read": 19357657,
+          "median_cache_read": 11158985.5,
           "range_cache_read": [
-            19357657,
+            2960314,
             19357657
           ],
-          "median_total_cost_usd": 8.377759099999999,
+          "median_total_cost_usd": 5.01801465,
           "range_total_cost_usd": [
-            8.377759099999999,
+            1.6582702,
             8.377759099999999
           ],
-          "median_turns": 169,
+          "median_turns": 111,
           "range_turns": [
-            169,
+            53,
             169
           ],
-          "median_wall_s": 1893,
+          "median_wall_s": 1095,
           "range_wall_s": [
-            1893,
+            297,
             1893
           ],
-          "median_mcp_docs": 0,
+          "median_mcp_docs": 1.5,
           "range_mcp_docs": [
             0,
-            0
+            3
           ],
           "median_web": 0,
           "range_web": [
             0,
             0
           ],
-          "median_loc_js_added": 148,
+          "median_loc_js_added": 132,
           "range_loc_js_added": [
-            148,
+            116,
             148
           ],
-          "median_loc_native_added": 118,
+          "median_loc_native_added": 124.5,
           "range_loc_native_added": [
             118,
-            118
+            131
           ],
-          "median_loc_native_code_added": 91,
+          "median_loc_native_code_added": 97,
           "range_loc_native_code_added": [
             91,
-            91
+            103
           ],
-          "median_loc_native_config_added": 27,
+          "median_loc_native_config_added": 27.5,
           "range_loc_native_config_added": [
             27,
-            27
+            28
           ],
-          "median_first_turn_context": 34973,
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34854.5,
           "range_first_turn_context": [
-            34973,
+            34736,
             34973
           ]
         },
         "total_per_trial": {
-          "n": 1,
-          "median_input": 491,
+          "n": 2,
+          "median_input": 320,
           "range_input": [
-            491,
+            149,
             491
           ],
-          "median_output": 101774,
+          "median_output": 75587.5,
           "range_output": [
-            101774,
+            49401,
             101774
           ],
-          "median_cache_write": 460628,
+          "median_cache_write": 319315.5,
           "range_cache_write": [
-            460628,
+            178003,
             460628
           ],
-          "median_cache_read": 26375579,
+          "median_cache_read": 15640274,
           "range_cache_read": [
-            26375579,
+            4904969,
             26375579
           ],
-          "median_total_cost_usd": 12.2068427,
+          "median_total_cost_usd": 7.7450782,
           "range_total_cost_usd": [
-            12.2068427,
+            3.2833137,
             12.2068427
           ],
-          "median_turns": 294,
+          "median_turns": 201.5,
           "range_turns": [
-            294,
+            109,
             294
           ],
-          "median_wall_s": 2813,
+          "median_wall_s": 1788.5,
           "range_wall_s": [
-            2813,
+            764,
             2813
           ],
-          "median_mcp_docs": 2,
+          "median_mcp_docs": 3.5,
           "range_mcp_docs": [
             2,
-            2
+            5
           ],
           "median_web": 0,
           "range_web": [
             0,
             0
           ],
-          "median_loc_js_added": 440,
+          "median_loc_js_added": 461.5,
           "range_loc_js_added": [
             440,
-            440
+            483
           ],
-          "median_loc_native_added": 255,
+          "median_loc_native_added": 272,
           "range_loc_native_added": [
             255,
-            255
+            289
           ],
-          "median_loc_native_code_added": 195,
+          "median_loc_native_code_added": 212,
           "range_loc_native_code_added": [
             195,
-            195
+            229
           ],
           "median_loc_native_config_added": 60,
           "range_loc_native_config_added": [
             60,
             60
+          ],
+          "median_loc_generated_added": 137.5,
+          "range_loc_generated_added": [
+            0,
+            275
           ]
         }
       }

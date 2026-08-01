@@ -1,0 +1,10 @@
+2	1	app.json
+21	0	modules/expo-bench-speech/LICENSE
+6	0	modules/expo-bench-speech/expo-module.config.json
+25	0	modules/expo-bench-speech/ios/ExpoBenchSpeech.podspec
+90	0	modules/expo-bench-speech/ios/ExpoBenchSpeechModule.swift
+-	-	modules/expo-bench-speech/ios/assets/sample.wav
+6	0	modules/expo-bench-speech/src/ExpoBenchSpeech.types.ts
+15	0	modules/expo-bench-speech/src/ExpoBenchSpeechModule.ts
+6	0	modules/expo-bench-speech/src/ExpoBenchSpeechModule.web.ts
+104	8	screens/TranscribeScreen.tsx
