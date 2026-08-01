@@ -29,6 +29,9 @@ main-ns-4,ns,claude-sonnet-5,3,true,false,phases-complete,pending,395,46658,1737
 main-ns-5,ns,claude-sonnet-5,1,true,false,phases-complete,pending,539,12531,65787,2727935,1.4034155,56,234,13,3,20,7,0,0,2,3,57,0,ns-vs-expo,main,v1.1.0,0,0,0,34573,false
 main-ns-5,ns,claude-sonnet-5,2,true,false,phases-complete,pending,250,57208,176247,16777268,6.950291399999999,167,1097,36,11,67,6,0,0,27,5,204,12,ns-vs-expo,main,v1.1.0,0,12,0,34545,false
 main-ns-5,ns,claude-sonnet-5,3,true,false,phases-complete,pending,46,14627,49279,1394368,0.9342694,33,168,10,4,15,2,0,0,1,5,146,2,ns-vs-expo,main,v1.1.0,0,2,0,34609,false
+main-ns-6,ns,claude-sonnet-5,1,true,false,phases-complete,pending,164,9253,39240,1426149,0.8033026999999998,40,170,13,4,16,2,0,0,0,3,51,0,ns-vs-expo,main,v1.1.0,0,0,0,34572,false
+main-ns-6,ns,claude-sonnet-5,2,true,false,phases-complete,pending,585,32565,104087,5564155,2.9473605,82,555,18,4,47,3,0,0,1,4,155,12,ns-vs-expo,main,v1.1.0,0,12,0,34599,false
+main-ns-6,ns,claude-sonnet-5,3,true,false,phases-complete,pending,148,36521,150630,8046020,3.866591999999998,97,623,23,3,51,5,0,0,1,3,106,2,ns-vs-expo,main,v1.1.0,0,2,0,34610,false
 pilot-expo-1,expo,claude-sonnet-5,1,true,false,phases-complete,pending,89,23113,74470,3320017,1.7905401000000003,62,478,16,6,32,0,0,0,1,14,118,0,ns-vs-expo,pilot,v1.1.0,0,0,0,34740,false
 pilot-expo-1,expo,claude-sonnet-5,2,true,false,phases-complete,pending,98,26692,87952,3697905,2.0385435000000007,63,442,18,10,31,2,0,0,1,9,174,137,ns-vs-expo,pilot,v1.1.0,104,33,0,34766,false
 pilot-expo-1,expo,claude-sonnet-5,3,true,false,phases-complete,pending,304,51969,298206,19357657,8.377759099999999,169,1893,22,11,118,0,0,0,0,10,148,118,ns-vs-expo,pilot,v1.1.0,91,27,0,34973,false

@@ -1,0 +1,144 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index bfc6515..769ac30 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -26,6 +26,8 @@
+ 	<string>Native Bench reads your step count to show your recent activity.</string>
+ 	<key>NSHealthUpdateUsageDescription</key>
+ 	<string>Native Bench writes step count samples that you log in the app.</string>
++	<key>NSSpeechRecognitionUsageDescription</key>
++	<string>Native Bench uses speech recognition to transcribe the bundled sample audio.</string>
+ 	<key>UILaunchStoryboardName</key>
+ 	<string>LaunchScreen</string>
+ 	<key>UIRequiresFullScreen</key>
+diff --git a/App_Resources/iOS/sample.wav b/App_Resources/iOS/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/App_Resources/iOS/sample.wav differ
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+index 58d3a94..168e33f 100644
+--- a/app/components/Transcribe.vue
++++ b/app/components/Transcribe.vue
+@@ -1,16 +1,116 @@
+ <template>
+-    <Page>
++    <Page @navigatingTo="onNavigatingTo">
+         <ActionBar title="Transcribe" />
+ 
+         <StackLayout class="p-4">
+-            <Label text="Speech access: not requested" class="text-base mb-4" textWrap="true" />
++            <Label :text="statusText" class="text-base mb-4" textWrap="true" />
+ 
+-            <Button text="Request Access" class="text-lg p-3 mb-3 bg-blue-500 text-white rounded-lg" />
+-            <Button text="Transcribe Sample" :isEnabled="false" class="text-lg p-3 mb-6 bg-gray-300 text-gray-500 rounded-lg" />
++            <Button text="Request Access" class="text-lg p-3 mb-3 bg-blue-500 text-white rounded-lg" @tap="requestAccess" />
++            <Button
++                text="Transcribe Sample"
++                :isEnabled="canTranscribe"
++                :class="canTranscribe ? 'text-lg p-3 mb-6 bg-blue-500 text-white rounded-lg' : 'text-lg p-3 mb-6 bg-gray-300 text-gray-500 rounded-lg'"
++                @tap="transcribeSample"
++            />
+ 
+-            <Label text="No transcript yet" class="text-base text-gray-500" textWrap="true" />
++            <Label v-if="!transcript && !isTranscribing" text="No transcript yet" class="text-base text-gray-500" textWrap="true" />
++            <StackLayout v-else>
++                <Label :text="transcript" class="text-base mb-1" textWrap="true" />
++                <Label v-if="completedLine" :text="completedLine" class="text-sm text-gray-500" textWrap="true" />
++            </StackLayout>
+         </StackLayout>
+     </Page>
+ </template>
+ 
+-<script setup lang="ts"></script>
++<script setup lang="ts">
++import { computed, ref } from 'vue'
++import { Utils } from '@nativescript/core'
++
++type AccessState = 'not-requested' | 'granted' | 'denied'
++
++const accessState = ref<AccessState>('not-requested')
++const statusText = ref('Speech access: not requested')
++const transcript = ref('')
++const completedLine = ref('')
++const isTranscribing = ref(false)
++
++const canTranscribe = computed(() => accessState.value === 'granted' && !isTranscribing.value)
++
++// Retained outside the tap handler so the runtime doesn't GC them mid-recognition.
++let recognizer: SFSpeechRecognizer | null = null
++let recognitionTask: SFSpeechRecognitionTask | null = null
++let startedAt = 0
++
++function refreshAuthStatus() {
++    const status = SFSpeechRecognizer.authorizationStatus()
++    if (status === SFSpeechRecognizerAuthorizationStatus.Authorized) {
++        accessState.value = 'granted'
++        statusText.value = 'Speech access: granted'
++    } else if (status === SFSpeechRecognizerAuthorizationStatus.Denied || status === SFSpeechRecognizerAuthorizationStatus.Restricted) {
++        accessState.value = 'denied'
++        statusText.value = 'Speech access: denied'
++    } else {
++        accessState.value = 'not-requested'
++        statusText.value = 'Speech access: not requested'
++    }
++}
++
++function onNavigatingTo() {
++    refreshAuthStatus()
++}
++
++function requestAccess() {
++    SFSpeechRecognizer.requestAuthorization(() => {
++        Utils.dispatchToMainThread(() => {
++            refreshAuthStatus()
++        })
++    })
++}
++
++function transcribeSample() {
++    const path = NSBundle.mainBundle.pathForResourceOfType('sample', 'wav')
++    if (!path) {
++        statusText.value = 'sample.wav not found in app bundle'
++        return
++    }
++
++    recognizer = SFSpeechRecognizer.alloc().initWithLocale(NSLocale.alloc().initWithLocaleIdentifier('en-US'))
++    if (!recognizer.available) {
++        statusText.value = 'Speech recognizer not available'
++        return
++    }
++
++    const request = SFSpeechURLRecognitionRequest.alloc().initWithURL(NSURL.fileURLWithPath(path))
++    request.shouldReportPartialResults = true
++    // The iOS Simulator lacks on-device speech models; force server-based recognition (spec permits either).
++    request.requiresOnDeviceRecognition = false
++
++    transcript.value = ''
++    completedLine.value = ''
++    isTranscribing.value = true
++    statusText.value = 'Transcribing…'
++    startedAt = Date.now()
++
++    recognitionTask = recognizer.recognitionTaskWithRequestResultHandler(request, (result, error) => {
++        Utils.dispatchToMainThread(() => {
++            if (error) {
++                isTranscribing.value = false
++                statusText.value = error.localizedDescription
++                return
++            }
++            if (!result) {
++                return
++            }
++
++            transcript.value = result.bestTranscription.formattedString
++
++            if (result.final) {
++                const elapsedSeconds = (Date.now() - startedAt) / 1000
++                completedLine.value = `Completed in ${elapsedSeconds.toFixed(1)} s`
++                isTranscribing.value = false
++                statusText.value = 'Speech access: granted'
++            }
++        })
++    })
++}
++</script>

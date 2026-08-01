@@ -434,3 +434,63 @@ is agent *choice* — but plausibly invited by NativeScript's faster rebuild mak
 iteration cheap. This data cannot separate "chose to" from "was invited to"; isolating
 it would need a condition with UI-automation tools withheld from both arms, which is a
 separate study, not a correction to this one.
+
+---
+
+## 13. Confound: interactive UI verification is entangled with token cost (2026-08-01)
+
+**This is the most serious limitation in the study and it constrains the headline claim.**
+
+Both frameworks' agents had the same tools, including `idb` (installed and working)
+for driving the simulator UI. How much each agent chose to use it correlates with its
+total token cost at **r = 0.90 — within NativeScript, within Expo, and pooled across
+all ten trials.**
+
+| | `idb ui tap` calls per trial | Trials with zero |
+|---|---|---|
+| NativeScript | 21, 37, 37, 37, 23 | **none** |
+| Expo | 6, 0, 0, 21, 14 | **two** |
+
+Expo's three cheapest trials (58.5k, 59.3k, 63.8k output) tapped 0, 0, and 6 times.
+Its two most expensive (94.2k, 72.1k) tapped 21 and 14, landing inside NativeScript's
+range. NativeScript never skipped verification in any trial.
+
+### What was ruled out
+
+An architectural explanation was hypothesised and **rejected**: NativeScript resolves
+native calls at runtime via reflection, so a wrong API name compiles cleanly and would
+only fail when run — which would *force* the agent to drive the app, where Expo's
+compiled Swift module is checked by `xcodebuild`. Searching every transcript for
+genuine runtime-failure signatures (`unrecognized selector`, `NSInvalidArgumentException`,
+`JS ERROR`, `SIGABRT`, `Terminating app due to`) found **zero occurrences on both arms**.
+The hypothesis is not supported by this data.
+
+Also ruled out as causes: `CLAUDE.md` "Definition of done" wording (byte-identical
+across arms), tool availability (both had `idb`), and tool-failure rates (NS 1.2%,
+Expo 1.8%).
+
+### What this means for the result
+
+The measured token gap is **substantially confounded with verification effort**, and
+that effort varies within Expo about as much as it differs between the two frameworks.
+"Expo costs 0.67× the tokens" therefore cannot be attributed to interop architecture
+on this evidence. It was already directional only (p = 0.056, overlapping ranges); this
+confound weakens it further.
+
+Stated plainly: the study measures *what these agents did*, and a large share of what
+they did was decide how much to verify.
+
+### Why acceptance testing becomes load-bearing
+
+If the trials that skipped verification produced apps that fail the SPEC §6 checklist —
+permission flows, streaming partial results, deny paths — then their lower token counts
+represent **unfinished work rather than efficiency**, and the comparison may inverse.
+
+`main-expo-2` and `main-expo-3` are the two cheapest trials in the study and the only
+two that never drove the UI. They are the highest-priority acceptance candidates.
+
+### Follow-up worth running (not a correction to this study)
+
+A condition with UI-automation tools withheld from both arms would isolate
+build-verified implementation cost from interactive-verification cost. That is a
+separate study slug, which this harness now supports as data.
