@@ -1,0 +1,8 @@
+9	1	app.json
+21	0	modules/expo-health-benchmark/LICENSE
+6	0	modules/expo-health-benchmark/expo-module.config.json
+24	0	modules/expo-health-benchmark/ios/ExpoHealthBenchmark.podspec
+101	0	modules/expo-health-benchmark/ios/ExpoHealthBenchmarkModule.swift
+6	0	modules/expo-health-benchmark/src/ExpoHealthBenchmark.types.ts
+12	0	modules/expo-health-benchmark/src/ExpoHealthBenchmarkModule.ts
+130	4	screens/HealthScreen.tsx

@@ -394,3 +394,43 @@ concurrently, and mark any usage-limit death `infra-invalid` rather than as a fr
    enabled official Claude Code plugin come with the stock template. Normalizing them away is required to hold
    the study's controls, but it means the measured numbers understate what a real Expo team gets on day one.
 8. **Stochasticity**: n=5, medians, full raw disclosure — unchanged.
+
+---
+
+## 12. Fairness audit of the NativeScript arm (2026-08-01, after n=5)
+
+Asked directly: is NativeScript being properly utilised, or is Expo gaining from a
+setup defect? Six checks over the archived transcripts.
+
+| Check | Finding |
+|---|---|
+| `CLAUDE.md` parity | Structurally identical — same five sections, 187 vs 239 words |
+| Tool access | `idb` installed and used by both arms (NS 211 calls, Expo 50) |
+| Tool-call failure rate | NS **1.2%**, Expo 1.8% — NS is not fighting errors |
+| Dev loop | NS's HMR loop available and used; agents mostly chose full rebuilds |
+| Prompts / model / turn cap / spec | Byte-identical; conditions verified uniform across all trials |
+| Docs MCP health | 86 NS calls, 2 near-empty — the server works |
+
+**Conclusion: the NativeScript arm is not handicapped.** Its higher token use traces
+to three real behaviours, none of them a setup defect:
+
+1. **Its docs server returns smaller chunks.** NativeScript's `search_docs` averages
+   4,958 chars/call; Expo's `read_documentation` returns 16,752 — whole pages. NS made
+   86 calls to Expo's 10, pulling ~2.5× more total documentation to get there. Docs
+   quality is explicitly within scope (`PLAN.md` §6.2), not noise to remove.
+2. **Much heavier interactive UI verification** — `idb` 211 vs 50, `simctl` 86 vs 15.
+3. **Different discovery targets** — NS read its own app source 77× and
+   `@nativescript/types` iOS declarations 14×, hunting API signatures; Expo read its
+   own generated module scaffold 59×.
+
+**The mechanism in one line:** NativeScript discovers; Expo follows a scaffold. Expo
+wrote 1.7× more JavaScript *and* 213 lines of Swift while spending fewer tokens,
+because `create-expo-module` hands it a known-good shape. NativeScript's "call any
+API directly" freedom means working out *which* call, every time.
+
+**Open question, stated rather than resolved.** NS averaged 9.06 bash calls per edit
+against Expo's 3.10, mostly that verification loop. Both arms had the same tools, so it
+is agent *choice* — but plausibly invited by NativeScript's faster rebuild making
+iteration cheap. This data cannot separate "chose to" from "was invited to"; isolating
+it would need a condition with UI-automation tools withheld from both arms, which is a
+separate study, not a correction to this one.

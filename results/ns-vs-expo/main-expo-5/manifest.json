@@ -18,7 +18,7 @@
     }
   },
   "started_at": "2026-08-01T15:01:33Z",
-  "outcome": "in-progress",
+  "outcome": "phases-complete",
   "acceptance": {
     "status": "pending",
     "items": {},
@@ -40,6 +40,12 @@
       "enforced": true
     },
     "phase-2": {
+      "kind": "tools",
+      "result": "USED=mcp__expo__read_documentation",
+      "is_error": false,
+      "enforced": true
+    },
+    "phase-3": {
       "kind": "tools",
       "result": "USED=mcp__expo__read_documentation",
       "is_error": false,
@@ -87,6 +93,90 @@
       "build_pass": true,
       "wall_seconds": 150,
       "end_sha": "b76940588f216d1d715da98946262f098cb2fb4a"
+    },
+    "2": {
+      "session_id": "28a543ee-e381-4343-862a-b0980e79fd3f",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 113,
+      "duration_ms": 698055,
+      "total_cost_usd": 3.344571099999999,
+      "usage": {
+        "input_tokens": 157,
+        "cache_creation_input_tokens": 115893,
+        "cache_read_input_tokens": 7063937,
+        "output_tokens": 35253,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 115893,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 749,
+            "cache_read_input_tokens": 144740,
+            "cache_creation_input_tokens": 571,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 571
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 699,
+      "end_sha": "a0e9a5e65083602f19e6afe09409c13a28c8e228"
+    },
+    "3": {
+      "session_id": "a515edbb-4c91-4a50-a9d7-b6341732011f",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 52,
+      "duration_ms": 465568,
+      "total_cost_usd": 2.0494030000000008,
+      "usage": {
+        "input_tokens": 70,
+        "cache_creation_input_tokens": 105621,
+        "cache_read_input_tokens": 3201860,
+        "output_tokens": 30275,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 105621,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 595,
+            "cache_read_input_tokens": 125846,
+            "cache_creation_input_tokens": 239,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 239
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 467,
+      "end_sha": "4fdc9475a46f8b94cec5a2132db4883484cccac6"
     }
-  }
+  },
+  "trial_branch": "trials/main-expo-5",
+  "finished_at": "2026-08-01T15:27:40Z"
 }

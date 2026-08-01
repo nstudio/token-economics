@@ -1,0 +1,8 @@
+2	1	app.json
+6	0	modules/expo-speech-benchmark/expo-module.config.json
+27	0	modules/expo-speech-benchmark/ios/ExpoSpeechBenchmark.podspec
+112	0	modules/expo-speech-benchmark/ios/ExpoSpeechBenchmarkModule.swift
+-	-	modules/expo-speech-benchmark/ios/Resources/sample.wav
+5	0	modules/expo-speech-benchmark/src/ExpoSpeechBenchmark.types.ts
+15	0	modules/expo-speech-benchmark/src/ExpoSpeechBenchmarkModule.ts
+93	4	screens/TranscribeScreen.tsx
