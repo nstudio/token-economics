@@ -428,12 +428,12 @@ wrote 1.7× more JavaScript *and* 213 lines of Swift while spending fewer tokens
 because `create-expo-module` hands it a known-good shape. NativeScript's "call any
 API directly" freedom means working out *which* call, every time.
 
-**Open question, stated rather than resolved.** NS averaged 9.06 bash calls per edit
-against Expo's 3.10, mostly that verification loop. Both arms had the same tools, so it
-is agent *choice* — but plausibly invited by NativeScript's faster rebuild making
-iteration cheap. This data cannot separate "chose to" from "was invited to"; isolating
-it would need a condition with UI-automation tools withheld from both arms, which is a
-separate study, not a correction to this one.
+**Superseded by §13.** This section originally logged the 9.06-vs-3.10 bash-calls-per-edit
+gap as an open question about agent choice, and glossed it as "NativeScript agents verified
+more; Expo agents trusted the build." That was a rationalisation of a number rather than an
+explanation of it. Investigated properly (§13), verification effort turns out to correlate
+with token cost at **r = 0.90 within each arm** — which makes it a confound on the headline
+comparison, not a characteristic of either framework.
 
 ---
 

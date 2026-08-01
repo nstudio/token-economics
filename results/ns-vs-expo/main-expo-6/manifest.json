@@ -31,5 +31,13 @@
     "node": "v24.1.0",
     "docs_mcp": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)"
   },
-  "baseline_sha": "ca6562379805473a5ebadaa2fb8d31acde40d0a7"
+  "baseline_sha": "ca6562379805473a5ebadaa2fb8d31acde40d0a7",
+  "mcp_preflight": {
+    "phase-1": {
+      "kind": "tools",
+      "result": "USED=mcp__expo__read_documentation",
+      "is_error": false,
+      "enforced": true
+    }
+  }
 }
