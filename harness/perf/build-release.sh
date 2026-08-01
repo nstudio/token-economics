@@ -76,12 +76,20 @@ restore_repo() { # restore_repo <repo>
 }
 
 # Default: every main-* trial present in the study's results, interleaved by round
-# so a partial batch still covers both arms evenly.
+# so a partial batch still covers both arms evenly. Rounds are discovered from the
+# results directory rather than assumed — a study extended past its original n
+# would otherwise be silently half-built.
 default_trials() {
   local n fw
-  for n in 1 2 3 4 5; do
+  # Only plain main-<fw>-<n> dirs: .infra-invalid attempts spent zero measured
+  # tokens and have no tree worth rebuilding.
+  local rounds
+  rounds="$(ls -d "$RESULTS_DIR"/main-*/ 2>/dev/null \
+    | sed -nE 's|.*/main-[a-z]+-([0-9]+)/$|\1|p' | sort -n -u)"
+  for n in $rounds; do
     for fw in $STUDY_FRAMEWORKS; do
-      [ -d "$RESULTS_DIR/main-$fw-$n" ] && echo "main-$fw-$n"
+      local d="$RESULTS_DIR/main-$fw-$n"
+      [ -d "$d" ] && [ ! -d "$d/app-release" ] && echo "main-$fw-$n"
     done
   done
 }
