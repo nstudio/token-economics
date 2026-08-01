@@ -1,19 +1,27 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-# Stores the Expo access token the Expo docs MCP authenticates with.
+# Stores the Expo ROBOT access token the Expo docs MCP authenticates with.
 #
 #   ./set-expo-token.sh
 #
 # Prompts with echo off and writes harness/.env.local (gitignored, mode 600).
 # Nothing is passed as an argument, so the token cannot end up in shell history,
-# a process listing, or a transcript. Create the token at:
-#   https://expo.dev/settings/access-tokens
+# a process listing, or a transcript.
+#
+# It must be a ROBOT token, not a personal access token — mcp.expo.dev rejects
+# personal tokens outright:
+#   401 {"error":"invalid_token","error_description":"The MCP server accepts a
+#        robot access token here; personal access tokens are not supported."}
+# Create one at https://expo.dev/settings/access-tokens under Robot users.
+# Robot tokens are the credential Expo intends for CI, so unlike the interactive
+# OAuth session they do not expire hourly — which is what makes an unattended
+# multi-hour benchmark run possible at all.
 
 HARNESS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ENV_FILE="$HARNESS_DIR/.env.local"
 
-printf 'Expo access token (input hidden): '
+printf 'Expo ROBOT access token (input hidden): '
 IFS= read -rs TOKEN
 printf '\n'
 
