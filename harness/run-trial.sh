@@ -18,6 +18,8 @@ set -uo pipefail
 #   ALLOW_FROZEN=1       permit writing trials into a frozen (published) study
 #   SKIP_BASELINE_CHECK  set to 1 to skip the pre-trial baseline build verification
 #   ANTHROPIC_API_KEY    recommended for headless runs; Keychain OAuth may also work
+#   EXPO_TOKEN           Expo access token for its docs MCP; put it in
+#                        harness/.env.local (gitignored) rather than the environment
 #
 # Each phase runs in a fresh headless Claude Code session with an isolated
 # CLAUDE_CONFIG_DIR (no global CLAUDE.md, memory, or personal settings) and exactly
@@ -29,6 +31,13 @@ HARNESS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$HARNESS_DIR")"
 REGISTRY="$HARNESS_DIR/lib/registry.mjs"
 source "$HARNESS_DIR/lib/common.sh"
+
+# Operator secrets (e.g. EXPO_TOKEN for the Expo docs MCP). Gitignored. The mcp
+# config references ${EXPO_TOKEN}, so the committed file and the archived
+# manifest carry the placeholder and never the token itself.
+if [ -f "$HARNESS_DIR/.env.local" ]; then
+  set -a; . "$HARNESS_DIR/.env.local"; set +a
+fi
 
 die() { te_die "$@"; }
 note() { te_note "$@"; }
@@ -331,6 +340,12 @@ if [ "$STUDY_FROZEN" = "1" ] && [ "${ALLOW_FROZEN:-0}" != "1" ]; then
   To reproduce it independently, set ALLOW_FROZEN=1 and use a trial id that cannot
   collide with the published set (e.g. repro-$FRAMEWORK-1)."
 fi
+
+# Fail before touching a repo if the docs MCP config needs a secret we don't have.
+for _v in $(grep -oE '\$\{[A-Z_]+\}' "$MCP_CONFIG" | tr -d '${}' | sort -u); do
+  [ -n "${!_v:-}" ] || die "$(basename "$MCP_CONFIG") requires \$$_v but it is unset.
+  Put it in $HARNESS_DIR/.env.local (gitignored), then re-run."
+done
 
 TRIAL_ID="${3:-$FRAMEWORK-$(date +%Y%m%d-%H%M%S)}"
 TRIAL_DIR="$RESULTS_DIR/$TRIAL_ID"

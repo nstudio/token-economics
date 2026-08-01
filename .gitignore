@@ -20,3 +20,6 @@ results/**/app-release/
 
 # sparkling-app-cli template cache (local tooling artifact)
 /.temp-templates/
+
+# Operator secrets for MCP auth (never committed)
+harness/.env.local
