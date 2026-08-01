@@ -67,7 +67,7 @@ Interactive items (permission flows, step logging + persistence, transcription s
 | Native-side LOC added | **16** (15–17) | **242** (235–421) | **~15×** |
 | — of which native-language code | **0** (0–0) | **226** (213–405) | — |
 | — of which native config | 16 (15–17) | 18 (16–23) | ~1× |
-| JS/TS-side LOC added | 376 (327–396) | 393 (335–504) | ~1× |
+| JS/TS-side LOC added | 376 (327–396) | 392 (335–503) | ~1× |
 
 The LOC split is the mechanism in one row, and the three-way breakdown (added 2026-07-31, see the addendum below) makes it exact: both frameworks wrote essentially the same amount of Vue/TS **and the same native configuration**, but Lynx additionally authored ~226 lines of Swift per trial while NativeScript authored **none** — and that authorship plus the discovery around it roughly doubles total token spend.
 
@@ -193,6 +193,14 @@ Per phase, the config work is not merely similar — it is **identical**:
 | 3 — Speech | **0 / 2** | 106 / **2** |
 
 Both agents wrote the same 14 lines of HealthKit entitlement/usage-string config, then the same 2 lines for Speech. Every remaining native line on the LynxJS side is Swift the agent had to author, register, and debug. The precise claim is therefore stronger than the original "16 vs 242": **reaching these two platform APIs required the same platform configuration on both frameworks, and 226 lines of Swift on exactly one of them.**
+
+### 1a. Correction — generated lockfiles no longer count as authored code
+
+Preparing the Expo arm surfaced that `package-lock.json` / `Podfile.lock` / `Gemfile.lock` churn was being counted as JS/TS LOC. A dependency resolver writes those files; counting them credits `npm install` as authorship, and the effect scales with how many packages a framework's idiom pulls in — one Expo phase alone produced 275 lockfile lines. The classifier now reports them in a separate `generated` bucket, counted in neither the JS nor the native totals.
+
+Applied to this study the effect is one line: **LynxJS JS/TS LOC median 393 → 392** (range 335–504 → 335–503). NativeScript is unchanged at 376, and every other published number — output tokens, cost, turns, native LOC, all per-phase figures, all performance and interop results — is bit-identical. Both frameworks' median generated-line count is 0; only two Lynx trials touched a lockfile at all.
+
+The table above carries the corrected figure. It is recorded here rather than silently amended because a published number moved, however slightly.
 
 ### 2. Fixed context prefix (MCP schema weight) was not a factor here
 

@@ -69,19 +69,30 @@ const NATIVE_CONFIG_EXTS = new Set([
   'modulemap', 'podspec', 'xcscheme',
 ]);
 
+// Machine-generated dependency manifests. A resolver writes these; nobody
+// authors them, and their churn is proportional to how many packages a
+// framework's idiom pulls in — counting them as written code would credit
+// `npm install` as authorship.
+const GENERATED_FILES =
+  /(^|\/)(package-lock\.json|yarn\.lock|pnpm-lock\.yaml|npm-shrinkwrap\.json|Podfile\.lock|Gemfile\.lock|bun\.lockb)$/;
+
 /**
- * Classify a repo-relative path as 'native-code' | 'native-config' | 'js'.
+ * Classify a repo-relative path as
+ * 'native-code' | 'native-config' | 'js' | 'generated'.
  *
  * Invariant relied on by the published v1.0 numbers: the union of the two native
  * buckets is exactly the old single native bucket, so `loc_native_added` is
- * unchanged by the three-way split. Any new rule must widen both partitions
- * together or neither.
+ * unchanged. Any new rule must widen both partitions together or neither.
+ *
+ * 'generated' is reported separately rather than folded into any bucket, so it
+ * is visible without being counted as authored work.
  */
 export function classifyPath(p, framework = {}) {
   const ext = (p.split('.').pop() || '').toLowerCase();
   const base = p.split('/').pop();
   const underRoot = roots => (roots ?? []).some(r => p.startsWith(r));
 
+  if (GENERATED_FILES.test(p)) return 'generated';
   if (NATIVE_CODE_EXTS.has(ext)) return 'native-code';
   if (NATIVE_CONFIG_EXTS.has(ext)) return 'native-config';
   if ((framework.nativeConfigFiles ?? []).includes(base)) return 'native-config';

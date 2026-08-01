@@ -85,6 +85,7 @@ function analyzeNumstat(file, framework) {
     loc_native_added: 0,
     loc_native_code_added: 0,
     loc_native_config_added: 0,
+    loc_generated_added: 0,
   };
   if (!fs.existsSync(file)) return out;
   for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
@@ -96,6 +97,7 @@ function analyzeNumstat(file, framework) {
     switch (classifyPath(m[3], framework)) {
       case 'native-code': out.loc_native_code_added += added; break;
       case 'native-config': out.loc_native_config_added += added; break;
+      case 'generated': out.loc_generated_added += added; break;
       default: out.loc_js_added += added;
     }
   }
@@ -119,7 +121,7 @@ function range(xs) {
 const NUMERIC = [
   'input', 'output', 'cache_write', 'cache_read', 'total_cost_usd', 'turns', 'wall_s',
   'mcp_docs', 'web', 'loc_js_added', 'loc_native_added',
-  'loc_native_code_added', 'loc_native_config_added',
+  'loc_native_code_added', 'loc_native_config_added', 'loc_generated_added',
 ];
 // Aggregated per phase but never summed into a per-trial total: it measures the
 // size of a session's fixed context prefix, so adding three phases' worth is
@@ -133,7 +135,7 @@ const COLS = [
   'input', 'output', 'cache_write', 'cache_read', 'total_cost_usd', 'turns', 'wall_s',
   'reads', 'edits', 'bash', 'mcp_docs', 'web', 'tasks', 'other_tools',
   'files_changed', 'loc_js_added', 'loc_native_added',
-  'study', 'set', 'spec_version', 'loc_native_code_added', 'loc_native_config_added',
+  'study', 'set', 'spec_version', 'loc_native_code_added', 'loc_native_config_added', 'loc_generated_added',
   'first_turn_context',
 ];
 

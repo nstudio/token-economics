@@ -39,7 +39,8 @@
       "loc_js_added": 137,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-1",
@@ -72,7 +73,8 @@
       "loc_js_added": 124,
       "loc_native_added": 127,
       "loc_native_code_added": 111,
-      "loc_native_config_added": 16
+      "loc_native_config_added": 16,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-1",
@@ -105,7 +107,8 @@
       "loc_js_added": 84,
       "loc_native_added": 108,
       "loc_native_code_added": 106,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-2",
@@ -138,7 +141,8 @@
       "loc_js_added": 231,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-2",
@@ -171,7 +175,8 @@
       "loc_js_added": 85,
       "loc_native_added": 148,
       "loc_native_code_added": 134,
-      "loc_native_config_added": 14
+      "loc_native_config_added": 14,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-2",
@@ -204,7 +209,8 @@
       "loc_js_added": 77,
       "loc_native_added": 94,
       "loc_native_code_added": 92,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-3",
@@ -237,7 +243,8 @@
       "loc_js_added": 155,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-3",
@@ -270,7 +277,8 @@
       "loc_js_added": 101,
       "loc_native_added": 136,
       "loc_native_code_added": 115,
-      "loc_native_config_added": 21
+      "loc_native_config_added": 21,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-3",
@@ -303,7 +311,8 @@
       "loc_js_added": 79,
       "loc_native_added": 100,
       "loc_native_code_added": 98,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-4",
@@ -336,7 +345,8 @@
       "loc_js_added": 182,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-4",
@@ -366,10 +376,11 @@
       "spec_version": "v1.0.0",
       "first_turn_context": 34833,
       "files_changed": 9,
-      "loc_js_added": 185,
+      "loc_js_added": 184,
       "loc_native_added": 241,
       "loc_native_code_added": 227,
-      "loc_native_config_added": 14
+      "loc_native_config_added": 14,
+      "loc_generated_added": 1
     },
     {
       "trial": "main-lynx-4",
@@ -402,7 +413,8 @@
       "loc_js_added": 137,
       "loc_native_added": 180,
       "loc_native_code_added": 178,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-lynx-5",
@@ -432,10 +444,11 @@
       "spec_version": "v1.0.0",
       "first_turn_context": 34804,
       "files_changed": 12,
-      "loc_js_added": 179,
+      "loc_js_added": 173,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 6
     },
     {
       "trial": "main-lynx-5",
@@ -465,10 +478,11 @@
       "spec_version": "v1.0.0",
       "first_turn_context": 34833,
       "files_changed": 8,
-      "loc_js_added": 124,
+      "loc_js_added": 123,
       "loc_native_added": 218,
       "loc_native_code_added": 204,
-      "loc_native_config_added": 14
+      "loc_native_config_added": 14,
+      "loc_generated_added": 1
     },
     {
       "trial": "main-lynx-5",
@@ -501,7 +515,8 @@
       "loc_js_added": 96,
       "loc_native_added": 165,
       "loc_native_code_added": 161,
-      "loc_native_config_added": 4
+      "loc_native_config_added": 4,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-1",
@@ -534,7 +549,8 @@
       "loc_js_added": 51,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-1",
@@ -567,7 +583,8 @@
       "loc_js_added": 200,
       "loc_native_added": 15,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 15
+      "loc_native_config_added": 15,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-1",
@@ -600,7 +617,8 @@
       "loc_js_added": 125,
       "loc_native_added": 2,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-2",
@@ -633,7 +651,8 @@
       "loc_js_added": 52,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-2",
@@ -666,7 +685,8 @@
       "loc_js_added": 184,
       "loc_native_added": 14,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 14
+      "loc_native_config_added": 14,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-2",
@@ -699,7 +719,8 @@
       "loc_js_added": 103,
       "loc_native_added": 2,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-3",
@@ -732,7 +753,8 @@
       "loc_js_added": 59,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-3",
@@ -765,7 +787,8 @@
       "loc_js_added": 169,
       "loc_native_added": 15,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 15
+      "loc_native_config_added": 15,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-3",
@@ -798,7 +821,8 @@
       "loc_js_added": 99,
       "loc_native_added": 2,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-4",
@@ -831,7 +855,8 @@
       "loc_js_added": 58,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-4",
@@ -864,7 +889,8 @@
       "loc_js_added": 203,
       "loc_native_added": 13,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 13
+      "loc_native_config_added": 13,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-4",
@@ -897,7 +923,8 @@
       "loc_js_added": 135,
       "loc_native_added": 3,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 3
+      "loc_native_config_added": 3,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-5",
@@ -930,7 +957,8 @@
       "loc_js_added": 49,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-5",
@@ -963,7 +991,8 @@
       "loc_js_added": 248,
       "loc_native_added": 13,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 13
+      "loc_native_config_added": 13,
+      "loc_generated_added": 0
     },
     {
       "trial": "main-ns-5",
@@ -996,7 +1025,8 @@
       "loc_js_added": 93,
       "loc_native_added": 2,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-lynx-1",
@@ -1029,7 +1059,8 @@
       "loc_js_added": 215,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-lynx-1",
@@ -1062,7 +1093,8 @@
       "loc_js_added": 151,
       "loc_native_added": 174,
       "loc_native_code_added": 160,
-      "loc_native_config_added": 14
+      "loc_native_config_added": 14,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-lynx-1",
@@ -1095,7 +1127,8 @@
       "loc_js_added": 135,
       "loc_native_added": 124,
       "loc_native_code_added": 122,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-ns-1",
@@ -1128,7 +1161,8 @@
       "loc_js_added": 51,
       "loc_native_added": 0,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 0
+      "loc_native_config_added": 0,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-ns-1",
@@ -1161,7 +1195,8 @@
       "loc_js_added": 213,
       "loc_native_added": 12,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 12
+      "loc_native_config_added": 12,
+      "loc_generated_added": 0
     },
     {
       "trial": "pilot-ns-1",
@@ -1194,7 +1229,8 @@
       "loc_js_added": 140,
       "loc_native_added": 2,
       "loc_native_code_added": 0,
-      "loc_native_config_added": 2
+      "loc_native_config_added": 2,
+      "loc_generated_added": 0
     }
   ],
   "aggregates": {
@@ -1264,6 +1300,11 @@
           ],
           "median_loc_native_config_added": 0,
           "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
             0,
             0
           ],
@@ -1340,6 +1381,11 @@
             13,
             15
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34517,
           "range_first_turn_context": [
             34515,
@@ -1413,6 +1459,11 @@
             2,
             3
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34530,
           "range_first_turn_context": [
             34530,
@@ -1485,6 +1536,11 @@
           "range_loc_native_config_added": [
             15,
             17
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
           ]
         }
       },
@@ -1536,7 +1592,7 @@
             0,
             0
           ],
-          "median_loc_js_added": 179,
+          "median_loc_js_added": 173,
           "range_loc_js_added": [
             137,
             231
@@ -1555,6 +1611,11 @@
           "range_loc_native_config_added": [
             0,
             0
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            6
           ],
           "median_first_turn_context": 34804,
           "range_first_turn_context": [
@@ -1609,10 +1670,10 @@
             0,
             2
           ],
-          "median_loc_js_added": 124,
+          "median_loc_js_added": 123,
           "range_loc_js_added": [
             85,
-            185
+            184
           ],
           "median_loc_native_added": 148,
           "range_loc_native_added": [
@@ -1628,6 +1689,11 @@
           "range_loc_native_config_added": [
             14,
             21
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            1
           ],
           "median_first_turn_context": 34833,
           "range_first_turn_context": [
@@ -1702,6 +1768,11 @@
             2,
             4
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34849,
           "range_first_turn_context": [
             34845,
@@ -1755,10 +1826,10 @@
             0,
             2
           ],
-          "median_loc_js_added": 393,
+          "median_loc_js_added": 392,
           "range_loc_js_added": [
             335,
-            504
+            503
           ],
           "median_loc_native_added": 242,
           "range_loc_native_added": [
@@ -1774,6 +1845,11 @@
           "range_loc_native_config_added": [
             16,
             23
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            7
           ]
         }
       }
@@ -1844,6 +1920,11 @@
           ],
           "median_loc_native_config_added": 0,
           "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
             0,
             0
           ],
@@ -1920,6 +2001,11 @@
             12,
             12
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34515,
           "range_first_turn_context": [
             34515,
@@ -1993,6 +2079,11 @@
             2,
             2
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34530,
           "range_first_turn_context": [
             34530,
@@ -2065,6 +2156,11 @@
           "range_loc_native_config_added": [
             14,
             14
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
           ]
         }
       },
@@ -2133,6 +2229,11 @@
           ],
           "median_loc_native_config_added": 0,
           "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
             0,
             0
           ],
@@ -2209,6 +2310,11 @@
             14,
             14
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34830,
           "range_first_turn_context": [
             34830,
@@ -2282,6 +2388,11 @@
             2,
             2
           ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
+          ],
           "median_first_turn_context": 34845,
           "range_first_turn_context": [
             34845,
@@ -2354,6 +2465,11 @@
           "range_loc_native_config_added": [
             16,
             16
+          ],
+          "median_loc_generated_added": 0,
+          "range_loc_generated_added": [
+            0,
+            0
           ]
         }
       }
