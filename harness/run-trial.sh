@@ -184,9 +184,12 @@ preserve_trial_branch() {
   # branch HEAD is on. Without a named ref, this trial's final tree survives only
   # in the reflog until gc. harness/perf/build-release.sh checks out exactly this
   # name to rebuild the app in Release.
-  git -C "$REPO" branch -f "trials/$TRIAL_ID" HEAD
-  manifest_set "trial_branch" "\"trials/$TRIAL_ID\""
-  note "preserved final tree as branch trials/$TRIAL_ID"
+  # Study-scoped: two studies share these repos and reuse trial ids, so an
+  # unscoped name lets a later study silently overwrite an earlier one's tree —
+  # and a Release rebuild would then measure the wrong code under the right name.
+  git -C "$REPO" branch -f "trials/$STUDY_SLUG/$TRIAL_ID" HEAD
+  manifest_set "trial_branch" "\"trials/$STUDY_SLUG/$TRIAL_ID\""
+  note "preserved final tree as branch trials/$STUDY_SLUG/$TRIAL_ID"
 }
 
 record_toolchain() {

@@ -160,6 +160,6 @@
       "end_sha": "64b546f98869f4dff2716d50495e628a9dfe16a0"
     }
   },
-  "trial_branch": "trials/pilot-ns-1",
+  "trial_branch": "trials/ns-vs-expo/pilot-ns-1",
   "finished_at": "2026-08-01T01:01:39Z"
 }

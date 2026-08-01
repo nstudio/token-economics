@@ -41,8 +41,13 @@ build_one() { # build_one <trial-id> ; returns nonzero on failure (batch continu
   local dest="$RESULTS_DIR/$id/app-release"
   if [ -d "$dest" ]; then note "$id: app-release exists, skipping"; return 0; fi
 
-  note "$id: checkout trials/$id"
-  git -C "$repo" checkout -f -q "trials/$id" || { note "$id: checkout FAILED"; return 1; }
+  # The manifest records the exact branch for this trial; trial ids repeat across
+  # studies, so never reconstruct the name from the id alone.
+  local br
+  br="$(node -e 'try{console.log(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).trial_branch||"")}catch(e){}' "$RESULTS_DIR/$id/manifest.json")"
+  [ -n "$br" ] || br="trials/$STUDY_SLUG/$id"
+  note "$id: checkout $br"
+  git -C "$repo" checkout -f -q "$br" || { note "$id: checkout FAILED"; return 1; }
   git -C "$repo" clean -fd -q
 
   if ! git -C "$repo" diff --quiet "$BASELINE_TAG" -- package.json; then

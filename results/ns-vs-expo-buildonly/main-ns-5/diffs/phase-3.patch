@@ -1,0 +1,170 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index ae990e2..e67beed 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -26,6 +26,8 @@
+ 	<string>Native Bench reads your step count from Health to show your recent activity.</string>
+ 	<key>NSHealthUpdateUsageDescription</key>
+ 	<string>Native Bench writes step samples to Health when you log steps.</string>
++	<key>NSSpeechRecognitionUsageDescription</key>
++	<string>Native Bench uses speech recognition to transcribe the sample audio.</string>
+ 	<key>UILaunchStoryboardName</key>
+ 	<string>LaunchScreen</string>
+ 	<key>UIRequiresFullScreen</key>
+diff --git a/app/assets/sample.wav b/app/assets/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/app/assets/sample.wav differ
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+index 5e430fc..e625be2 100644
+--- a/app/components/Transcribe.vue
++++ b/app/components/Transcribe.vue
+@@ -1,16 +1,76 @@
+ <template>
+-  <Page>
++  <Page @navigatedTo="onNavigatedTo">
+     <ActionBar title="Transcribe" />
+ 
+     <GridLayout rows="auto, auto, auto, *" class="p-4">
+-      <Label row="0" text="Speech access: not requested" class="text-base" textWrap="true" />
++      <Label row="0" :text="statusText" class="text-base" textWrap="true" />
+ 
+-      <Button row="1" text="Request Access" class="mt-4 p-3" />
+-      <Button row="2" text="Transcribe Sample" isEnabled="false" class="mt-2 p-3" />
++      <Button row="1" text="Request Access" class="mt-4 p-3" @tap="onRequestAccess" />
++      <Button row="2" text="Transcribe Sample" :isEnabled="canTranscribe" class="mt-2 p-3" @tap="onTranscribe" />
+ 
+-      <Label row="3" text="No transcript yet" class="text-gray-500 mt-6" verticalAlignment="top" textWrap="true" />
++      <StackLayout row="3" verticalAlignment="top" class="mt-6">
++        <Label :text="transcriptText" class="text-gray-500" textWrap="true" />
++        <Label v-if="completedText" :text="completedText" class="text-gray-500 mt-2" textWrap="true" />
++      </StackLayout>
+     </GridLayout>
+   </Page>
+ </template>
+ 
+-<script setup lang="ts"></script>
++<script setup lang="ts">
++import { ref, computed } from 'vue'
++import { getAccessStatus, requestAccess, transcribeSample, type SpeechAccessStatus } from '../services/speech'
++
++const accessStatus = ref<SpeechAccessStatus>('not-requested')
++const statusMessage = ref('')
++const isTranscribing = ref(false)
++const transcript = ref('')
++const completedText = ref('')
++
++const statusText = computed(() => {
++  if (statusMessage.value) return statusMessage.value
++  if (isTranscribing.value) return 'Transcribing…'
++  switch (accessStatus.value) {
++    case 'granted':
++      return 'Speech access: granted'
++    case 'denied':
++      return 'Speech access: denied'
++    default:
++      return 'Speech access: not requested'
++  }
++})
++
++const canTranscribe = computed(() => accessStatus.value === 'granted' && !isTranscribing.value)
++
++const transcriptText = computed(() => transcript.value || 'No transcript yet')
++
++function onNavigatedTo() {
++  statusMessage.value = ''
++  accessStatus.value = getAccessStatus()
++}
++
++async function onRequestAccess() {
++  statusMessage.value = ''
++  accessStatus.value = await requestAccess()
++}
++
++async function onTranscribe() {
++  statusMessage.value = ''
++  completedText.value = ''
++  transcript.value = ''
++  isTranscribing.value = true
++  const startedAt = Date.now()
++
++  try {
++    const finalText = await transcribeSample((partial) => {
++      transcript.value = partial
++    })
++    transcript.value = finalText
++    const elapsedSeconds = (Date.now() - startedAt) / 1000
++    completedText.value = `Completed in ${elapsedSeconds.toFixed(1)} s`
++  } catch (error) {
++    statusMessage.value = `Transcription failed: ${(error as Error).message}`
++  } finally {
++    isTranscribing.value = false
++  }
++}
++</script>
+diff --git a/app/services/speech.ts b/app/services/speech.ts
+new file mode 100644
+index 0000000..c8d2df3
+--- /dev/null
++++ b/app/services/speech.ts
+@@ -0,0 +1,60 @@
++import { Utils, knownFolders, path } from '@nativescript/core'
++
++export type SpeechAccessStatus = 'not-requested' | 'granted' | 'denied'
++
++function statusFromAuthorization(status: SFSpeechRecognizerAuthorizationStatus): SpeechAccessStatus {
++  switch (status) {
++    case SFSpeechRecognizerAuthorizationStatus.Authorized:
++      return 'granted'
++    case SFSpeechRecognizerAuthorizationStatus.NotDetermined:
++      return 'not-requested'
++    default:
++      return 'denied'
++  }
++}
++
++export function getAccessStatus(): SpeechAccessStatus {
++  return statusFromAuthorization(SFSpeechRecognizer.authorizationStatus())
++}
++
++export function requestAccess(): Promise<SpeechAccessStatus> {
++  return new Promise((resolve) => {
++    SFSpeechRecognizer.requestAuthorization((status) => {
++      Utils.executeOnMainThread(() => resolve(statusFromAuthorization(status)))
++    })
++  })
++}
++
++function sampleFileUrl(): NSURL {
++  const filePath = path.join(knownFolders.currentApp().path, 'assets/sample.wav')
++  return NSURL.fileURLWithPath(filePath)
++}
++
++export function transcribeSample(onPartial: (text: string) => void): Promise<string> {
++  return new Promise((resolve, reject) => {
++    const recognizer = SFSpeechRecognizer.alloc().initWithLocale(NSLocale.alloc().initWithLocaleIdentifier('en-US'))
++    if (!recognizer || !recognizer.available) {
++      reject(new Error('Speech recognizer unavailable'))
++      return
++    }
++
++    const request = SFSpeechURLRecognitionRequest.alloc().initWithURL(sampleFileUrl())
++    request.shouldReportPartialResults = true
++
++    recognizer.recognitionTaskWithRequestResultHandler(request, (result, error) => {
++      Utils.executeOnMainThread(() => {
++        if (error) {
++          reject(new Error(error.localizedDescription))
++          return
++        }
++        if (!result) return
++
++        const text = result.bestTranscription.formattedString
++        onPartial(text)
++        if (result.final) {
++          resolve(text)
++        }
++      })
++    })
++  })
++}

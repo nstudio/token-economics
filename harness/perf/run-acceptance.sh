@@ -36,8 +36,12 @@ mkdir -p "$OUT_DIR"
 check_one() { # check_one <trial-id>
   local id="$1"
   local app bid
-  app="$(ls -d "$RESULTS_DIR/$id/app"/*.app 2>/dev/null | head -1)"
-  [ -n "$app" ] || { note "$id: no archived app, skipping"; return 1; }
+  # Release, never Debug: React Native Debug builds do not embed the JS bundle —
+  # they fetch it from Metro at runtime, so a Debug RN app launched standalone is
+  # an error screen and any verdict against it is meaningless. Release embeds on
+  # both arms, which also makes this the same artifact the perf suite measures.
+  app="$(ls -d "$RESULTS_DIR/$id/app-release"/*.app 2>/dev/null | head -1)"
+  [ -n "$app" ] || { note "$id: no Release app (run build-release.sh first), skipping"; return 1; }
   bid="$(plutil -extract CFBundleIdentifier raw "$app/Info.plist")"
 
   # A clean install per trial: permission state is sticky, and a granted
@@ -68,7 +72,7 @@ default_trials() {
   for d in "$RESULTS_DIR"/main-*/; do
     t="$(basename "$d")"
     case "$t" in *infra-invalid*) continue ;; esac
-    [ -d "$d/app" ] && echo "$t"
+    [ -d "$d/app-release" ] && echo "$t"
   done
 }
 

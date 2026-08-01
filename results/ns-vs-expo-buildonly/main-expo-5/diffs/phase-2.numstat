@@ -1,0 +1,9 @@
+8	1	app.json
+21	0	modules/health-kit/LICENSE
+6	0	modules/health-kit/expo-module.config.json
+23	0	modules/health-kit/ios/ExpoHealthKit.podspec
+113	0	modules/health-kit/ios/ExpoHealthKitModule.swift
+7	0	modules/health-kit/src/ExpoHealthKit.types.ts
+12	0	modules/health-kit/src/ExpoHealthKitModule.ts
+2	0	modules/health-kit/src/index.ts
+136	6	screens/HealthScreen.tsx

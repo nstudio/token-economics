@@ -1,0 +1,331 @@
+diff --git a/app.json b/app.json
+index fedc760..a502ca4 100644
+--- a/app.json
++++ b/app.json
+@@ -11,7 +11,8 @@
+       "bundleIdentifier": "com.nstudio.expobenchmark",
+       "infoPlist": {
+         "NSHealthShareUsageDescription": "Native Bench reads your step count to display recent activity.",
+-        "NSHealthUpdateUsageDescription": "Native Bench writes step count samples for the health benchmark."
++        "NSHealthUpdateUsageDescription": "Native Bench writes step count samples for the health benchmark.",
++        "NSSpeechRecognitionUsageDescription": "Native Bench uses speech recognition to transcribe a sample audio file."
+       },
+       "entitlements": {
+         "com.apple.developer.healthkit": true,
+diff --git a/modules/speech-transcribe/expo-module.config.json b/modules/speech-transcribe/expo-module.config.json
+new file mode 100644
+index 0000000..ad57209
+--- /dev/null
++++ b/modules/speech-transcribe/expo-module.config.json
+@@ -0,0 +1,6 @@
++{
++  "platforms": ["apple"],
++  "apple": {
++    "modules": ["SpeechTranscribeModule"]
++  }
++}
+diff --git a/modules/speech-transcribe/ios/SpeechTranscribe.podspec b/modules/speech-transcribe/ios/SpeechTranscribe.podspec
+new file mode 100644
+index 0000000..3a82068
+--- /dev/null
++++ b/modules/speech-transcribe/ios/SpeechTranscribe.podspec
+@@ -0,0 +1,24 @@
++Pod::Spec.new do |s|
++  s.name           = 'SpeechTranscribe'
++  s.version        = '1.0.0'
++  s.summary        = 'Local Expo module exposing Speech framework transcription of a bundled audio file'
++  s.description    = 'Local Expo module exposing Speech framework transcription of a bundled audio file'
++  s.author         = ''
++  s.homepage       = 'https://docs.expo.dev/modules/'
++  s.platforms      = {
++    :ios => '16.4'
++  }
++  s.source         = { git: '' }
++  s.static_framework = true
++
++  s.dependency 'ExpoModulesCore'
++  s.frameworks = 'Speech'
++
++  # Swift/Objective-C compatibility
++  s.pod_target_xcconfig = {
++    'DEFINES_MODULE' => 'YES',
++  }
++
++  s.source_files = "**/*.{h,m,mm,swift,hpp,cpp}"
++  s.resources = "assets/*"
++end
+diff --git a/modules/speech-transcribe/ios/SpeechTranscribeModule.swift b/modules/speech-transcribe/ios/SpeechTranscribeModule.swift
+new file mode 100644
+index 0000000..149eb0f
+--- /dev/null
++++ b/modules/speech-transcribe/ios/SpeechTranscribeModule.swift
+@@ -0,0 +1,97 @@
++import ExpoModulesCore
++import Speech
++
++enum SpeechTranscribeError: Error, LocalizedError {
++  case notAuthorized
++  case recognizerUnavailable
++  case audioFileNotFound
++
++  var errorDescription: String? {
++    switch self {
++    case .notAuthorized:
++      return "Speech recognition access has not been granted"
++    case .recognizerUnavailable:
++      return "Speech recognizer is not available"
++    case .audioFileNotFound:
++      return "Sample audio file not found in app bundle"
++    }
++  }
++}
++
++public class SpeechTranscribeModule: Module {
++  private let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
++  private var recognitionTask: SFSpeechRecognitionTask?
++
++  public func definition() -> ModuleDefinition {
++    Name("SpeechTranscribe")
++
++    Events("onPartialTranscript")
++
++    AsyncFunction("getAuthorizationStatus") { () -> String in
++      self.authorizationStatusString()
++    }
++
++    AsyncFunction("requestAuthorization") { () async -> String in
++      await withCheckedContinuation { continuation in
++        SFSpeechRecognizer.requestAuthorization { _ in
++          continuation.resume(returning: self.authorizationStatusString())
++        }
++      }
++    }
++
++    AsyncFunction("transcribeSample") { () async throws -> String in
++      try await self.transcribe()
++    }
++  }
++
++  private func authorizationStatusString() -> String {
++    switch SFSpeechRecognizer.authorizationStatus() {
++    case .notDetermined:
++      return "notDetermined"
++    case .authorized:
++      return "authorized"
++    case .denied, .restricted:
++      return "denied"
++    @unknown default:
++      return "notDetermined"
++    }
++  }
++
++  private func transcribe() async throws -> String {
++    guard SFSpeechRecognizer.authorizationStatus() == .authorized else {
++      throw SpeechTranscribeError.notAuthorized
++    }
++    guard let recognizer = recognizer, recognizer.isAvailable else {
++      throw SpeechTranscribeError.recognizerUnavailable
++    }
++    guard let url = Bundle.main.url(forResource: "sample", withExtension: "wav") else {
++      throw SpeechTranscribeError.audioFileNotFound
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = true
++
++    return try await withCheckedThrowingContinuation { continuation in
++      var didFinish = false
++      self.recognitionTask = recognizer.recognitionTask(with: request) { result, error in
++        if didFinish {
++          return
++        }
++        if let error {
++          didFinish = true
++          continuation.resume(throwing: error)
++          return
++        }
++        guard let result else {
++          return
++        }
++        let transcript = result.bestTranscription.formattedString
++        self.sendEvent("onPartialTranscript", ["transcript": transcript])
++        if result.isFinal {
++          didFinish = true
++          continuation.resume(returning: transcript)
++        }
++      }
++    }
++  }
++}
+diff --git a/modules/speech-transcribe/ios/assets/sample.wav b/modules/speech-transcribe/ios/assets/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/modules/speech-transcribe/ios/assets/sample.wav differ
+diff --git a/modules/speech-transcribe/src/SpeechTranscribe.types.ts b/modules/speech-transcribe/src/SpeechTranscribe.types.ts
+new file mode 100644
+index 0000000..7368ed0
+--- /dev/null
++++ b/modules/speech-transcribe/src/SpeechTranscribe.types.ts
+@@ -0,0 +1,9 @@
++export type SpeechAuthorizationStatus = 'notDetermined' | 'authorized' | 'denied';
++
++export type PartialTranscriptEvent = {
++  transcript: string;
++};
++
++export type SpeechTranscribeModuleEvents = {
++  onPartialTranscript(event: PartialTranscriptEvent): void;
++};
+diff --git a/modules/speech-transcribe/src/SpeechTranscribeModule.ts b/modules/speech-transcribe/src/SpeechTranscribeModule.ts
+new file mode 100644
+index 0000000..a83da43
+--- /dev/null
++++ b/modules/speech-transcribe/src/SpeechTranscribeModule.ts
+@@ -0,0 +1,11 @@
++import { NativeModule, requireNativeModule } from 'expo';
++
++import type { SpeechAuthorizationStatus, SpeechTranscribeModuleEvents } from './SpeechTranscribe.types';
++
++declare class SpeechTranscribeModule extends NativeModule<SpeechTranscribeModuleEvents> {
++  getAuthorizationStatus(): Promise<SpeechAuthorizationStatus>;
++  requestAuthorization(): Promise<SpeechAuthorizationStatus>;
++  transcribeSample(): Promise<string>;
++}
++
++export default requireNativeModule<SpeechTranscribeModule>('SpeechTranscribe');
+diff --git a/screens/TranscribeScreen.tsx b/screens/TranscribeScreen.tsx
+index 0c39a6a..f7c6f8a 100644
+--- a/screens/TranscribeScreen.tsx
++++ b/screens/TranscribeScreen.tsx
+@@ -1,19 +1,102 @@
++import { useCallback, useEffect, useState } from 'react';
+ import { StyleSheet, Text, View } from 'react-native';
++import { useFocusEffect } from '@react-navigation/native';
+ 
+ import { Button } from '../components/Button';
++import SpeechTranscribeModule from '../modules/speech-transcribe/src/SpeechTranscribeModule';
++import type { SpeechAuthorizationStatus } from '../modules/speech-transcribe/src/SpeechTranscribe.types';
++
++const STATUS_LABELS: Record<SpeechAuthorizationStatus, string> = {
++  notDetermined: 'Speech access: not requested',
++  authorized: 'Speech access: granted',
++  denied: 'Speech access: denied',
++};
+ 
+ export default function TranscribeScreen() {
++  const [status, setStatus] = useState<SpeechAuthorizationStatus>('notDetermined');
++  const [errorText, setErrorText] = useState<string | null>(null);
++  const [transcript, setTranscript] = useState<string | null>(null);
++  const [elapsedSeconds, setElapsedSeconds] = useState<number | null>(null);
++  const [isTranscribing, setIsTranscribing] = useState(false);
++
++  const refresh = useCallback(async () => {
++    try {
++      const current = await SpeechTranscribeModule.getAuthorizationStatus();
++      setStatus(current);
++      setErrorText(null);
++    } catch (error) {
++      setErrorText(error instanceof Error ? error.message : String(error));
++    }
++  }, []);
++
++  useFocusEffect(
++    useCallback(() => {
++      refresh();
++    }, [refresh])
++  );
++
++  useEffect(() => {
++    const subscription = SpeechTranscribeModule.addListener('onPartialTranscript', (event) => {
++      setTranscript(event.transcript);
++    });
++    return () => subscription.remove();
++  }, []);
++
++  const handleRequestAccess = async () => {
++    try {
++      const result = await SpeechTranscribeModule.requestAuthorization();
++      setStatus(result);
++      setErrorText(null);
++    } catch (error) {
++      setErrorText(error instanceof Error ? error.message : String(error));
++    }
++  };
++
++  const handleTranscribe = async () => {
++    setIsTranscribing(true);
++    setErrorText(null);
++    setTranscript(null);
++    setElapsedSeconds(null);
++    const startedAt = Date.now();
++    try {
++      const finalTranscript = await SpeechTranscribeModule.transcribeSample();
++      setTranscript(finalTranscript);
++      setElapsedSeconds((Date.now() - startedAt) / 1000);
++    } catch (error) {
++      setErrorText(error instanceof Error ? error.message : String(error));
++    } finally {
++      setIsTranscribing(false);
++    }
++  };
++
++  const statusLine = errorText ?? (isTranscribing ? 'Transcribing…' : STATUS_LABELS[status]);
++
+   return (
+     <View style={styles.container}>
+-      <Text style={styles.status}>Speech access: not requested</Text>
++      <Text style={styles.status}>{statusLine}</Text>
+ 
+       <View style={styles.actions}>
+-        <Button label="Request Access" onPress={() => {}} />
+-        <Button label="Transcribe Sample" onPress={() => {}} disabled />
++        <Button label="Request Access" onPress={handleRequestAccess} />
++        <Button
++          label="Transcribe Sample"
++          onPress={handleTranscribe}
++          disabled={status !== 'authorized' || isTranscribing}
++        />
+       </View>
+ 
+       <View style={styles.transcriptArea}>
+-        <Text style={styles.emptyStateText}>No transcript yet</Text>
++        {transcript === null ? (
++          <View style={styles.emptyState}>
++            <Text style={styles.emptyStateText}>No transcript yet</Text>
++          </View>
++        ) : (
++          <>
++            <Text style={styles.transcriptText}>{transcript}</Text>
++            {elapsedSeconds !== null && (
++              <Text style={styles.completedText}>Completed in {elapsedSeconds.toFixed(1)} s</Text>
++            )}
++          </>
++        )}
+       </View>
+     </View>
+   );
+@@ -33,6 +116,10 @@ const styles = StyleSheet.create({
+     gap: 12,
+   },
+   transcriptArea: {
++    flex: 1,
++    gap: 12,
++  },
++  emptyState: {
+     flex: 1,
+     alignItems: 'center',
+     justifyContent: 'center',
+@@ -41,4 +128,13 @@ const styles = StyleSheet.create({
+     fontSize: 16,
+     color: '#8E8E93',
+   },
++  transcriptText: {
++    fontSize: 16,
++    color: '#333',
++    lineHeight: 22,
++  },
++  completedText: {
++    fontSize: 14,
++    color: '#8E8E93',
++  },
+ });

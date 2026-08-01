@@ -15,7 +15,7 @@
     }
   },
   "started_at": "2026-08-01T19:28:17Z",
-  "outcome": "in-progress",
+  "outcome": "phases-complete",
   "acceptance": {
     "status": "pending",
     "items": {},
@@ -35,6 +35,145 @@
       "result": "USED=mcp__nativescript-docs__search_docs",
       "is_error": false,
       "enforced": true
+    },
+    "phase-2": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
+    },
+    "phase-3": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
     }
-  }
+  },
+  "phases": {
+    "1": {
+      "session_id": "db791cf6-48e8-488a-9b71-629bc6586533",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 29,
+      "duration_ms": 120673,
+      "total_cost_usd": 0.8165234999999998,
+      "usage": {
+        "input_tokens": 46,
+        "cache_creation_input_tokens": 46315,
+        "cache_read_input_tokens": 1337535,
+        "output_tokens": 9096,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 46315,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 118,
+            "cache_read_input_tokens": 74428,
+            "cache_creation_input_tokens": 1284,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1284
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 122,
+      "end_sha": "3982dc81f55136daa40a9fc3ccf1aa228d41fc53"
+    },
+    "2": {
+      "session_id": "a67b8e93-e5b6-40e5-87a2-f7c9bb89de45",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 76,
+      "duration_ms": 616854,
+      "total_cost_usd": 3.1324496,
+      "usage": {
+        "input_tokens": 124,
+        "cache_creation_input_tokens": 109290,
+        "cache_read_input_tokens": 6269482,
+        "output_tokens": 39646,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 109290,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 602,
+            "cache_read_input_tokens": 138472,
+            "cache_creation_input_tokens": 226,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 226
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 618,
+      "end_sha": "b81e88de886a33a77a301d66ba4547a6ad559cfb"
+    },
+    "3": {
+      "session_id": "dac2bba5-3893-4efd-8a2a-3bf3c26650cb",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 48,
+      "duration_ms": 298064,
+      "total_cost_usd": 1.5632586,
+      "usage": {
+        "input_tokens": 68,
+        "cache_creation_input_tokens": 77955,
+        "cache_read_input_tokens": 2742162,
+        "output_tokens": 18124,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 77955,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 327,
+            "cache_read_input_tokens": 107112,
+            "cache_creation_input_tokens": 255,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 255
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 299,
+      "end_sha": "ce01ee363e9736ed9672698b9283644edd451551"
+    }
+  },
+  "trial_branch": "trials/ns-vs-expo-buildonly/main-ns-1",
+  "finished_at": "2026-08-01T19:46:43Z"
 }

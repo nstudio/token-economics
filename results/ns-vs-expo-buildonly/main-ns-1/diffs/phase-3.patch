@@ -1,0 +1,138 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index 9483d8c..dd55adc 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -47,5 +47,7 @@
+ 	<string>Native Bench reads your step count to display recent activity.</string>
+ 	<key>NSHealthUpdateUsageDescription</key>
+ 	<string>Native Bench writes step count samples that you log in the app.</string>
++	<key>NSSpeechRecognitionUsageDescription</key>
++	<string>Native Bench uses speech recognition to transcribe a sample audio file.</string>
+ </dict>
+ </plist>
+diff --git a/App_Resources/iOS/sample.wav b/App_Resources/iOS/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/App_Resources/iOS/sample.wav differ
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+index b7aa85f..c0a2957 100644
+--- a/app/components/Transcribe.vue
++++ b/app/components/Transcribe.vue
+@@ -1,20 +1,111 @@
+ <template>
+-    <Page>
++    <Page @navigatedTo="onNavigatedTo">
+         <ActionBar title="Transcribe">
+             <NavigationButton text="Home" />
+         </ActionBar>
+ 
+         <ScrollView>
+             <StackLayout class="p-4">
+-                <Label text="Speech access: not requested" class="text-base" textWrap="true" />
++                <Label :text="statusText" class="text-base" textWrap="true" />
+ 
+-                <Button text="Request Access" class="mt-4 p-3 bg-blue-500 text-white rounded-lg" />
+-                <Button text="Transcribe Sample" :isEnabled="false" class="mt-3 p-3 bg-gray-300 text-white rounded-lg" />
++                <Button text="Request Access" class="mt-4 p-3 bg-blue-500 text-white rounded-lg" @tap="requestAccess" />
++                <Button text="Transcribe Sample" :isEnabled="canTranscribe" :class="canTranscribe ? 'bg-blue-500' : 'bg-gray-300'" class="mt-3 p-3 text-white rounded-lg" @tap="transcribeSample" />
+ 
+-                <Label text="No transcript yet" class="mt-6 text-gray-500" textWrap="true" />
++                <Label v-if="!transcript" text="No transcript yet" class="mt-6 text-gray-500" textWrap="true" />
++                <StackLayout v-else class="mt-6">
++                    <Label :text="transcript" textWrap="true" class="text-gray-800" />
++                    <Label v-if="completedText" :text="completedText" textWrap="true" class="mt-1 text-gray-500" />
++                </StackLayout>
+             </StackLayout>
+         </ScrollView>
+     </Page>
+ </template>
+ 
+-<script setup lang="ts"></script>
++<script setup lang="ts">
++import { computed, ref } from 'nativescript-vue'
++import { Utils } from '@nativescript/core'
++
++const statusText = ref('Speech access: not requested')
++const authGranted = ref(false)
++const isTranscribing = ref(false)
++const transcript = ref('')
++const completedText = ref('')
++
++const canTranscribe = computed(() => authGranted.value && !isTranscribing.value)
++
++let recognizer: SFSpeechRecognizer | null = null
++let startTime = 0
++
++function getRecognizer(): SFSpeechRecognizer {
++    if (!recognizer) {
++        recognizer = SFSpeechRecognizer.new()
++    }
++    return recognizer
++}
++
++function refreshStatus() {
++    const status = SFSpeechRecognizer.authorizationStatus()
++    if (status === SFSpeechRecognizerAuthorizationStatus.Authorized) {
++        statusText.value = 'Speech access: granted'
++        authGranted.value = true
++    } else if (status === SFSpeechRecognizerAuthorizationStatus.Denied || status === SFSpeechRecognizerAuthorizationStatus.Restricted) {
++        statusText.value = 'Speech access: denied'
++        authGranted.value = false
++    } else {
++        statusText.value = 'Speech access: not requested'
++        authGranted.value = false
++    }
++}
++
++function requestAccess() {
++    SFSpeechRecognizer.requestAuthorization(() => {
++        Utils.dispatchToMainThread(() => {
++            refreshStatus()
++        })
++    })
++}
++
++function transcribeSample() {
++    const url = NSBundle.mainBundle.URLForResourceWithExtension('sample', 'wav')
++    if (!url) {
++        statusText.value = 'Transcription failed: sample audio file not found in bundle'
++        return
++    }
++
++    isTranscribing.value = true
++    transcript.value = ''
++    completedText.value = ''
++    statusText.value = 'Transcribing…'
++    startTime = Date.now()
++
++    const request = SFSpeechURLRecognitionRequest.alloc().initWithURL(url)
++    request.shouldReportPartialResults = true
++
++    getRecognizer().recognitionTaskWithRequestResultHandler(request, (result, error) => {
++        Utils.dispatchToMainThread(() => {
++            if (error) {
++                statusText.value = `Transcription failed: ${error.localizedDescription}`
++                isTranscribing.value = false
++                return
++            }
++
++            if (!result) {
++                return
++            }
++
++            transcript.value = result.bestTranscription.formattedString
++
++            if (result.final) {
++                const elapsedSeconds = (Date.now() - startTime) / 1000
++                completedText.value = `Completed in ${elapsedSeconds.toFixed(1)} s`
++                statusText.value = 'Speech access: granted'
++                isTranscribing.value = false
++            }
++        })
++    })
++}
++
++function onNavigatedTo() {
++    refreshStatus()
++}
++</script>

@@ -160,7 +160,7 @@
       "end_sha": "dfbcab6d8996ce51b1b30b3179ca879504349139"
     }
   },
-  "trial_branch": "trials/pilot-expo-1",
+  "trial_branch": "trials/ns-vs-expo/pilot-expo-1",
   "finished_at": "2026-08-01T01:57:37Z",
   "superseded": {
     "reason": "Run against the create-expo-app DEFAULT template, whose scaffold ships ~750 lines of demo app. Phase 1 measured template demolition (+118/-745 across 14 files) rather than building the specshell, which is not the activity the NativeScript arm performs (+57/-14). Baseline re-established on --template blank-typescript to match the v1.0 precedent of near-blank scaffolds on both arms.",

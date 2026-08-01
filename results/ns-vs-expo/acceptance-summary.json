@@ -1,0 +1,12 @@
+{
+  "study": "ns-vs-expo",
+  "rows": [
+    {
+      "trial": "main-ns-1",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project UIDriver.xcodeproj -scheme UIDriver -destination id=7DFF2660-A10C-449E-867A-92863D91663B "-only-testing:UIDriverUITests/FeatureLatencyTests"
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:7DFF2660-A10C-449E-867A-92863D91663B, OS:26.5, name:iPhone 17 Pro }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'UIDriverUITests' in project 'UIDriver' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /Users/nstudio/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+    cd /Users/nstudio/Documents/github/NathanWalker/token-economics/harness/perf/uidriver/UIDriver.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /Users/nstudio/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F73-688ef53f1462e2c8f657fdc38a81448f6cfe768891a92b912361537c460fe42b.sdkstatcache
+
+2026-08-01 16:03:14.773310-0700 UIDriverUITests-Runner[99029:30054331] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-08-01 16:03:15.295.
+Test Suite 'UIDriverUITests.xctest' started at 2026-08-01 16:03:15.296.
+Test Suite 'FeatureLatencyTests' started at 2026-08-01 16:03:15.296.
+Test Case '-[UIDriverUITests.FeatureLatencyTests testFeatureLatencies]' started.
+    t =     0.00s Start Test at 2026-08-01 16:03:15.297
+    t =     0.02s Set Up
+STEP[0s]: iter 0: launch org.nativescript.nsbenchmark
+    t =     0.02s Open org.nativescript.nsbenchmark
+    t =     0.02s     Launch org.nativescript.nsbenchmark
+    t =     0.13s         Setting up automation session
+objc[99029]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x109198310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x105758398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =     1.34s         Wait for org.nativescript.nsbenchmark to idle
+    t =     2.50s Checking existence of `"Health" Button`
+    t =     2.53s Waiting 20.0s for "Health" Button to exist
+    t =     3.56s     Checking `Expect predicate `existsNoRetry == 1` for object "Health" Button`
+    t =     3.56s         Checking existence of `"Health" Button`
+STEP[3s]: iter 0: nav Health
+    t =     3.58s Checking existence of `"Health" Button`
+    t =     3.58s Tap "Health" Button
+    t =     3.58s     Wait for org.nativescript.nsbenchmark to idle
+    t =     3.59s     Find the "Health" Button
+    t =     3.59s     Check for interrupting elements affecting "Health" Button
+    t =     3.61s     Synthesize event
+    t =     3.89s     Wait for org.nativescript.nsbenchmark to idle
+    t =     4.26s Waiting 10.0s for Any (First Match) to exist
+    t =     5.27s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     5.28s         Checking existence of `Any (First Match)`
+    t =     5.30s Checking existence of `Any (First Match)`
+    t =     5.32s Find the Any (First Match)
+STEP[5s]: iter 0: HK authorize
+    t =     5.33s Checking existence of `"Request Access" Button`
+    t =     5.34s Checking existence of `"Request Access" Button`
+    t =     5.35s Find the "Request Access" Button
+    t =     5.37s Tap "Request Access" Button
+    t =     5.37s     Wait for org.nativescript.nsbenchmark to idle
+    t =     5.37s     Find the "Request Access" Button
+    t =     5.38s     Check for interrupting elements affecting "Request Access" Button
+    t =     5.40s     Synthesize event
+    t =     5.68s     Wait for org.nativescript.nsbenchmark to idle
+    t =     6.19s Waiting 3.0s for Any (First Match) to exist
+    t =     7.20s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     7.21s         Checking existence of `Any (First Match)`
+    t =     7.27s Find the Any (First Match)
+STEP[7s]: health sheet(app): tap 'Turn On All'
+    t =     7.31s Tap "Turn On All" StaticText
+    t =     7.31s     Wait for org.nativescript.nsbenchmark to idle
+    t =     7.31s     Find the "Turn On All" StaticText
+    t =     7.34s     Check for interrupting elements affecting "Turn On All" StaticText
+    t =     7.38s     Synthesize event
+    t =     7.67s     Wait for org.nativescript.nsbenchmark to idle
+    t =     7.67s Waiting 2.0s for "Allow" Button to exist
+    t =     8.69s     Checking `Expect predicate `existsNoRetry == 1` for object "Allow" Button`
+    t =     8.69s         Checking existence of `"Allow" Button`
+    t =     8.73s Find the "Allow" Button
+STEP[8s]: health sheet(app): confirm 'Allow'
+    t =     8.76s Tap "UIA.Health.Allow.Button" Button
+    t =     8.76s     Wait for org.nativescript.nsbenchmark to idle
+    t =     8.77s     Find the "UIA.Health.Allow.Button" Button
+    t =     8.79s     Check for interrupting elements affecting "UIA.Health.Allow.Button" Button
+    t =     8.82s     Synthesize event
+    t =     9.11s     Wait for org.nativescript.nsbenchmark to idle
+    t =     9.12s Waiting 15.0s for Any (First Match) to exist
+    t =    10.14s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    10.14s         Checking existence of `Any (First Match)`
+    t =    10.16s Checking existence of `"Health access: not requested" StaticText`
+    t =    10.18s Find the "Health access: not requested" StaticText
+    t =    10.19s Waiting 15.0s for Any (First Match) to exist
+** BUILD INTERRUPTED **

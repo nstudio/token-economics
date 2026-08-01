@@ -1,0 +1,8 @@
+3	1	app.json
+6	0	modules/expo-speech/expo-module.config.json
+24	0	modules/expo-speech/ios/ExpoSpeech.podspec
+94	0	modules/expo-speech/ios/ExpoSpeechModule.swift
+5	0	modules/expo-speech/src/ExpoSpeech.types.ts
+13	0	modules/expo-speech/src/ExpoSpeechModule.ts
+38	0	plugins/withTranscribeSample.js
+102	4	screens/TranscribeScreen.tsx

@@ -1,0 +1,232 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index d537114..9483d8c 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -43,5 +43,9 @@
+ 		<string>UIInterfaceOrientationLandscapeLeft</string>
+ 		<string>UIInterfaceOrientationLandscapeRight</string>
+ 	</array>
++	<key>NSHealthShareUsageDescription</key>
++	<string>Native Bench reads your step count to display recent activity.</string>
++	<key>NSHealthUpdateUsageDescription</key>
++	<string>Native Bench writes step count samples that you log in the app.</string>
+ </dict>
+ </plist>
+diff --git a/App_Resources/iOS/app.entitlements b/App_Resources/iOS/app.entitlements
+new file mode 100644
+index 0000000..e10f430
+--- /dev/null
++++ b/App_Resources/iOS/app.entitlements
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>com.apple.developer.healthkit</key>
++	<true/>
++</dict>
++</plist>
+diff --git a/App_Resources/iOS/build.xcconfig b/App_Resources/iOS/build.xcconfig
+index 80bc992..5751b7c 100644
+--- a/App_Resources/iOS/build.xcconfig
++++ b/App_Resources/iOS/build.xcconfig
+@@ -5,3 +5,4 @@
+ // DEVELOPMENT_TEAM = YOUR_TEAM_ID;
+ ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+ IPHONEOS_DEPLOYMENT_TARGET = 16.0;
++OTHER_LDFLAGS = $(inherited) -framework HealthKit
+diff --git a/app/components/Health.vue b/app/components/Health.vue
+index 7fec66e..a79a515 100644
+--- a/app/components/Health.vue
++++ b/app/components/Health.vue
+@@ -1,21 +1,177 @@
+ <template>
+-    <Page>
++    <Page @navigatedTo="onNavigatedTo">
+         <ActionBar title="Health">
+             <NavigationButton text="Home" />
+         </ActionBar>
+ 
+         <ScrollView>
+             <StackLayout class="p-4">
+-                <Label text="Health access: not requested" class="text-base" textWrap="true" />
++                <Label :text="statusText" class="text-base" textWrap="true" />
+ 
+-                <Button text="Request Access" class="mt-4 p-3 bg-blue-500 text-white rounded-lg" />
+-                <Button text="Log 500 Steps" :isEnabled="false" class="mt-3 p-3 bg-gray-300 text-white rounded-lg" />
++                <Button text="Request Access" class="mt-4 p-3 bg-blue-500 text-white rounded-lg" @tap="requestAccess" />
++                <Button text="Log 500 Steps" :isEnabled="canLog" :class="canLog ? 'bg-blue-500' : 'bg-gray-300'" class="mt-3 p-3 text-white rounded-lg" @tap="logSteps" />
+ 
+                 <Label text="Last 7 Days" class="mt-6 text-lg font-bold" />
+-                <Label text="No data yet" class="mt-2 text-gray-500" textWrap="true" />
++                <Label v-if="!authGranted" text="Health access needed" class="mt-2 text-gray-500" textWrap="true" />
++                <StackLayout v-else class="mt-2">
++                    <Label v-if="dayRows.length === 0" text="No data yet" class="text-gray-500" textWrap="true" />
++                    <Label
++                        v-for="(row, i) in dayRows"
++                        :key="i"
++                        :text="row.text"
++                        textWrap="true"
++                        :class="row.isToday ? 'mt-1 font-bold text-blue-600' : 'mt-1 text-gray-800'"
++                    />
++                </StackLayout>
+             </StackLayout>
+         </ScrollView>
+     </Page>
+ </template>
+ 
+-<script setup lang="ts"></script>
++<script setup lang="ts">
++import { ref } from 'nativescript-vue'
++import { Utils } from '@nativescript/core'
++
++interface DayRow {
++    text: string
++    isToday: boolean
++}
++
++const statusText = ref('Health access: not requested')
++const authGranted = ref(false)
++const canLog = ref(false)
++const dayRows = ref<DayRow[]>([])
++
++let healthStore: HKHealthStore | null = null
++let stepType: HKQuantityType | null = null
++
++function getStore(): HKHealthStore {
++    if (!healthStore) {
++        healthStore = HKHealthStore.new()
++    }
++    return healthStore
++}
++
++function getStepType(): HKQuantityType {
++    if (!stepType) {
++        stepType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
++    }
++    return stepType
++}
++
++function formatSteps(steps: number): string {
++    return `${Math.round(steps).toLocaleString('en-US')} steps`
++}
++
++function queryDaySteps(dayStart: Date, dayEnd: Date): Promise<number> {
++    return new Promise((resolve) => {
++        const predicate = HKQuery.predicateForSamplesWithStartDateEndDateOptions(dayStart, dayEnd, HKQueryOptions.StrictStartDate)
++        const query = HKStatisticsQuery.alloc().initWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler(
++            getStepType(),
++            predicate,
++            HKStatisticsOptions.CumulativeSum,
++            (_query, result, error) => {
++                if (error || !result) {
++                    resolve(0)
++                    return
++                }
++                const sum = result.sumQuantity()
++                resolve(sum ? sum.doubleValueForUnit(HKUnit.countUnit()) : 0)
++            }
++        )
++        getStore().executeQuery(query)
++    })
++}
++
++async function loadLast7Days() {
++    const todayStart = new Date()
++    todayStart.setHours(0, 0, 0, 0)
++
++    const rows: DayRow[] = []
++    for (let i = 0; i < 7; i++) {
++        const dayStart = new Date(todayStart)
++        dayStart.setDate(todayStart.getDate() - i)
++        const dayEnd = new Date(dayStart)
++        dayEnd.setDate(dayStart.getDate() + 1)
++        const isToday = i === 0
++
++        const steps = await queryDaySteps(dayStart, dayEnd)
++        const label = dayStart.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '')
++        const text = `${label} — ${formatSteps(steps)}`
++
++        rows.push({ text: isToday ? `${text} (today)` : text, isToday })
++    }
++
++    dayRows.value = rows
++}
++
++function refreshStatus() {
++    if (!HKHealthStore.isHealthDataAvailable()) {
++        statusText.value = 'Health access: denied'
++        authGranted.value = false
++        canLog.value = false
++        dayRows.value = []
++        return
++    }
++
++    const status = getStore().authorizationStatusForType(getStepType())
++    if (status === HKAuthorizationStatus.SharingAuthorized) {
++        statusText.value = 'Health access: granted'
++        authGranted.value = true
++    } else if (status === HKAuthorizationStatus.SharingDenied) {
++        statusText.value = 'Health access: denied'
++        authGranted.value = false
++    } else {
++        statusText.value = 'Health access: not requested'
++        authGranted.value = false
++    }
++
++    canLog.value = authGranted.value
++
++    if (authGranted.value) {
++        loadLast7Days()
++    } else {
++        dayRows.value = []
++    }
++}
++
++function requestAccess() {
++    if (!HKHealthStore.isHealthDataAvailable()) {
++        statusText.value = 'Health access: denied'
++        return
++    }
++
++    const shareTypes = NSSet.setWithObject<HKSampleType>(getStepType())
++    const readTypes = NSSet.setWithObject<HKObjectType>(getStepType())
++
++    getStore().requestAuthorizationToShareTypesReadTypesCompletion(shareTypes, readTypes, (success, error) => {
++        Utils.dispatchToMainThread(() => {
++            if (!success && error) {
++                statusText.value = `Request failed: ${error.localizedDescription}`
++                return
++            }
++            refreshStatus()
++        })
++    })
++}
++
++function logSteps() {
++    const quantity = HKQuantity.quantityWithUnitDoubleValue(HKUnit.countUnit(), 500)
++    const now = new Date()
++    const sample = HKQuantitySample.quantitySampleWithTypeQuantityStartDateEndDate(getStepType(), quantity, now, now)
++
++    getStore().saveObjectWithCompletion(sample, (success, error) => {
++        Utils.dispatchToMainThread(() => {
++            if (!success) {
++                statusText.value = `Save failed: ${error ? error.localizedDescription : 'unknown error'}`
++                return
++            }
++            loadLast7Days()
++        })
++    })
++}
++
++function onNavigatedTo() {
++    refreshStatus()
++}
++</script>
+diff --git a/types/references.d.ts b/types/references.d.ts
+index dedd793..b8fe492 100644
+--- a/types/references.d.ts
++++ b/types/references.d.ts
+@@ -1 +1,2 @@
+ /// <reference path="../node_modules/@nativescript/types/index.d.ts" />
++/// <reference path="../node_modules/@nativescript/types-ios/lib/ios/objc-x86_64/objc!HealthKit.d.ts" />
