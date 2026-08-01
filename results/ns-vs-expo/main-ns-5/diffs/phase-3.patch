@@ -1,0 +1,200 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index bad393c..7089dbc 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -26,6 +26,8 @@
+ 	<string>Native Bench reads your step count to display recent activity.</string>
+ 	<key>NSHealthUpdateUsageDescription</key>
+ 	<string>Native Bench writes step count samples to demonstrate logging steps.</string>
++	<key>NSSpeechRecognitionUsageDescription</key>
++	<string>Native Bench uses speech recognition to transcribe a bundled sample audio file.</string>
+ 	<key>UILaunchStoryboardName</key>
+ 	<string>LaunchScreen</string>
+ 	<key>UIRequiresFullScreen</key>
+diff --git a/app/assets/sample.wav b/app/assets/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/app/assets/sample.wav differ
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+index 7098537..40a4c6b 100644
+--- a/app/components/Transcribe.vue
++++ b/app/components/Transcribe.vue
+@@ -1,19 +1,86 @@
+ <template>
+-    <Page>
++    <Page @navigatingTo="onNavigatingTo">
+         <ActionBar title="Transcribe" />
+ 
+         <ScrollView>
+             <StackLayout class="p-6">
+-                <Label text="Speech access: not requested" class="text-base text-gray-700 mb-4" textWrap="true" />
++                <Label :text="statusText" class="text-base text-gray-700 mb-4" textWrap="true" />
+ 
+-                <Button text="Request Access" class="bg-blue-500 text-white rounded-lg p-4 mb-3 font-semibold" />
+-                <Button text="Transcribe Sample" :isEnabled="false" class="bg-gray-300 text-gray-500 rounded-lg p-4 font-semibold" />
++                <Button text="Request Access" @tap="onRequestAccess" class="bg-blue-500 text-white rounded-lg p-4 mb-3 font-semibold" />
++                <Button
++                    text="Transcribe Sample"
++                    :isEnabled="canTranscribe"
++                    @tap="onTranscribe"
++                    :class="canTranscribe ? 'bg-blue-500 text-white rounded-lg p-4 font-semibold' : 'bg-gray-300 text-gray-500 rounded-lg p-4 font-semibold'"
++                />
+ 
+-                <Label text="No transcript yet" class="text-base text-gray-500 mt-8" textWrap="true" />
++                <Label :text="transcriptText" class="text-base text-gray-700 mt-8" textWrap="true" />
++                <Label v-if="completedText" :text="completedText" class="text-base text-gray-500 mt-2" textWrap="true" />
+             </StackLayout>
+         </ScrollView>
+     </Page>
+ </template>
+ 
+ <script setup lang="ts">
++import { ref, computed } from 'nativescript-vue'
++import * as Speech from '~/services/speech'
++import type { SpeechAuthStatus } from '~/services/speech'
++
++const AUTH_STATUS_TEXT: Record<SpeechAuthStatus, string> = {
++    'not-requested': 'Speech access: not requested',
++    granted: 'Speech access: granted',
++    denied: 'Speech access: denied',
++}
++
++const authStatus = ref<SpeechAuthStatus>('not-requested')
++const statusText = ref(AUTH_STATUS_TEXT['not-requested'])
++const isTranscribing = ref(false)
++const transcriptText = ref('No transcript yet')
++const completedText = ref('')
++
++const canTranscribe = computed(() => authStatus.value === 'granted' && !isTranscribing.value)
++
++function showError(error: unknown) {
++    statusText.value = error instanceof Error ? error.message : String(error)
++}
++
++function onNavigatingTo() {
++    authStatus.value = Speech.getAuthorizationStatus()
++    statusText.value = AUTH_STATUS_TEXT[authStatus.value]
++}
++
++async function onRequestAccess() {
++    try {
++        authStatus.value = await Speech.requestAuthorization()
++        statusText.value = AUTH_STATUS_TEXT[authStatus.value]
++    } catch (error) {
++        showError(error)
++    }
++}
++
++async function onTranscribe() {
++    if (!canTranscribe.value) {
++        return
++    }
++    isTranscribing.value = true
++    completedText.value = ''
++    transcriptText.value = 'No transcript yet'
++    statusText.value = 'Transcribing…'
++    const startTime = Date.now()
++    try {
++        const finalText = await Speech.transcribeSample({
++            onPartial: (text) => {
++                transcriptText.value = text
++            },
++        })
++        transcriptText.value = finalText
++        const elapsedSeconds = (Date.now() - startTime) / 1000
++        completedText.value = `Completed in ${elapsedSeconds.toFixed(1)} s`
++        statusText.value = AUTH_STATUS_TEXT[authStatus.value]
++    } catch (error) {
++        showError(error)
++    } finally {
++        isTranscribing.value = false
++    }
++}
+ </script>
+diff --git a/app/services/speech.ts b/app/services/speech.ts
+new file mode 100644
+index 0000000..6e60839
+--- /dev/null
++++ b/app/services/speech.ts
+@@ -0,0 +1,73 @@
++import { knownFolders, path as fsPath } from '@nativescript/core';
++
++export type SpeechAuthStatus = 'not-requested' | 'granted' | 'denied';
++
++export interface TranscriptionCallbacks {
++  onPartial: (text: string) => void;
++}
++
++let recognizer: SFSpeechRecognizer | null = null;
++
++function getRecognizer(): SFSpeechRecognizer {
++  if (!recognizer) {
++    recognizer = SFSpeechRecognizer.new();
++  }
++  return recognizer;
++}
++
++function toAuthStatus(status: SFSpeechRecognizerAuthorizationStatus): SpeechAuthStatus {
++  switch (status) {
++    case SFSpeechRecognizerAuthorizationStatus.Authorized:
++      return 'granted';
++    case SFSpeechRecognizerAuthorizationStatus.Denied:
++    case SFSpeechRecognizerAuthorizationStatus.Restricted:
++      return 'denied';
++    default:
++      return 'not-requested';
++  }
++}
++
++export function getAuthorizationStatus(): SpeechAuthStatus {
++  return toAuthStatus(SFSpeechRecognizer.authorizationStatus());
++}
++
++export function requestAuthorization(): Promise<SpeechAuthStatus> {
++  return new Promise((resolve) => {
++    SFSpeechRecognizer.requestAuthorization((status: SFSpeechRecognizerAuthorizationStatus) => {
++      resolve(toAuthStatus(status));
++    });
++  });
++}
++
++function sampleFileUrl(): NSURL {
++  const filePath = fsPath.join(knownFolders.currentApp().path, 'assets', 'sample.wav');
++  return NSURL.fileURLWithPath(filePath);
++}
++
++export function transcribeSample(callbacks: TranscriptionCallbacks): Promise<string> {
++  return new Promise((resolve, reject) => {
++    const speechRecognizer = getRecognizer();
++    if (!speechRecognizer.available) {
++      reject(new Error('Speech recognizer is not available'));
++      return;
++    }
++
++    const request = SFSpeechURLRecognitionRequest.alloc().initWithURL(sampleFileUrl());
++    request.shouldReportPartialResults = true;
++
++    speechRecognizer.recognitionTaskWithRequestResultHandler(request, (result: SFSpeechRecognitionResult, error: NSError) => {
++      if (error) {
++        reject(new Error(error.localizedDescription));
++        return;
++      }
++      if (!result) {
++        return;
++      }
++      const text = result.bestTranscription.formattedString;
++      callbacks.onPartial(text);
++      if (result.final) {
++        resolve(text);
++      }
++    });
++  });
++}
+diff --git a/types/references.d.ts b/types/references.d.ts
+index b8fe492..43b6caf 100644
+--- a/types/references.d.ts
++++ b/types/references.d.ts
+@@ -1,2 +1,3 @@
+ /// <reference path="../node_modules/@nativescript/types/index.d.ts" />
+ /// <reference path="../node_modules/@nativescript/types-ios/lib/ios/objc-x86_64/objc!HealthKit.d.ts" />
++/// <reference path="../node_modules/@nativescript/types-ios/lib/ios/objc-x86_64/objc!Speech.d.ts" />

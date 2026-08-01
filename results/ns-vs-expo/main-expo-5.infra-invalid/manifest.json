@@ -1,0 +1,41 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-expo-5",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "expo",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "expo": {
+        "type": "http",
+        "url": "https://mcp.expo.dev/mcp",
+        "headers": {
+          "Authorization": "Bearer ${EXPO_TOKEN}"
+        }
+      }
+    }
+  },
+  "started_at": "2026-08-01T08:38:37Z",
+  "outcome": "infra-invalid-auth",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)"
+  },
+  "baseline_sha": "ca6562379805473a5ebadaa2fb8d31acde40d0a7",
+  "infra_invalid": {
+    "reason": "Claude subscription OAuth token expired mid-batch; the headless auth preflight failed before any measured session started. Zero phases run, zero tokens, zero cost. Same failure mode and protocol as the v1.0 study, which hit an auth rotation at its own pair 5.",
+    "detected_at": "2026-08-01",
+    "measured_tokens": 0,
+    "replaced_by": "main-expo-5"
+  }
+}

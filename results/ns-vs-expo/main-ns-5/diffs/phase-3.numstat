@@ -1,0 +1,5 @@
+2	0	App_Resources/iOS/Info.plist
+-	-	app/assets/sample.wav
+72	5	app/components/Transcribe.vue
+73	0	app/services/speech.ts
+1	0	types/references.d.ts
