@@ -1,0 +1,43 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "pilot-expo-2",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "expo",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "expo": {
+        "type": "http",
+        "url": "https://mcp.expo.dev/mcp"
+      }
+    }
+  },
+  "started_at": "2026-08-01T02:09:37Z",
+  "outcome": "infra-invalid-mcp",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)"
+  },
+  "baseline_sha": "ca6562379805473a5ebadaa2fb8d31acde40d0a7",
+  "mcp_preflight": {
+    "kind": "tools",
+    "result": "USED=WebSearch\n\nSources:\n- [Expo SDK reference - Expo Documentation](https://docs.expo.dev/versions/latest/)\n- [Expo Documentation](https://docs.expo.dev/)",
+    "is_error": false,
+    "enforced": true
+  },
+  "infra_invalid": {
+    "reason": "Expo MCP OAuth token expired between pilot-expo-1 and this attempt (claude mcp get expo went from Connected to Needs authentication). Aborted at the MCP preflight with zero measured tokens spent.",
+    "detected_at": "2026-08-01",
+    "measured_tokens": 0
+  }
+}

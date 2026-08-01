@@ -205,7 +205,8 @@ preflight() {
   esac
 }
 
-preflight_mcp() {
+preflight_mcp() { # preflight_mcp [phase-label]
+  local tag="${1:-preflight}"
   # A docs MCP the agent cannot reach does not weaken the comparison — it
   # invalidates it: docs friction collapses to zero on one arm only, and the
   # trial still "succeeds". So this is a hard gate, not a note.
@@ -213,18 +214,21 @@ preflight_mcp() {
   # Resources-based servers (no tools) can't be probed this way; for those the
   # answer is recorded but not enforced.
   note "preflight: verifying docs MCP '$DOCS_MCP_NAME' loads (kind: $DOCS_MCP_KIND)"
-  local pf="$TRIAL_DIR/preflight-mcp.json"
+  local pf="$TRIAL_DIR/preflight-mcp-$tag.json"
   # Ground truth only: the probe must actually CALL the server. Asking the model
   # to introspect its own tool list is unreliable — a session holding working
-  # mcp__expo__* tools still answered "absent" when asked that way.
+  # mcp__expo__* tools still answered "absent" when asked that way. The built-in
+  # web tools are removed for the probe, so the docs MCP is the only path to
+  # documentation and the agent cannot satisfy the request another way.
   local probe="Use your documentation tool to look up anything at all. Then reply with exactly one line: USED=<the exact tool name you called>, or NO_DOCS_TOOL if you have none."
   ( cd "$REPO" && CLAUDE_CONFIG_DIR="$SCRATCH_CONFIG" claude -p "$probe" \
       --output-format json --model "$MODEL" --max-turns 6 \
       --mcp-config "$MCP_CONFIG" --strict-mcp-config \
+      --disallowedTools WebSearch WebFetch \
       --dangerously-skip-permissions </dev/null ) >"$pf" 2>"$pf.stderr"
   local result
   result="$(json_field "$pf" result)"
-  manifest_set "mcp_preflight" "$(node -e '
+  manifest_set "mcp_preflight.$tag" "$(node -e '
     const fs = require("fs");
     let s = {};
     try { s = JSON.parse(fs.readFileSync(process.argv[1], "utf8")); } catch (e) {}
@@ -242,8 +246,8 @@ preflight_mcp() {
   fi
   case "$result" in
     *"mcp__${DOCS_MCP_NAME}"*) note "preflight mcp: ok — agent called ${result#*USED=}" ;;
-    *) manifest_set "outcome" '"infra-invalid-mcp"'
-       die "docs MCP '$DOCS_MCP_NAME' did not load (probe said: ${result:-<no answer>}).
+    *) manifest_set "outcome" "\"infra-invalid-mcp@$tag\""
+       die "docs MCP '$DOCS_MCP_NAME' did not load at $tag (probe said: ${result:-<no answer>}).
   This trial is INFRA-INVALID, not a framework result — running one arm without its
   docs server would invalidate the comparison. Fix and re-run:
     claude mcp add --scope user --transport http $DOCS_MCP_NAME <url>
@@ -305,6 +309,7 @@ if [ "${1:-}" = "remediate" ]; then
   make_scratch_config
   export FAILURES="$FAILURES_TEXT"
   manifest_set "remediation_failures" "$(node -e 'console.log(JSON.stringify(process.env.FAILURES))')"
+  preflight_mcp "phase-R"
   run_phase "R" "$REMEDIATION_PROMPT"
   preserve_trial_branch
   rm -rf "$TRIAL_DIR/app"
@@ -357,9 +362,14 @@ if [ "${SKIP_BASELINE_CHECK:-0}" != "1" ]; then
 fi
 
 preflight
-preflight_mcp
 
+# The docs MCP is re-verified before every phase, not once per trial. A token
+# that expires mid-trial would otherwise leave later phases running without docs
+# on one arm only — silently changing what is being measured while the trial
+# still reports build-green. Observed with the Expo MCP, whose OAuth session
+# expired roughly an hour after authorization.
 for n in $PHASE_IDS; do
+  preflight_mcp "phase-$n"
   prompt_var="PHASE_PROMPT_$n"
   run_phase "$n" "${!prompt_var}" || exit 1
 done
