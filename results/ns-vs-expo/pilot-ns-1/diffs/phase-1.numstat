@@ -1,0 +1,4 @@
+4	2	app/app.ts
+17	0	app/components/Health.vue
+20	12	app/components/Home.vue
+16	0	app/components/Transcribe.vue

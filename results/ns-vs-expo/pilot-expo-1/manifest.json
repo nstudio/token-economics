@@ -1,0 +1,171 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "pilot-expo-1",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "expo",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "expo": {
+        "type": "http",
+        "url": "https://mcp.expo.dev/mcp"
+      }
+    }
+  },
+  "started_at": "2026-08-01T01:01:40Z",
+  "outcome": "phases-complete",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)"
+  },
+  "baseline_sha": "e055a195cc13ab37c1e98718fc0614ae080d18e9",
+  "mcp_preflight": {
+    "kind": "tools",
+    "result": "USED=mcp__expo__read_documentation",
+    "is_error": false,
+    "enforced": true
+  },
+  "phases": {
+    "1": {
+      "session_id": "8a4c08b7-aee6-4b93-862e-1254fad82699",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 62,
+      "duration_ms": 478421,
+      "total_cost_usd": 1.7905401000000003,
+      "usage": {
+        "input_tokens": 89,
+        "cache_creation_input_tokens": 74470,
+        "cache_read_input_tokens": 3320017,
+        "output_tokens": 23113,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 74470,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 473,
+            "cache_read_input_tokens": 103245,
+            "cache_creation_input_tokens": 626,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 626
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 479,
+      "end_sha": "487c90098a1c7b6b07a9a9d254f55529b4195c3c"
+    },
+    "2": {
+      "session_id": "8deb6a25-4d81-46a7-8278-e07181411e67",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 63,
+      "duration_ms": 441953,
+      "total_cost_usd": 2.0385435000000007,
+      "usage": {
+        "input_tokens": 98,
+        "cache_creation_input_tokens": 87952,
+        "cache_read_input_tokens": 3697905,
+        "output_tokens": 26692,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 87952,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 510,
+            "cache_read_input_tokens": 111295,
+            "cache_creation_input_tokens": 341,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 341
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 443,
+      "end_sha": "e422de09813f11d4ae0a5d82bee29ea980686565"
+    },
+    "3": {
+      "session_id": "b1e60b37-1b86-4f8b-bf63-d3f0854ec9e7",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 169,
+      "duration_ms": 1892679,
+      "total_cost_usd": 8.377759099999999,
+      "usage": {
+        "input_tokens": 304,
+        "cache_creation_input_tokens": 298206,
+        "cache_read_input_tokens": 19357657,
+        "output_tokens": 51969,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 298206,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 769,
+            "cache_read_input_tokens": 227369,
+            "cache_creation_input_tokens": 129,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 129
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 1895,
+      "end_sha": "dfbcab6d8996ce51b1b30b3179ca879504349139"
+    }
+  },
+  "trial_branch": "trials/pilot-expo-1",
+  "finished_at": "2026-08-01T01:57:37Z",
+  "superseded": {
+    "reason": "Run against the create-expo-app DEFAULT template, whose scaffold ships ~750 lines of demo app. Phase 1 measured template demolition (+118/-745 across 14 files) rather than building the specshell, which is not the activity the NativeScript arm performs (+57/-14). Baseline re-established on --template blank-typescript to match the v1.0 precedent of near-blank scaffolds on both arms.",
+    "superseded_at": "2026-08-01",
+    "replaced_by": "pilot-expo-2",
+    "retained_because": "PLAN.md 4.3 — every started trial stays in the published record; this one is excluded from medians as a pilot and additionally flagged here."
+  }
+}

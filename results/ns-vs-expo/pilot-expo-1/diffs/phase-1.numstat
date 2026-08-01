@@ -1,0 +1,14 @@
+7	4	src/app/_layout.tsx
+0	180	src/app/explore.tsx
+46	0	src/app/health.tsx
+19	59	src/app/index.tsx
+45	0	src/app/transcribe.tsx
+0	6	src/components/animated-icon.module.css
+1	76	src/components/animated-icon.tsx
+0	105	src/components/animated-icon.web.tsx
+0	32	src/components/app-tabs.tsx
+0	115	src/components/app-tabs.web.tsx
+0	25	src/components/external-link.tsx
+0	35	src/components/hint-row.tsx
+0	65	src/components/ui/collapsible.tsx
+0	43	src/components/web-badge.tsx

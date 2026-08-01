@@ -1,0 +1,3 @@
+2	0	App_Resources/iOS/Info.plist
+-	-	app/assets/sample.wav
+102	6	app/components/Transcribe.vue

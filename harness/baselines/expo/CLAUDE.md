@@ -1,13 +1,13 @@
 # expo-benchmark
 
-Expo app using React and React Native with TypeScript, built with the Expo SDK and Expo Router. iOS is the only target for this project.
+Expo app using React and React Native with TypeScript, built with the Expo SDK. iOS is the only target for this project.
 
 ## Layout
 
-- `src/app/` — Expo Router routes; each file is a screen, `src/app/_layout.tsx` defines navigation
-- `src/components/`, `src/hooks/`, `src/constants/` — shared React components, hooks, and theme
+- `App.tsx` — root React component; `index.ts` registers it as the app entry
 - `modules/` — local native modules created with `npx create-expo-module@latest --local`
 - `app.json` — app config: name, scheme, iOS bundle id, `ios.infoPlist`, `ios.entitlements`, config plugins
+- `assets/` — app icons and images
 - `SPEC.md`, `spec-assets/` — app specification and fixed assets (read-only)
 
 ## Build & run (iOS)

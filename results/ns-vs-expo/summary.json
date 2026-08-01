@@ -1,0 +1,792 @@
+{
+  "study": "ns-vs-expo",
+  "title": "NativeScript vs Expo",
+  "spec_version": "v1.1.0",
+  "frameworks": [
+    "ns",
+    "expo"
+  ],
+  "median_set": "main",
+  "rows": [
+    {
+      "trial": "pilot-expo-1",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 89,
+      "output": 23113,
+      "cache_write": 74470,
+      "cache_read": 3320017,
+      "total_cost_usd": 1.7905401000000003,
+      "turns": 62,
+      "wall_s": 478,
+      "reads": 16,
+      "edits": 6,
+      "bash": 32,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34740,
+      "files_changed": 14,
+      "loc_js_added": 118,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "pilot-expo-1",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 98,
+      "output": 26692,
+      "cache_write": 87952,
+      "cache_read": 3697905,
+      "total_cost_usd": 2.0385435000000007,
+      "turns": 63,
+      "wall_s": 442,
+      "reads": 18,
+      "edits": 10,
+      "bash": 31,
+      "mcp_docs": 2,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34766,
+      "files_changed": 9,
+      "loc_js_added": 174,
+      "loc_native_added": 137,
+      "loc_native_code_added": 104,
+      "loc_native_config_added": 33
+    },
+    {
+      "trial": "pilot-expo-1",
+      "framework": "expo",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 304,
+      "output": 51969,
+      "cache_write": 298206,
+      "cache_read": 19357657,
+      "total_cost_usd": 8.377759099999999,
+      "turns": 169,
+      "wall_s": 1893,
+      "reads": 22,
+      "edits": 11,
+      "bash": 118,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 0,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34973,
+      "files_changed": 10,
+      "loc_js_added": 148,
+      "loc_native_added": 118,
+      "loc_native_code_added": 91,
+      "loc_native_config_added": 27
+    },
+    {
+      "trial": "pilot-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "1",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 80,
+      "output": 10831,
+      "cache_write": 53741,
+      "cache_read": 2433008,
+      "total_cost_usd": 1.2157844000000004,
+      "turns": 53,
+      "wall_s": 189,
+      "reads": 13,
+      "edits": 8,
+      "bash": 20,
+      "mcp_docs": 4,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 1,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34574,
+      "files_changed": 4,
+      "loc_js_added": 57,
+      "loc_native_added": 0,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 0
+    },
+    {
+      "trial": "pilot-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "2",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 126,
+      "output": 42963,
+      "cache_write": 102429,
+      "cache_read": 5111678,
+      "total_cost_usd": 3.21164595,
+      "turns": 82,
+      "wall_s": 506,
+      "reads": 12,
+      "edits": 4,
+      "bash": 52,
+      "mcp_docs": 0,
+      "web": 0,
+      "tasks": 0,
+      "other_tools": 13,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34601,
+      "files_changed": 4,
+      "loc_js_added": 156,
+      "loc_native_added": 12,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 12
+    },
+    {
+      "trial": "pilot-ns-1",
+      "framework": "ns",
+      "model": "claude-sonnet-5",
+      "phase": "3",
+      "build_pass": true,
+      "capped": false,
+      "outcome": "phases-complete",
+      "acceptance": "pending",
+      "input": 182,
+      "output": 37727,
+      "cache_write": 176052,
+      "cache_read": 10403051,
+      "total_cost_usd": 4.767854299999999,
+      "turns": 137,
+      "wall_s": 790,
+      "reads": 35,
+      "edits": 4,
+      "bash": 57,
+      "mcp_docs": 9,
+      "web": 1,
+      "tasks": 0,
+      "other_tools": 3,
+      "study": "ns-vs-expo",
+      "set": "pilot",
+      "spec_version": "v1.1.0",
+      "first_turn_context": 34556,
+      "files_changed": 3,
+      "loc_js_added": 102,
+      "loc_native_added": 2,
+      "loc_native_code_added": 0,
+      "loc_native_config_added": 2
+    }
+  ],
+  "aggregates": {
+    "pilot": {
+      "ns": {
+        "phase_1": {
+          "n": 1,
+          "median_input": 80,
+          "range_input": [
+            80,
+            80
+          ],
+          "median_output": 10831,
+          "range_output": [
+            10831,
+            10831
+          ],
+          "median_cache_write": 53741,
+          "range_cache_write": [
+            53741,
+            53741
+          ],
+          "median_cache_read": 2433008,
+          "range_cache_read": [
+            2433008,
+            2433008
+          ],
+          "median_total_cost_usd": 1.2157844000000004,
+          "range_total_cost_usd": [
+            1.2157844000000004,
+            1.2157844000000004
+          ],
+          "median_turns": 53,
+          "range_turns": [
+            53,
+            53
+          ],
+          "median_wall_s": 189,
+          "range_wall_s": [
+            189,
+            189
+          ],
+          "median_mcp_docs": 4,
+          "range_mcp_docs": [
+            4,
+            4
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 57,
+          "range_loc_js_added": [
+            57,
+            57
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34574,
+          "range_first_turn_context": [
+            34574,
+            34574
+          ]
+        },
+        "phase_2": {
+          "n": 1,
+          "median_input": 126,
+          "range_input": [
+            126,
+            126
+          ],
+          "median_output": 42963,
+          "range_output": [
+            42963,
+            42963
+          ],
+          "median_cache_write": 102429,
+          "range_cache_write": [
+            102429,
+            102429
+          ],
+          "median_cache_read": 5111678,
+          "range_cache_read": [
+            5111678,
+            5111678
+          ],
+          "median_total_cost_usd": 3.21164595,
+          "range_total_cost_usd": [
+            3.21164595,
+            3.21164595
+          ],
+          "median_turns": 82,
+          "range_turns": [
+            82,
+            82
+          ],
+          "median_wall_s": 506,
+          "range_wall_s": [
+            506,
+            506
+          ],
+          "median_mcp_docs": 0,
+          "range_mcp_docs": [
+            0,
+            0
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 156,
+          "range_loc_js_added": [
+            156,
+            156
+          ],
+          "median_loc_native_added": 12,
+          "range_loc_native_added": [
+            12,
+            12
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 12,
+          "range_loc_native_config_added": [
+            12,
+            12
+          ],
+          "median_first_turn_context": 34601,
+          "range_first_turn_context": [
+            34601,
+            34601
+          ]
+        },
+        "phase_3": {
+          "n": 1,
+          "median_input": 182,
+          "range_input": [
+            182,
+            182
+          ],
+          "median_output": 37727,
+          "range_output": [
+            37727,
+            37727
+          ],
+          "median_cache_write": 176052,
+          "range_cache_write": [
+            176052,
+            176052
+          ],
+          "median_cache_read": 10403051,
+          "range_cache_read": [
+            10403051,
+            10403051
+          ],
+          "median_total_cost_usd": 4.767854299999999,
+          "range_total_cost_usd": [
+            4.767854299999999,
+            4.767854299999999
+          ],
+          "median_turns": 137,
+          "range_turns": [
+            137,
+            137
+          ],
+          "median_wall_s": 790,
+          "range_wall_s": [
+            790,
+            790
+          ],
+          "median_mcp_docs": 9,
+          "range_mcp_docs": [
+            9,
+            9
+          ],
+          "median_web": 1,
+          "range_web": [
+            1,
+            1
+          ],
+          "median_loc_js_added": 102,
+          "range_loc_js_added": [
+            102,
+            102
+          ],
+          "median_loc_native_added": 2,
+          "range_loc_native_added": [
+            2,
+            2
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 2,
+          "range_loc_native_config_added": [
+            2,
+            2
+          ],
+          "median_first_turn_context": 34556,
+          "range_first_turn_context": [
+            34556,
+            34556
+          ]
+        },
+        "total_per_trial": {
+          "n": 1,
+          "median_input": 388,
+          "range_input": [
+            388,
+            388
+          ],
+          "median_output": 91521,
+          "range_output": [
+            91521,
+            91521
+          ],
+          "median_cache_write": 332222,
+          "range_cache_write": [
+            332222,
+            332222
+          ],
+          "median_cache_read": 17947737,
+          "range_cache_read": [
+            17947737,
+            17947737
+          ],
+          "median_total_cost_usd": 9.195284649999998,
+          "range_total_cost_usd": [
+            9.195284649999998,
+            9.195284649999998
+          ],
+          "median_turns": 272,
+          "range_turns": [
+            272,
+            272
+          ],
+          "median_wall_s": 1485,
+          "range_wall_s": [
+            1485,
+            1485
+          ],
+          "median_mcp_docs": 13,
+          "range_mcp_docs": [
+            13,
+            13
+          ],
+          "median_web": 1,
+          "range_web": [
+            1,
+            1
+          ],
+          "median_loc_js_added": 315,
+          "range_loc_js_added": [
+            315,
+            315
+          ],
+          "median_loc_native_added": 14,
+          "range_loc_native_added": [
+            14,
+            14
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 14,
+          "range_loc_native_config_added": [
+            14,
+            14
+          ]
+        }
+      },
+      "expo": {
+        "phase_1": {
+          "n": 1,
+          "median_input": 89,
+          "range_input": [
+            89,
+            89
+          ],
+          "median_output": 23113,
+          "range_output": [
+            23113,
+            23113
+          ],
+          "median_cache_write": 74470,
+          "range_cache_write": [
+            74470,
+            74470
+          ],
+          "median_cache_read": 3320017,
+          "range_cache_read": [
+            3320017,
+            3320017
+          ],
+          "median_total_cost_usd": 1.7905401000000003,
+          "range_total_cost_usd": [
+            1.7905401000000003,
+            1.7905401000000003
+          ],
+          "median_turns": 62,
+          "range_turns": [
+            62,
+            62
+          ],
+          "median_wall_s": 478,
+          "range_wall_s": [
+            478,
+            478
+          ],
+          "median_mcp_docs": 0,
+          "range_mcp_docs": [
+            0,
+            0
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 118,
+          "range_loc_js_added": [
+            118,
+            118
+          ],
+          "median_loc_native_added": 0,
+          "range_loc_native_added": [
+            0,
+            0
+          ],
+          "median_loc_native_code_added": 0,
+          "range_loc_native_code_added": [
+            0,
+            0
+          ],
+          "median_loc_native_config_added": 0,
+          "range_loc_native_config_added": [
+            0,
+            0
+          ],
+          "median_first_turn_context": 34740,
+          "range_first_turn_context": [
+            34740,
+            34740
+          ]
+        },
+        "phase_2": {
+          "n": 1,
+          "median_input": 98,
+          "range_input": [
+            98,
+            98
+          ],
+          "median_output": 26692,
+          "range_output": [
+            26692,
+            26692
+          ],
+          "median_cache_write": 87952,
+          "range_cache_write": [
+            87952,
+            87952
+          ],
+          "median_cache_read": 3697905,
+          "range_cache_read": [
+            3697905,
+            3697905
+          ],
+          "median_total_cost_usd": 2.0385435000000007,
+          "range_total_cost_usd": [
+            2.0385435000000007,
+            2.0385435000000007
+          ],
+          "median_turns": 63,
+          "range_turns": [
+            63,
+            63
+          ],
+          "median_wall_s": 442,
+          "range_wall_s": [
+            442,
+            442
+          ],
+          "median_mcp_docs": 2,
+          "range_mcp_docs": [
+            2,
+            2
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 174,
+          "range_loc_js_added": [
+            174,
+            174
+          ],
+          "median_loc_native_added": 137,
+          "range_loc_native_added": [
+            137,
+            137
+          ],
+          "median_loc_native_code_added": 104,
+          "range_loc_native_code_added": [
+            104,
+            104
+          ],
+          "median_loc_native_config_added": 33,
+          "range_loc_native_config_added": [
+            33,
+            33
+          ],
+          "median_first_turn_context": 34766,
+          "range_first_turn_context": [
+            34766,
+            34766
+          ]
+        },
+        "phase_3": {
+          "n": 1,
+          "median_input": 304,
+          "range_input": [
+            304,
+            304
+          ],
+          "median_output": 51969,
+          "range_output": [
+            51969,
+            51969
+          ],
+          "median_cache_write": 298206,
+          "range_cache_write": [
+            298206,
+            298206
+          ],
+          "median_cache_read": 19357657,
+          "range_cache_read": [
+            19357657,
+            19357657
+          ],
+          "median_total_cost_usd": 8.377759099999999,
+          "range_total_cost_usd": [
+            8.377759099999999,
+            8.377759099999999
+          ],
+          "median_turns": 169,
+          "range_turns": [
+            169,
+            169
+          ],
+          "median_wall_s": 1893,
+          "range_wall_s": [
+            1893,
+            1893
+          ],
+          "median_mcp_docs": 0,
+          "range_mcp_docs": [
+            0,
+            0
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 148,
+          "range_loc_js_added": [
+            148,
+            148
+          ],
+          "median_loc_native_added": 118,
+          "range_loc_native_added": [
+            118,
+            118
+          ],
+          "median_loc_native_code_added": 91,
+          "range_loc_native_code_added": [
+            91,
+            91
+          ],
+          "median_loc_native_config_added": 27,
+          "range_loc_native_config_added": [
+            27,
+            27
+          ],
+          "median_first_turn_context": 34973,
+          "range_first_turn_context": [
+            34973,
+            34973
+          ]
+        },
+        "total_per_trial": {
+          "n": 1,
+          "median_input": 491,
+          "range_input": [
+            491,
+            491
+          ],
+          "median_output": 101774,
+          "range_output": [
+            101774,
+            101774
+          ],
+          "median_cache_write": 460628,
+          "range_cache_write": [
+            460628,
+            460628
+          ],
+          "median_cache_read": 26375579,
+          "range_cache_read": [
+            26375579,
+            26375579
+          ],
+          "median_total_cost_usd": 12.2068427,
+          "range_total_cost_usd": [
+            12.2068427,
+            12.2068427
+          ],
+          "median_turns": 294,
+          "range_turns": [
+            294,
+            294
+          ],
+          "median_wall_s": 2813,
+          "range_wall_s": [
+            2813,
+            2813
+          ],
+          "median_mcp_docs": 2,
+          "range_mcp_docs": [
+            2,
+            2
+          ],
+          "median_web": 0,
+          "range_web": [
+            0,
+            0
+          ],
+          "median_loc_js_added": 440,
+          "range_loc_js_added": [
+            440,
+            440
+          ],
+          "median_loc_native_added": 255,
+          "range_loc_native_added": [
+            255,
+            255
+          ],
+          "median_loc_native_code_added": 195,
+          "range_loc_native_code_added": [
+            195,
+            195
+          ],
+          "median_loc_native_config_added": 60,
+          "range_loc_native_config_added": [
+            60,
+            60
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1014 @@
+diff --git a/src/app/_layout.tsx b/src/app/_layout.tsx
+index b3fd50c..c876074 100644
+--- a/src/app/_layout.tsx
++++ b/src/app/_layout.tsx
+@@ -1,18 +1,21 @@
+-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
++import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+ import * as SplashScreen from 'expo-splash-screen';
+ import { useColorScheme } from 'react-native';
+ 
+ import { AnimatedSplashOverlay } from '@/components/animated-icon';
+-import AppTabs from '@/components/app-tabs';
+ 
+ SplashScreen.preventAutoHideAsync();
+ 
+-export default function TabLayout() {
++export default function RootLayout() {
+   const colorScheme = useColorScheme();
+   return (
+     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+       <AnimatedSplashOverlay />
+-      <AppTabs />
++      <Stack>
++        <Stack.Screen name="index" options={{ headerShown: false }} />
++        <Stack.Screen name="health" options={{ title: 'Health' }} />
++        <Stack.Screen name="transcribe" options={{ title: 'Transcribe' }} />
++      </Stack>
+     </ThemeProvider>
+   );
+ }
+diff --git a/src/app/explore.tsx b/src/app/explore.tsx
+deleted file mode 100644
+index 2934085..0000000
+--- a/src/app/explore.tsx
++++ /dev/null
+@@ -1,180 +0,0 @@
+-import { Image } from 'expo-image';
+-import { SymbolView } from 'expo-symbols';
+-import { Platform, Pressable, ScrollView, StyleSheet } from 'react-native';
+-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+-
+-import { ExternalLink } from '@/components/external-link';
+-import { ThemedText } from '@/components/themed-text';
+-import { ThemedView } from '@/components/themed-view';
+-import { Collapsible } from '@/components/ui/collapsible';
+-import { WebBadge } from '@/components/web-badge';
+-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+-import { useTheme } from '@/hooks/use-theme';
+-
+-export default function TabTwoScreen() {
+-  const safeAreaInsets = useSafeAreaInsets();
+-  const insets = {
+-    ...safeAreaInsets,
+-    bottom: safeAreaInsets.bottom + BottomTabInset + Spacing.three,
+-  };
+-  const theme = useTheme();
+-
+-  const contentPlatformStyle = Platform.select({
+-    android: {
+-      paddingTop: insets.top,
+-      paddingLeft: insets.left,
+-      paddingRight: insets.right,
+-      paddingBottom: insets.bottom,
+-    },
+-    web: {
+-      paddingTop: Spacing.six,
+-      paddingBottom: Spacing.four,
+-    },
+-  });
+-
+-  return (
+-    <ScrollView
+-      style={[styles.scrollView, { backgroundColor: theme.background }]}
+-      contentInset={insets}
+-      contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}>
+-      <ThemedView style={styles.container}>
+-        <ThemedView style={styles.titleContainer}>
+-          <ThemedText type="subtitle">Explore</ThemedText>
+-          <ThemedText style={styles.centerText} themeColor="textSecondary">
+-            This starter app includes example{'\n'}code to help you get started.
+-          </ThemedText>
+-
+-          <ExternalLink href="https://docs.expo.dev" asChild>
+-            <Pressable style={({ pressed }) => pressed && styles.pressed}>
+-              <ThemedView type="backgroundElement" style={styles.linkButton}>
+-                <ThemedText type="link">Expo documentation</ThemedText>
+-                <SymbolView
+-                  tintColor={theme.text}
+-                  name={{ ios: 'arrow.up.right.square', android: 'link', web: 'link' }}
+-                  size={12}
+-                />
+-              </ThemedView>
+-            </Pressable>
+-          </ExternalLink>
+-        </ThemedView>
+-
+-        <ThemedView style={styles.sectionsWrapper}>
+-          <Collapsible title="File-based routing">
+-            <ThemedText type="small">
+-              This app has two screens: <ThemedText type="code">src/app/index.tsx</ThemedText> and{' '}
+-              <ThemedText type="code">src/app/explore.tsx</ThemedText>
+-            </ThemedText>
+-            <ThemedText type="small">
+-              The layout file in <ThemedText type="code">src/app/_layout.tsx</ThemedText> sets up
+-              the tab navigator.
+-            </ThemedText>
+-            <ExternalLink href="https://docs.expo.dev/router/introduction">
+-              <ThemedText type="linkPrimary">Learn more</ThemedText>
+-            </ExternalLink>
+-          </Collapsible>
+-
+-          <Collapsible title="Android, iOS, and web support">
+-            <ThemedView type="backgroundElement" style={styles.collapsibleContent}>
+-              <ThemedText type="small">
+-                You can open this project on Android, iOS, and the web. To open the web version,
+-                press <ThemedText type="smallBold">w</ThemedText> in the terminal running this
+-                project.
+-              </ThemedText>
+-              <Image
+-                source={require('@/assets/images/tutorial-web.png')}
+-                style={styles.imageTutorial}
+-              />
+-            </ThemedView>
+-          </Collapsible>
+-
+-          <Collapsible title="Images">
+-            <ThemedText type="small">
+-              For static images, you can use the <ThemedText type="code">@2x</ThemedText> and{' '}
+-              <ThemedText type="code">@3x</ThemedText> suffixes to provide files for different
+-              screen densities.
+-            </ThemedText>
+-            <Image source={require('@/assets/images/react-logo.png')} style={styles.imageReact} />
+-            <ExternalLink href="https://reactnative.dev/docs/images">
+-              <ThemedText type="linkPrimary">Learn more</ThemedText>
+-            </ExternalLink>
+-          </Collapsible>
+-
+-          <Collapsible title="Light and dark mode components">
+-            <ThemedText type="small">
+-              This template has light and dark mode support. The{' '}
+-              <ThemedText type="code">useColorScheme()</ThemedText> hook lets you inspect what the
+-              user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
+-            </ThemedText>
+-            <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
+-              <ThemedText type="linkPrimary">Learn more</ThemedText>
+-            </ExternalLink>
+-          </Collapsible>
+-
+-          <Collapsible title="Animations">
+-            <ThemedText type="small">
+-              This template includes an example of an animated component. The{' '}
+-              <ThemedText type="code">src/components/ui/collapsible.tsx</ThemedText> component uses
+-              the powerful <ThemedText type="code">react-native-reanimated</ThemedText> library to
+-              animate opening this hint.
+-            </ThemedText>
+-          </Collapsible>
+-        </ThemedView>
+-        {Platform.OS === 'web' && <WebBadge />}
+-      </ThemedView>
+-    </ScrollView>
+-  );
+-}
+-
+-const styles = StyleSheet.create({
+-  scrollView: {
+-    flex: 1,
+-  },
+-  contentContainer: {
+-    flexDirection: 'row',
+-    justifyContent: 'center',
+-  },
+-  container: {
+-    maxWidth: MaxContentWidth,
+-    flexGrow: 1,
+-  },
+-  titleContainer: {
+-    gap: Spacing.three,
+-    alignItems: 'center',
+-    paddingHorizontal: Spacing.four,
+-    paddingVertical: Spacing.six,
+-  },
+-  centerText: {
+-    textAlign: 'center',
+-  },
+-  pressed: {
+-    opacity: 0.7,
+-  },
+-  linkButton: {
+-    flexDirection: 'row',
+-    paddingHorizontal: Spacing.four,
+-    paddingVertical: Spacing.two,
+-    borderRadius: Spacing.five,
+-    justifyContent: 'center',
+-    gap: Spacing.one,
+-    alignItems: 'center',
+-  },
+-  sectionsWrapper: {
+-    gap: Spacing.five,
+-    paddingHorizontal: Spacing.four,
+-    paddingTop: Spacing.three,
+-  },
+-  collapsibleContent: {
+-    alignItems: 'center',
+-  },
+-  imageTutorial: {
+-    width: '100%',
+-    aspectRatio: 296 / 171,
+-    borderRadius: Spacing.three,
+-    marginTop: Spacing.two,
+-  },
+-  imageReact: {
+-    width: 100,
+-    height: 100,
+-    alignSelf: 'center',
+-  },
+-});
+diff --git a/src/app/health.tsx b/src/app/health.tsx
+new file mode 100644
+index 0000000..2cc5572
+--- /dev/null
++++ b/src/app/health.tsx
+@@ -0,0 +1,46 @@
++import { Button, StyleSheet } from 'react-native';
++import { SafeAreaView } from 'react-native-safe-area-context';
++
++import { ThemedText } from '@/components/themed-text';
++import { ThemedView } from '@/components/themed-view';
++import { Spacing } from '@/constants/theme';
++
++export default function HealthScreen() {
++  return (
++    <ThemedView style={styles.container}>
++      <SafeAreaView style={styles.safeArea}>
++        <ThemedText type="default">Health access: not requested</ThemedText>
++
++        <ThemedView style={styles.buttonGroup}>
++          <Button title="Request Access" onPress={() => {}} />
++          <Button title="Log 500 Steps" onPress={() => {}} disabled />
++        </ThemedView>
++
++        <ThemedView style={styles.section}>
++          <ThemedText type="smallBold">Last 7 Days</ThemedText>
++          <ThemedText type="small" themeColor="textSecondary">
++            No data yet
++          </ThemedText>
++        </ThemedView>
++      </SafeAreaView>
++    </ThemedView>
++  );
++}
++
++const styles = StyleSheet.create({
++  container: {
++    flex: 1,
++  },
++  safeArea: {
++    flex: 1,
++    paddingHorizontal: Spacing.four,
++    paddingTop: Spacing.four,
++    gap: Spacing.five,
++  },
++  buttonGroup: {
++    gap: Spacing.three,
++  },
++  section: {
++    gap: Spacing.two,
++  },
++});
+diff --git a/src/app/index.tsx b/src/app/index.tsx
+index 8ec3e6f..388c792 100644
+--- a/src/app/index.tsx
++++ b/src/app/index.tsx
+@@ -1,61 +1,30 @@
+-import * as Device from 'expo-device';
+-import { Platform, StyleSheet } from 'react-native';
++import { useRouter } from 'expo-router';
++import { Button, StyleSheet } from 'react-native';
+ import { SafeAreaView } from 'react-native-safe-area-context';
+ 
+-import { AnimatedIcon } from '@/components/animated-icon';
+-import { HintRow } from '@/components/hint-row';
+ import { ThemedText } from '@/components/themed-text';
+ import { ThemedView } from '@/components/themed-view';
+-import { WebBadge } from '@/components/web-badge';
+-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+-
+-function getDevMenuHint() {
+-  if (Platform.OS === 'web') {
+-    return <ThemedText type="small">use browser devtools</ThemedText>;
+-  }
+-  if (Device.isDevice) {
+-    return (
+-      <ThemedText type="small">
+-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
+-      </ThemedText>
+-    );
+-  }
+-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+-  return (
+-    <ThemedText type="small">
+-      press <ThemedText type="code">{shortcut}</ThemedText>
+-    </ThemedText>
+-  );
+-}
++import { MaxContentWidth, Spacing } from '@/constants/theme';
+ 
+ export default function HomeScreen() {
++  const router = useRouter();
++
+   return (
+     <ThemedView style={styles.container}>
+       <SafeAreaView style={styles.safeArea}>
+         <ThemedView style={styles.heroSection}>
+-          <AnimatedIcon />
+-          <ThemedText type="title" style={styles.title}>
+-            Welcome to&nbsp;Expo
++          <ThemedText type="title" style={styles.centerText}>
++            Native Bench
++          </ThemedText>
++          <ThemedText type="default" themeColor="textSecondary" style={styles.centerText}>
++            Token economics benchmark
+           </ThemedText>
+         </ThemedView>
+ 
+-        <ThemedText type="code" style={styles.code}>
+-          get started
+-        </ThemedText>
+-
+-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
+-          <HintRow
+-            title="Try editing"
+-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
+-          />
+-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
+-          <HintRow
+-            title="Fresh start"
+-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
+-          />
++        <ThemedView style={styles.buttonGroup}>
++          <Button title="Health" onPress={() => router.push('/health')} />
++          <Button title="Transcribe" onPress={() => router.push('/transcribe')} />
+         </ThemedView>
+-
+-        {Platform.OS === 'web' && <WebBadge />}
+       </SafeAreaView>
+     </ThemedView>
+   );
+@@ -69,30 +38,21 @@ const styles = StyleSheet.create({
+   },
+   safeArea: {
+     flex: 1,
++    justifyContent: 'center',
+     paddingHorizontal: Spacing.four,
+     alignItems: 'center',
+-    gap: Spacing.three,
+-    paddingBottom: BottomTabInset + Spacing.three,
++    gap: Spacing.six,
+     maxWidth: MaxContentWidth,
+   },
+   heroSection: {
+     alignItems: 'center',
+-    justifyContent: 'center',
+-    flex: 1,
+-    paddingHorizontal: Spacing.four,
+-    gap: Spacing.four,
++    gap: Spacing.two,
+   },
+-  title: {
++  centerText: {
+     textAlign: 'center',
+   },
+-  code: {
+-    textTransform: 'uppercase',
+-  },
+-  stepContainer: {
+-    gap: Spacing.three,
++  buttonGroup: {
+     alignSelf: 'stretch',
+-    paddingHorizontal: Spacing.three,
+-    paddingVertical: Spacing.four,
+-    borderRadius: Spacing.four,
++    gap: Spacing.three,
+   },
+ });
+diff --git a/src/app/transcribe.tsx b/src/app/transcribe.tsx
+new file mode 100644
+index 0000000..62a8128
+--- /dev/null
++++ b/src/app/transcribe.tsx
+@@ -0,0 +1,45 @@
++import { Button, StyleSheet } from 'react-native';
++import { SafeAreaView } from 'react-native-safe-area-context';
++
++import { ThemedText } from '@/components/themed-text';
++import { ThemedView } from '@/components/themed-view';
++import { Spacing } from '@/constants/theme';
++
++export default function TranscribeScreen() {
++  return (
++    <ThemedView style={styles.container}>
++      <SafeAreaView style={styles.safeArea}>
++        <ThemedText type="default">Speech access: not requested</ThemedText>
++
++        <ThemedView style={styles.buttonGroup}>
++          <Button title="Request Access" onPress={() => {}} />
++          <Button title="Transcribe Sample" onPress={() => {}} disabled />
++        </ThemedView>
++
++        <ThemedView style={styles.section}>
++          <ThemedText type="small" themeColor="textSecondary">
++            No transcript yet
++          </ThemedText>
++        </ThemedView>
++      </SafeAreaView>
++    </ThemedView>
++  );
++}
++
++const styles = StyleSheet.create({
++  container: {
++    flex: 1,
++  },
++  safeArea: {
++    flex: 1,
++    paddingHorizontal: Spacing.four,
++    paddingTop: Spacing.four,
++    gap: Spacing.five,
++  },
++  buttonGroup: {
++    gap: Spacing.three,
++  },
++  section: {
++    gap: Spacing.two,
++  },
++});
+diff --git a/src/components/animated-icon.module.css b/src/components/animated-icon.module.css
+deleted file mode 100644
+index f8156fe..0000000
+--- a/src/components/animated-icon.module.css
++++ /dev/null
+@@ -1,6 +0,0 @@
+-.expoLogoBackground {
+-  background-image: linear-gradient(180deg, #3c9ffe, #0274df);
+-  border-radius: 40px;
+-  width: 128px;
+-  height: 128px;
+-}
+diff --git a/src/components/animated-icon.tsx b/src/components/animated-icon.tsx
+index c7c2911..e4818ce 100644
+--- a/src/components/animated-icon.tsx
++++ b/src/components/animated-icon.tsx
+@@ -1,11 +1,10 @@
+ import { Image } from 'expo-image';
+ import * as SplashScreen from 'expo-splash-screen';
+ import { useState } from 'react';
+-import { Dimensions, StyleSheet, View } from 'react-native';
++import { StyleSheet, View } from 'react-native';
+ import Animated, { Easing, Keyframe } from 'react-native-reanimated';
+ import { scheduleOnRN } from 'react-native-worklets';
+ 
+-const INITIAL_SCALE_FACTOR = Dimensions.get('screen').height / 90;
+ const DURATION = 600;
+ 
+ export function AnimatedSplashOverlay() {
+@@ -59,85 +58,11 @@ export function AnimatedSplashOverlay() {
+   );
+ }
+ 
+-const keyframe = new Keyframe({
+-  0: {
+-    transform: [{ scale: INITIAL_SCALE_FACTOR }],
+-  },
+-  100: {
+-    transform: [{ scale: 1 }],
+-    easing: Easing.elastic(0.7),
+-  },
+-});
+-
+-const logoKeyframe = new Keyframe({
+-  0: {
+-    transform: [{ scale: 1.3 }],
+-    opacity: 0,
+-  },
+-  40: {
+-    transform: [{ scale: 1.3 }],
+-    opacity: 0,
+-    easing: Easing.elastic(0.7),
+-  },
+-  100: {
+-    opacity: 1,
+-    transform: [{ scale: 1 }],
+-    easing: Easing.elastic(0.7),
+-  },
+-});
+-
+-const glowKeyframe = new Keyframe({
+-  0: {
+-    transform: [{ rotateZ: '0deg' }],
+-  },
+-  100: {
+-    transform: [{ rotateZ: '7200deg' }],
+-  },
+-});
+-
+-export function AnimatedIcon() {
+-  return (
+-    <View style={styles.iconContainer}>
+-      <Animated.View entering={glowKeyframe.duration(60 * 1000 * 4)} style={styles.glow}>
+-        <Image style={styles.glow} source={require('@/assets/images/logo-glow.png')} />
+-      </Animated.View>
+-
+-      <Animated.View entering={keyframe.duration(DURATION)} style={styles.background} />
+-      <Animated.View style={styles.imageContainer} entering={logoKeyframe.duration(DURATION)}>
+-        <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />
+-      </Animated.View>
+-    </View>
+-  );
+-}
+-
+ const styles = StyleSheet.create({
+-  imageContainer: {
+-    justifyContent: 'center',
+-    alignItems: 'center',
+-  },
+-  glow: {
+-    width: 201,
+-    height: 201,
+-    position: 'absolute',
+-  },
+-  iconContainer: {
+-    justifyContent: 'center',
+-    alignItems: 'center',
+-    width: 128,
+-    height: 128,
+-    zIndex: 100,
+-  },
+   image: {
+     width: 76,
+     height: 71,
+   },
+-  background: {
+-    borderRadius: 40,
+-    experimental_backgroundImage: `linear-gradient(180deg, #3C9FFE, #0274DF)`,
+-    width: 128,
+-    height: 128,
+-    position: 'absolute',
+-  },
+   splashOverlay: {
+     ...StyleSheet.absoluteFill,
+     backgroundColor: '#208AEF',
+diff --git a/src/components/animated-icon.web.tsx b/src/components/animated-icon.web.tsx
+index dfbb1fd..dba1b29 100644
+--- a/src/components/animated-icon.web.tsx
++++ b/src/components/animated-icon.web.tsx
+@@ -1,108 +1,3 @@
+-import { Image } from 'expo-image';
+-import { StyleSheet, View } from 'react-native';
+-import Animated, { Keyframe, Easing } from 'react-native-reanimated';
+-
+-import classes from './animated-icon.module.css';
+-const DURATION = 300;
+-
+ export function AnimatedSplashOverlay() {
+   return null;
+ }
+-
+-const keyframe = new Keyframe({
+-  0: {
+-    transform: [{ scale: 0 }],
+-  },
+-  60: {
+-    transform: [{ scale: 1.2 }],
+-    easing: Easing.elastic(1.2),
+-  },
+-  100: {
+-    transform: [{ scale: 1 }],
+-    easing: Easing.elastic(1.2),
+-  },
+-});
+-
+-const logoKeyframe = new Keyframe({
+-  0: {
+-    opacity: 0,
+-  },
+-  60: {
+-    transform: [{ scale: 1.2 }],
+-    opacity: 0,
+-    easing: Easing.elastic(1.2),
+-  },
+-  100: {
+-    transform: [{ scale: 1 }],
+-    opacity: 1,
+-    easing: Easing.elastic(1.2),
+-  },
+-});
+-
+-const glowKeyframe = new Keyframe({
+-  0: {
+-    transform: [{ rotateZ: '-180deg' }, { scale: 0.8 }],
+-    opacity: 0,
+-  },
+-  [DURATION / 1000]: {
+-    transform: [{ rotateZ: '0deg' }, { scale: 1 }],
+-    opacity: 1,
+-    easing: Easing.elastic(0.7),
+-  },
+-  100: {
+-    transform: [{ rotateZ: '7200deg' }],
+-  },
+-});
+-
+-export function AnimatedIcon() {
+-  return (
+-    <View style={styles.iconContainer}>
+-      <Animated.View entering={glowKeyframe.duration(60 * 1000 * 4)} style={styles.glow}>
+-        <Image style={styles.glow} source={require('@/assets/images/logo-glow.png')} />
+-      </Animated.View>
+-
+-      <Animated.View style={styles.background} entering={keyframe.duration(DURATION)}>
+-        <div className={classes.expoLogoBackground} />
+-      </Animated.View>
+-
+-      <Animated.View style={styles.imageContainer} entering={logoKeyframe.duration(DURATION)}>
+-        <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />
+-      </Animated.View>
+-    </View>
+-  );
+-}
+-
+-const styles = StyleSheet.create({
+-  container: {
+-    alignItems: 'center',
+-    width: '100%',
+-    zIndex: 1000,
+-    position: 'absolute',
+-    top: 128 / 2 + 138,
+-  },
+-  imageContainer: {
+-    justifyContent: 'center',
+-    alignItems: 'center',
+-  },
+-  glow: {
+-    width: 201,
+-    height: 201,
+-    position: 'absolute',
+-  },
+-  iconContainer: {
+-    justifyContent: 'center',
+-    alignItems: 'center',
+-    width: 128,
+-    height: 128,
+-  },
+-  image: {
+-    position: 'absolute',
+-    width: 76,
+-    height: 71,
+-  },
+-  background: {
+-    width: 128,
+-    height: 128,
+-    position: 'absolute',
+-  },
+-});
+diff --git a/src/components/app-tabs.tsx b/src/components/app-tabs.tsx
+deleted file mode 100644
+index 80719bc..0000000
+--- a/src/components/app-tabs.tsx
++++ /dev/null
+@@ -1,32 +0,0 @@
+-import { NativeTabs } from 'expo-router/unstable-native-tabs';
+-import { useColorScheme } from 'react-native';
+-
+-import { Colors } from '@/constants/theme';
+-
+-export default function AppTabs() {
+-  const scheme = useColorScheme();
+-  const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
+-
+-  return (
+-    <NativeTabs
+-      backgroundColor={colors.background}
+-      indicatorColor={colors.backgroundElement}
+-      labelStyle={{ selected: { color: colors.text } }}>
+-      <NativeTabs.Trigger name="index">
+-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+-        <NativeTabs.Trigger.Icon
+-          src={require('@/assets/images/tabIcons/home.png')}
+-          renderingMode="template"
+-        />
+-      </NativeTabs.Trigger>
+-
+-      <NativeTabs.Trigger name="explore">
+-        <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
+-        <NativeTabs.Trigger.Icon
+-          src={require('@/assets/images/tabIcons/explore.png')}
+-          renderingMode="template"
+-        />
+-      </NativeTabs.Trigger>
+-    </NativeTabs>
+-  );
+-}
+diff --git a/src/components/app-tabs.web.tsx b/src/components/app-tabs.web.tsx
+deleted file mode 100644
+index ca2787d..0000000
+--- a/src/components/app-tabs.web.tsx
++++ /dev/null
+@@ -1,115 +0,0 @@
+-import {
+-  Tabs,
+-  TabList,
+-  TabTrigger,
+-  TabSlot,
+-  TabTriggerSlotProps,
+-  TabListProps,
+-} from 'expo-router/ui';
+-import { SymbolView } from 'expo-symbols';
+-import { Pressable, useColorScheme, View, StyleSheet } from 'react-native';
+-
+-import { ExternalLink } from './external-link';
+-import { ThemedText } from './themed-text';
+-import { ThemedView } from './themed-view';
+-
+-import { Colors, MaxContentWidth, Spacing } from '@/constants/theme';
+-
+-export default function AppTabs() {
+-  return (
+-    <Tabs>
+-      <TabSlot style={{ height: '100%' }} />
+-      <TabList asChild>
+-        <CustomTabList>
+-          <TabTrigger name="home" href="/" asChild>
+-            <TabButton>Home</TabButton>
+-          </TabTrigger>
+-          <TabTrigger name="explore" href="/explore" asChild>
+-            <TabButton>Explore</TabButton>
+-          </TabTrigger>
+-        </CustomTabList>
+-      </TabList>
+-    </Tabs>
+-  );
+-}
+-
+-export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
+-  return (
+-    <Pressable {...props} style={({ pressed }) => pressed && styles.pressed}>
+-      <ThemedView
+-        type={isFocused ? 'backgroundSelected' : 'backgroundElement'}
+-        style={styles.tabButtonView}>
+-        <ThemedText type="small" themeColor={isFocused ? 'text' : 'textSecondary'}>
+-          {children}
+-        </ThemedText>
+-      </ThemedView>
+-    </Pressable>
+-  );
+-}
+-
+-export function CustomTabList(props: TabListProps) {
+-  const scheme = useColorScheme();
+-  const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
+-
+-  return (
+-    <View {...props} style={styles.tabListContainer}>
+-      <ThemedView type="backgroundElement" style={styles.innerContainer}>
+-        <ThemedText type="smallBold" style={styles.brandText}>
+-          Expo Starter
+-        </ThemedText>
+-
+-        {props.children}
+-
+-        <ExternalLink href="https://docs.expo.dev" asChild>
+-          <Pressable style={styles.externalPressable}>
+-            <ThemedText type="link">Docs</ThemedText>
+-            <SymbolView
+-              tintColor={colors.text}
+-              name={{ ios: 'arrow.up.right.square', web: 'link' }}
+-              size={12}
+-            />
+-          </Pressable>
+-        </ExternalLink>
+-      </ThemedView>
+-    </View>
+-  );
+-}
+-
+-const styles = StyleSheet.create({
+-  tabListContainer: {
+-    position: 'absolute',
+-    width: '100%',
+-    padding: Spacing.three,
+-    justifyContent: 'center',
+-    alignItems: 'center',
+-    flexDirection: 'row',
+-  },
+-  innerContainer: {
+-    paddingVertical: Spacing.two,
+-    paddingHorizontal: Spacing.five,
+-    borderRadius: Spacing.five,
+-    flexDirection: 'row',
+-    alignItems: 'center',
+-    flexGrow: 1,
+-    gap: Spacing.two,
+-    maxWidth: MaxContentWidth,
+-  },
+-  brandText: {
+-    marginRight: 'auto',
+-  },
+-  pressed: {
+-    opacity: 0.7,
+-  },
+-  tabButtonView: {
+-    paddingVertical: Spacing.one,
+-    paddingHorizontal: Spacing.three,
+-    borderRadius: Spacing.three,
+-  },
+-  externalPressable: {
+-    flexDirection: 'row',
+-    justifyContent: 'center',
+-    alignItems: 'center',
+-    gap: Spacing.one,
+-    marginLeft: Spacing.three,
+-  },
+-});
+diff --git a/src/components/external-link.tsx b/src/components/external-link.tsx
+deleted file mode 100644
+index 883e515..0000000
+--- a/src/components/external-link.tsx
++++ /dev/null
+@@ -1,25 +0,0 @@
+-import { Href, Link } from 'expo-router';
+-import { openBrowserAsync, WebBrowserPresentationStyle } from 'expo-web-browser';
+-import { type ComponentProps } from 'react';
+-
+-type Props = Omit<ComponentProps<typeof Link>, 'href'> & { href: Href & string };
+-
+-export function ExternalLink({ href, ...rest }: Props) {
+-  return (
+-    <Link
+-      target="_blank"
+-      {...rest}
+-      href={href}
+-      onPress={async (event) => {
+-        if (process.env.EXPO_OS !== 'web') {
+-          // Prevent the default behavior of linking to the default browser on native.
+-          event.preventDefault();
+-          // Open the link in an in-app browser.
+-          await openBrowserAsync(href, {
+-            presentationStyle: WebBrowserPresentationStyle.AUTOMATIC,
+-          });
+-        }
+-      }}
+-    />
+-  );
+-}
+diff --git a/src/components/hint-row.tsx b/src/components/hint-row.tsx
+deleted file mode 100644
+index acf4dc5..0000000
+--- a/src/components/hint-row.tsx
++++ /dev/null
+@@ -1,35 +0,0 @@
+-import type { ReactNode } from 'react';
+-import { View, StyleSheet } from 'react-native';
+-
+-import { ThemedText } from './themed-text';
+-import { ThemedView } from './themed-view';
+-
+-import { Spacing } from '@/constants/theme';
+-
+-type HintRowProps = {
+-  title?: string;
+-  hint?: ReactNode;
+-};
+-
+-export function HintRow({ title = 'Try editing', hint = 'app/index.tsx' }: HintRowProps) {
+-  return (
+-    <View style={styles.stepRow}>
+-      <ThemedText type="small">{title}</ThemedText>
+-      <ThemedView type="backgroundSelected" style={styles.codeSnippet}>
+-        <ThemedText themeColor="textSecondary">{hint}</ThemedText>
+-      </ThemedView>
+-    </View>
+-  );
+-}
+-
+-const styles = StyleSheet.create({
+-  stepRow: {
+-    flexDirection: 'row',
+-    justifyContent: 'space-between',
+-  },
+-  codeSnippet: {
+-    borderRadius: Spacing.two,
+-    paddingVertical: Spacing.half,
+-    paddingHorizontal: Spacing.two,
+-  },
+-});
+diff --git a/src/components/ui/collapsible.tsx b/src/components/ui/collapsible.tsx
+deleted file mode 100644
+index d0d745b..0000000
+--- a/src/components/ui/collapsible.tsx
++++ /dev/null
+@@ -1,65 +0,0 @@
+-import { SymbolView } from 'expo-symbols';
+-import { PropsWithChildren, useState } from 'react';
+-import { Pressable, StyleSheet } from 'react-native';
+-import Animated, { FadeIn } from 'react-native-reanimated';
+-
+-import { ThemedText } from '@/components/themed-text';
+-import { ThemedView } from '@/components/themed-view';
+-import { Spacing } from '@/constants/theme';
+-import { useTheme } from '@/hooks/use-theme';
+-
+-export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
+-  const [isOpen, setIsOpen] = useState(false);
+-  const theme = useTheme();
+-
+-  return (
+-    <ThemedView>
+-      <Pressable
+-        style={({ pressed }) => [styles.heading, pressed && styles.pressedHeading]}
+-        onPress={() => setIsOpen((value) => !value)}>
+-        <ThemedView type="backgroundElement" style={styles.button}>
+-          <SymbolView
+-            name={{ ios: 'chevron.right', android: 'chevron_right', web: 'chevron_right' }}
+-            size={14}
+-            weight="bold"
+-            tintColor={theme.text}
+-            style={{ transform: [{ rotate: isOpen ? '-90deg' : '90deg' }] }}
+-          />
+-        </ThemedView>
+-
+-        <ThemedText type="small">{title}</ThemedText>
+-      </Pressable>
+-      {isOpen && (
+-        <Animated.View entering={FadeIn.duration(200)}>
+-          <ThemedView type="backgroundElement" style={styles.content}>
+-            {children}
+-          </ThemedView>
+-        </Animated.View>
+-      )}
+-    </ThemedView>
+-  );
+-}
+-
+-const styles = StyleSheet.create({
+-  heading: {
+-    flexDirection: 'row',
+-    alignItems: 'center',
+-    gap: Spacing.two,
+-  },
+-  pressedHeading: {
+-    opacity: 0.7,
+-  },
+-  button: {
+-    width: Spacing.four,
+-    height: Spacing.four,
+-    borderRadius: 12,
+-    justifyContent: 'center',
+-    alignItems: 'center',
+-  },
+-  content: {
+-    marginTop: Spacing.three,
+-    borderRadius: Spacing.three,
+-    marginLeft: Spacing.four,
+-    padding: Spacing.four,
+-  },
+-});
+diff --git a/src/components/web-badge.tsx b/src/components/web-badge.tsx
+deleted file mode 100644
+index 6667898..0000000
+--- a/src/components/web-badge.tsx
++++ /dev/null
+@@ -1,43 +0,0 @@
+-import { version } from 'expo/package.json';
+-import { Image } from 'expo-image';
+-import { useColorScheme, StyleSheet } from 'react-native';
+-
+-import { ThemedText } from './themed-text';
+-import { ThemedView } from './themed-view';
+-
+-import { Spacing } from '@/constants/theme';
+-
+-export function WebBadge() {
+-  const scheme = useColorScheme();
+-
+-  return (
+-    <ThemedView style={styles.container}>
+-      <ThemedText type="code" themeColor="textSecondary" style={styles.versionText}>
+-        v{version}
+-      </ThemedText>
+-      <Image
+-        source={
+-          scheme === 'dark'
+-            ? require('@/assets/images/expo-badge-white.png')
+-            : require('@/assets/images/expo-badge.png')
+-        }
+-        style={styles.badgeImage}
+-      />
+-    </ThemedView>
+-  );
+-}
+-
+-const styles = StyleSheet.create({
+-  container: {
+-    padding: Spacing.five,
+-    alignItems: 'center',
+-    gap: Spacing.two,
+-  },
+-  versionText: {
+-    textAlign: 'center',
+-  },
+-  badgeImage: {
+-    width: 123,
+-    aspectRatio: 123 / 24,
+-  },
+-});

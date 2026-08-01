@@ -1,0 +1,10 @@
+2	1	app.json
+21	0	modules/speech-kit/LICENSE
+6	0	modules/speech-kit/expo-module.config.json
+25	0	modules/speech-kit/ios/SpeechKitModule.podspec
+91	0	modules/speech-kit/ios/SpeechKitModule.swift
+1	0	modules/speech-kit/ios/assets/sample.wav
+11	0	modules/speech-kit/src/SpeechKitModule.ts
+9	0	modules/speech-kit/src/SpeechKitModule.types.ts
+19	0	modules/speech-kit/src/SpeechKitModule.web.ts
+81	6	src/app/transcribe.tsx
