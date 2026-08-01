@@ -167,6 +167,16 @@ archive_app() {
   fi
 }
 
+preserve_trial_branch() {
+  # The next trial resets --hard to the baseline tag, which rewinds whatever
+  # branch HEAD is on. Without a named ref, this trial's final tree survives only
+  # in the reflog until gc. harness/perf/build-release.sh checks out exactly this
+  # name to rebuild the app in Release.
+  git -C "$REPO" branch -f "trials/$TRIAL_ID" HEAD
+  manifest_set "trial_branch" "\"trials/$TRIAL_ID\""
+  note "preserved final tree as branch trials/$TRIAL_ID"
+}
+
 record_toolchain() {
   manifest_set "toolchain" "$(node -e '
     const cp = require("child_process");
@@ -296,6 +306,7 @@ if [ "${1:-}" = "remediate" ]; then
   export FAILURES="$FAILURES_TEXT"
   manifest_set "remediation_failures" "$(node -e 'console.log(JSON.stringify(process.env.FAILURES))')"
   run_phase "R" "$REMEDIATION_PROMPT"
+  preserve_trial_branch
   rm -rf "$TRIAL_DIR/app"
   archive_app
   note "remediation done — re-run the acceptance checklist and record results in manifest.json (acceptance)"
@@ -353,6 +364,7 @@ for n in $PHASE_IDS; do
   run_phase "$n" "${!prompt_var}" || exit 1
 done
 
+preserve_trial_branch
 archive_app
 manifest_set "outcome" '"phases-complete"'
 manifest_set "finished_at" "\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
