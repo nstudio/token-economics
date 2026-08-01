@@ -1,0 +1,10 @@
+1	0	.gitignore
+2	1	app.json
+21	0	modules/expo-speech/LICENSE
+6	0	modules/expo-speech/expo-module.config.json
+4	0	modules/expo-speech/index.ts
+34	0	modules/expo-speech/ios/ExpoSpeech.podspec
+90	0	modules/expo-speech/ios/ExpoSpeechModule.swift
+5	0	modules/expo-speech/src/ExpoSpeech.types.ts
+13	0	modules/expo-speech/src/ExpoSpeechModule.ts
+95	8	screens/TranscribeScreen.tsx

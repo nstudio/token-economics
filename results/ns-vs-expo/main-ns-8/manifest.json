@@ -1,0 +1,89 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-ns-8",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "ns",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "nativescript-docs": {
+        "type": "http",
+        "url": "https://docs.nativescript.org/mcp"
+      }
+    }
+  },
+  "started_at": "2026-08-01T18:39:17Z",
+  "outcome": "in-progress",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "docs.nativescript.org/mcp (hosted HTTP — not version-pinnable)"
+  },
+  "baseline_sha": "b51dc822a7ae9e113ad4e14b0920596172c3ca65",
+  "mcp_preflight": {
+    "phase-1": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
+    },
+    "phase-2": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
+    }
+  },
+  "phases": {
+    "1": {
+      "session_id": "432e292f-a525-4e30-86b5-271fd4039f52",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 54,
+      "duration_ms": 215572,
+      "total_cost_usd": 1.2989133,
+      "usage": {
+        "input_tokens": 76,
+        "cache_creation_input_tokens": 63454,
+        "cache_read_input_tokens": 2450801,
+        "output_tokens": 12134,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 63454,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 306,
+            "cache_read_input_tokens": 90336,
+            "cache_creation_input_tokens": 2513,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2513
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 216,
+      "end_sha": "96a45904b5bfb38d768b8b19ce92ba9b51edec9e"
+    }
+  }
+}

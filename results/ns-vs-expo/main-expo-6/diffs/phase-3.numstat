@@ -1,0 +1,8 @@
+2	1	app.json
+6	0	modules/speech-recognizer/expo-module.config.json
+-	-	modules/speech-recognizer/ios/Resources/sample.wav
+25	0	modules/speech-recognizer/ios/SpeechRecognizerModule.podspec
+97	0	modules/speech-recognizer/ios/SpeechRecognizerModule.swift
+18	0	modules/speech-recognizer/src/SpeechRecognizerModule.ts
+5	0	modules/speech-recognizer/src/SpeechRecognizerModule.types.ts
+94	5	screens/TranscribeScreen.tsx

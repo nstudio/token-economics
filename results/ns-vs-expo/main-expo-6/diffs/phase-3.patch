@@ -1,0 +1,326 @@
+diff --git a/app.json b/app.json
+index 6662023..956eb74 100644
+--- a/app.json
++++ b/app.json
+@@ -11,7 +11,8 @@
+       "bundleIdentifier": "com.nstudio.expobenchmark",
+       "infoPlist": {
+         "NSHealthShareUsageDescription": "Native Bench reads your step count to show your recent activity.",
+-        "NSHealthUpdateUsageDescription": "Native Bench writes step count samples you log to Health."
++        "NSHealthUpdateUsageDescription": "Native Bench writes step count samples you log to Health.",
++        "NSSpeechRecognitionUsageDescription": "Native Bench uses speech recognition to transcribe a sample audio file."
+       },
+       "entitlements": {
+         "com.apple.developer.healthkit": true
+diff --git a/modules/speech-recognizer/expo-module.config.json b/modules/speech-recognizer/expo-module.config.json
+new file mode 100644
+index 0000000..25838e8
+--- /dev/null
++++ b/modules/speech-recognizer/expo-module.config.json
+@@ -0,0 +1,6 @@
++{
++  "platforms": ["apple"],
++  "apple": {
++    "modules": ["SpeechRecognizerModule"]
++  }
++}
+diff --git a/modules/speech-recognizer/ios/Resources/sample.wav b/modules/speech-recognizer/ios/Resources/sample.wav
+new file mode 100644
+index 0000000..12c1070
+Binary files /dev/null and b/modules/speech-recognizer/ios/Resources/sample.wav differ
+diff --git a/modules/speech-recognizer/ios/SpeechRecognizerModule.podspec b/modules/speech-recognizer/ios/SpeechRecognizerModule.podspec
+new file mode 100644
+index 0000000..529f9fe
+--- /dev/null
++++ b/modules/speech-recognizer/ios/SpeechRecognizerModule.podspec
+@@ -0,0 +1,25 @@
++Pod::Spec.new do |s|
++  s.name           = 'SpeechRecognizerModule'
++  s.version        = '1.0.0'
++  s.summary        = 'A sample project summary'
++  s.description    = 'A sample project description'
++  s.author         = ''
++  s.homepage       = 'https://docs.expo.dev/modules/'
++  s.platforms      = {
++    :ios => '16.4',
++    :tvos => '16.4'
++  }
++  s.source         = { git: '' }
++  s.static_framework = true
++
++  s.dependency 'ExpoModulesCore'
++  s.frameworks = 'Speech'
++
++  # Swift/Objective-C compatibility
++  s.pod_target_xcconfig = {
++    'DEFINES_MODULE' => 'YES',
++  }
++
++  s.source_files = "**/*.{h,m,mm,swift,hpp,cpp}"
++  s.resources = "Resources/*.wav"
++end
+diff --git a/modules/speech-recognizer/ios/SpeechRecognizerModule.swift b/modules/speech-recognizer/ios/SpeechRecognizerModule.swift
+new file mode 100644
+index 0000000..0e9119c
+--- /dev/null
++++ b/modules/speech-recognizer/ios/SpeechRecognizerModule.swift
+@@ -0,0 +1,97 @@
++import ExpoModulesCore
++import Speech
++
++private let PARTIAL_TRANSCRIPT_EVENT = "onPartialTranscript"
++
++internal final class SampleAudioUnavailableException: Exception {
++  override var reason: String {
++    "Sample audio file is missing from the app bundle."
++  }
++}
++
++internal final class RecognizerUnavailableException: Exception {
++  override var reason: String {
++    "Speech recognizer is not available for the current locale."
++  }
++}
++
++internal final class TranscriptionInProgressException: Exception {
++  override var reason: String {
++    "A transcription is already running."
++  }
++}
++
++public class SpeechRecognizerModule: Module {
++  private var recognitionTask: SFSpeechRecognitionTask?
++
++  public func definition() -> ModuleDefinition {
++    Name("SpeechRecognizerModule")
++
++    Events(PARTIAL_TRANSCRIPT_EVENT)
++
++    AsyncFunction("requestAuthorization") { () -> String in
++      let status = await withCheckedContinuation { (continuation: CheckedContinuation<SFSpeechRecognizerAuthorizationStatus, Never>) in
++        SFSpeechRecognizer.requestAuthorization { status in
++          continuation.resume(returning: status)
++        }
++      }
++      return SpeechRecognizerModule.authorizationStatusString(status)
++    }
++
++    Function("getAuthorizationStatus") { () -> String in
++      SpeechRecognizerModule.authorizationStatusString(SFSpeechRecognizer.authorizationStatus())
++    }
++
++    AsyncFunction("transcribeSample") { (promise: Promise) in
++      self.transcribeSample(promise: promise)
++    }
++  }
++
++  private func transcribeSample(promise: Promise) {
++    guard recognitionTask == nil else {
++      promise.reject(TranscriptionInProgressException())
++      return
++    }
++    guard let url = Bundle(for: SpeechRecognizerModule.self).url(forResource: "sample", withExtension: "wav") else {
++      promise.reject(SampleAudioUnavailableException())
++      return
++    }
++    guard let recognizer = SFSpeechRecognizer(), recognizer.isAvailable else {
++      promise.reject(RecognizerUnavailableException())
++      return
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = true
++
++    recognitionTask = recognizer.recognitionTask(with: request) { [weak self] result, error in
++      guard let self else { return }
++      if let error {
++        self.recognitionTask = nil
++        promise.reject(error)
++        return
++      }
++      guard let result else { return }
++
++      self.sendEvent(PARTIAL_TRANSCRIPT_EVENT, ["transcript": result.bestTranscription.formattedString])
++
++      if result.isFinal {
++        self.recognitionTask = nil
++        promise.resolve(result.bestTranscription.formattedString)
++      }
++    }
++  }
++
++  private static func authorizationStatusString(_ status: SFSpeechRecognizerAuthorizationStatus) -> String {
++    switch status {
++    case .notDetermined:
++      return "notDetermined"
++    case .authorized:
++      return "authorized"
++    case .denied, .restricted:
++      return "denied"
++    @unknown default:
++      return "notDetermined"
++    }
++  }
++}
+diff --git a/modules/speech-recognizer/src/SpeechRecognizerModule.ts b/modules/speech-recognizer/src/SpeechRecognizerModule.ts
+new file mode 100644
+index 0000000..07c6663
+--- /dev/null
++++ b/modules/speech-recognizer/src/SpeechRecognizerModule.ts
+@@ -0,0 +1,18 @@
++import { NativeModule, requireNativeModule } from 'expo';
++
++import type {
++  PartialTranscriptEvent,
++  SpeechAuthorizationStatus,
++} from './SpeechRecognizerModule.types';
++
++export type SpeechRecognizerModuleEvents = {
++  onPartialTranscript(event: PartialTranscriptEvent): void;
++};
++
++declare class SpeechRecognizerModule extends NativeModule<SpeechRecognizerModuleEvents> {
++  requestAuthorization(): Promise<SpeechAuthorizationStatus>;
++  getAuthorizationStatus(): SpeechAuthorizationStatus;
++  transcribeSample(): Promise<string>;
++}
++
++export default requireNativeModule<SpeechRecognizerModule>('SpeechRecognizerModule');
+diff --git a/modules/speech-recognizer/src/SpeechRecognizerModule.types.ts b/modules/speech-recognizer/src/SpeechRecognizerModule.types.ts
+new file mode 100644
+index 0000000..7842137
+--- /dev/null
++++ b/modules/speech-recognizer/src/SpeechRecognizerModule.types.ts
+@@ -0,0 +1,5 @@
++export type SpeechAuthorizationStatus = 'notDetermined' | 'authorized' | 'denied';
++
++export type PartialTranscriptEvent = {
++  transcript: string;
++};
+diff --git a/screens/TranscribeScreen.tsx b/screens/TranscribeScreen.tsx
+index 1caac3a..9f3ef82 100644
+--- a/screens/TranscribeScreen.tsx
++++ b/screens/TranscribeScreen.tsx
+@@ -1,23 +1,102 @@
++import { useCallback, useState } from 'react';
+ import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native';
++import { useFocusEffect } from '@react-navigation/native';
++
++import SpeechRecognizerModule from '../modules/speech-recognizer/src/SpeechRecognizerModule';
++import type { SpeechAuthorizationStatus } from '../modules/speech-recognizer/src/SpeechRecognizerModule.types';
++
++const STATUS_LABEL: Record<SpeechAuthorizationStatus, string> = {
++  notDetermined: 'Speech access: not requested',
++  authorized: 'Speech access: granted',
++  denied: 'Speech access: denied',
++};
++
++function errorMessage(error: unknown): string {
++  return error instanceof Error ? error.message : String(error);
++}
+ 
+ export default function TranscribeScreen() {
++  const [authStatus, setAuthStatus] = useState<SpeechAuthorizationStatus>('notDetermined');
++  const [statusOverride, setStatusOverride] = useState<string | null>(null);
++  const [transcript, setTranscript] = useState('');
++  const [completedSeconds, setCompletedSeconds] = useState<number | null>(null);
++  const [transcribing, setTranscribing] = useState(false);
++
++  useFocusEffect(
++    useCallback(() => {
++      setStatusOverride(null);
++      setAuthStatus(SpeechRecognizerModule.getAuthorizationStatus());
++    }, [])
++  );
++
++  const handleRequestAccess = async () => {
++    try {
++      const status = await SpeechRecognizerModule.requestAuthorization();
++      setStatusOverride(null);
++      setAuthStatus(status);
++    } catch (error) {
++      setStatusOverride(errorMessage(error));
++    }
++  };
++
++  const handleTranscribe = async () => {
++    setTranscribing(true);
++    setStatusOverride(null);
++    setTranscript('');
++    setCompletedSeconds(null);
++
++    const startedAt = Date.now();
++    const subscription = SpeechRecognizerModule.addListener('onPartialTranscript', (event) => {
++      setTranscript(event.transcript);
++    });
++
++    try {
++      const finalTranscript = await SpeechRecognizerModule.transcribeSample();
++      setTranscript(finalTranscript);
++      setCompletedSeconds((Date.now() - startedAt) / 1000);
++    } catch (error) {
++      setStatusOverride(errorMessage(error));
++    } finally {
++      subscription.remove();
++      setTranscribing(false);
++    }
++  };
++
++  const transcribeDisabled = authStatus !== 'authorized' || transcribing;
++  const statusText = transcribing ? 'Transcribing…' : statusOverride ?? STATUS_LABEL[authStatus];
++
+   return (
+     <ScrollView contentContainerStyle={styles.container}>
+-      <Text style={styles.status}>Speech access: not requested</Text>
++      <Text style={styles.status}>{statusText}</Text>
+ 
+       <View style={styles.buttons}>
+-        <Pressable style={styles.button}>
++        <Pressable style={styles.button} onPress={handleRequestAccess}>
+           <Text style={styles.buttonText}>Request Access</Text>
+         </Pressable>
+-        <Pressable style={[styles.button, styles.buttonDisabled]} disabled>
+-          <Text style={[styles.buttonText, styles.buttonTextDisabled]}>
++        <Pressable
++          style={[styles.button, transcribeDisabled && styles.buttonDisabled]}
++          disabled={transcribeDisabled}
++          onPress={handleTranscribe}
++        >
++          <Text style={[styles.buttonText, transcribeDisabled && styles.buttonTextDisabled]}>
+             Transcribe Sample
+           </Text>
+         </Pressable>
+       </View>
+ 
+       <View style={styles.transcriptArea}>
+-        <Text style={styles.emptyState}>No transcript yet</Text>
++        {transcript.length === 0 ? (
++          <Text style={styles.emptyState}>No transcript yet</Text>
++        ) : (
++          <>
++            <Text style={styles.transcriptText}>{transcript}</Text>
++            {completedSeconds !== null && (
++              <Text style={styles.completedText}>
++                Completed in {completedSeconds.toFixed(1)} s
++              </Text>
++            )}
++          </>
++        )}
+       </View>
+     </ScrollView>
+   );
+@@ -62,4 +141,14 @@ const styles = StyleSheet.create({
+     fontSize: 15,
+     color: '#8e8e93',
+   },
++  transcriptText: {
++    fontSize: 15,
++    color: '#333',
++    lineHeight: 22,
++  },
++  completedText: {
++    fontSize: 13,
++    color: '#8e8e93',
++    marginTop: 12,
++  },
+ });

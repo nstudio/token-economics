@@ -1,0 +1,46 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-ns-8",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "ns",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "nativescript-docs": {
+        "type": "http",
+        "url": "https://docs.nativescript.org/mcp"
+      }
+    }
+  },
+  "started_at": "2026-08-01T17:58:13Z",
+  "outcome": "infra-invalid-mcp@phase-1",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "docs.nativescript.org/mcp (hosted HTTP — not version-pinnable)"
+  },
+  "baseline_sha": "b51dc822a7ae9e113ad4e14b0920596172c3ca65",
+  "mcp_preflight": {
+    "phase-1": {
+      "kind": "tools",
+      "result": "NO_DOCS_TOOL",
+      "is_error": false,
+      "enforced": true
+    }
+  },
+  "infra_invalid": {
+    "reason": "docs.nativescript.org/mcp failed to load at the phase-1 gate (probe: NO_DOCS_TOOL). The server returned HTTP 200 on a direct check minutes later, so this was a transient outage. Caught before any measured session; zero phases, zero tokens.",
+    "detected_at": "2026-08-01",
+    "measured_tokens": 0,
+    "replaced_by": "main-ns-8"
+  }
+}

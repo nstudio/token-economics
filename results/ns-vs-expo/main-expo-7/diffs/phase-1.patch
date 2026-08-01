@@ -1,0 +1,314 @@
+diff --git a/App.tsx b/App.tsx
+index 0329d0c..ab98df8 100644
+--- a/App.tsx
++++ b/App.tsx
+@@ -1,12 +1,23 @@
++import { useState } from 'react';
++import { SafeAreaView, StyleSheet } from 'react-native';
+ import { StatusBar } from 'expo-status-bar';
+-import { StyleSheet, Text, View } from 'react-native';
++
++import HomeScreen from './screens/HomeScreen';
++import HealthScreen from './screens/HealthScreen';
++import TranscribeScreen from './screens/TranscribeScreen';
++
++type Screen = 'home' | 'health' | 'transcribe';
+ 
+ export default function App() {
++  const [screen, setScreen] = useState<Screen>('home');
++
+   return (
+-    <View style={styles.container}>
+-      <Text>Open up App.tsx to start working on your app!</Text>
++    <SafeAreaView style={styles.container}>
++      {screen === 'home' && <HomeScreen onNavigate={setScreen} />}
++      {screen === 'health' && <HealthScreen onBack={() => setScreen('home')} />}
++      {screen === 'transcribe' && <TranscribeScreen onBack={() => setScreen('home')} />}
+       <StatusBar style="auto" />
+-    </View>
++    </SafeAreaView>
+   );
+ }
+ 
+@@ -14,7 +25,5 @@ const styles = StyleSheet.create({
+   container: {
+     flex: 1,
+     backgroundColor: '#fff',
+-    alignItems: 'center',
+-    justifyContent: 'center',
+   },
+ });
+diff --git a/screens/HealthScreen.tsx b/screens/HealthScreen.tsx
+new file mode 100644
+index 0000000..8613bc7
+--- /dev/null
++++ b/screens/HealthScreen.tsx
+@@ -0,0 +1,75 @@
++import { Pressable, StyleSheet, Text, View } from 'react-native';
++
++import ScreenHeader from './ScreenHeader';
++
++type Props = {
++  onBack: () => void;
++};
++
++export default function HealthScreen({ onBack }: Props) {
++  return (
++    <View style={styles.container}>
++      <ScreenHeader title="Health" onBack={onBack} />
++
++      <View style={styles.content}>
++        <Text style={styles.statusLine}>Health access: not requested</Text>
++
++        <Pressable style={styles.button}>
++          <Text style={styles.buttonText}>Request Access</Text>
++        </Pressable>
++
++        <Pressable style={[styles.button, styles.buttonDisabled]} disabled>
++          <Text style={[styles.buttonText, styles.buttonTextDisabled]}>Log 500 Steps</Text>
++        </Pressable>
++
++        <Text style={styles.sectionHeader}>Last 7 Days</Text>
++        <Text style={styles.emptyState}>No data yet</Text>
++      </View>
++    </View>
++  );
++}
++
++const styles = StyleSheet.create({
++  container: {
++    flex: 1,
++    backgroundColor: '#fff',
++  },
++  content: {
++    paddingHorizontal: 16,
++    paddingTop: 8,
++  },
++  statusLine: {
++    fontSize: 15,
++    color: '#444',
++    marginBottom: 16,
++  },
++  button: {
++    backgroundColor: '#007aff',
++    paddingVertical: 14,
++    borderRadius: 10,
++    alignItems: 'center',
++    marginBottom: 12,
++  },
++  buttonDisabled: {
++    backgroundColor: '#e0e0e0',
++  },
++  buttonText: {
++    color: '#fff',
++    fontSize: 17,
++    fontWeight: '600',
++  },
++  buttonTextDisabled: {
++    color: '#999',
++  },
++  sectionHeader: {
++    fontSize: 18,
++    fontWeight: '700',
++    color: '#1a1a1a',
++    marginTop: 24,
++    marginBottom: 8,
++  },
++  emptyState: {
++    fontSize: 15,
++    color: '#999',
++  },
++});
+diff --git a/screens/HomeScreen.tsx b/screens/HomeScreen.tsx
+new file mode 100644
+index 0000000..cf4fd1f
+--- /dev/null
++++ b/screens/HomeScreen.tsx
+@@ -0,0 +1,59 @@
++import { Pressable, StyleSheet, Text, View } from 'react-native';
++
++type Props = {
++  onNavigate: (screen: 'health' | 'transcribe') => void;
++};
++
++export default function HomeScreen({ onNavigate }: Props) {
++  return (
++    <View style={styles.container}>
++      <Text style={styles.title}>Native Bench</Text>
++      <Text style={styles.subtitle}>Token economics benchmark</Text>
++
++      <View style={styles.buttons}>
++        <Pressable style={styles.button} onPress={() => onNavigate('health')}>
++          <Text style={styles.buttonText}>Health</Text>
++        </Pressable>
++        <Pressable style={styles.button} onPress={() => onNavigate('transcribe')}>
++          <Text style={styles.buttonText}>Transcribe</Text>
++        </Pressable>
++      </View>
++    </View>
++  );
++}
++
++const styles = StyleSheet.create({
++  container: {
++    flex: 1,
++    alignItems: 'center',
++    justifyContent: 'center',
++    backgroundColor: '#fff',
++    paddingHorizontal: 24,
++  },
++  title: {
++    fontSize: 28,
++    fontWeight: '700',
++    color: '#1a1a1a',
++  },
++  subtitle: {
++    fontSize: 16,
++    color: '#666',
++    marginTop: 8,
++    marginBottom: 40,
++  },
++  buttons: {
++    width: '100%',
++    gap: 12,
++  },
++  button: {
++    backgroundColor: '#007aff',
++    paddingVertical: 14,
++    borderRadius: 10,
++    alignItems: 'center',
++  },
++  buttonText: {
++    color: '#fff',
++    fontSize: 17,
++    fontWeight: '600',
++  },
++});
+diff --git a/screens/ScreenHeader.tsx b/screens/ScreenHeader.tsx
+new file mode 100644
+index 0000000..7d863e8
+--- /dev/null
++++ b/screens/ScreenHeader.tsx
+@@ -0,0 +1,39 @@
++import { Pressable, StyleSheet, Text, View } from 'react-native';
++
++type Props = {
++  title: string;
++  onBack: () => void;
++};
++
++export default function ScreenHeader({ title, onBack }: Props) {
++  return (
++    <View style={styles.header}>
++      <Pressable style={styles.backButton} onPress={onBack} hitSlop={8}>
++        <Text style={styles.backText}>‹ Home</Text>
++      </Pressable>
++      <Text style={styles.title}>{title}</Text>
++    </View>
++  );
++}
++
++const styles = StyleSheet.create({
++  header: {
++    flexDirection: 'row',
++    alignItems: 'center',
++    paddingHorizontal: 16,
++    paddingVertical: 12,
++  },
++  backButton: {
++    paddingVertical: 4,
++    paddingRight: 12,
++  },
++  backText: {
++    fontSize: 17,
++    color: '#007aff',
++  },
++  title: {
++    fontSize: 20,
++    fontWeight: '700',
++    color: '#1a1a1a',
++  },
++});
+diff --git a/screens/TranscribeScreen.tsx b/screens/TranscribeScreen.tsx
+new file mode 100644
+index 0000000..e1e2de3
+--- /dev/null
++++ b/screens/TranscribeScreen.tsx
+@@ -0,0 +1,77 @@
++import { Pressable, StyleSheet, Text, View } from 'react-native';
++
++import ScreenHeader from './ScreenHeader';
++
++type Props = {
++  onBack: () => void;
++};
++
++export default function TranscribeScreen({ onBack }: Props) {
++  return (
++    <View style={styles.container}>
++      <ScreenHeader title="Transcribe" onBack={onBack} />
++
++      <View style={styles.content}>
++        <Text style={styles.statusLine}>Speech access: not requested</Text>
++
++        <Pressable style={styles.button}>
++          <Text style={styles.buttonText}>Request Access</Text>
++        </Pressable>
++
++        <Pressable style={[styles.button, styles.buttonDisabled]} disabled>
++          <Text style={[styles.buttonText, styles.buttonTextDisabled]}>Transcribe Sample</Text>
++        </Pressable>
++
++        <View style={styles.transcriptArea}>
++          <Text style={styles.emptyState}>No transcript yet</Text>
++        </View>
++      </View>
++    </View>
++  );
++}
++
++const styles = StyleSheet.create({
++  container: {
++    flex: 1,
++    backgroundColor: '#fff',
++  },
++  content: {
++    flex: 1,
++    paddingHorizontal: 16,
++    paddingTop: 8,
++  },
++  statusLine: {
++    fontSize: 15,
++    color: '#444',
++    marginBottom: 16,
++  },
++  button: {
++    backgroundColor: '#007aff',
++    paddingVertical: 14,
++    borderRadius: 10,
++    alignItems: 'center',
++    marginBottom: 12,
++  },
++  buttonDisabled: {
++    backgroundColor: '#e0e0e0',
++  },
++  buttonText: {
++    color: '#fff',
++    fontSize: 17,
++    fontWeight: '600',
++  },
++  buttonTextDisabled: {
++    color: '#999',
++  },
++  transcriptArea: {
++    flex: 1,
++    marginTop: 12,
++    padding: 12,
++    borderRadius: 10,
++    backgroundColor: '#f5f5f5',
++  },
++  emptyState: {
++    fontSize: 15,
++    color: '#999',
++  },
++});

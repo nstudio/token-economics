@@ -494,3 +494,80 @@ two that never drove the UI. They are the highest-priority acceptance candidates
 A condition with UI-automation tools withheld from both arms would isolate
 build-verified implementation cost from interactive-verification cost. That is a
 separate study slug, which this harness now supports as data.
+
+---
+
+## 14. Corrected analysis: the raw token comparison was an artifact (2026-08-01)
+
+**This supersedes every earlier headline in this document, including §3's predictions
+and the n=5 figures reported during the run.**
+
+### The finding
+
+Controlling for how much interactive UI verification each agent performed reverses the
+result. At every matched level of verification effort, **NativeScript uses fewer tokens
+than Expo**:
+
+| Verification band | NativeScript median | Expo median | Cheaper |
+|---|---|---|---|
+| 0–7 `idb ui tap` calls | **57,160** | 63,838 | NativeScript |
+| 8–25 taps | **78,339** | 87,832 | NativeScript |
+| 26+ taps | **110,390** | 111,471 | NativeScript |
+
+The banded comparison involves no modelling — it is the trials sorted by verification
+effort. A regression over the same 15 trials agrees:
+
+| Model | Framework coefficient (NS vs Expo) | t | R² |
+|---|---|---|---|
+| `tokens ~ framework` | +9,598 | 0.93, n.s. | **0.06** |
+| `tokens ~ taps + framework` | **−11,737** | **−2.37, p<0.05** | **0.86** |
+
+Framework alone explains **6%** of variance in token cost. Adding verification effort
+explains **86%**, at ~1,500 tokens per UI tap (t = 8.16) — and the framework coefficient
+*changes sign*.
+
+Two trials from the n=6–8 batch made this unmissable: `main-ns-7` performed 5 taps and
+became the cheapest NativeScript trial in the study (57,160); `main-expo-8` performed 37
+taps and became the most expensive Expo trial (111,471). Neither is explicable by
+framework; both are explicable by verification effort.
+
+### What was previously reported, and why it was wrong
+
+At n=5 this document and the run commentary reported "Expo costs 0.67× the tokens" as
+the headline, with the caveat that it was directional (p = 0.056). That framing was
+wrong in substance, not just in confidence: the gap was **not a framework effect at
+all**. It measured NativeScript's agents choosing to drive the simulator 20–37 times per
+trial while Expo's agents did so 0–37 times with far more scatter.
+
+The error was compounded by an unfounded gloss — "NativeScript agents verified more;
+Expo agents trusted the build" — which explained the number by restating it. The
+confound was found only when that sentence was challenged directly.
+
+### What the study can claim
+
+1. **Verification behaviour dominates measured agent cost** (R² = 0.86), far exceeding
+   framework choice (R² = 0.06). For anyone budgeting agent spend, *how thoroughly the
+   agent is told to verify* matters more than which of these two frameworks is used.
+2. **At matched verification effort, NativeScript is the more token-efficient of the
+   two**, consistently across all three bands.
+3. The per-tap cost is substantial and measurable: **~1,500 output tokens per UI
+   interaction**.
+
+### What remains unexplained
+
+Why NativeScript's agents verified more consistently (20–37 taps in six of seven trials)
+than Expo's (0–37, high scatter) is **not established**. An architectural hypothesis —
+that NativeScript's runtime binding lets bad native calls survive the build, forcing the
+agent to run the app — was tested against every transcript and **rejected**: zero genuine
+runtime-failure signatures on either arm. Prompt-response variance and some unmeasured
+property of the frameworks both remain live, and this data cannot separate them.
+
+### Consequence for design
+
+A future study should either **hold verification effort constant** (withhold UI-automation
+tools from both arms, measuring build-verified implementation cost) or **treat it as a
+declared independent variable** rather than letting agents choose it freely. Letting it
+float means the headline measures agent behaviour, not framework economics.
+
+The `results/ns-vs-expo/REPORT.md` write-up must lead with this and must not publish a
+raw token ratio as a framework comparison.

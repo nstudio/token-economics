@@ -1,0 +1,182 @@
+{
+  "auth_mode": "subscription-keychain",
+  "trial_id": "main-expo-7",
+  "study": "ns-vs-expo",
+  "spec_version": "v1.1.0",
+  "framework": "expo",
+  "model": "claude-sonnet-5",
+  "max_turns": 160,
+  "mcp_config": {
+    "mcpServers": {
+      "expo": {
+        "type": "http",
+        "url": "https://mcp.expo.dev/mcp",
+        "headers": {
+          "Authorization": "Bearer ${EXPO_TOKEN}"
+        }
+      }
+    }
+  },
+  "started_at": "2026-08-01T17:28:43Z",
+  "outcome": "phases-complete",
+  "acceptance": {
+    "status": "pending",
+    "items": {},
+    "notes": ""
+  },
+  "toolchain": {
+    "claude_version": "2.1.220 (Claude Code)",
+    "xcode": "Xcode 26.5",
+    "macos": "26.5.2",
+    "node": "v24.1.0",
+    "docs_mcp": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)"
+  },
+  "baseline_sha": "ca6562379805473a5ebadaa2fb8d31acde40d0a7",
+  "mcp_preflight": {
+    "phase-1": {
+      "kind": "tools",
+      "result": "USED=mcp__expo__read_documentation",
+      "is_error": false,
+      "enforced": true
+    },
+    "phase-2": {
+      "kind": "tools",
+      "result": "USED=mcp__expo__read_documentation",
+      "is_error": false,
+      "enforced": true
+    },
+    "phase-3": {
+      "kind": "tools",
+      "result": "USED=mcp__expo__read_documentation",
+      "is_error": false,
+      "enforced": true
+    }
+  },
+  "phases": {
+    "1": {
+      "session_id": "87786b3d-8d48-4087-9107-0ee38607fc28",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 18,
+      "duration_ms": 129543,
+      "total_cost_usd": 0.513933,
+      "usage": {
+        "input_tokens": 36,
+        "cache_creation_input_tokens": 27567,
+        "cache_read_input_tokens": 777850,
+        "output_tokens": 7621,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 27567,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 326,
+            "cache_read_input_tokens": 56838,
+            "cache_creation_input_tokens": 145,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 145
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 131,
+      "end_sha": "685902af43880cb61529ff22dab2e4be5e94aaf4"
+    },
+    "2": {
+      "session_id": "fd4d67f5-d358-4c47-9fce-4b61bfa47e11",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 42,
+      "duration_ms": 440989,
+      "total_cost_usd": 1.7901818999999999,
+      "usage": {
+        "input_tokens": 64,
+        "cache_creation_input_tokens": 53088,
+        "cache_read_input_tokens": 1983387,
+        "output_tokens": 27453,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 53088,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 361,
+            "cache_read_input_tokens": 82172,
+            "cache_creation_input_tokens": 331,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 331
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 442,
+      "end_sha": "20b98096a69921f9d5b28c1ea2c0cf22a8b5b54b"
+    },
+    "3": {
+      "session_id": "aaab5d5b-bc58-4120-9982-f717e336d454",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 112,
+      "duration_ms": 1006512,
+      "total_cost_usd": 4.584217399999998,
+      "usage": {
+        "input_tokens": 178,
+        "cache_creation_input_tokens": 166331,
+        "cache_read_input_tokens": 9311828,
+        "output_tokens": 52758,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 166331,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 748,
+            "cache_read_input_tokens": 185331,
+            "cache_creation_input_tokens": 1449,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1449
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 1007,
+      "end_sha": "2ca1f17d8852bf9af646ac26865059916dc840ca"
+    }
+  },
+  "trial_branch": "trials/main-expo-7",
+  "finished_at": "2026-08-01T17:58:13Z"
+}
