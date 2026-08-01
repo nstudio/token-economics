@@ -126,8 +126,16 @@ and TestFlight/App Store/Play Store data. There is no documentation-only mode. A
    metric a real test rather than a rhetorical one.
 4. **Count `add_library` calls explicitly** in the tool histogram. The SPEC rule forbids capability wrappers;
    the tool remains available for legitimate installs, and any attempt to reach for a wrapper is data.
-5. **Record the OAuth dependency** — the Expo arm requires an Expo account and a network round-trip that the NS
-   arm does not.
+5. **Authenticate with a ROBOT token, not interactive OAuth.** The OAuth session expires roughly hourly, which
+   no multi-hour run can rely on, and a personal access token is rejected outright — `mcp.expo.dev` answers
+   `401 invalid_token: "The MCP server accepts a robot access token here; personal access tokens are not
+   supported."` Robot tokens are Expo's CI credential and do not expire on that cadence. The token lives in
+   `harness/.env.local` (gitignored, mode 600, written by `harness/set-expo-token.sh` with echo off); the
+   committed MCP config carries only the `EXPO_TOKEN` placeholder, so no secret reaches the repo or any trial
+   manifest. The docs MCP is re-verified before **every** phase, so a credential dying mid-trial is caught
+   rather than silently removing docs from one arm while the trial still reports green.
+6. **Record the auth dependency** — the Expo arm requires an Expo account, a robot user, and a network
+   round-trip that the NativeScript arm does not.
 
 ✅ **Pilot item #1 — RESOLVED (2026-07-31).** The Expo MCP is OAuth-gated; `claude mcp add` alone is not
 enough (it writes config, not a token). After `claude mcp add --scope user` + `claude mcp login expo`, a
