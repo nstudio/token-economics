@@ -571,3 +571,43 @@ float means the headline measures agent behaviour, not framework economics.
 
 The `results/ns-vs-expo/REPORT.md` write-up must lead with this and must not publish a
 raw token ratio as a framework comparison.
+
+---
+
+## 15. Does the confound invalidate the published v1.0 study? No. (2026-08-01)
+
+§14 showed that free-choice verification effort swamped the framework signal in this
+study. The obvious next question is whether the same flaw undermines the published
+NativeScript-vs-LynxJS result. It does not, and the reason is instructive.
+
+| | v1.0 — NS vs LynxJS | v1.1 — NS vs Expo |
+|---|---|---|
+| UI-verification calls, median | NS 31 · Lynx 35 — **comparable** | NS 26 · Expo 7.5 — **3.5× apart** |
+| r(verification, tokens), pooled | 0.47 | **0.89** |
+| Per-trial range overlap | **none** | substantial |
+| Framework gap | ~58,000 tokens (1.9×) | ~10,000 tokens |
+
+In v1.0 both arms verified at similar rates, so verification effort largely **cancels**
+between them. The 4-call median difference is worth roughly 6,000 tokens at the measured
+~1,500/call — under 10% of a 58,000-token gap that already had non-overlapping ranges.
+**The published 1.9× result stands.**
+
+In v1.1 the arms differed 3.5× in verification while the framework gap was only ~10,000
+tokens — small enough for verification to dominate it completely.
+
+### The actual lesson
+
+The free-verification design is not universally broken; it has **no resolving power when
+the frameworks are closely matched**. v1.0 survived because LynxJS's disadvantage was
+overwhelming enough to swamp the noise. NativeScript vs Expo is a close comparison, and
+the design could not resolve it.
+
+Two consequences for future studies:
+
+1. **Report the verification-effort asymmetry as a standard diagnostic**, alongside the
+   token medians, in every study. If the arms differ materially, the headline ratio is
+   not a framework result. This is cheap: `harness/analyze-confound.mjs` computes it from
+   archived transcripts with no new trials.
+2. **When a pilot suggests a close comparison, pin verification effort** — an identical
+   instruction in both arms' prompts — rather than letting agents choose. That is a new
+   spec version and a new study slug, not an amendment to a published one.

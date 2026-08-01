@@ -1,91 +1,116 @@
 #!/usr/bin/env node
-// Confound analysis for ns-vs-expo (PLAN-EXPO §14): does framework still predict
-// token cost once interactive UI verification is controlled for? Answer: no — the
-// sign flips. Kept in the harness so the correction is reproducible, not just asserted.
+// Verification-effort confound diagnostic (PLAN-EXPO §14, §15).
 //
-//   node analyze-confound.mjs
+//   node analyze-confound.mjs <study-slug>
+//
+// Agents choose how much to drive the simulator UI, and that choice costs tokens.
+// When a study's two arms verify at different rates, the headline token ratio
+// measures that choice rather than the frameworks. This reports the asymmetry and
+// asks whether framework still predicts cost once verification is controlled for.
+//
+// Run it on every study before publishing a ratio. In ns-vs-lynx the arms verified
+// comparably and the published result held; in ns-vs-expo they differed ~3.5x and the
+// framework coefficient changed sign.
 
-import fs from "node:fs";
-const ROOT = "/Users/nstudio/Documents/github/NathanWalker/token-economics";
-const s = JSON.parse(fs.readFileSync(`${ROOT}/results/ns-vs-expo/summary.json`, "utf8"));
-const R = s.rows.filter(r => r.set === "main" && r.phase !== "R");
-const tok = t => R.filter(r => r.trial === t).reduce((a, x) => a + x.output, 0);
-const taps = t => {
+import fs from 'node:fs';
+import path from 'node:path';
+import { ROOT, getStudy } from './lib/registry.mjs';
+
+const slug = process.argv[2];
+if (!slug) { console.error('usage: node analyze-confound.mjs <study-slug>'); process.exit(2); }
+const study = getStudy(slug);
+const dir = path.join(ROOT, study.resultsDir);
+const [ARM_A, ARM_B] = study.frameworks;
+
+const rows = JSON.parse(fs.readFileSync(path.join(dir, 'summary.json'), 'utf8'))
+  .rows.filter(r => r.set === 'main' && r.phase !== 'R');
+
+const tokens = t => rows.filter(r => r.trial === t).reduce((a, x) => a + x.output, 0);
+
+/** Bash calls that drive the simulator UI — the verification-effort proxy. */
+const UI_CALL = /idb ui tap|idb ui describe|simctl\s+(ui|launch)/;
+function uiCalls(trial) {
   let n = 0;
-  for (const ph of ["1", "2", "3"]) {
-    const f = `${ROOT}/results/ns-vs-expo/${t}/phase-${ph}.jsonl`;
+  for (const phase of study.phases.map(p => p.id)) {
+    const f = path.join(dir, trial, `phase-${phase}.jsonl`);
     if (!fs.existsSync(f)) continue;
-    for (const l of fs.readFileSync(f, "utf8").split("\n")) {
-      if (!l.trim()) continue;
-      let e; try { e = JSON.parse(l); } catch { continue; }
-      if (e.type !== "assistant") continue;
+    for (const line of fs.readFileSync(f, 'utf8').split('\n')) {
+      if (!line.trim()) continue;
+      let e; try { e = JSON.parse(line); } catch { continue; }
+      if (e.type !== 'assistant') continue;
       for (const b of (e.message?.content || []))
-        if (b.type === "tool_use" && b.name === "Bash" && /idb ui tap/.test(b.input?.command || "")) n++;
+        if (b.type === 'tool_use' && b.name === 'Bash' && UI_CALL.test(b.input?.command || '')) n++;
     }
   }
   return n;
-};
-const have = fw => [1,2,3,4,5,6,7,8].map(i => `main-${fw}-${i}`).filter(t => R.some(r => r.trial === t));
-const D = [
-  ...have("ns").map(t => ({ t, fw: 1, x: taps(t), y: tok(t) })),
-  ...have("expo").map(t => ({ t, fw: 0, x: taps(t), y: tok(t) })),
-];
+}
 
-// Solve OLS by Gauss-Jordan on the augmented normal equations.
+const trialsFor = fw => [...new Set(rows.filter(r => r.framework === fw).map(r => r.trial))].sort();
+const data = [ARM_A, ARM_B].flatMap((fw, i) =>
+  trialsFor(fw).map(t => ({ trial: t, arm: i, x: uiCalls(t), y: tokens(t) })));
+
+if (data.length < 6) { console.error('too few trials for this diagnostic'); process.exit(1); }
+
+const mean = a => a.reduce((p, q) => p + q, 0) / a.length;
+const sd = a => Math.sqrt(mean(a.map(x => (x - mean(a)) ** 2)));
+const corr = (A, B) => mean(A.map((_, i) => (A[i] - mean(A)) * (B[i] - mean(B)))) / (sd(A) * sd(B));
+const med = a => { const q = [...a].sort((p, r) => p - r); return q.length % 2 ? q[q.length >> 1] : (q[q.length / 2 - 1] + q[q.length / 2]) / 2; };
+
+/** OLS with standard errors, via Gauss-Jordan on the normal equations. */
 function ols(X, Y) {
   const k = X[0].length, n = X.length;
-  const A = Array.from({ length: k }, (_, i) =>
+  const solve = (aug, cols) => {
+    for (let c = 0; c < k; c++) {
+      let p = c;
+      for (let r = c + 1; r < k; r++) if (Math.abs(aug[r][c]) > Math.abs(aug[p][c])) p = r;
+      [aug[c], aug[p]] = [aug[p], aug[c]];
+      const piv = aug[c][c];
+      for (let j = 0; j < cols; j++) aug[c][j] /= piv;
+      for (let r = 0; r < k; r++) {
+        if (r === c) continue;
+        const f = aug[r][c];
+        for (let j = 0; j < cols; j++) aug[r][j] -= f * aug[c][j];
+      }
+    }
+    return aug;
+  };
+  const A = solve(Array.from({ length: k }, (_, i) =>
     Array.from({ length: k + 1 }, (_, j) =>
-      j < k ? X.reduce((a, r, q) => a + r[i] * r[j], 0)
-            : X.reduce((a, r, q) => a + r[i] * Y[q], 0)));
-  for (let c = 0; c < k; c++) {
-    let p = c;
-    for (let r = c + 1; r < k; r++) if (Math.abs(A[r][c]) > Math.abs(A[p][c])) p = r;
-    [A[c], A[p]] = [A[p], A[c]];
-    const piv = A[c][c];
-    for (let j = c; j <= k; j++) A[c][j] /= piv;
-    for (let r = 0; r < k; r++) {
-      if (r === c) continue;
-      const f = A[r][c];
-      for (let j = c; j <= k; j++) A[r][j] -= f * A[c][j];
-    }
-  }
+      j < k ? X.reduce((a, r) => a + r[i] * r[j], 0)
+            : X.reduce((a, r, q) => a + r[i] * Y[q], 0))), k + 1);
   const b = A.map(r => r[k]);
-  // (X'X)^-1 for standard errors
-  const M = Array.from({ length: k }, (_, i) =>
+  const M = solve(Array.from({ length: k }, (_, i) =>
     Array.from({ length: 2 * k }, (_, j) =>
-      j < k ? X.reduce((a, r) => a + r[i] * r[j], 0) : (i === j - k ? 1 : 0)));
-  for (let c = 0; c < k; c++) {
-    let p = c;
-    for (let r = c + 1; r < k; r++) if (Math.abs(M[r][c]) > Math.abs(M[p][c])) p = r;
-    [M[c], M[p]] = [M[p], M[c]];
-    const piv = M[c][c];
-    for (let j = 0; j < 2 * k; j++) M[c][j] /= piv;
-    for (let r = 0; r < k; r++) {
-      if (r === c) continue;
-      const f = M[r][c];
-      for (let j = 0; j < 2 * k; j++) M[r][j] -= f * M[c][j];
-    }
-  }
+      j < k ? X.reduce((a, r) => a + r[i] * r[j], 0) : (i === j - k ? 1 : 0))), 2 * k);
   const inv = M.map(r => r.slice(k));
   const pred = X.map(r => r.reduce((a, v, i) => a + v * b[i], 0));
   const sse = Y.reduce((a, y, i) => a + (y - pred[i]) ** 2, 0);
   const sigma2 = sse / (n - k);
-  const se = b.map((_, i) => Math.sqrt(sigma2 * inv[i][i]));
-  const my = Y.reduce((a, y) => a + y, 0) / n;
-  const sst = Y.reduce((a, y) => a + (y - my) ** 2, 0);
-  return { b, se, t: b.map((v, i) => v / se[i]), r2: 1 - sse / sst, n, k };
+  const my = mean(Y), sst = Y.reduce((a, y) => a + (y - my) ** 2, 0);
+  return {
+    b, t: b.map((v, i) => v / Math.sqrt(sigma2 * inv[i][i])),
+    r2: 1 - sse / sst, df: n - k,
+  };
 }
 
-console.log(`n = ${D.length} trials (${have("ns").length} NS, ${have("expo").length} Expo)\n`);
+const A = data.filter(d => d.arm === 0), B = data.filter(d => d.arm === 1);
+console.log(`\n═══ verification-effort confound — ${study.title} ═══\n`);
+console.log(`  ${ARM_A.padEnd(6)} n=${A.length}  UI calls median ${String(med(A.map(d => d.x))).padStart(3)}  tokens median ${med(A.map(d => d.y))}`);
+console.log(`  ${ARM_B.padEnd(6)} n=${B.length}  UI calls median ${String(med(B.map(d => d.x))).padStart(3)}  tokens median ${med(B.map(d => d.y))}`);
 
-const m1 = ols(D.map(d => [1, d.fw]), D.map(d => d.y));
-console.log("Model 1 — tokens ~ framework alone");
-console.log(`  framework (NS vs Expo): ${m1.b[1].toFixed(0).padStart(8)} tokens   t=${m1.t[1].toFixed(2)}   R2=${m1.r2.toFixed(2)}`);
+const ratio = med(A.map(d => d.x)) / Math.max(med(B.map(d => d.x)), 0.5);
+const asym = ratio > 1.5 || ratio < 0.67;
+console.log(`\n  verification asymmetry ${ratio.toFixed(1)}x — ${asym ? 'HEADLINE RATIO IS NOT A FRAMEWORK RESULT' : 'arms verify comparably, ratio is interpretable'}`);
+console.log(`  r(UI calls, tokens) pooled = ${corr(data.map(d => d.x), data.map(d => d.y)).toFixed(2)}`);
 
-const m2 = ols(D.map(d => [1, d.x, d.fw]), D.map(d => d.y));
-const crit = 2.16; // t(0.975, df≈13)
-console.log("\nModel 2 — tokens ~ verification taps + framework");
-console.log(`  taps:                   ${m2.b[1].toFixed(0).padStart(8)} tokens/tap  t=${m2.t[1].toFixed(2)}  ${Math.abs(m2.t[1]) > crit ? "SIGNIFICANT" : "n.s."}`);
-console.log(`  framework (NS vs Expo): ${m2.b[2].toFixed(0).padStart(8)} tokens      t=${m2.t[2].toFixed(2)}  ${Math.abs(m2.t[2]) > crit ? "SIGNIFICANT" : "NOT significant"}`);
-console.log(`  R2 = ${m2.r2.toFixed(2)}   (|t| > ~${crit} for p<0.05, df=${m2.n - m2.k})`);
+const m1 = ols(data.map(d => [1, d.arm]), data.map(d => d.y));
+const m2 = ols(data.map(d => [1, d.x, d.arm]), data.map(d => d.y));
+const crit = 2.16;
+console.log(`\n  model 1  tokens ~ arm       : arm ${m1.b[1].toFixed(0).padStart(8)}   t=${m1.t[1].toFixed(2).padStart(6)}   R2=${m1.r2.toFixed(2)}`);
+console.log(`  model 2  tokens ~ UI + arm  : UI  ${m2.b[1].toFixed(0).padStart(8)}/c t=${m2.t[1].toFixed(2).padStart(6)}   ${Math.abs(m2.t[1]) > crit ? 'sig' : 'n.s.'}`);
+console.log(`                               arm ${m2.b[2].toFixed(0).padStart(8)}   t=${m2.t[2].toFixed(2).padStart(6)}   ${Math.abs(m2.t[2]) > crit ? 'sig' : 'n.s.'}   R2=${m2.r2.toFixed(2)}`);
+if (Math.sign(m1.b[1]) !== Math.sign(m2.b[2])) {
+  console.log(`\n  The arm coefficient CHANGES SIGN once verification is controlled for:`);
+  console.log(`  the raw comparison reports the opposite of the controlled one.`);
+}
+console.log();

@@ -41,6 +41,12 @@
       "result": "USED=mcp__nativescript-docs__search_docs",
       "is_error": false,
       "enforced": true
+    },
+    "phase-3": {
+      "kind": "tools",
+      "result": "USED=mcp__nativescript-docs__search_docs",
+      "is_error": false,
+      "enforced": true
     }
   },
   "phases": {
@@ -84,6 +90,47 @@
       "build_pass": true,
       "wall_seconds": 216,
       "end_sha": "96a45904b5bfb38d768b8b19ce92ba9b51edec9e"
+    },
+    "2": {
+      "session_id": "21864457-e8f4-4673-a902-5d36d11a4b43",
+      "exit_code": 0,
+      "is_error": false,
+      "num_turns": 125,
+      "duration_ms": 839330,
+      "total_cost_usd": 4.893774400000002,
+      "usage": {
+        "input_tokens": 205,
+        "cache_creation_input_tokens": 136958,
+        "cache_read_input_tokens": 10967258,
+        "output_tokens": 52032,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 136958,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 594,
+            "cache_read_input_tokens": 165926,
+            "cache_creation_input_tokens": 437,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 437
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "build_pass": true,
+      "wall_seconds": 840,
+      "end_sha": "710d4590e5aca207d9b9655793166045e86bbd72"
     }
   }
 }
