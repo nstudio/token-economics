@@ -152,6 +152,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
           STUDY_MAX_TURNS: String(r.study.maxTurns),
           PHASE_IDS: r.study.phases.map(p => p.id).join(' '),
           REMEDIATION_PROMPT: path.join(HARNESS, r.study.remediationPrompt),
+          PROMPT_SUFFIX: r.study.promptSuffix ?? "",
           FRAMEWORK: r.framework.id,
           FRAMEWORK_LABEL: r.framework.label,
           DOCS_MCP_NAME: r.framework.docsMcpName,

@@ -1,0 +1,22 @@
+{
+  "slug": "ns-vs-expo-buildonly",
+  "title": "NativeScript vs Expo — build-verified condition",
+  "specVersion": "v1.1.0",
+  "specDir": "spec/v1.1",
+  "baselineTag": "benchmark-baseline-v1.1",
+  "frameworks": ["ns", "expo"],
+  "resultsDir": "results/ns-vs-expo-buildonly",
+  "model": "claude-sonnet-5",
+  "maxTurns": 160,
+  "promptSuffix": "Do not launch, install, or drive the app on a simulator, and do not use UI automation tools (idb, simctl, xcrun simctl, or similar). The build command above is your only verification. Complete the task by reading the spec, writing the code, and making the build pass.",
+  "phases": [
+    { "id": "1", "label": "App shell", "prompt": "prompts/phase-1.md" },
+    { "id": "2", "label": "Health (HealthKit)", "prompt": "prompts/phase-2.md" },
+    { "id": "3", "label": "Transcribe (Speech)", "prompt": "prompts/phase-3.md" }
+  ],
+  "remediationPrompt": "prompts/remediate.md",
+  "trialSets": { "main": "^main-" },
+  "medianSet": "main",
+  "frozen": false,
+  "notes": "Controlled companion to ns-vs-expo (PLAN-EXPO §14). In the free-choice study, interactive UI verification explained 84% of token variance against framework's 6%, and the arms verified at asymmetric rates (2.2x), so the headline ratio measured agent behaviour rather than framework economics. Here verification is pinned OFF identically on both arms, isolating build-verified implementation cost. Compliance is objectively checkable from the transcripts: a compliant trial makes zero idb/simctl calls. Same spec, baseline, model, and turn cap as the free-choice study, so the two are directly comparable."
+}

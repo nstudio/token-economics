@@ -70,6 +70,9 @@ render_prompt() { # render_prompt <template> <out> ; uses FRAMEWORK_LABEL, DOCS_
     let t = fs.readFileSync(tpl, "utf8");
     for (const k of ["FRAMEWORK_LABEL", "DOCS_MCP_NAME", "BUILD_GATE", "FAILURES"])
       t = t.replaceAll("{{" + k + "}}", process.env[k] || "");
+    // Per-study condition text, appended identically to both arms. Empty for
+    // studies that do not declare one, so their prompts stay byte-identical.
+    if (process.env.PROMPT_SUFFIX) t = t.trimEnd() + "\n\n" + process.env.PROMPT_SUFFIX + "\n";
     fs.writeFileSync(out, t);
   ' "$1" "$2"
 }
