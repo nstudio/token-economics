@@ -8,6 +8,9 @@ main-expo-2,expo,claude-sonnet-5,3,true,false,phases-complete,pending,76,26052,8
 main-expo-3,expo,claude-sonnet-5,1,true,false,phases-complete,pending,42,14937,40500,1139074,,1,626,6,4,11,0,0,0,4,4,246,0,ns-vs-expo,main,v1.1.0,0,0,0,34711,true
 main-expo-3,expo,claude-sonnet-5,2,true,false,phases-complete,pending,77,29729,64807,2820744,1.6820071999999997,51,376,16,7,19,2,0,0,5,9,184,167,ns-vs-expo,main,v1.1.0,134,33,0,34728,false
 main-expo-3,expo,claude-sonnet-5,3,true,false,phases-complete,pending,42,19172,63983,1253248,1.0483673999999998,35,230,13,8,11,1,0,0,1,9,152,125,ns-vs-expo,main,v1.1.0,96,29,0,34733,false
+main-expo-4,expo,claude-sonnet-5,1,true,false,phases-complete,pending,44,9948,36977,1092826,,3,364,7,5,10,0,0,0,2,7,249,0,ns-vs-expo,main,v1.1.0,0,0,275,34712,true
+main-expo-4,expo,claude-sonnet-5,2,true,false,phases-complete,pending,165,39872,129356,8565713,3.9452009000000006,114,728,32,6,52,1,0,0,2,9,181,138,ns-vs-expo,main,v1.1.0,106,32,0,34729,false
+main-expo-4,expo,claude-sonnet-5,3,true,false,phases-complete,pending,138,44368,130970,6741172,3.4748946,100,743,28,13,45,0,0,0,1,9,140,158,ns-vs-expo,main,v1.1.0,98,60,0,34735,false
 main-ns-1,ns,claude-sonnet-5,1,true,false,phases-complete,pending,69,10674,45186,1850283,0.9872489,47,187,14,5,18,0,0,0,1,3,57,0,ns-vs-expo,main,v1.1.0,0,0,0,34517,false
 main-ns-1,ns,claude-sonnet-5,2,true,false,phases-complete,pending,174,42884,138507,9328654,4.274174199999999,114,802,24,6,59,8,0,0,1,4,157,14,ns-vs-expo,main,v1.1.0,0,14,0,34545,false
 main-ns-1,ns,claude-sonnet-5,3,true,false,phases-complete,pending,40,12523,41856,1130228,0.7789164000000001,30,218,7,2,15,4,0,0,1,3,100,2,ns-vs-expo,main,v1.1.0,0,2,0,34611,false
@@ -17,6 +20,9 @@ main-ns-2,ns,claude-sonnet-5,3,true,false,phases-complete,pending,2685,50321,220
 main-ns-3,ns,claude-sonnet-5,1,true,false,phases-complete,pending,596,17157,60063,2494782,1.3686916,53,391,12,3,22,7,0,0,1,3,34,0,ns-vs-expo,main,v1.1.0,0,0,0,34573,false
 main-ns-3,ns,claude-sonnet-5,2,true,false,phases-complete,pending,679,52071,174407,13556072,5.897129599999998,156,1072,25,6,77,12,0,0,18,5,161,13,ns-vs-expo,main,v1.1.0,0,13,0,34601,false
 main-ns-3,ns,claude-sonnet-5,3,true,false,phases-complete,pending,250,42447,153206,13304061,5.5486663,149,868,32,3,84,2,0,0,4,3,112,2,ns-vs-expo,main,v1.1.0,0,2,0,34611,false
+main-ns-4,ns,claude-sonnet-5,1,true,false,phases-complete,pending,82,16531,63597,2672068,1.4321444,56,273,14,3,23,8,0,0,0,3,39,0,ns-vs-expo,main,v1.1.0,0,0,0,34517,false
+main-ns-4,ns,claude-sonnet-5,2,true,false,phases-complete,pending,216,47201,164541,13398185,6.317482550000002,137,1002,30,6,71,3,0,0,4,5,232,12,ns-vs-expo,main,v1.1.0,0,12,0,34599,false
+main-ns-4,ns,claude-sonnet-5,3,true,false,phases-complete,pending,395,46658,173711,13070022,5.7112316000000005,139,1012,33,8,67,6,2,0,3,5,171,2,ns-vs-expo,main,v1.1.0,0,2,0,34610,false
 pilot-expo-1,expo,claude-sonnet-5,1,true,false,phases-complete,pending,89,23113,74470,3320017,1.7905401000000003,62,478,16,6,32,0,0,0,1,14,118,0,ns-vs-expo,pilot,v1.1.0,0,0,0,34740,false
 pilot-expo-1,expo,claude-sonnet-5,2,true,false,phases-complete,pending,98,26692,87952,3697905,2.0385435000000007,63,442,18,10,31,2,0,0,1,9,174,137,ns-vs-expo,pilot,v1.1.0,104,33,0,34766,false
 pilot-expo-1,expo,claude-sonnet-5,3,true,false,phases-complete,pending,304,51969,298206,19357657,8.377759099999999,169,1893,22,11,118,0,0,0,0,10,148,118,ns-vs-expo,pilot,v1.1.0,91,27,0,34973,false

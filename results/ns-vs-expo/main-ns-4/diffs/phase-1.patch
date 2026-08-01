@@ -1,0 +1,75 @@
+diff --git a/app/components/Health.vue b/app/components/Health.vue
+new file mode 100644
+index 0000000..1856493
+--- /dev/null
++++ b/app/components/Health.vue
+@@ -0,0 +1,15 @@
++<template>
++    <Page>
++        <ActionBar title="Health" />
++
++        <StackLayout class="p-6">
++            <Label text="Health access: not requested" class="text-base text-gray-600" textWrap="true" />
++
++            <Button text="Request Access" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-6" />
++            <Button text="Log 500 Steps" :isEnabled="false" class="bg-gray-300 text-gray-500 text-lg rounded-lg p-4 mt-3" />
++
++            <Label text="Last 7 Days" class="text-lg font-bold mt-10" />
++            <Label text="No data yet" class="text-gray-400 text-center mt-4" textWrap="true" />
++        </StackLayout>
++    </Page>
++</template>
+diff --git a/app/components/Home.vue b/app/components/Home.vue
+index 9cd4386..9aa1961 100644
+--- a/app/components/Home.vue
++++ b/app/components/Home.vue
+@@ -1,19 +1,19 @@
+ <template>
+     <Frame>
+-        <Page>
+-            <ActionBar>
+-                <Label text="Home"/>
+-            </ActionBar>
++        <Page actionBarHidden="true">
++            <StackLayout class="p-8" verticalAlignment="middle">
++                <Label text="Native Bench" class="text-4xl font-bold text-center" textWrap="true" />
++                <Label text="Token economics benchmark" class="text-base text-gray-500 text-center mt-2" textWrap="true" />
+ 
+-            <GridLayout>
+-                <Label class="text-xl align-middle text-center text-gray-500" :text="message" />
+-            </GridLayout>
++                <Button text="Health" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-12" @tap="$navigateTo(Health)" />
++                <Button text="Transcribe" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-4" @tap="$navigateTo(Transcribe)" />
++            </StackLayout>
+         </Page>
+     </Frame>
+ </template>
+ 
+ <script setup lang="ts">
+-  import { computed } from 'nativescript-vue'
+-
+-  const message = computed(() => "Blank {N}-Vue app");
++  import { $navigateTo } from 'nativescript-vue'
++  import Health from './Health.vue'
++  import Transcribe from './Transcribe.vue'
+ </script>
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+new file mode 100644
+index 0000000..3e80333
+--- /dev/null
++++ b/app/components/Transcribe.vue
+@@ -0,0 +1,14 @@
++<template>
++    <Page>
++        <ActionBar title="Transcribe" />
++
++        <StackLayout class="p-6">
++            <Label text="Speech access: not requested" class="text-base text-gray-600" textWrap="true" />
++
++            <Button text="Request Access" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-6" />
++            <Button text="Transcribe Sample" :isEnabled="false" class="bg-gray-300 text-gray-500 text-lg rounded-lg p-4 mt-3" />
++
++            <Label text="No transcript yet" class="text-gray-400 text-center mt-10" textWrap="true" />
++        </StackLayout>
++    </Page>
++</template>

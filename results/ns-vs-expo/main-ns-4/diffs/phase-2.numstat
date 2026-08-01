@@ -1,0 +1,5 @@
+4	0	App_Resources/iOS/Info.plist
+8	0	App_Resources/iOS/app.entitlements
+111	5	app/components/Health.vue
+120	0	app/services/health.ts
+1	0	types/references.d.ts

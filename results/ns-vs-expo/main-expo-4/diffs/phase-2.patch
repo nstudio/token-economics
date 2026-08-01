@@ -1,0 +1,408 @@
+diff --git a/app.json b/app.json
+index d33463e..aa6e905 100644
+--- a/app.json
++++ b/app.json
+@@ -8,7 +8,14 @@
+     "userInterfaceStyle": "light",
+     "ios": {
+       "supportsTablet": true,
+-      "bundleIdentifier": "com.nstudio.expobenchmark"
++      "bundleIdentifier": "com.nstudio.expobenchmark",
++      "infoPlist": {
++        "NSHealthShareUsageDescription": "Native Bench reads your step count to show your recent activity.",
++        "NSHealthUpdateUsageDescription": "Native Bench saves the steps you log to the Health store."
++      },
++      "entitlements": {
++        "com.apple.developer.healthkit": true
++      }
+     },
+     "android": {
+       "adaptiveIcon": {
+diff --git a/modules/expo-health-kit/LICENSE b/modules/expo-health-kit/LICENSE
+new file mode 100644
+index 0000000..30b20e3
+--- /dev/null
++++ b/modules/expo-health-kit/LICENSE
+@@ -0,0 +1,21 @@
++The MIT License (MIT)
++
++Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
+diff --git a/modules/expo-health-kit/expo-module.config.json b/modules/expo-health-kit/expo-module.config.json
+new file mode 100644
+index 0000000..b5cd561
+--- /dev/null
++++ b/modules/expo-health-kit/expo-module.config.json
+@@ -0,0 +1,6 @@
++{
++  "platforms": ["apple"],
++  "apple": {
++    "modules": ["ExpoHealthKitModule"]
++  }
++}
+diff --git a/modules/expo-health-kit/index.ts b/modules/expo-health-kit/index.ts
+new file mode 100644
+index 0000000..ae712ce
+--- /dev/null
++++ b/modules/expo-health-kit/index.ts
+@@ -0,0 +1,4 @@
++// Re-export the native module. On web, it will be resolved to ExpoHealthKitModule.web.ts
++// and on native platforms to ExpoHealthKitModule.ts
++export { default } from './src/ExpoHealthKitModule';
++export * from './src/ExpoHealthKit.types';
+diff --git a/modules/expo-health-kit/ios/ExpoHealthKit.podspec b/modules/expo-health-kit/ios/ExpoHealthKit.podspec
+new file mode 100644
+index 0000000..9ffd185
+--- /dev/null
++++ b/modules/expo-health-kit/ios/ExpoHealthKit.podspec
+@@ -0,0 +1,24 @@
++Pod::Spec.new do |s|
++  s.name           = 'ExpoHealthKit'
++  s.version        = '1.0.0'
++  s.summary        = 'A sample project summary'
++  s.description    = 'A sample project description'
++  s.author         = ''
++  s.homepage       = 'https://docs.expo.dev/modules/'
++  s.platforms      = {
++    :ios => '16.4',
++    :tvos => '16.4'
++  }
++  s.source         = { git: '' }
++  s.static_framework = true
++
++  s.dependency 'ExpoModulesCore'
++  s.frameworks = 'HealthKit'
++
++  # Swift/Objective-C compatibility
++  s.pod_target_xcconfig = {
++    'DEFINES_MODULE' => 'YES',
++  }
++
++  s.source_files = "**/*.{h,m,mm,swift,hpp,cpp}"
++end
+diff --git a/modules/expo-health-kit/ios/ExpoHealthKitModule.swift b/modules/expo-health-kit/ios/ExpoHealthKitModule.swift
+new file mode 100644
+index 0000000..16a3abd
+--- /dev/null
++++ b/modules/expo-health-kit/ios/ExpoHealthKitModule.swift
+@@ -0,0 +1,106 @@
++import ExpoModulesCore
++import HealthKit
++
++enum ExpoHealthKitError: Error, LocalizedError {
++  case unavailable
++
++  var errorDescription: String? {
++    switch self {
++    case .unavailable:
++      return "Health data is not available on this device."
++    }
++  }
++}
++
++public class ExpoHealthKitModule: Module {
++  private let healthStore = HKHealthStore()
++  private let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
++
++  public func definition() -> ModuleDefinition {
++    Name("ExpoHealthKit")
++
++    Function("getAuthorizationStatus") { () -> String in
++      self.authorizationStatusString()
++    }
++
++    AsyncFunction("requestAuthorizationAsync") { () -> String in
++      guard HKHealthStore.isHealthDataAvailable() else {
++        throw ExpoHealthKitError.unavailable
++      }
++      try await self.healthStore.requestAuthorization(toShare: [self.stepType], read: [self.stepType])
++      return self.authorizationStatusString()
++    }
++
++    AsyncFunction("logStepsAsync") { (steps: Double) in
++      let now = Date()
++      let quantity = HKQuantity(unit: .count(), doubleValue: steps)
++      let sample = HKQuantitySample(type: self.stepType, quantity: quantity, start: now, end: now)
++      try await self.healthStore.save(sample)
++    }
++
++    AsyncFunction("getDailyStepTotalsAsync") { (days: Int) -> [[String: Any]] in
++      try await self.dailyStepTotals(days: days)
++    }
++  }
++
++  private func authorizationStatusString() -> String {
++    switch healthStore.authorizationStatus(for: stepType) {
++    case .notDetermined:
++      return "notDetermined"
++    case .sharingDenied:
++      return "denied"
++    case .sharingAuthorized:
++      return "authorized"
++    @unknown default:
++      return "notDetermined"
++    }
++  }
++
++  private func dailyStepTotals(days: Int) async throws -> [[String: Any]] {
++    let calendar = Calendar.current
++    let now = Date()
++    let startOfToday = calendar.startOfDay(for: now)
++    guard let startDay = calendar.date(byAdding: .day, value: -(days - 1), to: startOfToday) else {
++      return []
++    }
++
++    let dayFormatter = DateFormatter()
++    dayFormatter.dateFormat = "yyyy-MM-dd"
++    dayFormatter.timeZone = calendar.timeZone
++    dayFormatter.locale = Locale(identifier: "en_US_POSIX")
++
++    var intervalComponents = DateComponents()
++    intervalComponents.day = 1
++
++    let predicate = HKQuery.predicateForSamples(withStart: startDay, end: now, options: .strictStartDate)
++
++    return try await withCheckedThrowingContinuation { continuation in
++      let query = HKStatisticsCollectionQuery(
++        quantityType: stepType,
++        quantitySamplePredicate: predicate,
++        options: .cumulativeSum,
++        anchorDate: startOfToday,
++        intervalComponents: intervalComponents
++      )
++
++      query.initialResultsHandler = { _, collection, error in
++        if let error = error {
++          continuation.resume(throwing: error)
++          return
++        }
++
++        var results: [[String: Any]] = []
++        collection?.enumerateStatistics(from: startDay, to: now) { statistics, _ in
++          let steps = statistics.sumQuantity()?.doubleValue(for: .count()) ?? 0
++          results.append([
++            "dayStart": dayFormatter.string(from: statistics.startDate),
++            "steps": steps,
++          ])
++        }
++        continuation.resume(returning: results)
++      }
++
++      healthStore.execute(query)
++    }
++  }
++}
+diff --git a/modules/expo-health-kit/src/ExpoHealthKit.types.ts b/modules/expo-health-kit/src/ExpoHealthKit.types.ts
+new file mode 100644
+index 0000000..474c5c1
+--- /dev/null
++++ b/modules/expo-health-kit/src/ExpoHealthKit.types.ts
+@@ -0,0 +1,7 @@
++export type HealthAuthorizationStatus = 'notDetermined' | 'authorized' | 'denied';
++
++export type DailyStepTotal = {
++  /** Local calendar day, formatted `yyyy-MM-dd`. */
++  dayStart: string;
++  steps: number;
++};
+diff --git a/modules/expo-health-kit/src/ExpoHealthKitModule.ts b/modules/expo-health-kit/src/ExpoHealthKitModule.ts
+new file mode 100644
+index 0000000..7e4da57
+--- /dev/null
++++ b/modules/expo-health-kit/src/ExpoHealthKitModule.ts
+@@ -0,0 +1,12 @@
++import { NativeModule, requireNativeModule } from 'expo';
++
++import type { DailyStepTotal, HealthAuthorizationStatus } from './ExpoHealthKit.types';
++
++declare class ExpoHealthKitModule extends NativeModule<{}> {
++  getAuthorizationStatus(): HealthAuthorizationStatus;
++  requestAuthorizationAsync(): Promise<HealthAuthorizationStatus>;
++  logStepsAsync(steps: number): Promise<void>;
++  getDailyStepTotalsAsync(days: number): Promise<DailyStepTotal[]>;
++}
++
++export default requireNativeModule<ExpoHealthKitModule>('ExpoHealthKit');
+diff --git a/screens/HealthScreen.tsx b/screens/HealthScreen.tsx
+index f40f828..e61e37c 100644
+--- a/screens/HealthScreen.tsx
++++ b/screens/HealthScreen.tsx
+@@ -1,25 +1,140 @@
++import { useCallback, useState } from 'react';
+ import { Pressable, StyleSheet, Text, View } from 'react-native';
++import { useFocusEffect } from '@react-navigation/native';
++
++import ExpoHealthKit from '../modules/expo-health-kit';
++import type {
++  DailyStepTotal,
++  HealthAuthorizationStatus,
++} from '../modules/expo-health-kit';
++
++const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
++const MONTHS = [
++  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
++  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
++];
++
++function formatDayLabel(dayStart: string): string {
++  const [year, month, day] = dayStart.split('-').map(Number);
++  const date = new Date(year, month - 1, day);
++  return `${WEEKDAYS[date.getDay()]} ${MONTHS[date.getMonth()]} ${date.getDate()}`;
++}
++
++function statusLabel(status: HealthAuthorizationStatus): string {
++  switch (status) {
++    case 'authorized':
++      return 'Health access: granted';
++    case 'denied':
++      return 'Health access: denied';
++    default:
++      return 'Health access: not requested';
++  }
++}
++
++function errorMessage(e: unknown): string {
++  return e instanceof Error ? e.message : String(e);
++}
+ 
+ export default function HealthScreen() {
++  const [authStatus, setAuthStatus] = useState<HealthAuthorizationStatus>('notDetermined');
++  const [error, setError] = useState<string | null>(null);
++  const [days, setDays] = useState<DailyStepTotal[] | null>(null);
++
++  const loadDays = useCallback(async () => {
++    try {
++      const totals = await ExpoHealthKit.getDailyStepTotalsAsync(7);
++      setDays(totals);
++    } catch (e) {
++      setError(errorMessage(e));
++    }
++  }, []);
++
++  useFocusEffect(
++    useCallback(() => {
++      const status = ExpoHealthKit.getAuthorizationStatus();
++      setAuthStatus(status);
++      setError(null);
++      if (status === 'authorized') {
++        loadDays();
++      }
++    }, [loadDays])
++  );
++
++  const handleRequestAccess = async () => {
++    try {
++      const status = await ExpoHealthKit.requestAuthorizationAsync();
++      setAuthStatus(status);
++      setError(null);
++      if (status === 'authorized') {
++        await loadDays();
++      }
++    } catch (e) {
++      setError(errorMessage(e));
++    }
++  };
++
++  const handleLogSteps = async () => {
++    try {
++      await ExpoHealthKit.logStepsAsync(500);
++      setError(null);
++      await loadDays();
++    } catch (e) {
++      setError(errorMessage(e));
++    }
++  };
++
++  const orderedDays = days ? [...days].reverse() : [];
++
+   return (
+     <View style={styles.container}>
+-      <Text style={styles.status}>Health access: not requested</Text>
++      <Text style={styles.status}>{error ?? statusLabel(authStatus)}</Text>
+ 
+       <View style={styles.buttons}>
+-        <Pressable style={styles.button}>
++        <Pressable style={styles.button} onPress={handleRequestAccess}>
+           <Text style={styles.buttonText}>Request Access</Text>
+         </Pressable>
+-        <Pressable style={[styles.button, styles.buttonDisabled]} disabled>
+-          <Text style={[styles.buttonText, styles.buttonTextDisabled]}>
++        <Pressable
++          style={[styles.button, authStatus !== 'authorized' && styles.buttonDisabled]}
++          disabled={authStatus !== 'authorized'}
++          onPress={handleLogSteps}
++        >
++          <Text
++            style={[
++              styles.buttonText,
++              authStatus !== 'authorized' && styles.buttonTextDisabled,
++            ]}
++          >
+             Log 500 Steps
+           </Text>
+         </Pressable>
+       </View>
+ 
+       <Text style={styles.sectionHeader}>Last 7 Days</Text>
+-      <View style={styles.emptyState}>
+-        <Text style={styles.emptyStateText}>No data yet</Text>
+-      </View>
++      {authStatus === 'denied' ? (
++        <View style={styles.emptyState}>
++          <Text style={styles.emptyStateText}>Health access needed</Text>
++        </View>
++      ) : authStatus === 'authorized' && orderedDays.length > 0 ? (
++        <View>
++          {orderedDays.map((d, index) => {
++            const isToday = index === 0;
++            const label = formatDayLabel(d.dayStart);
++            const stepsText = d.steps.toLocaleString('en-US');
++            return (
++              <Text
++                key={d.dayStart}
++                style={[styles.dayRow, isToday && styles.dayRowToday]}
++              >
++                {label} — {stepsText} steps{isToday ? ' (today)' : ''}
++              </Text>
++            );
++          })}
++        </View>
++      ) : (
++        <View style={styles.emptyState}>
++          <Text style={styles.emptyStateText}>No data yet</Text>
++        </View>
++      )}
+     </View>
+   );
+ }
+@@ -70,4 +185,13 @@ const styles = StyleSheet.create({
+     fontSize: 15,
+     color: '#8e8e93',
+   },
++  dayRow: {
++    fontSize: 16,
++    color: '#1c1c1e',
++    paddingVertical: 8,
++  },
++  dayRowToday: {
++    fontWeight: '700',
++    color: '#007aff',
++  },
+ });

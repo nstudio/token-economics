@@ -1,0 +1,229 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index 9624955..4bf3811 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -26,6 +26,8 @@
+ 	<string>Native Bench reads step count data to display your recent activity.</string>
+ 	<key>NSHealthUpdateUsageDescription</key>
+ 	<string>Native Bench writes step count data that you log in the app.</string>
++	<key>NSSpeechRecognitionUsageDescription</key>
++	<string>Native Bench uses speech recognition to transcribe the bundled sample audio.</string>
+ 	<key>UILaunchStoryboardName</key>
+ 	<string>LaunchScreen</string>
+ 	<key>UIRequiresFullScreen</key>
+diff --git a/app/components/Transcribe.vue b/app/components/Transcribe.vue
+index 3e80333..beae982 100644
+--- a/app/components/Transcribe.vue
++++ b/app/components/Transcribe.vue
+@@ -1,14 +1,94 @@
+ <template>
+-    <Page>
++    <Page @navigatedTo="onNavigatedTo">
+         <ActionBar title="Transcribe" />
+ 
+         <StackLayout class="p-6">
+-            <Label text="Speech access: not requested" class="text-base text-gray-600" textWrap="true" />
++            <Label :text="statusMessage" class="text-base text-gray-600" textWrap="true" />
+ 
+-            <Button text="Request Access" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-6" />
+-            <Button text="Transcribe Sample" :isEnabled="false" class="bg-gray-300 text-gray-500 text-lg rounded-lg p-4 mt-3" />
++            <Button text="Request Access" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-6" @tap="onRequestAccess" />
++            <Button
++                text="Transcribe Sample"
++                :isEnabled="canTranscribe"
++                :class="canTranscribe ? 'bg-blue-500 text-white text-lg rounded-lg p-4 mt-3' : 'bg-gray-300 text-gray-500 text-lg rounded-lg p-4 mt-3'"
++                @tap="onTranscribe"
++            />
+ 
+-            <Label text="No transcript yet" class="text-gray-400 text-center mt-10" textWrap="true" />
++            <Label
++                :text="transcript.length ? transcript : 'No transcript yet'"
++                :class="transcript.length ? 'text-base text-gray-800 mt-10' : 'text-gray-400 text-center mt-10'"
++                textWrap="true"
++            />
++            <Label v-if="completedIn" :text="`Completed in ${completedIn} s`" class="text-sm text-gray-500 mt-2" textWrap="true" />
+         </StackLayout>
+     </Page>
+ </template>
++
++<script setup lang="ts">
++import { ref, computed } from 'nativescript-vue';
++import type { NavigatedData } from '@nativescript/core';
++import { getAccessStatus, requestAccess, transcribeSample, type SpeechAccessStatus } from '../services/speech';
++
++const statusLabels: Record<SpeechAccessStatus, string> = {
++    'not-requested': 'Speech access: not requested',
++    granted: 'Speech access: granted',
++    denied: 'Speech access: denied',
++};
++
++const accessStatus = ref<SpeechAccessStatus>('not-requested');
++const accessGranted = ref(false);
++const statusMessage = ref(statusLabels['not-requested']);
++const running = ref(false);
++const transcript = ref('');
++const completedIn = ref<string | null>(null);
++
++const canTranscribe = computed(() => accessGranted.value && !running.value);
++
++function applyStatus(status: SpeechAccessStatus) {
++    accessStatus.value = status;
++    accessGranted.value = status === 'granted';
++    statusMessage.value = statusLabels[status];
++}
++
++function showError(error: unknown) {
++    statusMessage.value = error instanceof Error ? error.message : String(error);
++}
++
++function refresh() {
++    applyStatus(getAccessStatus());
++}
++
++async function onRequestAccess() {
++    try {
++        applyStatus(await requestAccess());
++    } catch (error) {
++        showError(error);
++    }
++}
++
++async function onTranscribe() {
++    if (!canTranscribe.value) {
++        return;
++    }
++    running.value = true;
++    transcript.value = '';
++    completedIn.value = null;
++    statusMessage.value = 'Transcribing…';
++    const startedAt = Date.now();
++    try {
++        const text = await transcribeSample((partial) => {
++            transcript.value = partial;
++        });
++        transcript.value = text;
++        completedIn.value = ((Date.now() - startedAt) / 1000).toFixed(1);
++        statusMessage.value = statusLabels[accessStatus.value];
++    } catch (error) {
++        showError(error);
++    } finally {
++        running.value = false;
++    }
++}
++
++function onNavigatedTo(_args: NavigatedData) {
++    refresh();
++}
++</script>
+diff --git a/app/services/speech.ts b/app/services/speech.ts
+new file mode 100644
+index 0000000..95711e4
+--- /dev/null
++++ b/app/services/speech.ts
+@@ -0,0 +1,72 @@
++import { knownFolders } from '@nativescript/core';
++
++export type SpeechAccessStatus = 'not-requested' | 'granted' | 'denied';
++
++let recognizer: SFSpeechRecognizer | null = null;
++
++function getRecognizer(): SFSpeechRecognizer {
++  if (!recognizer) {
++    recognizer = new SFSpeechRecognizer({ locale: NSLocale.alloc().initWithLocaleIdentifier('en-US') });
++  }
++  return recognizer;
++}
++
++function describe(error: NSError | null, fallback: string): string {
++  return error ? error.localizedDescription : fallback;
++}
++
++function toAccessStatus(status: SFSpeechRecognizerAuthorizationStatus): SpeechAccessStatus {
++  if (status === SFSpeechRecognizerAuthorizationStatus.Authorized) {
++    return 'granted';
++  }
++  if (status === SFSpeechRecognizerAuthorizationStatus.Denied || status === SFSpeechRecognizerAuthorizationStatus.Restricted) {
++    return 'denied';
++  }
++  return 'not-requested';
++}
++
++export function getAccessStatus(): SpeechAccessStatus {
++  return toAccessStatus(SFSpeechRecognizer.authorizationStatus());
++}
++
++export function requestAccess(): Promise<SpeechAccessStatus> {
++  return new Promise((resolve) => {
++    SFSpeechRecognizer.requestAuthorization((status) => {
++      resolve(toAccessStatus(status));
++    });
++  });
++}
++
++function sampleFileUrl(): NSURL {
++  const path = knownFolders.currentApp().getFile('assets/sample.wav').path;
++  return NSURL.fileURLWithPath(path);
++}
++
++export function transcribeSample(onPartial: (text: string) => void): Promise<string> {
++  return new Promise((resolve, reject) => {
++    const speechRecognizer = getRecognizer();
++    if (!speechRecognizer.available) {
++      reject(new Error('Speech recognizer is not available'));
++      return;
++    }
++
++    const request = new SFSpeechURLRecognitionRequest({ URL: sampleFileUrl() });
++    request.shouldReportPartialResults = true;
++    request.requiresOnDeviceRecognition = false;
++
++    speechRecognizer.recognitionTaskWithRequestResultHandler(request, (result, error) => {
++      if (error) {
++        reject(new Error(describe(error, 'Transcription failed')));
++        return;
++      }
++      if (!result) {
++        return;
++      }
++      const text = result.bestTranscription.formattedString;
++      onPartial(text);
++      if (result.final) {
++        resolve(text);
++      }
++    });
++  });
++}
+diff --git a/package.json b/package.json
+index 6fb8487..8869af0 100644
+--- a/package.json
++++ b/package.json
+@@ -20,6 +20,7 @@
+     "nativescript": "9.1.0-alpha.15",
+     "tailwindcss": "^4.0.0",
+     "typescript": "~6.0.0",
++    "vite-plugin-static-copy": "^4.1.1",
+     "vue-tsc": "^3.3.8"
+   },
+   "scripts": {
+diff --git a/vite.config.ts b/vite.config.ts
+index 332b9b2..55bdbc3 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -1,4 +1,14 @@
+-import { defineConfig } from 'vite';
+-import { vueConfig } from '@nativescript/vite/vue';;
++import path from 'node:path';
++import { defineConfig, mergeConfig } from 'vite';
++import { vueConfig } from '@nativescript/vite/vue';
++import { viteStaticCopy } from 'vite-plugin-static-copy';
+ 
+-export default defineConfig(({ mode }) => vueConfig({ mode }));
++export default defineConfig(({ mode }) =>
++  mergeConfig(vueConfig({ mode }), {
++    plugins: [
++      viteStaticCopy({
++        targets: [{ src: path.resolve(process.cwd(), 'spec-assets/sample.wav'), dest: 'assets', rename: { stripBase: true } }],
++      }),
++    ],
++  })
++);

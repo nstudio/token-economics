@@ -224,10 +224,17 @@ function analyzeStudy(study) {
         const metrics = phase === 'total' ? NUMERIC : [...NUMERIC, ...PER_PHASE_ONLY];
         aggregates[set][fw][phase === 'total' ? 'total_per_trial' : `phase_${phase}`] = {
           n: sample.length,
-          ...Object.fromEntries(metrics.flatMap(c => [
-            [`median_${c}`, median(sample.map(r => r[c]))],
-            [`range_${c}`, range(sample.map(r => r[c]))],
-          ])),
+          // Per-metric n, because a metric can be withheld for some trials (see
+          // summary_usage_mismatch). Reporting only the sample size would let a
+          // median over 2 values be quoted as "median of 5".
+          ...Object.fromEntries(metrics.flatMap(c => {
+            const vals = sample.map(r => r[c]).filter(v => typeof v === 'number' && !Number.isNaN(v));
+            return [
+              [`median_${c}`, median(sample.map(r => r[c]))],
+              [`range_${c}`, range(sample.map(r => r[c]))],
+              [`n_${c}`, vals.length],
+            ];
+          })),
         };
       }
     }

@@ -1,0 +1,293 @@
+diff --git a/App_Resources/iOS/Info.plist b/App_Resources/iOS/Info.plist
+index d537114..9624955 100644
+--- a/App_Resources/iOS/Info.plist
++++ b/App_Resources/iOS/Info.plist
+@@ -22,6 +22,10 @@
+ 	<string>1.0.0</string>
+ 	<key>LSRequiresIPhoneOS</key>
+ 	<true/>
++	<key>NSHealthShareUsageDescription</key>
++	<string>Native Bench reads step count data to display your recent activity.</string>
++	<key>NSHealthUpdateUsageDescription</key>
++	<string>Native Bench writes step count data that you log in the app.</string>
+ 	<key>UILaunchStoryboardName</key>
+ 	<string>LaunchScreen</string>
+ 	<key>UIRequiresFullScreen</key>
+diff --git a/App_Resources/iOS/app.entitlements b/App_Resources/iOS/app.entitlements
+new file mode 100644
+index 0000000..e10f430
+--- /dev/null
++++ b/App_Resources/iOS/app.entitlements
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>com.apple.developer.healthkit</key>
++	<true/>
++</dict>
++</plist>
+diff --git a/app/components/Health.vue b/app/components/Health.vue
+index 1856493..87c46f1 100644
+--- a/app/components/Health.vue
++++ b/app/components/Health.vue
+@@ -1,15 +1,121 @@
+ <template>
+-    <Page>
++    <Page @navigatedTo="onNavigatedTo">
+         <ActionBar title="Health" />
+ 
+         <StackLayout class="p-6">
+-            <Label text="Health access: not requested" class="text-base text-gray-600" textWrap="true" />
++            <Label :text="statusMessage" class="text-base text-gray-600" textWrap="true" />
+ 
+-            <Button text="Request Access" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-6" />
+-            <Button text="Log 500 Steps" :isEnabled="false" class="bg-gray-300 text-gray-500 text-lg rounded-lg p-4 mt-3" />
++            <Button text="Request Access" class="bg-blue-500 text-white text-lg rounded-lg p-4 mt-6" @tap="onRequestAccess" />
++            <Button
++                text="Log 500 Steps"
++                :isEnabled="accessGranted"
++                :class="accessGranted ? 'bg-blue-500 text-white text-lg rounded-lg p-4 mt-3' : 'bg-gray-300 text-gray-500 text-lg rounded-lg p-4 mt-3'"
++                @tap="onLogSteps"
++            />
+ 
+             <Label text="Last 7 Days" class="text-lg font-bold mt-10" />
+-            <Label text="No data yet" class="text-gray-400 text-center mt-4" textWrap="true" />
++
++            <StackLayout v-if="accessGranted">
++                <Label
++                    v-for="day in days"
++                    :key="day.date.toISOString()"
++                    :text="dayLabel(day)"
++                    :class="isToday(day.date) ? 'text-base font-bold text-blue-600 mt-2' : 'text-base text-gray-700 mt-2'"
++                    textWrap="true"
++                />
++            </StackLayout>
++            <Label v-else-if="accessStatus === 'denied'" text="Health access needed" class="text-gray-400 text-center mt-4" textWrap="true" />
++            <Label v-else text="No data yet" class="text-gray-400 text-center mt-4" textWrap="true" />
+         </StackLayout>
+     </Page>
+ </template>
++
++<script setup lang="ts">
++import { ref } from 'nativescript-vue';
++import type { NavigatedData } from '@nativescript/core';
++import { getAccessStatus, requestAccess, logSteps, getLast7DayTotals, type DayTotal, type HealthAccessStatus } from '../services/health';
++
++const statusLabels: Record<HealthAccessStatus, string> = {
++    'not-requested': 'Health access: not requested',
++    granted: 'Health access: granted',
++    denied: 'Health access: denied',
++};
++
++const accessStatus = ref<HealthAccessStatus>('not-requested');
++const accessGranted = ref(false);
++const statusMessage = ref(statusLabels['not-requested']);
++const days = ref<DayTotal[]>([]);
++
++function applyStatus(status: HealthAccessStatus) {
++    accessStatus.value = status;
++    accessGranted.value = status === 'granted';
++    statusMessage.value = statusLabels[status];
++}
++
++function showError(error: unknown) {
++    statusMessage.value = error instanceof Error ? error.message : String(error);
++}
++
++async function loadDays() {
++    try {
++        days.value = await getLast7DayTotals();
++    } catch (error) {
++        showError(error);
++    }
++}
++
++async function refresh() {
++    applyStatus(getAccessStatus());
++    if (accessGranted.value) {
++        await loadDays();
++    }
++}
++
++async function onRequestAccess() {
++    try {
++        applyStatus(await requestAccess());
++        if (accessGranted.value) {
++            await loadDays();
++        }
++    } catch (error) {
++        showError(error);
++    }
++}
++
++async function onLogSteps() {
++    if (!accessGranted.value) {
++        return;
++    }
++    try {
++        await logSteps(500);
++        await loadDays();
++    } catch (error) {
++        showError(error);
++    }
++}
++
++function onNavigatedTo(_args: NavigatedData) {
++    refresh();
++}
++
++function isToday(date: Date): boolean {
++    const now = new Date();
++    return date.getFullYear() === now.getFullYear() && date.getMonth() === now.getMonth() && date.getDate() === now.getDate();
++}
++
++const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
++const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
++
++function withThousandsSeparators(value: number): string {
++    return Math.round(value)
++        .toString()
++        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
++}
++
++function dayLabel(day: DayTotal): string {
++    const weekday = WEEKDAYS[day.date.getDay()];
++    const month = MONTHS[day.date.getMonth()];
++    const label = `${weekday} ${month} ${day.date.getDate()} — ${withThousandsSeparators(day.steps)} steps`;
++    return isToday(day.date) ? `${label} (today)` : label;
++}
++</script>
+diff --git a/app/services/health.ts b/app/services/health.ts
+new file mode 100644
+index 0000000..1c2d148
+--- /dev/null
++++ b/app/services/health.ts
+@@ -0,0 +1,120 @@
++export type HealthAccessStatus = 'not-requested' | 'granted' | 'denied';
++
++export interface DayTotal {
++  date: Date;
++  steps: number;
++}
++
++let healthStore: HKHealthStore | null = null;
++
++function getStore(): HKHealthStore {
++  if (!healthStore) {
++    healthStore = HKHealthStore.new();
++  }
++  return healthStore;
++}
++
++function stepCountType(): HKQuantityType {
++  return HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount) as HKQuantityType;
++}
++
++function describe(error: NSError | null, fallback: string): string {
++  return error ? error.localizedDescription : fallback;
++}
++
++export function isHealthDataAvailable(): boolean {
++  return HKHealthStore.isHealthDataAvailable();
++}
++
++export function getAccessStatus(): HealthAccessStatus {
++  if (!isHealthDataAvailable()) {
++    return 'denied';
++  }
++  const status = getStore().authorizationStatusForType(stepCountType());
++  if (status === HKAuthorizationStatus.SharingAuthorized) {
++    return 'granted';
++  }
++  if (status === HKAuthorizationStatus.SharingDenied) {
++    return 'denied';
++  }
++  return 'not-requested';
++}
++
++export function requestAccess(): Promise<HealthAccessStatus> {
++  return new Promise((resolve, reject) => {
++    if (!isHealthDataAvailable()) {
++      reject(new Error('Health data is not available on this device'));
++      return;
++    }
++    const type = stepCountType();
++    const shareTypes = NSSet.setWithArray<HKSampleType>([type]);
++    const readTypes = NSSet.setWithArray<HKObjectType>([type]);
++    getStore().requestAuthorizationToShareTypesReadTypesCompletion(shareTypes, readTypes, (success, error) => {
++      if (!success) {
++        reject(new Error(describe(error, 'Health access request failed')));
++        return;
++      }
++      resolve(getAccessStatus());
++    });
++  });
++}
++
++export function logSteps(count: number): Promise<void> {
++  return new Promise((resolve, reject) => {
++    const now = new Date();
++    const quantity = HKQuantity.quantityWithUnitDoubleValue(HKUnit.countUnit(), count);
++    const sample = HKQuantitySample.quantitySampleWithTypeQuantityStartDateEndDate(stepCountType(), quantity, now, now);
++    getStore().saveObjectWithCompletion(sample, (success, error) => {
++      if (!success) {
++        reject(new Error(describe(error, 'Failed to save steps')));
++        return;
++      }
++      resolve();
++    });
++  });
++}
++
++export function getLast7DayTotals(): Promise<DayTotal[]> {
++  return new Promise((resolve, reject) => {
++    const now = new Date();
++    const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
++    startDate.setDate(startDate.getDate() - 6);
++
++    const predicate = HKQuery.predicateForSamplesWithStartDateEndDateOptions(startDate, now, HKQueryOptions.None);
++    const query = new HKSampleQuery({
++      sampleType: stepCountType(),
++      predicate,
++      limit: HKObjectQueryNoLimit,
++      sortDescriptors: [],
++      resultsHandler: (_query, results, error) => {
++        if (error) {
++          reject(new Error(describe(error, 'Failed to load step history')));
++          return;
++        }
++
++        const totals: DayTotal[] = [];
++        for (let i = 0; i < 7; i++) {
++          const date = new Date(startDate);
++          date.setDate(date.getDate() + i);
++          totals.push({ date, steps: 0 });
++        }
++
++        const count = results ? results.count : 0;
++        for (let i = 0; i < count; i++) {
++          const sample = results.objectAtIndex(i) as HKQuantitySample;
++          const steps = sample.quantity.doubleValueForUnit(HKUnit.countUnit());
++          const sampleDate = sample.startDate;
++          const dayIndex = Math.round(
++            (new Date(sampleDate.getFullYear(), sampleDate.getMonth(), sampleDate.getDate()).getTime() - startDate.getTime()) / 86400000
++          );
++          if (dayIndex >= 0 && dayIndex < 7) {
++            totals[dayIndex].steps += steps;
++          }
++        }
++
++        resolve(totals.reverse());
++      },
++    });
++    getStore().executeQuery(query);
++  });
++}
+diff --git a/types/references.d.ts b/types/references.d.ts
+index dedd793..f7eb410 100644
+--- a/types/references.d.ts
++++ b/types/references.d.ts
+@@ -1 +1,2 @@
+ /// <reference path="../node_modules/@nativescript/types/index.d.ts" />
++/// <reference path="../node_modules/@nativescript/types-ios/complete.d.ts" />

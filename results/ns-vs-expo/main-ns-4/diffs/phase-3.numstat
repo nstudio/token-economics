@@ -1,0 +1,5 @@
+2	0	App_Resources/iOS/Info.plist
+85	5	app/components/Transcribe.vue
+72	0	app/services/speech.ts
+1	0	package.json
+13	3	vite.config.ts
