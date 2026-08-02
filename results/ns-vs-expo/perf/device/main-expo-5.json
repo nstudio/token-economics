@@ -1,0 +1,24 @@
+{
+  "trial": "main-expo-5",
+  "framework": "expo",
+  "configuration": "Release",
+  "destination": "generic/platform=iOS",
+  "signed": false,
+  "from": "xcarchive",
+  "bundle_bytes": 30121984,
+  "executable_bytes": 1310720,
+  "archs": [
+    "arm64"
+  ],
+  "symbols": 1158,
+  "frameworks": {
+    "ExpoFileSystem.framework": 1134592,
+    "ExpoFont.framework": 208896,
+    "ExpoModulesCore.framework": 3747840,
+    "ExpoModulesJSI.framework": 1433600,
+    "ExpoModulesWorklets.framework": 167936,
+    "React.framework": 12021760,
+    "ReactNativeDependencies.framework": 1265664,
+    "hermesvm.framework": 5066752
+  }
+}

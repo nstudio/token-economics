@@ -190,8 +190,11 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       }
       case 'app-locator': {
         const fw = getFramework(rest[0]);
-        const cfg = rest[1] === 'release' ? fw.releaseAppLocator : fw.appLocator;
-        console.log(JSON.stringify(cfg ?? null));
+        const byConfig = {
+          release: fw.releaseAppLocator,
+          device: fw.deviceAppLocator,
+        };
+        console.log(JSON.stringify(byConfig[rest[1]] ?? fw.appLocator ?? null));
         break;
       }
       case 'get': {

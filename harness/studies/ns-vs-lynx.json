@@ -4,18 +4,56 @@
   "specVersion": "v1.0.0",
   "specDir": "spec/v1.0",
   "baselineTag": "benchmark-baseline",
-  "frameworks": ["ns", "lynx"],
+  "frameworks": [
+    "ns",
+    "lynx"
+  ],
   "resultsDir": "results/ns-vs-lynx",
   "model": "claude-sonnet-5",
   "maxTurns": 160,
   "phases": [
-    { "id": "1", "label": "App shell", "prompt": "prompts/phase-1.md" },
-    { "id": "2", "label": "Health (HealthKit)", "prompt": "prompts/phase-2.md" },
-    { "id": "3", "label": "Transcribe (Speech)", "prompt": "prompts/phase-3.md" }
+    {
+      "id": "1",
+      "label": "App shell",
+      "prompt": "prompts/phase-1.md"
+    },
+    {
+      "id": "2",
+      "label": "Health (HealthKit)",
+      "prompt": "prompts/phase-2.md"
+    },
+    {
+      "id": "3",
+      "label": "Transcribe (Speech)",
+      "prompt": "prompts/phase-3.md"
+    }
   ],
   "remediationPrompt": "prompts/remediate.md",
-  "trialSets": { "pilot": "^pilot-", "main": "^main-" },
+  "trialSets": {
+    "pilot": "^pilot-",
+    "main": "^main-"
+  },
+  "legacyTrialBranches": {
+    "main-lynx-1": "trials/main-lynx-1",
+    "main-lynx-2": "trials/main-lynx-2",
+    "main-lynx-3": "trials/main-lynx-3",
+    "main-lynx-4": "trials/main-lynx-4",
+    "main-lynx-5": "trials/main-lynx-5",
+    "ref-ns-v1.0": "cc1f065"
+  },
+  "lostTrialTrees": {
+    "trials": [
+      "main-ns-1",
+      "main-ns-2",
+      "main-ns-3",
+      "main-ns-4",
+      "main-ns-5"
+    ],
+    "reason": "This study predates study-scoped trial branches. Its NativeScript trees were committed as trials/main-ns-N; the 2026-08-01 ns-vs-expo-buildonly run reused those exact names and force-updated them, so the 2026-07-25 trees are gone. Token results are unaffected (they come from archived transcripts), but the NativeScript arm cannot be rebuilt from source. The one surviving v1.0 tree is ns-benchmark main @ cc1f065.",
+    "survivingReference": "cc1f065",
+    "substitute": "ref-ns-v1.0 measures ns-benchmark main @ cc1f065, the one surviving spec-v1.0 NativeScript tree from this study's 2026-07-25 window. It stands in for the lost per-trial trees as a single disclosed reference, which the ns-vs-expo run justifies: all 8 NativeScript archives there came out byte-identical in size, so NativeScript app size does not vary by implementation."
+  },
   "medianSet": "main",
   "frozen": true,
-  "frozenReason": "Published submission (2026-07-25). Historical numbers are never edited in place — a re-run under a changed model, framework version, or spec is a new study slug. Set ALLOW_FROZEN=1 only to reproduce, never to amend."
+  "frozenReason": "Published submission (2026-07-25). Historical numbers are never edited in place \u2014 a re-run under a changed model, framework version, or spec is a new study slug. Set ALLOW_FROZEN=1 only to reproduce, never to amend."
 }

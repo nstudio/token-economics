@@ -22,9 +22,10 @@ te_resolve_study() {
 
 te_repo() { node "$TE_REGISTRY" repo "$1"; }
 
-# te_locate_app <framework> <repo-path> [debug|release] — echoes the built .app path.
-# Both the trial runner and the perf suite resolve build products through here, so
-# a framework's product layout is described in exactly one place.
+# te_locate_app <framework> <repo-path> [debug|release|device] — echoes the built
+# .app path. Both the trial runner and the perf suite resolve build products through
+# here, so a framework's product layout is described in exactly one place.
+# 'device' reads out of the .xcarchive named by TE_ARCHIVE.
 te_locate_app() {
   local fw="$1" repo="$2" cfgname="${3:-debug}" locator kind app=""
   locator="$(node "$TE_REGISTRY" app-locator "$fw" "$cfgname")"
@@ -35,6 +36,9 @@ te_locate_app() {
       local pattern
       pattern="$(node -e 'process.stdout.write(JSON.parse(process.argv[1]).pattern)' "$locator")"
       app="$(ls -d "$repo"/$pattern 2>/dev/null | head -1)"
+      ;;
+    archive)
+      app="$(ls -d "${TE_ARCHIVE:?device locator needs TE_ARCHIVE}"/Products/Applications/*.app 2>/dev/null | head -1)"
       ;;
     xcodebuild)
       local products

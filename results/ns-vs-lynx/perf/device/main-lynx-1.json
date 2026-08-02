@@ -1,0 +1,30 @@
+{
+  "trial": "main-lynx-1",
+  "framework": "lynx",
+  "configuration": "Release",
+  "destination": "generic/platform=iOS",
+  "signed": false,
+  "from": "xcarchive",
+  "bundle_bytes": 27357184,
+  "executable_bytes": 831488,
+  "archs": [
+    "arm64"
+  ],
+  "symbols": 688,
+  "frameworks": {
+    "BaseDevtool.framework": 581632,
+    "DebugRouter.framework": 851968,
+    "Lynx.framework": 15122432,
+    "LynxBase.framework": 385024,
+    "LynxDevtool.framework": 4120576,
+    "LynxService.framework": 106496,
+    "LynxServiceAPI.framework": 81920,
+    "Mantle.framework": 163840,
+    "PrimJS.framework": 2158592,
+    "SDWebImage.framework": 806912,
+    "SDWebImageWebPCoder.framework": 102400,
+    "SnapKit.framework": 339968,
+    "SocketRocket.framework": 200704,
+    "libwebp.framework": 626688
+  }
+}

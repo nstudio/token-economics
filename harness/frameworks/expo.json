@@ -6,7 +6,7 @@
   "uiLayer": "React 19 / React Native 0.86 (Expo SDK 57)",
   "docsMcpName": "expo",
   "mcpConfig": "mcp/expo.mcp.json",
-  "docsMcpVersion": "mcp.expo.dev/mcp (hosted HTTP, OAuth — not version-pinnable)",
+  "docsMcpVersion": "mcp.expo.dev/mcp (hosted HTTP, OAuth \u2014 not version-pinnable)",
   "docsMcpKind": "tools",
   "buildGate": "npx expo prebuild --platform ios && xcodebuild -workspace ios/ExpoBenchmark.xcworkspace -scheme ExpoBenchmark -configuration Debug -destination \"generic/platform=iOS Simulator\" build",
   "appLocator": {
@@ -36,6 +36,10 @@
       "generic/platform=iOS Simulator"
     ]
   },
+  "deviceBuildGate": "npx expo prebuild --platform ios && xcodebuild -workspace ios/ExpoBenchmark.xcworkspace -scheme ExpoBenchmark -configuration Release -destination 'generic/platform=iOS' -archivePath \"$TE_ARCHIVE\" -derivedDataPath \"$TE_DERIVED\" archive CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=''",
+  "deviceAppLocator": {
+    "kind": "archive"
+  },
   "interopBranch": "interop-bench",
   "nativeRoots": [
     "ios/"
@@ -50,7 +54,7 @@
   ],
   "notes": {
     "workspaceName": "ios/ExpoBenchmark.xcworkspace and scheme ExpoBenchmark are produced by `expo prebuild` from app.json's `name`; the baseline scaffold pins name=ExpoBenchmark so this locator stays valid.",
-    "cng": "ios/ is generated, not committed — native configuration must go through app.json / config plugins, which is why those paths classify as native-config.",
+    "cng": "ios/ is generated, not committed \u2014 native configuration must go through app.json / config plugins, which is why those paths classify as native-config.",
     "mcpTier": "Remote tier only. The local tier (expo-mcp package + EXPO_UNSTABLE_MCP_SERVER=1) stays off: simulator tap/screenshot would give this arm a visual verification loop no other arm has."
   }
 }

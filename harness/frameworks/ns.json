@@ -6,7 +6,7 @@
   "uiLayer": "Vue 3 (nativescript-vue)",
   "docsMcpName": "nativescript-docs",
   "mcpConfig": "mcp/ns.mcp.json",
-  "docsMcpVersion": "docs.nativescript.org/mcp (hosted HTTP — not version-pinnable)",
+  "docsMcpVersion": "docs.nativescript.org/mcp (hosted HTTP \u2014 not version-pinnable)",
   "docsMcpKind": "tools",
   "buildGate": "ns build ios",
   "appLocator": {
@@ -17,6 +17,10 @@
   "releaseAppLocator": {
     "kind": "glob",
     "pattern": "platforms/ios/build/Release-iphonesimulator/*.app"
+  },
+  "deviceBuildGate": "ns prepare ios --release && xcodebuild -project \"$(ls -d platforms/ios/*.xcodeproj | head -1)\" -scheme \"$(basename \"$(ls -d platforms/ios/*.xcodeproj | head -1)\" .xcodeproj)\" -configuration Release -destination 'generic/platform=iOS' -archivePath \"$TE_ARCHIVE\" -derivedDataPath \"$TE_DERIVED\" archive CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=''",
+  "deviceAppLocator": {
+    "kind": "archive"
   },
   "interopBranch": "interop-bench",
   "nativeRoots": [

@@ -1,0 +1,21 @@
+{
+  "trial": "main-ns-3",
+  "framework": "ns",
+  "configuration": "Release",
+  "destination": "generic/platform=iOS",
+  "signed": false,
+  "from": "xcarchive",
+  "bundle_bytes": 53604352,
+  "executable_bytes": 12349440,
+  "archs": [
+    "arm64"
+  ],
+  "symbols": 259,
+  "frameworks": {
+    "NSCWinterTC.framework": 81920,
+    "NativeScript.framework": 38891520,
+    "NativeScriptWebSockets.framework": 139264,
+    "TKLiveSync.framework": 143360,
+    "TNSWidgets.framework": 135168
+  }
+}
