@@ -1,0 +1,37 @@
+{
+  "runs": [
+    {
+      "iter": 0,
+      "hk_log_roundtrip_ms": 394,
+      "speech_state": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "nav_transcribe_ms": 1747,
+      "speech_granted": true,
+      "hk_rows_ms": 1101,
+      "nav_health_ms": 1779,
+      "health_granted": true
+    },
+    {
+      "hk_log_roundtrip_ms": 396,
+      "health_granted": true,
+      "hk_rows_ms": 1077,
+      "speech_state": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "iter": 1,
+      "speech_granted": true,
+      "nav_health_ms": 1760,
+      "nav_transcribe_ms": 1752
+    },
+    {
+      "hk_log_roundtrip_ms": 395,
+      "health_granted": true,
+      "nav_health_ms": 1766,
+      "speech_granted": true,
+      "iter": 2,
+      "speech_state": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "nav_transcribe_ms": 1733,
+      "hk_rows_ms": 1096
+    }
+  ],
+  "bundle_id": "com.nstudio.expobenchmark",
+  "trial": "main-expo-4",
+  "measured_at": "2026-08-02T01:58:22.133Z"
+}

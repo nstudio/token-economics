@@ -1,0 +1,78 @@
+{
+  "trial": "main-ns-3",
+  "bundle_id": "org.nativescript.nsbenchmark",
+  "sim_udid": "7DFF2660-A10C-449E-867A-92863D91663B",
+  "launches_n": 5,
+  "measured_at": "2026-08-02T00:36:58.420Z",
+  "size": {
+    "bundle_bytes": 97841152,
+    "executable_bytes": 24535040,
+    "frameworks": {
+      "NSCWinterTC.framework": 172032,
+      "NativeScript.framework": 70414336,
+      "NativeScriptWebSockets.framework": 307200,
+      "TKLiveSync.framework": 278528,
+      "TNSWidgets.framework": 253952
+    },
+    "installed_bytes": 97841152
+  },
+  "launches": [
+    {
+      "t0": 1785630952690,
+      "simctl_return_ms": 342,
+      "cpu_settle_ms": 1681,
+      "pid": 31577,
+      "markers": {
+        "bootstrap": 308,
+        "active": 308
+      }
+    },
+    {
+      "t0": 1785630962554,
+      "simctl_return_ms": 343,
+      "cpu_settle_ms": 1444,
+      "pid": 31627,
+      "markers": {
+        "bootstrap": 307,
+        "active": 307
+      }
+    },
+    {
+      "t0": 1785630972196,
+      "simctl_return_ms": 351,
+      "cpu_settle_ms": 1442,
+      "pid": 31678,
+      "markers": {
+        "bootstrap": 317,
+        "active": 318
+      }
+    },
+    {
+      "t0": 1785630981839,
+      "simctl_return_ms": 336,
+      "cpu_settle_ms": 1435,
+      "pid": 31730,
+      "markers": {
+        "bootstrap": 301,
+        "active": 301
+      }
+    },
+    {
+      "t0": 1785630991461,
+      "simctl_return_ms": 333,
+      "cpu_settle_ms": 1547,
+      "pid": 31779,
+      "markers": {
+        "bootstrap": 299,
+        "active": 299
+      }
+    }
+  ],
+  "idle": {
+    "rss_kb_median": 220656,
+    "cpu_pct_median": 0,
+    "cpu_pct_max": 0,
+    "phys_footprint_kb": 40960,
+    "samples": 10
+  }
+}

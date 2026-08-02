@@ -1,0 +1,81 @@
+{
+  "trial": "main-expo-3",
+  "bundle_id": "com.nstudio.expobenchmark",
+  "sim_udid": "7DFF2660-A10C-449E-867A-92863D91663B",
+  "launches_n": 5,
+  "measured_at": "2026-08-02T00:38:10.472Z",
+  "size": {
+    "bundle_bytes": 55545856,
+    "executable_bytes": 1650688,
+    "frameworks": {
+      "ExpoFileSystem.framework": 2273280,
+      "ExpoFont.framework": 413696,
+      "ExpoModulesCore.framework": 7483392,
+      "ExpoModulesJSI.framework": 2834432,
+      "ExpoModulesWorklets.framework": 339968,
+      "React.framework": 24391680,
+      "ReactNativeDependencies.framework": 2560000,
+      "hermesvm.framework": 10231808
+    },
+    "installed_bytes": 55545856
+  },
+  "launches": [
+    {
+      "t0": 1785631024706,
+      "simctl_return_ms": 337,
+      "cpu_settle_ms": 1547,
+      "pid": 31907,
+      "markers": {
+        "bootstrap": 304,
+        "active": 304
+      }
+    },
+    {
+      "t0": 1785631034451,
+      "simctl_return_ms": 334,
+      "cpu_settle_ms": 1562,
+      "pid": 31959,
+      "markers": {
+        "bootstrap": 299,
+        "active": 299
+      }
+    },
+    {
+      "t0": 1785631044202,
+      "simctl_return_ms": 334,
+      "cpu_settle_ms": 1573,
+      "pid": 32010,
+      "markers": {
+        "bootstrap": 299,
+        "active": 299
+      }
+    },
+    {
+      "t0": 1785631053982,
+      "simctl_return_ms": 323,
+      "cpu_settle_ms": 1432,
+      "pid": 32059,
+      "markers": {
+        "bootstrap": 289,
+        "active": 289
+      }
+    },
+    {
+      "t0": 1785631063602,
+      "simctl_return_ms": 333,
+      "cpu_settle_ms": 1440,
+      "pid": 32105,
+      "markers": {
+        "bootstrap": 297,
+        "active": 297
+      }
+    }
+  ],
+  "idle": {
+    "rss_kb_median": 212848,
+    "cpu_pct_median": 0,
+    "cpu_pct_max": 0,
+    "phys_footprint_kb": 27648,
+    "samples": 10
+  }
+}

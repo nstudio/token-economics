@@ -1,0 +1,369 @@
+{
+  "study": "ns-vs-expo-buildonly",
+  "trials": [
+    {
+      "trial": "main-expo-1",
+      "fw": "expo",
+      "bundle_mb": 57.14453125,
+      "installed_mb": 57.14453125,
+      "executable_mb": 5.33984375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 315,
+      "launch_ms_range": [
+        314,
+        320
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1553,
+      "idle_rss_mb": 234.078125,
+      "idle_footprint_mb": 35,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-2",
+      "fw": "expo",
+      "bundle_mb": 57.140625,
+      "installed_mb": 57.140625,
+      "executable_mb": 5.3359375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 318,
+      "launch_ms_range": [
+        300,
+        321
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1561,
+      "idle_rss_mb": 231.046875,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-3",
+      "fw": "expo",
+      "bundle_mb": 57.14453125,
+      "installed_mb": 57.14453125,
+      "executable_mb": 5.33984375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 319,
+      "launch_ms_range": [
+        304,
+        325
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1553,
+      "idle_rss_mb": 234.03125,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-4",
+      "fw": "expo",
+      "bundle_mb": 57.1171875,
+      "installed_mb": 57.1171875,
+      "executable_mb": 5.3125,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 319,
+      "launch_ms_range": [
+        316,
+        322
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1557,
+      "idle_rss_mb": 230.859375,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-5",
+      "fw": "expo",
+      "bundle_mb": 57.10546875,
+      "installed_mb": 57.10546875,
+      "executable_mb": 5.3046875,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 319,
+      "launch_ms_range": [
+        316,
+        320
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1564,
+      "idle_rss_mb": 226.0625,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-1",
+      "fw": "ns",
+      "bundle_mb": 93.3046875,
+      "installed_mb": 93.3046875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 314,
+      "launch_ms_range": [
+        312,
+        331
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1539,
+      "idle_rss_mb": 215.53125,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-2",
+      "fw": "ns",
+      "bundle_mb": 93.7421875,
+      "installed_mb": 93.7421875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 316,
+      "launch_ms_range": [
+        300,
+        331
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1429,
+      "idle_rss_mb": 215.515625,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-3",
+      "fw": "ns",
+      "bundle_mb": 93.74609375,
+      "installed_mb": 93.74609375,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 320,
+      "launch_ms_range": [
+        301,
+        336
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1557,
+      "idle_rss_mb": 213.75,
+      "idle_footprint_mb": 37,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-4",
+      "fw": "ns",
+      "bundle_mb": 93.7421875,
+      "installed_mb": 93.7421875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 318,
+      "launch_ms_range": [
+        304,
+        335
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1566,
+      "idle_rss_mb": 213.375,
+      "idle_footprint_mb": 36,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-5",
+      "fw": "ns",
+      "bundle_mb": 93.7421875,
+      "installed_mb": 93.7421875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 320,
+      "launch_ms_range": [
+        306,
+        325
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1566,
+      "idle_rss_mb": 218.28125,
+      "idle_footprint_mb": 41,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    }
+  ],
+  "aggregates": {
+    "ns": {
+      "n": 5,
+      "bundle_mb": {
+        "median": 93.7421875,
+        "range": [
+          93.3046875,
+          93.74609375
+        ]
+      },
+      "installed_mb": {
+        "median": 93.7421875,
+        "range": [
+          93.3046875,
+          93.74609375
+        ]
+      },
+      "executable_mb": {
+        "median": 23.3984375,
+        "range": [
+          23.3984375,
+          23.3984375
+        ]
+      },
+      "frameworks_mb": {
+        "median": 68.1171875,
+        "range": [
+          68.1171875,
+          68.1171875
+        ]
+      },
+      "devtool_mb": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_ms": {
+        "median": 318,
+        "range": [
+          314,
+          320
+        ]
+      },
+      "cpu_settle_ms": {
+        "median": 1557,
+        "range": [
+          1429,
+          1566
+        ]
+      },
+      "idle_rss_mb": {
+        "median": 215.515625,
+        "range": [
+          213.375,
+          218.28125
+        ]
+      },
+      "idle_footprint_mb": {
+        "median": 40,
+        "range": [
+          36,
+          41
+        ]
+      },
+      "idle_cpu_pct": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_sources": [
+        "active"
+      ]
+    },
+    "expo": {
+      "n": 5,
+      "bundle_mb": {
+        "median": 57.140625,
+        "range": [
+          57.10546875,
+          57.14453125
+        ]
+      },
+      "installed_mb": {
+        "median": 57.140625,
+        "range": [
+          57.10546875,
+          57.14453125
+        ]
+      },
+      "executable_mb": {
+        "median": 5.3359375,
+        "range": [
+          5.3046875,
+          5.33984375
+        ]
+      },
+      "frameworks_mb": {
+        "median": 48.1875,
+        "range": [
+          48.1875,
+          48.1875
+        ]
+      },
+      "devtool_mb": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_ms": {
+        "median": 319,
+        "range": [
+          315,
+          319
+        ]
+      },
+      "cpu_settle_ms": {
+        "median": 1557,
+        "range": [
+          1553,
+          1564
+        ]
+      },
+      "idle_rss_mb": {
+        "median": 231.046875,
+        "range": [
+          226.0625,
+          234.078125
+        ]
+      },
+      "idle_footprint_mb": {
+        "median": 34,
+        "range": [
+          34,
+          35
+        ]
+      },
+      "idle_cpu_pct": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_sources": [
+        "active"
+      ]
+    }
+  }
+}

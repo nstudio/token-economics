@@ -1,0 +1,37 @@
+{
+  "bundle_id": "com.nstudio.expobenchmark",
+  "runs": [
+    {
+      "speech_state": "init_or_task_failed: Failed to initialize recognizer",
+      "iter": 0,
+      "nav_transcribe_ms": 1757,
+      "hk_log_roundtrip_ms": 400,
+      "nav_health_ms": 1789,
+      "hk_rows_ms": 1105,
+      "speech_granted": true,
+      "health_granted": true
+    },
+    {
+      "nav_health_ms": 1791,
+      "hk_rows_ms": 1079,
+      "iter": 1,
+      "hk_log_roundtrip_ms": 403,
+      "health_granted": true,
+      "nav_transcribe_ms": 1762,
+      "speech_state": "init_or_task_failed: Failed to initialize recognizer",
+      "speech_granted": true
+    },
+    {
+      "speech_state": "init_or_task_failed: Failed to initialize recognizer",
+      "nav_transcribe_ms": 1735,
+      "nav_health_ms": 1786,
+      "health_granted": true,
+      "hk_log_roundtrip_ms": 402,
+      "hk_rows_ms": 1104,
+      "iter": 2,
+      "speech_granted": true
+    }
+  ],
+  "trial": "main-expo-5",
+  "measured_at": "2026-08-02T04:11:13.706Z"
+}

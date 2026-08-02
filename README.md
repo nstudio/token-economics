@@ -11,8 +11,9 @@ Each **study** pins a spec version, a model, and a pair of frameworks, then runs
 | Study | Spec | Status | Findings |
 |---|---|---|---|
 | `ns-vs-lynx` — NativeScript vs LynxJS (Sparkling) | v1.0.0 | **published, frozen** | [REPORT.md](results/ns-vs-lynx/REPORT.md) — 1.9× output tokens, 4.0× on the second native feature |
-| `ns-vs-expo` — NativeScript vs Expo (React Native) | v1.1.0 | planned — see [`PLAN-EXPO.md`](PLAN-EXPO.md) | — |
-| `ns-vs-expo-open` — same, wrapper-allowed condition | v1.1.0-open | planned (secondary) | — |
+| [`ns-vs-expo`](results/ns-vs-expo/REPORT.md) — NativeScript vs Expo (React Native) | v1.1.0 | **published** | [REPORT.md](results/ns-vs-expo/REPORT.md) — no measurable framework difference at matched verification (p=1.00) |
+| `ns-vs-expo-buildonly` — same pair, verification pinned off | v1.1.0 | **published** | controlled companion; see the report above |
+
 
 A published study is **frozen**: its numbers are never edited in place, and the harness refuses to append trials to it. A changed model, framework version, or spec is a new study slug.
 

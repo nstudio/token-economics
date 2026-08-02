@@ -1,0 +1,252 @@
+{
+  "study": "ns-vs-expo-buildonly",
+  "trials": [
+    {
+      "trial": "main-expo-1",
+      "fw": "expo",
+      "iters": 3,
+      "nav_health_ms": 2255,
+      "hk_rows_ms": null,
+      "hk_log_roundtrip_ms": null,
+      "nav_transcribe_ms": 2217,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)"
+      ],
+      "speech_app_reported_s": null,
+      "granted": false
+    },
+    {
+      "trial": "main-expo-2",
+      "fw": "expo",
+      "iters": 3,
+      "nav_health_ms": 2253,
+      "hk_rows_ms": 1086,
+      "hk_log_roundtrip_ms": 392,
+      "nav_transcribe_ms": 2225,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-expo-3",
+      "fw": "expo",
+      "iters": 3,
+      "nav_health_ms": 2224,
+      "hk_rows_ms": 1068,
+      "hk_log_roundtrip_ms": 383,
+      "nav_transcribe_ms": 2204,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-expo-4",
+      "fw": "expo",
+      "iters": 3,
+      "nav_health_ms": 2242,
+      "hk_rows_ms": 1084,
+      "hk_log_roundtrip_ms": 395,
+      "nav_transcribe_ms": 2224,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "unknown: "
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-expo-5",
+      "fw": "expo",
+      "iters": 3,
+      "nav_health_ms": 1789,
+      "hk_rows_ms": 1104,
+      "hk_log_roundtrip_ms": 402,
+      "nav_transcribe_ms": 1757,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-1",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 1809,
+      "hk_rows_ms": 1097,
+      "hk_log_roundtrip_ms": null,
+      "nav_transcribe_ms": 1733,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Transcription failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-2",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 1821,
+      "hk_rows_ms": 1105,
+      "hk_log_roundtrip_ms": null,
+      "nav_transcribe_ms": 1731,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-3",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 1804,
+      "hk_rows_ms": 1094,
+      "hk_log_roundtrip_ms": null,
+      "nav_transcribe_ms": 1728,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-4",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 1785,
+      "hk_rows_ms": 1058,
+      "hk_log_roundtrip_ms": null,
+      "nav_transcribe_ms": 1718,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    },
+    {
+      "trial": "main-ns-5",
+      "fw": "ns",
+      "iters": 3,
+      "nav_health_ms": 2217,
+      "hk_rows_ms": 1073,
+      "hk_log_roundtrip_ms": 639,
+      "nav_transcribe_ms": 2194,
+      "speech_wall_ms": null,
+      "speech_states": [
+        "init_or_task_failed: Transcription failed: Failed to initialize recognizer"
+      ],
+      "speech_app_reported_s": null,
+      "granted": true
+    }
+  ],
+  "aggregates": {
+    "ns": {
+      "n": 5,
+      "speech_states": [
+        "init_or_task_failed: Transcription failed: Failed to initialize recognizer",
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "nav_health_ms": {
+        "n": 5,
+        "median": 1809,
+        "range": [
+          1785,
+          2217
+        ]
+      },
+      "hk_rows_ms": {
+        "n": 5,
+        "median": 1094,
+        "range": [
+          1058,
+          1105
+        ]
+      },
+      "hk_log_roundtrip_ms": {
+        "n": 1,
+        "median": 639,
+        "range": [
+          639,
+          639
+        ]
+      },
+      "nav_transcribe_ms": {
+        "n": 5,
+        "median": 1731,
+        "range": [
+          1718,
+          2194
+        ]
+      },
+      "speech_wall_ms": {
+        "n": 0,
+        "median": null,
+        "range": [
+          null,
+          null
+        ]
+      }
+    },
+    "expo": {
+      "n": 5,
+      "speech_states": [
+        "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+        "unknown: ",
+        "init_or_task_failed: Failed to initialize recognizer"
+      ],
+      "nav_health_ms": {
+        "n": 5,
+        "median": 2242,
+        "range": [
+          1789,
+          2255
+        ]
+      },
+      "hk_rows_ms": {
+        "n": 4,
+        "median": 1085,
+        "range": [
+          1068,
+          1104
+        ]
+      },
+      "hk_log_roundtrip_ms": {
+        "n": 4,
+        "median": 393.5,
+        "range": [
+          383,
+          402
+        ]
+      },
+      "nav_transcribe_ms": {
+        "n": 5,
+        "median": 2217,
+        "range": [
+          1757,
+          2225
+        ]
+      },
+      "speech_wall_ms": {
+        "n": 0,
+        "median": null,
+        "range": [
+          null,
+          null
+        ]
+      }
+    }
+  }
+}

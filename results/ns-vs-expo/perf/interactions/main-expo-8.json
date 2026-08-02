@@ -1,0 +1,31 @@
+{
+  "runs": [
+    {
+      "hk_rows_ms": 1043,
+      "health_granted": true,
+      "nav_health_ms": 1376,
+      "hk_log_roundtrip_ms": 358,
+      "error": "goHome failed",
+      "iter": 0
+    },
+    {
+      "iter": 1,
+      "hk_rows_ms": 1058,
+      "hk_log_roundtrip_ms": 355,
+      "error": "goHome failed",
+      "nav_health_ms": 1396,
+      "health_granted": true
+    },
+    {
+      "nav_health_ms": 1363,
+      "iter": 2,
+      "hk_rows_ms": 1058,
+      "health_granted": true,
+      "hk_log_roundtrip_ms": 354,
+      "error": "goHome failed"
+    }
+  ],
+  "bundle_id": "com.nstudio.expobenchmark",
+  "trial": "main-expo-8",
+  "measured_at": "2026-08-02T02:53:32.156Z"
+}

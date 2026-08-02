@@ -1,0 +1,495 @@
+{
+  "study": "ns-vs-expo",
+  "trials": [
+    {
+      "trial": "main-expo-1",
+      "fw": "expo",
+      "bundle_mb": 57.140625,
+      "installed_mb": 57.140625,
+      "executable_mb": 5.33984375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 302,
+      "launch_ms_range": [
+        299,
+        321
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1546,
+      "idle_rss_mb": 231.171875,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-2",
+      "fw": "expo",
+      "bundle_mb": 57.16796875,
+      "installed_mb": 57.16796875,
+      "executable_mb": 5.36328125,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 301,
+      "launch_ms_range": [
+        297,
+        306
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1555,
+      "idle_rss_mb": 231.15625,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-3",
+      "fw": "expo",
+      "bundle_mb": 52.97265625,
+      "installed_mb": 52.97265625,
+      "executable_mb": 1.57421875,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 299,
+      "launch_ms_range": [
+        289,
+        304
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1547,
+      "idle_rss_mb": 207.859375,
+      "idle_footprint_mb": 27,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-4",
+      "fw": "expo",
+      "bundle_mb": 57.14453125,
+      "installed_mb": 57.14453125,
+      "executable_mb": 5.34375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 302,
+      "launch_ms_range": [
+        300,
+        303
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1557,
+      "idle_rss_mb": 226.296875,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-5",
+      "fw": "expo",
+      "bundle_mb": 57.1484375,
+      "installed_mb": 57.1484375,
+      "executable_mb": 5.34375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 303,
+      "launch_ms_range": [
+        288,
+        322
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1542,
+      "idle_rss_mb": 230.921875,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-6",
+      "fw": "expo",
+      "bundle_mb": 57.14453125,
+      "installed_mb": 57.14453125,
+      "executable_mb": 5.34375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 299,
+      "launch_ms_range": [
+        297,
+        319
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1565,
+      "idle_rss_mb": 229.90625,
+      "idle_footprint_mb": 34,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-7",
+      "fw": "expo",
+      "bundle_mb": 52.94921875,
+      "installed_mb": 52.94921875,
+      "executable_mb": 1.55859375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 301,
+      "launch_ms_range": [
+        298,
+        303
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1525,
+      "idle_rss_mb": 206.8125,
+      "idle_footprint_mb": 27,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-expo-8",
+      "fw": "expo",
+      "bundle_mb": 52.92578125,
+      "installed_mb": 52.92578125,
+      "executable_mb": 1.52734375,
+      "frameworks_mb": 48.1875,
+      "devtool_mb": 0,
+      "launch_ms_median": 301,
+      "launch_ms_range": [
+        296,
+        313
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1547,
+      "idle_rss_mb": 208.09375,
+      "idle_footprint_mb": 27,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-1",
+      "fw": "ns",
+      "bundle_mb": 93.3046875,
+      "installed_mb": 93.3046875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 304,
+      "launch_ms_range": [
+        302,
+        326
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1522,
+      "idle_rss_mb": 216.3125,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-2",
+      "fw": "ns",
+      "bundle_mb": 93.3046875,
+      "installed_mb": 93.3046875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 302,
+      "launch_ms_range": [
+        300,
+        307
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1443,
+      "idle_rss_mb": 216.109375,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-3",
+      "fw": "ns",
+      "bundle_mb": 93.30859375,
+      "installed_mb": 93.30859375,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 307,
+      "launch_ms_range": [
+        299,
+        318
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1444,
+      "idle_rss_mb": 215.484375,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-4",
+      "fw": "ns",
+      "bundle_mb": 93.30859375,
+      "installed_mb": 93.30859375,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 299,
+      "launch_ms_range": [
+        298,
+        308
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1447,
+      "idle_rss_mb": 214.546875,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-5",
+      "fw": "ns",
+      "bundle_mb": 93.30859375,
+      "installed_mb": 93.30859375,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 298,
+      "launch_ms_range": [
+        284,
+        302
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1444,
+      "idle_rss_mb": 216.234375,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-6",
+      "fw": "ns",
+      "bundle_mb": 93.3046875,
+      "installed_mb": 93.3046875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 303,
+      "launch_ms_range": [
+        299,
+        319
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1569,
+      "idle_rss_mb": 215.53125,
+      "idle_footprint_mb": 37,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-7",
+      "fw": "ns",
+      "bundle_mb": 93.7421875,
+      "installed_mb": 93.7421875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 301,
+      "launch_ms_range": [
+        299,
+        303
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1447,
+      "idle_rss_mb": 213.890625,
+      "idle_footprint_mb": 39,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    },
+    {
+      "trial": "main-ns-8",
+      "fw": "ns",
+      "bundle_mb": 93.7421875,
+      "installed_mb": 93.7421875,
+      "executable_mb": 23.3984375,
+      "frameworks_mb": 68.1171875,
+      "devtool_mb": 0,
+      "launch_ms_median": 300,
+      "launch_ms_range": [
+        298,
+        316
+      ],
+      "launch_source": "active",
+      "launches_n": 5,
+      "cpu_settle_ms_median": 1566,
+      "idle_rss_mb": 216.4375,
+      "idle_footprint_mb": 40,
+      "idle_cpu_pct": 0,
+      "idle_cpu_pct_max": 0
+    }
+  ],
+  "aggregates": {
+    "ns": {
+      "n": 8,
+      "bundle_mb": {
+        "median": 93.30859375,
+        "range": [
+          93.3046875,
+          93.7421875
+        ]
+      },
+      "installed_mb": {
+        "median": 93.30859375,
+        "range": [
+          93.3046875,
+          93.7421875
+        ]
+      },
+      "executable_mb": {
+        "median": 23.3984375,
+        "range": [
+          23.3984375,
+          23.3984375
+        ]
+      },
+      "frameworks_mb": {
+        "median": 68.1171875,
+        "range": [
+          68.1171875,
+          68.1171875
+        ]
+      },
+      "devtool_mb": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_ms": {
+        "median": 301.5,
+        "range": [
+          298,
+          307
+        ]
+      },
+      "cpu_settle_ms": {
+        "median": 1447,
+        "range": [
+          1443,
+          1569
+        ]
+      },
+      "idle_rss_mb": {
+        "median": 215.8203125,
+        "range": [
+          213.890625,
+          216.4375
+        ]
+      },
+      "idle_footprint_mb": {
+        "median": 40,
+        "range": [
+          37,
+          40
+        ]
+      },
+      "idle_cpu_pct": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_sources": [
+        "active"
+      ]
+    },
+    "expo": {
+      "n": 8,
+      "bundle_mb": {
+        "median": 57.142578125,
+        "range": [
+          52.92578125,
+          57.16796875
+        ]
+      },
+      "installed_mb": {
+        "median": 57.142578125,
+        "range": [
+          52.92578125,
+          57.16796875
+        ]
+      },
+      "executable_mb": {
+        "median": 5.341796875,
+        "range": [
+          1.52734375,
+          5.36328125
+        ]
+      },
+      "frameworks_mb": {
+        "median": 48.1875,
+        "range": [
+          48.1875,
+          48.1875
+        ]
+      },
+      "devtool_mb": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_ms": {
+        "median": 301,
+        "range": [
+          299,
+          303
+        ]
+      },
+      "cpu_settle_ms": {
+        "median": 1547,
+        "range": [
+          1525,
+          1565
+        ]
+      },
+      "idle_rss_mb": {
+        "median": 228.1015625,
+        "range": [
+          206.8125,
+          231.171875
+        ]
+      },
+      "idle_footprint_mb": {
+        "median": 34,
+        "range": [
+          27,
+          34
+        ]
+      },
+      "idle_cpu_pct": {
+        "median": 0,
+        "range": [
+          0,
+          0
+        ]
+      },
+      "launch_sources": [
+        "active"
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "runs": [
+    {
+      "nav_transcribe_ms": 1733,
+      "health_granted": true,
+      "error_hk_log": true,
+      "iter": 0,
+      "speech_granted": true,
+      "speech_state": "init_or_task_failed: Transcription failed: Failed to initialize recognizer",
+      "nav_health_ms": 1804,
+      "hk_rows_ms": 1102
+    },
+    {
+      "health_granted": true,
+      "error_hk_log": true,
+      "hk_rows_ms": 1097,
+      "iter": 1,
+      "nav_transcribe_ms": 1739,
+      "nav_health_ms": 1809,
+      "speech_granted": true,
+      "speech_state": "init_or_task_failed: Transcription failed: Failed to initialize recognizer"
+    },
+    {
+      "hk_rows_ms": 1089,
+      "speech_state": "init_or_task_failed: Transcription failed: Failed to initialize recognizer",
+      "health_granted": true,
+      "speech_granted": true,
+      "nav_transcribe_ms": 1733,
+      "error_hk_log": true,
+      "iter": 2,
+      "nav_health_ms": 1839
+    }
+  ],
+  "bundle_id": "org.nativescript.nsbenchmark",
+  "trial": "main-ns-1",
+  "measured_at": "2026-08-02T03:01:33.374Z"
+}
