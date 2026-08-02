@@ -6,6 +6,35 @@ Runner details: [`../../harness/README.md`](../../harness/README.md).
 **Status (2026-08-01):** complete. Two studies, 26 measured trials, 78/78 phases build-green.
 Every app rebuilt in Release, functionally verified, and performance-profiled.
 
+
+---
+
+## Correction (2026-08-02) — app size was measured on simulator builds
+
+**What was wrong.** App size came from the `Release-iphonesimulator` `.app` directory measured with
+`du`. That bundle carries an x86_64 slice that never ships and full symbol tables. NativeScript's
+published 93.3 MB was 67.2 MB of `NativeScript.framework`, whose binary was a 59 MB fat Mach-O
+(30 MB x86_64 + 29 MB arm64) with 49,215 symbols and a debug map. It is not an app size.
+
+**Why the ratio was wrong too.** Both arms were inflated, but not by the same proportion —
+NativeScript shed 45% on re-measurement, Expo 50% — so the published gap was also off.
+
+**What was done.** Every trial tree was re-archived with `harness/perf/build-device.sh`:
+`xcodebuild archive`, `-destination generic/platform=iOS`, signing disabled. `archive` rather than
+`build`, because only the archive action runs the strip and postprocessing an App Store build gets.
+
+| Figure | As published | Corrected |
+|---|---|---|
+| NativeScript bundle | 93.3 MB | **51.1 MB** (n=8, no variation) |
+| Expo bundle | 57.1 MB | **28.7 MB** (n=8, 27.4–28.7) |
+| NativeScript executable | 23.4 MB | **11.8 MB** |
+| Expo executable | 5.3 MB | **1.3 MB** |
+| Headline gap | −39% | **−44%** |
+
+Figures remain uncompressed and un-thinned, so they are upper bounds on download size. The direction
+of the finding is unchanged. Token results, memory, launch, and CPU are unaffected — those were
+always simulator measurements and remain so. Per-trial data: `perf/device/*.json`.
+
 ---
 
 ## The headline
@@ -148,17 +177,18 @@ rather than crashing. Identical to v1.0; excluded from verdicts, needs a device.
 
 | Metric | NativeScript | Expo | Δ |
 |---|---|---|---|
-| App bundle on disk | 93.3 MB | **57.1 MB** | **−39%** |
-| Main executable | 23.4 MB | 5.3 MB | −77% |
+| App bundle on disk (arm64 device archive) | 51.1 MB | **28.7 MB** | **−44%** |
+| Main executable | 11.8 MB | 1.3 MB | −89% |
 | Cold launch → active | 302 ms | 301 ms | **tie** |
 | Launch settle | 1,447 ms | 1,547 ms | +7% |
 | Idle memory (RSS) | **216 MB** | 228 MB | +6% |
 | Idle footprint | 40 MB | **34 MB** | −15% |
 | Idle CPU | 0.0% | 0.0% | tie |
 
-**This inverts v1.0's size finding.** There NativeScript was the light option (93.3 vs LynxJS 140.2 MB);
-against Expo it is the heavy one. Memory is mixed — RSS favours NativeScript, physical footprint favours
-Expo — and neither gap is decisive.
+**NativeScript is the heavier option here.** Memory is mixed — RSS favours NativeScript, physical
+footprint favours Expo — and neither gap is decisive. (Size rows re-measured 2026-08-02 on device
+archives; see the Correction at the top. v1.0's size finding was corrected in the same pass and no
+longer shows NativeScript as the lighter framework there either.)
 
 ### Tap-to-result latency
 
@@ -180,7 +210,8 @@ choice, not purely framework ceiling.
 ### Cross-study replication
 
 NativeScript, measured weeks apart in an independent study, reproduces v1.0 **within 1% on every
-metric**: bundle 93.3 MB, executable 23.4 MB, RSS ~215 MB, HealthKit query ~1,060 ms. This is the
+metric**: RSS ~215 MB, HealthKit query ~1,060 ms, and — after the 2026-08-02 size correction — a
+device-archive bundle of 51.1 MB on both, identical to the byte across all 8 archives. This is the
 strongest validity check available here.
 
 **Not measured:** JS↔native interop microbenchmarks. v1.0's suite requires a hand-written bench app plus

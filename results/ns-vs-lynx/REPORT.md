@@ -5,6 +5,42 @@ Living document. Methods: see [`../../PLAN.md`](../../PLAN.md). Runner details: 
 
 **Status (2026-07-25):** pilot + full main run complete — **10/10 trials, 30/30 phases build-green, n=5 per framework** — and the **runtime performance extension is measured** (Release rebuilds of all implementations; see §Performance). Remaining: operator interactive acceptance (apps archived per trial), which finalizes success rates, remediation tokens, and interaction-path perf notes.
 
+
+---
+
+## Correction (2026-08-02) — the app-size finding was wrong, and reverses
+
+**What was wrong.** App size came from the `Release-iphonesimulator` `.app` directory, which carries
+an x86_64 slice that never ships and full symbol tables. This penalised LynxJS far more than
+NativeScript: its DevTool/DebugRouter stack was counted fat and unstripped at 23.6 MB, where a device
+archive puts it at 5.3 MB.
+
+**What changed.** Re-measured as unsigned arm64 device archives, LynxJS is **smaller** than
+NativeScript rather than 50% larger. The conclusion reverses, and the latency write-up no longer
+claims footprint as NativeScript's runtime edge — its remaining edge is idle memory. What survives is
+the narrower finding that the Sparkling template ships DevTool in Release at all; only its weight was
+overstated.
+
+| Figure | As published | Corrected |
+|---|---|---|
+| NativeScript bundle | 93.3 MB | **51.1 MB** (n=1 reference, see below) |
+| LynxJS bundle | 140.2 MB | **26.1 MB** (n=4, no variation) |
+| LynxJS DevTool stack | 23.6 MB | **5.3 MB** |
+| Headline gap | +50% | **−49%** |
+
+**Provenance limit on the NativeScript arm.** This study predates study-scoped trial branches. Its
+NativeScript trees were committed as `trials/main-ns-N`, and the 2026-08-01 `ns-vs-expo-buildonly`
+run reused those exact names and force-updated them, so the 2026-07-25 trees are gone. Token results
+are unaffected — they come from archived transcripts — but that arm cannot be rebuilt from source.
+Recorded in `harness/studies/ns-vs-lynx.json` as `lostTrialTrees`; branch resolution now refuses to
+guess a flat name rather than silently measure another study's tree. The one surviving spec-v1.0 tree
+(`cc1f065`) is measured as `ref-ns-v1.0` and lands at 51.1 MB — identical to all 8 NativeScript
+archives in the companion Expo study — so the substitution does not move the number.
+
+`main-lynx-5` fails the device archive with the same "Multiple commands produce sample.wav" error it
+fails Release with, so the device corpus matches the published one. Per-trial data:
+`perf/device/*.json`.
+
 ---
 
 ## Pilot (2026-07-25) — `pilot-ns-1` / `pilot-lynx-1`
@@ -99,13 +135,18 @@ Token cost measures what it costs to *build*; this section measures what you *ge
 
 ### Results (median across apps; ranges in `perf/summary.json`)
 
+> **The four size rows below are superseded — see the Correction at the top of this file.** They are
+> simulator measurements, which carry an x86_64 slice that never ships and full symbol tables. On an
+> arm64 device archive: NativeScript **51.1 MB**, LynxJS **26.1 MB** (**−49%**, i.e. the sign flips),
+> DevTool stack **5.3 MB**. The launch, memory, and latency rows are unaffected.
+
 | Metric (Release, simulator) | NativeScript (n=5) | LynxJS (n=4) | Δ |
 |---|---|---|---|
-| App bundle on disk | **93.3 MB** | **140.2 MB** | **+50%** |
-| — main executable | 23.4 MB | 4.6 MB | app code lives in JS+frameworks on Lynx |
-| — frameworks | 68.1 MB | 134.9 MB | ~2× |
-| — of which DevTool/DebugRouter | 0 | 23.6 MB | ships in Release per Sparkling template |
-| Bundle ex-DevTool | 93.3 MB | ~116.7 MB | +25% |
+| ~~App bundle on disk~~ *(superseded)* | ~~93.3 MB~~ | ~~140.2 MB~~ | ~~+50%~~ |
+| ~~— main executable~~ | ~~23.4 MB~~ | ~~4.6 MB~~ | app code lives in JS+frameworks on Lynx |
+| ~~— frameworks~~ | ~~68.1 MB~~ | ~~134.9 MB~~ | ~~2×~~ |
+| ~~— of which DevTool/DebugRouter~~ | 0 | ~~23.6 MB~~ | ships in Release per Sparkling template |
+| ~~Bundle ex-DevTool~~ | ~~93.3 MB~~ | ~~116.7 MB~~ | ~~+25%~~ |
 | Cold launch → foreground-active | 316 ms | 317 ms | **~equal** |
 | Launch work settle (CPU quiesce) | 1.53 s | 1.64 s | +7% Lynx |
 | Idle memory (RSS) | **215 MB** | **288 MB** | **+33% (+72 MB)** |
@@ -135,8 +176,8 @@ The direct answer to "sure, NativeScript costs fewer tokens, but LynxJS will per
 
 - **The platform-API invocation paths are effectively equivalent.** The heavy read path (statistics query + marshal + render) is a dead tie — HealthKit itself dominates, and neither NativeScript's direct calls nor Lynx's Swift bridge adds visible cost against it.
 - **Lynx wins one metric**: the write→refresh round trip (447 vs 643 ms median, and remarkably consistent). Worth noting: the single fastest app overall was a NativeScript one (`main-ns-5`, 385 ms), and NS's wide range (385–647) traces to differing agent refresh strategies — so this is partly implementation choice, not pure framework ceiling. Either way, the "bridge tax" is **not** a practical latency penalty on these paths.
-- **No metric materially favors NativeScript at runtime.** Its runtime edge is size (+50%) and idle memory (+33%), not speed.
-- **Verdict on the adversarial claim:** "LynxJS will perform better" is *not supported* as a general statement — feature-path latency is a wash (one modest Lynx edge), launch is a tie, and Lynx pays real size/memory costs. Symmetrically, "NativeScript is faster at runtime" is not supported either. The decisive, non-wash differences in this study are **build cost (1.9× tokens)** and **footprint (+50% disk, +33% memory)** — both favoring NativeScript.
+- **No metric materially favors NativeScript at runtime.** ~~Its runtime edge is size (+50%) and idle memory (+33%), not speed.~~ **Corrected 2026-08-02:** size does not favor NativeScript — on a device archive LynxJS is 49% smaller. Its remaining runtime edge is idle memory (+34%), not speed and not footprint.
+- **Verdict on the adversarial claim:** "LynxJS will perform better" is *not supported* as a general statement — feature-path latency is a wash (one modest Lynx edge), launch is a tie, and Lynx pays real size/memory costs. Symmetrically, "NativeScript is faster at runtime" is not supported either. The decisive, non-wash difference in this study is **build cost (1.9× tokens)**, favoring NativeScript. ~~and footprint (+50% disk, +33% memory)~~ — **corrected 2026-08-02:** disk footprint favors *LynxJS* (−49% on a device archive); only idle memory (+34%) favors NativeScript.
 
 **Speech is simulator-blocked, identically for both frameworks:** all 27 iterations across all 9 apps failed with "Failed to initialize recognizer" — `SFSpeechRecognizer`'s server path rides Siri infrastructure that iOS Simulators don't provide. Every app surfaced the error in its status line per spec (correct behavior, both frameworks). Transcription latency therefore needs a physical device: each app displays `Completed in N.N s` on screen, so it's a 2-minute operator capture per app when a device is available — recorded then under `acceptance.perf_notes`.
 
