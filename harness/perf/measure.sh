@@ -153,6 +153,22 @@ measure_one() { # measure_one <trial-id>
   note "$id: wrote perf/$id.json"
 }
 
-TRIALS="${*:-main-ns-1 main-lynx-1 main-ns-2 main-lynx-2 main-ns-3 main-lynx-3 main-ns-4 main-lynx-4 main-ns-5 main-lynx-5}"
+# Discovered from the study's results, interleaved by round so a partial batch
+# still covers both arms evenly. Never a hardcoded list: a study extended past
+# its original n would otherwise be silently half-measured.
+default_trials() {
+  local n fw rounds
+  rounds="$(ls -d "$RESULTS_DIR"/main-*/ 2>/dev/null \
+    | sed -nE 's|.*/main-[a-z]+-([0-9]+)/$|\1|p' | sort -n -u)"
+  for n in $rounds; do
+    for fw in $STUDY_FRAMEWORKS; do
+      [ -d "$RESULTS_DIR/main-$fw-$n/app-release" ] && echo "main-$fw-$n"
+    done
+  done
+}
+
+TRIALS="${*:-$(default_trials | tr '\n' ' ')}"
+[ -n "${TRIALS// /}" ] || die "no trials with Release apps under $RESULTS_DIR"
+note "measuring $(echo "$TRIALS" | wc -w | tr -d ' ') trials"
 for id in $TRIALS; do measure_one "$id"; done
 note "measurement complete"

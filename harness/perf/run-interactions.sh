@@ -51,7 +51,22 @@ measure_one() { # measure_one <trial-id>
   xcrun simctl terminate "$SIM_UDID" "$bid" >/dev/null 2>&1
 }
 
-TRIALS="${*:-main-ns-1 main-lynx-1 main-ns-2 main-lynx-2 main-ns-3 main-lynx-3 main-ns-4 main-lynx-4 main-ns-5}"
+# Discovered from the study's results, interleaved by round. Never hardcoded:
+# v1.0's literal list silently omitted main-lynx-5, so that study measured 9 of
+# 10 apps with nothing to indicate the gap.
+default_trials() {
+  local n fw rounds
+  rounds="$(ls -d "$RESULTS_DIR"/main-*/ 2>/dev/null \
+    | sed -nE 's|.*/main-[a-z]+-([0-9]+)/$|\1|p' | sort -n -u)"
+  for n in $rounds; do
+    for fw in $STUDY_FRAMEWORKS; do
+      [ -d "$RESULTS_DIR/main-$fw-$n/app-release" ] && echo "main-$fw-$n"
+    done
+  done
+}
+
+TRIALS="${*:-$(default_trials | tr '\n' ' ')}"
+[ -n "${TRIALS// /}" ] || te_die "no trials with Release apps under $RESULTS_DIR"
 FAILED=""
 for id in $TRIALS; do measure_one "$id" || FAILED="$FAILED $id"; done
 [ -n "$FAILED" ] && note "completed with issues:$FAILED" || note "all interaction measurements complete"
