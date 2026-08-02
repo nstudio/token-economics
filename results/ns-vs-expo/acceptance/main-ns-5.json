@@ -1,1 +1,1 @@
-{"bundle_id":"org.nativescript.nsbenchmark","runs":[{"nav_transcribe_ms":2147,"speech_state":"init_or_task_failed: Failed to initialize recognizer","hk_rows_ms":1061,"iter":0,"nav_health_ms":2215,"speech_granted":true,"health_granted":true,"hk_log_roundtrip_ms":375}]}
+{"runs":[{"speech_state":"init_or_task_failed: Failed to initialize recognizer","iter":0,"hk_rows_ms":1054,"speech_granted":true,"nav_health_ms":2185,"hk_log_roundtrip_ms":373,"nav_transcribe_ms":2156,"health_granted":true}],"bundle_id":"org.nativescript.nsbenchmark"}

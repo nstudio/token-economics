@@ -1,0 +1,1 @@
+{"runs":[{"hk_rows_ms":1017,"health_granted":true,"nav_transcribe_ms":1715,"speech_granted":true,"nav_health_ms":1724,"iter":0,"hk_log_roundtrip_ms":399,"speech_state":"init_or_task_failed: Failed to initialize recognizer"}],"bundle_id":"com.nstudio.expobenchmark"}

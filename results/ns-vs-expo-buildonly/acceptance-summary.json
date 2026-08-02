@@ -1,0 +1,89 @@
+{
+  "study": "ns-vs-expo-buildonly",
+  "rows": [
+    {
+      "trial": "main-expo-1",
+      "arm": "expo",
+      "verdict": "FAIL",
+      "failed": [
+        "grants health access",
+        "renders 7-day list",
+        "log 500 refreshes list"
+      ],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-2",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-3",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-4",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "unknown: ",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-5",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-1",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Transcription failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-2",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-3",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-4",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-5",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Transcription failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"bundle_id":"org.nativescript.nsbenchmark","runs":[{"speech_granted":true,"hk_log_roundtrip_ms":373,"health_granted":true,"nav_health_ms":1750,"iter":0,"hk_rows_ms":1044,"speech_state":"init_or_task_failed: Failed to initialize recognizer","nav_transcribe_ms":1683}]}

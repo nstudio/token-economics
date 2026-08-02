@@ -23,14 +23,25 @@ const study = getStudy(slug);
 const dir = path.join(ROOT, study.resultsDir, 'acceptance');
 if (!fs.existsSync(dir)) { console.error(`no acceptance data at ${path.relative(ROOT, dir)}`); process.exit(1); }
 
-/** Checks that must hold for a trial to pass. Speech is deliberately excluded. */
+/**
+ * Checks that must hold for a trial to pass. Speech is deliberately excluded.
+ *
+ * Metrics the driver reaches directly are scored; anything gated behind
+ * back-navigation is NOT. The driver finds a back affordance by native nav-bar
+ * button, or a label equal to "Back"/"Home", or containing "Back" — so an app
+ * using e.g. a Pressable labelled "‹ Home" is unreachable even though its
+ * navigation works. SPEC pins no label for back, so that is driver coverage, not
+ * an app defect, and v1.0 reported the same symptom the same way. Scoring it as
+ * failure would manufacture defects out of a harness limitation.
+ */
 const CHECKS = [
   ['navigates to Health', r => r.nav_health_ms != null],
   ['grants health access', r => r.health_granted === true],
   ['renders 7-day list', r => r.hk_rows_ms != null],
   ['log 500 refreshes list', r => r.hk_log_roundtrip_ms != null],
-  ['navigates to Transcribe', r => r.nav_transcribe_ms != null],
 ];
+/** Gated behind back-navigation: reported as coverage, never as pass/fail. */
+const BACK_GATED = ['nav_transcribe_ms'];
 
 const armOf = trial => study.frameworks.find(fw => trial.includes(`-${fw}-`)) ?? '?';
 const rows = [];
@@ -50,16 +61,17 @@ for (const f of fs.readdirSync(dir).sort()) {
     verdict: undetermined ? 'undetermined' : (failed.length ? 'FAIL' : 'pass'),
     failed,
     speech: r.speech_state ?? 'not reached',
+    backNav: BACK_GATED.every(k => r[k] != null) ? 'reached' : 'driver could not match back control',
   });
 }
 
 if (!rows.length) { console.error('no acceptance results found'); process.exit(1); }
 
 console.log(`\n═══ functional acceptance — ${study.title} ═══\n`);
-console.log('  trial          arm     verdict        speech               failures');
+console.log('  trial          arm     verdict   back-nav coverage                  failures');
 for (const r of rows) {
   console.log(
-    `  ${r.trial.padEnd(14)} ${r.arm.padEnd(7)} ${r.verdict.padEnd(14)} ${String(r.speech).slice(0, 20).padEnd(20)} ${r.failed.join('; ')}`,
+    `  ${r.trial.padEnd(14)} ${r.arm.padEnd(7)} ${r.verdict.padEnd(9)} ${r.backNav.padEnd(34)} ${r.failed.join('; ')}`,
   );
 }
 
@@ -71,6 +83,10 @@ for (const fw of study.frameworks) {
   console.log(`    ${fw.padEnd(6)} ${pass}/${a.length} pass${und ? `  (${und} undetermined)` : ''}`);
 }
 
+const backOk = rows.filter(r => r.backNav === 'reached').length;
+console.log(`\n  back-navigation reachable by the driver on ${backOk}/${rows.length} apps — the rest use an`);
+console.log(`  unmatched back control (SPEC pins no label for it); their Transcribe metrics are absent,`);
+console.log(`  which is coverage, not a defect.`);
 const speechOk = rows.filter(r => r.speech === 'completed').length;
 console.log(`\n  speech completed on ${speechOk}/${rows.length} apps${speechOk === 0 ? ' — consistent with the simulator limitation; needs a device' : ''}`);
 

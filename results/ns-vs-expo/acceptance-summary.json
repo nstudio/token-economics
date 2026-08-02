@@ -2,11 +2,132 @@
   "study": "ns-vs-expo",
   "rows": [
     {
+      "trial": "main-expo-1",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-2",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-3",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "not reached",
+      "backNav": "driver could not match back control"
+    },
+    {
+      "trial": "main-expo-4",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-5",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/ConcurrentFunctionDefinition.swift:90)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-6",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore/Promise.swift:56)",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-expo-7",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "not reached",
+      "backNav": "driver could not match back control"
+    },
+    {
+      "trial": "main-expo-8",
+      "arm": "expo",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "not reached",
+      "backNav": "driver could not match back control"
+    },
+    {
       "trial": "main-ns-1",
       "arm": "ns",
       "verdict": "pass",
       "failed": [],
-      "speech": "init_or_task_failed: Failed to initialize recognizer"
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-2",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Speech access: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-3",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Transcription failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-4",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-5",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-6",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-7",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Transcription failed: Failed to initialize recognizer",
+      "backNav": "reached"
+    },
+    {
+      "trial": "main-ns-8",
+      "arm": "ns",
+      "verdict": "pass",
+      "failed": [],
+      "speech": "init_or_task_failed: Failed to initialize recognizer",
+      "backNav": "reached"
     }
   ]
 }

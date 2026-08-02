@@ -1,0 +1,1 @@
+{"bundle_id":"com.nstudio.expobenchmark","runs":[{"speech_granted":true,"health_granted":true,"speech_state":"init_or_task_failed: UnexpectedException: Failed to initialize recognizer (at ExpoModulesCore\/Promise.swift:56)","iter":0,"hk_log_roundtrip_ms":399,"nav_health_ms":2272,"hk_rows_ms":1106,"nav_transcribe_ms":2226}]}
